@@ -1,50 +1,50 @@
 import java.util.List;
 
-class Referentiel
+class Referential
 {
-	public List<Brokers> Broker;
-	public List<Currencies> Currencie;
-	public List<Depositaries> Depositarie;
-	public List<Instruments> Instrument;
-	public List<Traders> Trader;
-	public List<Wallets> Wallet;
+	public List<Broker> Brokers;
+	public List<Currency> Currencies;
+	public List<Depositary> Depositaries;
+	public List<Instrument> Instruments;
+	public List<Trader> Traders;
+	public List<Wallet> Wallets;
 }
 
-class Brokers
+class Broker
 {
 	public String code;
 	public String name;
 }
 
-class Currencies
+class Currency
 {
 	public String code;
 	public String name;
 	public String country;
 }
 
-class Depositaries
+class Depositary
 {
 	public String code;
 	public String libelle;
 }
 
-class Instruments
+class Instrument
 {
 	public String type;
 	public String isin;
 	public String libelle;
-	public String pays;
-	public float prix;
+	public String country;
+	public float price;
 }
 
-class Traders
+class Trader
 {
 	public String name;
 	public String codeptf;
 }
 
-class Wallets
+class Wallet
 {
 	public String name;
 	public String codeptf;

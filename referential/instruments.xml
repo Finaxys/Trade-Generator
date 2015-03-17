@@ -3,140 +3,140 @@
     <type>EQUITY</type>
     <isin>FR0000120354</isin>
     <libelle>VALLOUREC</libelle>
-    <pays>FR</pays>
-    <prix>21.78</prix>
+    <country>FR</country>
+    <price>21.78</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>NL0000400653</isin>
     <libelle>GEMALTO</libelle>
-    <pays>FR</pays>
-    <prix>9.10</prix>
+    <country>FR</country>
+    <price>9.10</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0011027143</isin>
     <libelle>AREVA</libelle>
-    <pays>FR</pays>
-    <prix>9.10</prix>
+    <country>FR</country>
+    <price>9.10</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0000077919</isin>
     <libelle>JCDECAUX SA</libelle>
-    <pays>FR</pays>
-    <prix>32.81</prix>
+    <country>FR</country>
+    <price>32.81</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0000120271</isin>
     <libelle>TOTAL</libelle>
-    <pays>FR</pays>
-    <prix>44.64</prix>
+    <country>FR</country>
+    <price>44.64</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0004035913</isin>
     <libelle>ILIAD</libelle>
-    <pays>FR</pays>
-    <prix>216.55</prix>
+    <country>FR</country>
+    <price>216.55</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0000120628</isin>
     <libelle>AXA</libelle>
-    <pays>FR</pays>
-    <prix>23.40</prix>
+    <country>FR</country>
+    <price>23.40</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0010112524</isin>
     <libelle>NEXITY</libelle>
-    <pays>FR</pays>
-    <prix>38.41</prix>
+    <country>FR</country>
+    <price>38.41</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0000120537</isin>
     <libelle>LAFARGE</libelle>
-    <pays>FR</pays>
-    <prix>64.98</prix>
+    <country>FR</country>
+    <price>64.98</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0000121329</isin>
     <libelle>THALES</libelle>
-    <pays>FR</pays>
-    <prix>53.73</prix>
+    <country>FR</country>
+    <price>53.73</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US4581401001</isin>
     <libelle>INTEL CORP</libelle>
-    <pays>FR</pays>
-    <prix>30.93</prix>
+    <country>FR</country>
+    <price>30.93</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US1667641005</isin>
     <libelle>CHEVRON</libelle>
-    <pays>FR</pays>
-    <prix>101.62</prix>
+    <country>FR</country>
+    <price>101.62</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US46625H1005</isin>
-    <libelle>JPMORGAN CHASE & CO</libelle>
-    <pays>FR</pays>
-    <prix>61.00</prix>
+    <libelle>JPMORGAN CHASE And CO</libelle>
+    <country>FR</country>
+    <price>61.00</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US4370761029</isin>
     <libelle>HOME DEPOT INCO</libelle>
-    <pays>FR</pays>
-    <prix>114.82</prix>
+    <country>FR</country>
+    <price>114.82</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US0258161092</isin>
     <libelle>AMERICAN EXPRESS</libelle>
-    <pays>FR</pays>
-    <prix>44.95</prix>
+    <country>FR</country>
+    <price>44.95</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US92343V1044</isin>
     <libelle>VERIZON COMMUNICATION INC</libelle>
-    <pays>FR</pays>
-    <prix>48.84</prix>
+    <country>FR</country>
+    <price>48.84</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>US3696041033</isin>
     <libelle>GENERAL ELECTRIC CO</libelle>
-    <pays>FR</pays>
-    <prix>25.04</prix>
+    <country>FR</country>
+    <price>25.04</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0010981746</isin>
     <libelle>CREDIT AGRICOLE 4.25% 04/02/23 EUR</libelle>
-    <pays>FR</pays>
-    <prix>124.05</prix>
+    <country>FR</country>
+    <price>124.05</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0010621532</isin>
     <libelle>BPCE 5.1% 27/06/18 EUR</libelle>
-    <pays>FR</pays>
-    <prix>114.46</prix>
+    <country>FR</country>
+    <price>114.46</price>
   </instrument>
   <instrument>
     <type>EQUITY</type>
     <isin>FR0011023548</isin>
     <libelle>LCL 4.15% 19/04/19 EUR</libelle>
-    <pays>FR</pays>
-    <prix>113.09</prix>
+    <country>FR</country>
+    <price>113.09</price>
   </instrument>
 </instruments>
