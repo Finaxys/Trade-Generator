@@ -1,0 +1,71 @@
+<brokers>
+	<broker>
+		<code>BRSGCIB</code>
+		<name>Broker Societe General Investment Banking</name>
+	</broker>
+	
+	<broker>
+		<code>BRSGSS</code>
+		<name>Broker Societe Generale Securities Services</name>
+	</broker>
+	
+	<broker>
+		<code>BRGDF</code>
+		<name>Broker GDF Indosuez</name>
+	</broker>
+	
+	<broker>
+		<code>BRAXA</code>
+		<name>Broker AXA Investment Management</name>
+	</broker>
+	
+	<broker>
+		<code>BRCACIB</code>
+		<name>Broker Credit Agricole Agricole Invesment Banking</name>
+	</broker>
+	
+	<broker>
+		<code>BRCACH</code>
+		<name>Broker Credit Agricole Cheuvreux</name>
+	</broker>
+	
+	<broker>
+		<code>BRCS</code>
+		<name>Broker Credit Suisse</name>
+	</broker>
+	
+	<broker>
+		<code>BRBNPCIB</code>
+		<name>Broker BNP Paris Investment Banking</name>
+	</broker>
+	
+	<broker>
+		<code>BRBPSS</code>
+		<name>Broker BNP Paris Securities Services</name>
+	</broker>
+	
+	<broker>
+		<code>BRDEUB</code>
+		<name>Broker Deutch Bank</name>
+	</broker>
+	
+	<broker>
+		<code>BRFOR</code>
+		<name>Broker BNP Paribas Fortis</name>
+	</broker>
+	
+	<broker>
+		<code>BRBBVA</code>
+		<name>Broker BBVA</name>
+	</broker>
+	
+	<broker>
+		<code>BRSANDIR</code>
+		<name>Broker Banko Santander</name>
+	</broker>
+	
+	<broker>
+		<code>BRNAX</code>
+		<name>Broker Natixis</name>
+	</broker>
+	
