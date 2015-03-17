@@ -1,0 +1,9 @@
+<setting_desk>
+ <equity>
+   <tolerancerep>2</tolerancerep>
+   <Partsell>20</Partsell>
+   <owncountry>20</owncountry>
+   <volumetry>1000</volumetry>
+   <tolerancevolumetry>2</tolerancevolumetry>
+ </equity>  
+<setting_desk>   

@@ -1,0 +1,17 @@
+<generalinf>
+   <system>
+    <Bank_system>BFI</Bank_system>
+   </system>
+   <repartition>
+    <equity>100</equity>    
+    <derivative>0</derivative>
+    <mutual_funds>0</mutual_funds>
+    <bond>0</bond>
+    <debt>0</debt>
+    <swaps>0</swaps>
+    <cds>0</cds>
+    <forex>0</forex>
+    <repo>0</repo>
+    <pretemprunt>0</pretemprunt>
+   </repartition>
+ </generalinf>  
