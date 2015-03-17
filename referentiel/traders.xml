@@ -1,0 +1,30 @@
+<traders>
+  <trader>
+    <name>Watt</name>
+    <codeptf>PFFRAC1</codeptf>
+  </trader>
+  <trader>
+    <name>Watt</name>
+    <codeptf>PFFRAC1</codeptf>
+  </trader>
+  <trader>
+    <name>Watt</name>
+    <codeptf>PFFRAC1</codeptf>
+  </trader>
+  <trader>
+    <name>Bord-Michel</name>
+    <codeptf>PFFRAC2</codeptf>
+  </trader>
+  <trader>
+    <name>Norman</name>
+    <codeptf>PFFRAC3</codeptf>
+  </trader>
+  <trader>
+    <name>Thomson</name>
+    <codeptf>PFACUS</codeptf>
+  </trader>
+  <trader>
+    <name>Sand</name>
+    <codeptf>PFBO</codeptf>
+  </trader>
+</traders>

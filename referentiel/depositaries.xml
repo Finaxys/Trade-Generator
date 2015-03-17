@@ -1,0 +1,30 @@
+<depositaries>
+  <depositary>
+    <code>CUSTGDF</code>
+    <libelle>Custodian GDF Indosuez</libelle>
+  </depositary>
+  <depositary>
+    <code>CACEIS</code>
+    <libelle>Credit Agricole Caisse d'Epargne Investor Services</libelle>
+  </depositary>
+  <depositary>
+    <code>CUSTCS</code>
+    <libelle>Custodian Credit Suisse</libelle>
+  </depositary>
+  <depositary>
+    <code>CUSTBPSS</code>
+    <libelle>Custodian BNP Paris Securities Services</libelle>
+  </depositary>
+  <depositary>
+    <code>CUSTBBVA</code>
+    <libelle>Custodian BBVA</libelle>
+  </depositary>
+  <depositary>
+    <code>CUSTDEUB</code>
+    <libelle>Custodian Deutch Bank</libelle>
+  </depositary>
+  <depositary>
+    <code>CUSTSGSS</code>
+    <libelle>Custodian Societe Generale  Securities Services</libelle>
+  </depositary>
+</depositaries>

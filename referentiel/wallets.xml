@@ -1,0 +1,30 @@
+<wallets>
+  <wallet>
+    <name>Watt</name>
+    <codeptf>PFFRAC1</codeptf>
+  </wallet>
+  <wallet>
+    <name>Saime</name>
+    <codeptf>PFFRAC1</codeptf>
+  </wallet>
+  <wallet>
+    <name>Martin</name>
+    <codeptf>PFFRAC1</codeptf>
+  </wallet>
+  <wallet>
+    <name>Bord-Michel</name>
+    <codeptf>PFFRAC2</codeptf>
+  </wallet>
+  <wallet>
+    <name>Norman</name>
+    <codeptf>PFFRAC3</codeptf>
+  </wallet>
+  <wallet>
+    <name>Thomson</name>
+    <codeptf>PFACUS</codeptf>
+  </wallet>
+  <wallet>
+    <name>Sand</name>
+    <codeptf>PFBO</codeptf>
+  </wallet>
+</wallets>
