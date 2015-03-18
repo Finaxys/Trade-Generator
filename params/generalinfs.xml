@@ -1,28 +1,26 @@
 <general_settings>
-  <system>
-    <bank_system>BFI</bank_system>
-    <total_budget>10000000</total_budget>
-    <owncountry>EU</owncountry>
-  </system>
+  <bank_system>BFI</bank_system>
+  <total_budget>10000000</total_budget>
+  <owncountry>EU</owncountry>
   <bussinessunits>
     <businessunit name="ged" ratio="100" >
-      <instruments name="test">	
-	<equity ratio="99">
+      <instruments>	
+	<instrument name="equity" ratio="99">
 	  <tolerancerep>2</tolerancerep> 
 	  <partsell>20</partsell> 
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
 	  <tolerancevolumetry>2</tolerancevolumetry> 
 	  <isstp>0</isstp> 
-	</equity>
-	<loandepo ratio="1">
+	</instrument>
+	<instrument name="loandepo" ratio="1">
 	  <tolerancerep>2</tolerancerep> 
 	  <partsell>20</partsell> 
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
 	  <tolerancevolumetry>2</tolerancevolumetry> 
 	  <isstp>0</isstp> 
-	</loandepo>
+	</instrument>
       </instruments>
       <portfolios>
 	<portfolio name="?equity?" ratio="80">
