@@ -10,12 +10,6 @@ class Referential
 	public List<Wallet> Wallets;
 }
 
-class Broker
-{
-	public String code;
-	public String name;
-}
-
 class Counterpart
 {
 	public String code;
