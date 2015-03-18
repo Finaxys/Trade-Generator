@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 class Referential
 {
@@ -8,12 +10,12 @@ class Referential
 	public List<Instrument> Instruments;
 	public List<Trader> Traders;
 	public List<Wallet> Wallets;
-}
-
-class Broker
-{
-	public String code;
-	public String name;
+	
+	public <T> T getRandomElement(List<T> list)
+	{
+        Random randomGenerator = new Random();
+        return (list.get(randomGenerator.nextInt(list.size())));
+	}
 }
 
 class Counterpart

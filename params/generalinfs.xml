@@ -1,18 +1,47 @@
 <general_settings>
-   <system>
+  <system>
     <bank_system>BFI</bank_system>
-	<total_budget>10000000</total_budget>
-   </system>
-   <repartition>
-    <equity>100</equity>    
-    <derivative>0</derivative>
-    <mutual_funds>0</mutual_funds>
-    <bond>0</bond>
-    <debt>0</debt>
-    <swaps>0</swaps>
-    <cds>0</cds>
-    <forex>0</forex>
-    <repo>0</repo>
-    <loan>0</loan>
-   </repartition>
- </general_settings>  
+    <total_budget>10000000</total_budget>
+    <owncountry>EU</owncountry>
+  </system>
+  <bussinessunits>
+    <bussinesunit name="ged" ratio="100" >
+      <instruments>	
+	<equity ratio="99">
+	  <tolerancerep>2</tolerancerep> 
+	  <partsell>20</partsell> 
+	  <owncountry>20</owncountry> 
+	  <volumetry>1000</volumetry> 
+	  <tolerancevolumetry>2</tolerancevolumetry> 
+	  <isstp>0</isstp> 
+	</equity>
+	<loandepo ratio="1">
+	  <tolerancerep>2</tolerancerep> 
+	  <partsell>20</partsell> 
+	  <owncountry>20</owncountry> 
+	  <volumetry>1000</volumetry> 
+	  <tolerancevolumetry>2</tolerancevolumetry> 
+	  <isstp>0</isstp> 
+	</loandepo>
+      </instruments>
+      <portfolios>
+	<portfolio name="?equity?" ratio="80">
+	  <books>
+	    <book name="bookequityeuro" currency="EUR" instrument="equity"/>
+	    <book name="bookfundingeuro" currency="EUR" instrument="loandepo"/>
+	    <book name="EQUOTHERS" currency="OTH" instrument="OTH"/>
+	  </books>
+	</portfolio>
+	<portfolio name="?derivative?" ratio="20">
+	  <books>
+	    <book name="bookdervius" currency="USD" instrument="deriv"/>
+	    <book name="bookfundingus" currency="USD" instrument="loandepo"/>		
+	    <book name="DERIVFUNDEUR" currency="EUR" instrument="loandepo"/>	
+	    <book name="DERIVOTHERS" currency="OTH" instrument="OTH"/>				
+	  </books>
+	</portfolio>
+      </portfolios>
+    </bussinesunit>
+  </bussinessunits>
+</general_settings>
+

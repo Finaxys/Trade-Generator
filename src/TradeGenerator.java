@@ -106,7 +106,14 @@ public class TradeGenerator
 				ref.Traders.add(trader);
 			}
 		});
-		
+
+		Instrument instrument = ref.getRandomElement(ref.Instruments);
+		System.out.println("-- Instrument");
+		System.out.println("ISIN : " +  instrument.isin);
+		System.out.println("LIBELLE : " + instrument.libelle);
+		System.out.println("PAYS : " + instrument.country);
+		System.out.println("PRIX : " + instrument.price);
+		System.out.println("TYPE : " + instrument.type);
 		
 //		for (Instrument instrument : ref.Instruments) {
 //			System.out.println("-- Instrument");

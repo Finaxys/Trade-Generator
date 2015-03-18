@@ -1,0 +1,27 @@
+<portfolios>
+  <portfolio>
+    <codeptf>PFFRAC1</codeptf>
+    <type>Equity</type>
+    <country>FR</country>
+  </portfolio>
+  <portfolio>
+    <codeptf>PFFRAC2</codeptf>
+    <type>Equity</type>
+    <country>FR</country>
+  </portfolio>
+  <portfolio>
+    <codeptf>PFFRAC3</codeptf>
+    <type>Equity</type>
+    <country>FR</country>
+  </portfolio>
+  <portfolio>
+    <codeptf>PFACUS</codeptf>
+    <type>Equity</type>
+    <country>US</country>
+  </portfolio>
+  <portfolio>
+    <codeptf>PFBO</codeptf>
+    <type>Bond</type>
+    <country>FR</country>
+  </portfolio>
+</portfolios>
