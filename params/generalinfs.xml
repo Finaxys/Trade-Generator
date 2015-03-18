@@ -5,8 +5,8 @@
     <owncountry>EU</owncountry>
   </system>
   <bussinessunits>
-    <bussinesunit name="ged" ratio="100" >
-      <instruments>	
+    <businessunit name="ged" ratio="100" >
+      <instruments name="test">	
 	<equity ratio="99">
 	  <tolerancerep>2</tolerancerep> 
 	  <partsell>20</partsell> 
@@ -41,7 +41,6 @@
 	  </books>
 	</portfolio>
       </portfolios>
-    </bussinesunit>
+    </businessunit>
   </bussinessunits>
 </general_settings>
-

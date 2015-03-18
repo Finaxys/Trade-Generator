@@ -9,7 +9,7 @@ class Referential
 	public List<Depositary> Depositaries;
 	public List<Instrument> Instruments;
 	public List<Trader> Traders;
-	public List<Wallet> Wallets;
+	public List<Portfolio> Portfolios;
 	
 	public <T> T getRandomElement(List<T> list)
 	{
@@ -52,7 +52,7 @@ class Trader
 	public String codeptf;
 }
 
-class Wallet
+class Portfolio
 {
 	public String type;
 	public String country;
