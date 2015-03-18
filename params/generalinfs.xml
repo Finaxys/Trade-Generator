@@ -1,6 +1,7 @@
-<generalinf>
+<general_settings>
    <system>
-    <Bank_system>BFI</Bank_system>
+    <bank_system>BFI</bank_system>
+	<total_budget>10000000</total_budget>
    </system>
    <repartition>
     <equity>100</equity>    
@@ -12,6 +13,6 @@
     <cds>0</cds>
     <forex>0</forex>
     <repo>0</repo>
-    <pretemprunt>0</pretemprunt>
+    <loan>0</loan>
    </repartition>
- </generalinf>  
+ </general_settings>  
