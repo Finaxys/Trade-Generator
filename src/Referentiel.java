@@ -2,7 +2,7 @@ import java.util.List;
 
 class Referential
 {
-	public List<Broker> Brokers;
+	public List<Counterpart> Counterparts;
 	public List<Currency> Currencies;
 	public List<Depositary> Depositaries;
 	public List<Instrument> Instruments;
@@ -10,7 +10,7 @@ class Referential
 	public List<Wallet> Wallets;
 }
 
-class Broker
+class Counterpart
 {
 	public String code;
 	public String name;
@@ -46,6 +46,7 @@ class Trader
 
 class Wallet
 {
-	public String name;
+	public String type;
+	public String country;
 	public String codeptf;
 }
