@@ -8,11 +8,13 @@ import java.util.List;
 
 
 public class Equity implements Instrument {
+	public String name;
 	public int Partsell;
 	public int owncountry;
 	public int volumetry;
 	public double volumetry_tolerance;
 	public double repartition_tolerance;
+	public Boolean is_stp;
     public Generals g;
     public Referential ref;
 	//private Date startDate;

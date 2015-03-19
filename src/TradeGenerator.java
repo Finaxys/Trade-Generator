@@ -168,15 +168,14 @@ public class TradeGenerator
 	  }
 	}
 	
-	// TODO CHECK
   static public Generals loadGeneralSettings()
   {
-	  Generals gen = null;
-
 	  try
 	  {
 		  ArrayList<Instrument>	instruments = new ArrayList<Instrument>();
 		  ArrayList<Portfolio>	portfolios = new ArrayList<Portfolio>();
+		  ArrayList<Businessunit>	businessunits = new ArrayList<Businessunit>();
+		  ArrayList<Book>	books = new ArrayList<Book>();
 
 		  File fXmlFile = new File("params/generalinfs.xml");
 		  DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -189,10 +188,10 @@ public class TradeGenerator
 		  Element esetting = (Element) settings.item(0);
 
 		  // Get businessunits
-		  NodeList businessunits = doc.getElementsByTagName("businessunit");
-		  for (int ibu = 0; ibu < businessunits.getLength(); ibu++)
+		  NodeList nbusinessunits = doc.getElementsByTagName("businessunit");
+		  for (int ibu = 0; ibu < nbusinessunits.getLength(); ibu++)
 		  {
-			  Element ebusinessunit = (Element) businessunits.item(ibu);
+			  Element ebusinessunit = (Element) nbusinessunits.item(ibu);
 
 			  if (((Node) ebusinessunit).getNodeType() != Node.ELEMENT_NODE)
 				  continue;
@@ -239,17 +238,24 @@ public class TradeGenerator
 				  for (int ibook = 0; ibook < nbooks.getLength(); ibook++)
 				  {
 					  Element ebook = (Element) nbooks.item(ibook);
-
 					  if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
 						  continue;
 
+					  books.add(new Book(ebook.getAttribute("name"), ebook.getAttribute("currency"), ebook.getAttribute("instrument")));
+
 					  System.out.println("Book >> " + ebook.getAttribute("name"));
 				  }
+				  
+				  portfolios.add(new Portfolio(eportfolio.getAttribute("name"), Integer.parseInt(eportfolio.getAttribute("ratio")), books));
 			  }
+			  
+			  businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), instruments, portfolios));
 		  }
+		  
+		  return new Generals(getContent(esetting, "bank_name"), Integer.parseInt(getContent(esetting, "total_budget")), getContent(esetting, "owncountry"), businessunits);
 	  } catch (Exception e) {
 		  e.printStackTrace();
 	  }
-	  return gen;
+	  return null;
   }
 }

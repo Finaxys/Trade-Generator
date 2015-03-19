@@ -1,4 +1,5 @@
 <general_settings>
+  <bank_name>Finaxys Bank</bank_name>
   <bank_system>BFI</bank_system>
   <total_budget>10000000</total_budget>
   <owncountry>EU</owncountry>

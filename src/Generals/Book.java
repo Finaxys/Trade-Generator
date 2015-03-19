@@ -2,14 +2,14 @@ package Generals;
 
 	public class Book 
 	{
-		public String nom;
-		public String dev;
+		public String name;
+		public String cur;
 		public String ins;
 		
-		public Book (String nom, String dev, String ins)
+		public Book (String name, String cur, String ins)
 		{
-			this.nom=nom;
-			this.dev= dev;
-			this.ins=ins;
+			this.name = name;
+			this.cur = cur;
+			this.ins = ins;
 		}
 	}
