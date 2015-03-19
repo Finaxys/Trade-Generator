@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 	public class Businessunit
 	{
-
 		public String name;
 		public double ratio;
 		public ArrayList<Instrument> lins;

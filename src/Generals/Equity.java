@@ -3,11 +3,13 @@ package Generals;
 import java.util.ArrayList;
 
 public class Equity implements Instrument {
+	public String name;
 	public int Partsell;
 	public int owncountry;
 	public int volumetry;
 	public double volumetry_tolerance;
 	public double repartition_tolerance;
+	public boolean is_stp;
     public Generals g;
 	//private Date startDate;
     
@@ -20,6 +22,7 @@ public class Equity implements Instrument {
 
 	}
     
+	@Override
 	public void generate() {
 		int montant_total_jour=5;//remplir avec general
 		double rand1, rand2;

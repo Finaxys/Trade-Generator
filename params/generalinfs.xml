@@ -10,7 +10,7 @@
 	  <partsell>20</partsell> 
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
-	  <tolerancevolumetry>2</tolerancevolumetry> 
+	  <volumetrytolerance>2</volumetrytolerance> 
 	  <isstp>0</isstp> 
 	</instrument>
 	<instrument name="loandepo" ratio="1">
@@ -18,7 +18,7 @@
 	  <partsell>20</partsell> 
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
-	  <tolerancevolumetry>2</tolerancevolumetry> 
+	  <volumetrytolerance>2</volumetrytolerance> 
 	  <isstp>0</isstp> 
 	</instrument>
       </instruments>

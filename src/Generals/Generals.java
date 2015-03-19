@@ -2,7 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 
-	class Generals {
+	public class Generals {
 		public String nom_de_la_banque;
 		public int total_buget; 
 		public String owncountry;
