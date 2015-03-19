@@ -1,12 +1,5 @@
 package Generals;
 
-import Referential;
-import Referential.Counterpart;
-import Referential.Currency;
-import Referential.Depositary;
-import Referential.Instrument;
-import Referential.Portfolio;
-import Referential.Trader;
 
 public class Tradeequity implements Tradeevents {
 
@@ -25,8 +18,8 @@ public class Tradeequity implements Tradeevents {
 	
 
 	public Tradeequity(int date, Boolean sens, float prix, int quantity,
-				Depositary d1, Counterpart c1, Trader tr1, Referential.Instrument iins1,
-				Currency cur1, Portfolio port1) {
+				Referential.Depositary d1, Referential.Counterpart c1, Referential.Trader tr1, Referential.Instrument iins1,
+				Referential.Currency cur1, Referential.Portfolio port1) {
 			super();
 			this.date = date;
 			Sens = sens;
