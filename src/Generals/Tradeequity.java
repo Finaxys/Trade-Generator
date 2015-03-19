@@ -3,9 +3,6 @@ package Generals;
 public class Tradeequity implements Tradeevents {
 
 	int date;
-	//date datedone;
-	//int heure;
-	//Trader trader;
 	boolean Sens;
 	Book book;
 	int prix;
@@ -21,12 +18,6 @@ public class Tradeequity implements Tradeevents {
 	}
 
 	public void toXml() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
-	
-	
-	
-	
-	
 }
