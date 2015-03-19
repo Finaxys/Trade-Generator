@@ -3,10 +3,10 @@ package Generals;
 	public class Book 
 	{
 		public String nom;
-		public Devise dev;
-		public Instrument ins;
+		public String dev;
+		public String ins;
 		
-		public Book (String nom, Devise dev, Instrument ins)
+		public Book (String nom, String dev, String ins)
 		{
 			this.nom=nom;
 			this.dev= dev;

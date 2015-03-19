@@ -1,6 +1,11 @@
 package Generals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+
 
 public class Equity implements Instrument {
 	public int Partsell;
@@ -9,12 +14,12 @@ public class Equity implements Instrument {
 	public double volumetry_tolerance;
 	public double repartition_tolerance;
     public Generals g;
-    
+    public Referential ref;
 	//private Date startDate;
     
-    public static ArrayList<Integer> tableaubin(int a,int b){
-    	ArrayList<Integer> T=new ArrayList<Integer>();
-    	return T;
+    public static List<Boolean> tableaubin(int a,int b){
+    	List<Boolean> t1=new ArrayList<Boolean>();
+    	return t1;
     }
 
     
@@ -39,7 +44,7 @@ public class Equity implements Instrument {
    // Date d=startDate;
    //DECLARATION des variables de la boucles while  
    //separer le montant en 2 
-    double rand12;
+    float rand12;
    //double random pour la tolérance des quantités 
     double randomquantity3;
     double randomquantity4;
@@ -48,13 +53,28 @@ public class Equity implements Instrument {
    //quantité a calculer
     int quantity1,quantity2;
    //prix soumis a tolerance randomquantity
-    int price1,price2;		
+    float price1,price2;		
    //nombre de jour de simulation en dur
     int day_simulation=20;
+    //start date
+    int day_start=0;
    //le jour courant
     int numero_jour_courant=0;
    //les tableaux de distribution de sell/buy; National/international
-    ArrayList<Integer> t1,t2;  	
+    //List<boolean> t1,t2; 
+    List<Boolean> t1;
+    
+    List<Boolean> t2;
+   
+    //declaration des tirages au sort sous contraintes
+    Referential.Depositary d1,d2;
+    Referential.Counterpart c1,c2;
+    Referential.Trader tr1,tr2;
+    Referential.Instrument iins1,iins2;
+    Referential.Currency cur1,cur2;
+    Referential.Portfolio port1,port2;
+ 
+    
 //boucle while parcourant les jours de simulation
       while(numero_jour_courant<=day_simulation){
 //durant un jour:
@@ -69,29 +89,38 @@ public class Equity implements Instrument {
         for (i=1; i<volume_arrondi; i=i+2) {
 
        //partage du montantpertrade
-	   rand12=Math.random();
+	   rand12=(float)Math.random();
 	   //set random price -+3%
 	   randomquantity3=6*(Math.random()-0.5);
 	   randomquantity4=6*(Math.random()-0.5);
-	   //g.getTrader("devise");
-
 	   
-	   //instrument1=new instrument(tableaubin1[i],"equity");
-//instrument2=new instrument(tableaubin1[i+1]);
-//
+	   //tirage au sort sous contrainte
+	   
+	    d1=ref.getRandomElement(ref.Depositaries);
+	    d2=ref.getRandomElement(ref.Depositaries);
+	    c1=ref.getRandomElement(ref.Counterparts);
+	    c2=ref.getRandomElement(ref.Counterparts);
+	   tr1=ref.getRandomElement(ref.Traders);
+	   tr2=ref.getRandomElement(ref.Traders);
+	   iins1=ref.getRandomElement(ref.Instruments);
+	   iins2=ref.getRandomElement(ref.Instruments);
+	   cur1=ref.getRandomElement(ref.Currencies);
+	   cur2=ref.getRandomElement(ref.Currencies);
+	   port1=ref.getRandomElement(ref.Portfolios);
+	   port2=ref.getRandomElement(ref.Portfolios);
 
-//price1=instrument1.getprice();
-//price2=instrument2.getprice();
-//price1=price1*(1+randomquantity3/100);
-//price2=price2*(1+randomquantity4/100);
-//quantity1=(int)rand12*to2tradeamount/price1;
-//quantity2=(int)rand12*to2tradeamount/price2;
-//CTP1=set_ref.getcounterpart();
-//D1=instrument1.getdevise();
-//dpst1=set_ref.getdepositaire();
-//
-//ToXML(s...);
 
+	   price1=iins1.price;
+	   price2=iins2.price;
+	   price1=(float) (price1*(1+randomquantity3/100));
+	   price2=(float) (price2*(1+randomquantity4/100));
+	   quantity1=(int) (rand12*to2tradeamount/price1);
+	   quantity2=(int) (rand12*to2tradeamount/price2);
+       t2.get(i);
+	   
+       Tradeequity tq1=new Tradeequity(day_start+day_simulation,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
+//	   Tradeequity tq2=
+       g.addTradevent(tq1);
 
 
                                 
@@ -106,7 +135,9 @@ public class Equity implements Instrument {
 
 
 	}
-	 
+
+
+
 	
 
 }
