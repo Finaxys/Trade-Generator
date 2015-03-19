@@ -107,18 +107,18 @@ public class TradeGenerator
 			}
 		});
 		
-		loadReferential(ref, "traders.xml", "trader", new CbReferential() {
-			public void init(Referential ref) {
-				ref.Traders = new ArrayList<Trader>();
-			}
-			
-			public void execute(Referential ref, Element eElement) {
-				Trader trader = new Trader();
-				trader.codeptf = getContent(eElement, "codeptf");
-				trader.name =  getContent(eElement, "name");
-				ref.Traders.add(trader);
-			}
-		});
+//		loadReferential(ref, "traders.xml", "trader", new CbReferential() {
+//			public void init(Referential ref) {
+//				ref.Traders = new ArrayList<Trader>();
+//			}
+//			
+//			public void execute(Referential ref, Element eElement) {
+//				Trader trader = new Trader();
+//				trader.codeptf = getContent(eElement, "codeptf");
+//				trader.name =  getContent(eElement, "name");
+//				ref.Traders.add(trader);
+//			}
+//		});
 
 //		Instrument instrument = ref.getRandomElement(ref.Instruments);
 //		System.out.println("-- Instrument");
@@ -179,11 +179,11 @@ public class TradeGenerator
 		Document doc = dBuilder.parse(fXmlFile);
 		doc.getDocumentElement().normalize();
 		
-		// Set general setting bank
+		// Get general setting bank
 		NodeList settings = doc.getElementsByTagName("general_settings");
 		Element setting = (Element) settings.item(0);
-		
-		// Set businessunits
+
+		// Get businessunits
 		NodeList businessunits = doc.getElementsByTagName("businessunit");
 		for (int temp = 0; temp < businessunits.getLength(); temp++)
 		{
@@ -196,11 +196,33 @@ public class TradeGenerator
 			
 			System.out.println("-- BusinessUnit : " + ebusinessunit.getAttribute("name"));
 			
-			NodeList portfolios = ebusinessunit.getElementsByTagName("portfolio");
-			for (int temp2 = 0; temp2 < portfolios.getLength(); temp2++)
-				System.out.println("Portfolio >> " + ((Element)portfolios.item(temp2)).getAttribute("name"));
+			// Get instruments
+			NodeList instruments = ebusinessunit.getElementsByTagName("instrument");
+			for (int iins = 0; iins < instruments.getLength(); iins++)
+			{
+				Element eins = (Element) instruments.item(iins);
+				System.out.println("Instrument >> " + eins.getAttribute("name"));
+			}
 			
-//			System.out.println(((Element) nNode).getElementsByTagName("businessunit"));
+			// Get portfolios
+			NodeList portfolios = ebusinessunit.getElementsByTagName("portfolio");
+			for (int ipf = 0; ipf < portfolios.getLength(); ipf++)
+			{
+				Node portfolio = portfolios.item(ipf);
+				if (portfolio.getNodeType() != Node.ELEMENT_NODE)
+					continue;
+				Element eportfolio = (Element) portfolio;
+
+				System.out.println("Portfolio >> " + eportfolio.getAttribute("name"));
+				
+				// Get books
+				NodeList books = eportfolio.getElementsByTagName("book");
+				for (int ibook = 0; ibook < books.getLength(); ibook++)
+				{
+					Element ebook = (Element) books.item(ibook);
+					System.out.println("Book >> " + ebook.getAttribute("name"));
+				}
+			}
 		}
 	  } catch (Exception e) {
 		e.printStackTrace();
