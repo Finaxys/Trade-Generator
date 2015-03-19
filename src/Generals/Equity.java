@@ -26,7 +26,7 @@ public class Equity implements Instrument {
 	public void generate() {
 		int montant_total_jour=5;//remplir avec general
 		double rand1, rand2;
-		double v;
+		double v;//raf
 		//calcul des  tolérances
 		//exemple 20==>random entre -0.2 et 0.2
 		rand1= this.repartition_tolerance*2*(Math.random()-0.5)/100;
