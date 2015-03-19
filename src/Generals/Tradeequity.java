@@ -1,11 +1,12 @@
 package Generals;
 
-import Generals.Referential.Counterpart;
-import Generals.Referential.Currency;
-import Generals.Referential.Depositary;
-import Generals.Referential.Instrument;
-import Generals.Referential.Portfolio;
-import Generals.Referential.Trader;
+import Referential;
+import Referential.Counterpart;
+import Referential.Currency;
+import Referential.Depositary;
+import Referential.Instrument;
+import Referential.Portfolio;
+import Referential.Trader;
 
 public class Tradeequity implements Tradeevents {
 
