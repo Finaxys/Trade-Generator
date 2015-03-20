@@ -6,8 +6,8 @@ public class TradeGenerator
 	public static void main(String[] args)
 	{
 		Referential ref = new Referential();	
+		Generals gen = null;
 		
-		LoadXML load = new LoadXML(ref);
-		load.loadAll();		
+		gen = LoadXML.init(ref);
 	}	
 }
