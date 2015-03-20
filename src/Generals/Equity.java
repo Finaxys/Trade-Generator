@@ -8,8 +8,9 @@ import java.util.List;
 
 
 
-public class Equity implements Instrument {
-	public String name;
+public class Equity extends Instrument {
+	//public final String type="Equity";
+	
 	public int Partsell;
 	public int owncountry;
 	public int volumetry;
@@ -20,7 +21,9 @@ public class Equity implements Instrument {
     public Referential ref;
 	//private Date startDate;
     
-    public static List<Boolean> tableaubin(int a,int b){
+ 
+
+	public static List<Boolean> tableaubin(int a,int b){
     	List<Boolean> t1=new ArrayList<Boolean>(a);
     	Collections.fill(t1,Boolean.FALSE);
     	int j;
@@ -128,8 +131,8 @@ public class Equity implements Instrument {
 	   quantity2=(int) (rand12*to2tradeamount/price2);
        
 	   
-       Tradeequity tq1=new Tradeequity(day_start+day_simulation,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
-       Tradeequity tq2=new Tradeequity(day_start+day_simulation,t2.get(i+1),price2,quantity2,d2,c2,tr2,iins2,cur2,port2);
+       Tradeequity tq1= new Tradeequity(day_start+day_simulation,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
+       Tradeequity tq2= new Tradeequity(day_start+day_simulation,t2.get(i+1),price2,quantity2,d2,c2,tr2,iins2,cur2,port2);
        // Tradeequity tq2=
        g.addTradevent(tq1);
        g.addTradevent(tq2);

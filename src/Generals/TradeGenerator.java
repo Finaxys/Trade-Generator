@@ -15,7 +15,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import java.lang.*;
 interface CbReferential {
 	public void init(Referential ref);
 	public void execute(Referential ref, Element elem);
@@ -131,6 +131,26 @@ public class TradeGenerator
 		// Load General Settings
 		Generals gen = loadGeneralSettings();
 		loadTraders();
+		//gen ref
+		
+		for (Businessunit bu : gen.bu)
+		{
+			for (Portfolio lpor :  bu.lpor)
+			{
+				for (Book b : lpor.lb)
+				{
+					if (b.name=="equity")
+					{
+						bu.lins.
+						
+					}
+					{
+						
+					}
+				}
+			}
+		}
+		
 	}
 	
 	static public String getContent(Element elem, String name)

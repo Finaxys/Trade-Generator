@@ -2,6 +2,9 @@ package Generals;
 
 import java.util.ArrayList;
 
-	public interface Instrument{
-		public void generate();
+	public abstract class Instrument
+	{
+		String name;
+		public abstract void  generate();
+	
 	}
