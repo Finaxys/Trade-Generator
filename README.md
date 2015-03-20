@@ -13,4 +13,10 @@ Generateur de trades
 - add to book: list of product owned 
 - optimiser:exemple: Math.random  -> Random //parallelise.
 - xml en dur
+- un fichier par jour
+- volumetry a changer
+- manque book +portfolio
+- interet du ratio
+- date a implementer
+- pouvoir faire un bilan pour chaque jour
 (- re-think equity generation...)
