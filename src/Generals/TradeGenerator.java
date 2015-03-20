@@ -11,7 +11,7 @@ public class TradeGenerator
 		gen = LoadXML.init(ref);
 
 		int simulate_days=Integer.parseInt(args[0]);
-
+        int amount_per_book;
 		int j;
 
 		for (j=0;j<=simulate_days;j++)
@@ -25,7 +25,8 @@ public class TradeGenerator
 						if (b.name=="equity")
 						{
 							Instrument t= bu.getInstrument(b.name);
-							t.generate(gen, ref, (int) (gen.total_buget*bu.ratio*port.ratio*b.ratio), j);
+							amount_per_book=(int) (gen.total_buget*bu.ratio*port.ratio*b.ratio/1000000);
+							t.generate(gen, ref,amount_per_book, j);
 
 						}  
 
