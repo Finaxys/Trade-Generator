@@ -21,7 +21,14 @@ public class Equity implements Instrument {
 	//private Date startDate;
     
     public static List<Boolean> tableaubin(int a,int b){
-    	List<Boolean> t1=new ArrayList<Boolean>();
+    	List<Boolean> t1=new ArrayList<Boolean>(a);
+    	Collections.fill(t1,Boolean.FALSE);
+    	int j;
+    	int national=(b*a)/100;
+    	for (j=1; j<=national;j++ ){
+    		t1.set(j, Boolean.TRUE);
+    	}
+    	Collections.shuffle(t1);
     	return t1;
     }
 
@@ -85,7 +92,7 @@ public class Equity implements Instrument {
           	  
         t1= tableaubin(volume_arrondi,this.owncountry);
 
-        t2=tableaubin(volume_arrondi,this.Partsell);
+        t2= tableaubin(volume_arrondi,this.Partsell);
        
         //pour chaque bi-trade
         int i;
@@ -119,12 +126,13 @@ public class Equity implements Instrument {
 	   price2=(float) (price2*(1+randomquantity4/100));
 	   quantity1=(int) (rand12*to2tradeamount/price1);
 	   quantity2=(int) (rand12*to2tradeamount/price2);
-       t2.get(i);
+       
 	   
        Tradeequity tq1=new Tradeequity(day_start+day_simulation,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
-//	   Tradeequity tq2=
+       Tradeequity tq2=new Tradeequity(day_start+day_simulation,t2.get(i+1),price2,quantity2,d2,c2,tr2,iins2,cur2,port2);
+       // Tradeequity tq2=
        g.addTradevent(tq1);
-
+       g.addTradevent(tq2);
 
                                 
 		    
