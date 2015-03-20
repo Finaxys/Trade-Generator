@@ -10,6 +10,4 @@ public class Devise {
 		this.country = country;
 		this.devise = devise;
 	}
-	
-
 }
