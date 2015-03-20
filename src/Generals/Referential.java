@@ -30,6 +30,14 @@ class Referential
 		public String code;
 		public String name;
 		public String country;
+		
+		public Currency(){}
+		public Currency(String code, String name, String country)
+		{
+			this.code = code;
+			this.name = name;
+			this.country = country;
+		}
 	}
 
 	public class Depositary
@@ -40,17 +48,30 @@ class Referential
 
 	public class Instrument
 	{
+		public String name;
 		public String type;
 		public String isin;
 		public String libelle;
 		public String country;
 		public float price;
+		
+		public Instrument(){}
+		public Instrument (String name)
+		{
+			this.name = name;
+		}
 	}
 
-	public class Trader
+	static public class Trader
 	{
 		public String name;
 		public String codeptf;
+		
+		public Trader (String name, String codeptf)
+		{
+			this.name = name;
+			this.codeptf = codeptf;
+		}
 	}
 
 	public class Portfolio

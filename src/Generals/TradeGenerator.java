@@ -130,6 +130,7 @@ public class TradeGenerator
 		
 		// Load General Settings
 		Generals gen = loadGeneralSettings();
+		loadTraders();
 	}
 	
 	static public String getContent(Element elem, String name)
@@ -258,4 +259,71 @@ public class TradeGenerator
 	  }
 	  return null;
   }
+  
+  static public void loadTraders()
+  {
+	  try
+	  {
+		  ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
+		  ArrayList<Referential.Instrument>	instruments = new ArrayList<Referential.Instrument>();
+		  ArrayList<Referential.Trader>	traders = new ArrayList<Referential.Trader>();
+		 
+		  Referential ref = new Referential();
+		  
+		  File fXmlFile = new File("referential/traders.xml");
+		  DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		  DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		  Document doc = dBuilder.parse(fXmlFile);
+		  doc.getDocumentElement().normalize();
+
+
+			  // Get currencies
+			  NodeList ncurrencies = doc.getElementsByTagName("currency");
+			  for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
+			  {
+				  Element ecurrency = (Element) ncurrencies.item(icurrencies);
+				  if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
+					  continue;
+				  
+
+				  System.out.println("currency >> " + ecurrency.getAttribute("name"));
+
+				  // Get instruments
+				  NodeList ninstruments = ecurrency.getElementsByTagName("instrument");
+				  for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++)
+				  {
+					  Element einstrument = (Element) ninstruments.item(iinstru);
+					  if (((Node) einstrument).getNodeType() != Node.ELEMENT_NODE)
+						  continue;
+  
+
+					  System.out.println("Instru >> " + einstrument.getAttribute("name"));
+					  
+					// Get traders
+					  NodeList ntraders = einstrument.getElementsByTagName("trader");
+					  for (int itrader = 0; itrader < ntraders.getLength(); itrader++)
+					  {
+						  Element etrader = (Element) ntraders.item(itrader);
+						  if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
+							  continue;
+
+						  traders.add(new Referential.Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
+
+						  System.out.println("Trader >> " + etrader.getAttribute("name"));
+						  
+					  }
+					  
+					  instruments.add(ref.new Instrument(einstrument.getAttribute("name"))); 
+				  }
+				  
+				  currencies.add(ref.new Currency(ecurrency.getAttribute("code"), ecurrency.getAttribute("name"), ecurrency.getAttribute("country")));
+			  }
+			  
+			  //businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), instruments, portfolios));
+			  
+	  } catch (Exception e) {
+		  e.printStackTrace();
+	  }
+  }
+  
 }

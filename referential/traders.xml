@@ -1,3 +1,4 @@
+<traders>
 <currency code="EUR" name="Euro" country="FR">
 	<instruments>
 		<instrument name="equity">
@@ -5,7 +6,7 @@
 			<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
 		</instrument>    
 		<instrument name="derivative">
-			<trader name="Watt" codeptf="PFFRAC1"></trader>
+			<trader name="Watt" codeptf="PFFRAC1"/>
 			<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
 		</instrument>
 		<instrument name="mutual_funds">
@@ -87,7 +88,6 @@
 		</instrument>
 	</instruments>
  </currency>
- 
  <currency code="EUR" name="Euro" country="IT">
 	<instruments>
 		<instrument name="equity">
@@ -632,3 +632,4 @@
 		</instrument>
 	</instruments>
 </currency>
+</traders>
