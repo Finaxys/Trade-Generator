@@ -1,10 +1,17 @@
 package Generals;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 public class TradeGenerator
 {	
 	public static void main(String[] args)
 	{
+		long startTime = System.currentTimeMillis();
+
+
 		Referential ref = new Referential();	
 		Generals gen = null;
 
@@ -27,5 +34,35 @@ public class TradeGenerator
 							t.generate(gen, ref, amount_per_book, j);
 						}  
 					}
+
+		// Create file BATCH MODE
+		FileOutputStream fop = null;
+		File file;
+		try
+		{
+			file = new File("trades.xml");
+			fop = new FileOutputStream(file);
+			if (!file.exists())
+				file.createNewFile();
+
+			for (Tradeevents trade : gen.te)
+			{
+				String xmlString = trade.toXml();
+				byte[] contentInBytes = xmlString.getBytes();
+				fop.write(contentInBytes);
+			}
+
+			fop.flush();
+			fop.close();
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println(estimatedTime / 1000);
+
 	}	
 }
