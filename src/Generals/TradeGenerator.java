@@ -34,6 +34,8 @@ public class TradeGenerator
 							t.generate(gen, ref, amount_per_book, j);
 						}  
 					}
+		
+		
 
 		// Create file BATCH MODE
 		FileOutputStream fop = null;
@@ -62,7 +64,7 @@ public class TradeGenerator
 		}
 
 		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println(estimatedTime / 1000);
+		System.out.println(estimatedTime * 100000 / 1000 / 60 / 60);
 
 	}	
 }

@@ -62,17 +62,17 @@ public class Tradeequity implements Tradeevents {
 
 			// append child elements to root element
 			trade.setAttribute("id", "XXX");
-			trade.appendChild(getTradeElement(doc, trade, "balance", buy.equals(Boolean.TRUE) ? "buy" : "sell"));
+			trade.appendChild(getTradeElement(doc, trade, "way", buy.equals(Boolean.TRUE) ? "buy" : "sell"));
 			trade.appendChild(getTradeElement(doc, trade, "type", "equity"));
 			trade.appendChild(getTradeElement(doc, trade, "product", pro1.libelle));
 			trade.appendChild(getTradeElement(doc, trade, "quantity", Integer.toString(quantity)));
 			trade.appendChild(getTradeElement(doc, trade, "price", Float.toString(prix)));
-			trade.appendChild(getTradeElement(doc, trade, "currency", cur1.name));
+			trade.appendChild(getTradeElement(doc, trade, "currency", cur1.code));
 			trade.appendChild(getTradeElement(doc, trade, "trader", tr1.codeptf));
 			Calendar c = new GregorianCalendar();
 			c.add(Calendar.DAY_OF_MONTH, date);
 			Date d = c.getTime();
-			trade.appendChild(getTradeElement(doc, trade, "date", d.getDay() + "/" + d.getDate() + "/" + d.getYear()));
+			trade.appendChild(getTradeElement(doc, trade, "tradedate", d.getDay() + "/" + d.getDate() + "/" + d.getYear()));
 
 			// output DOM XML to console 
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();

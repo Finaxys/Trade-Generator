@@ -106,8 +106,6 @@ public class Equity extends Instrument
 
 			Tradeequity tq1 = new Tradeequity(date, t2.get(i), price1, quantity1, d1, c1, tr1, pro1, cur1, port1);
 			Tradeequity tq2 = new Tradeequity(date, t2.get(i + 1), price2, quantity2, d2, c2, tr2, pro2, cur2, port2);
-			
-			System.out.println("Equity >> " + date + " / " + tq1.prix + " / " + tq1.quantity + " / " + tq1.port1.codeptf);
 
 			generals.addTradevent(tq1);
 			generals.addTradevent(tq2);
