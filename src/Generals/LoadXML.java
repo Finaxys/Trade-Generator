@@ -17,14 +17,14 @@ public class LoadXML
 		public void init(Referential ref);
 		public void execute(Referential ref, Element elem);
 	}
-	
+
 	private static Referential _ref;
-	
+
 	static public String getContent(Element elem, String name)
 	{
 		return (elem.getElementsByTagName(name).item(0).getTextContent());
 	}
-	
+
 	static public Generals init(Referential ref)
 	{
 		_ref = ref;

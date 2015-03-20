@@ -5,12 +5,13 @@ package Generals;
 		public String name;
 		public String cur;
 		public String ins;
-		public String ratio;
+		public int ratio;
 		
-		public Book (String name, String cur, String ins)
+		public Book (String name, String cur, String ins, int ratio)
 		{
 			this.name = name;
 			this.cur = cur;
 			this.ins = ins;
+			this.ratio = ratio;
 		}
 	}
