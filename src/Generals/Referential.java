@@ -1,8 +1,18 @@
 package Generals;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 
 class Referential
 {
@@ -49,11 +59,6 @@ class Referential
 	public class Instrument
 	{
 		public String name;
-		public String type;
-		public String isin;
-		public String libelle;
-		public String country;
-		public float price;
 		
 		public Instrument(){}
 		public Instrument (String name)
@@ -81,3 +86,5 @@ class Referential
 		public String codeptf;
 	}
 }
+
+	

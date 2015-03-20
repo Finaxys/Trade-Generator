@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class Businessunit
 {
 	public String name;
-	public double ratio;
+	public int ratio;
 	public ArrayList<Instrument> lins;
 	public ArrayList<Portfolio> lpor;
 
@@ -19,7 +19,7 @@ public class Businessunit
 		return (null);
 	}
 
-	public Businessunit(String name, double ratio, ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
+	public Businessunit(String name, int ratio, ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
 	{
 		super();
 		this.name = name;
