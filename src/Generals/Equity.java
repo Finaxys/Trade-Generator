@@ -17,11 +17,10 @@ public class Equity extends Instrument {
 	public double volumetry_tolerance;
 	public double repartition_tolerance;
 	public Boolean is_stp;
-    public Generals g;
-    public Referential ref;
+  
 	//private Date startDate;
     
- 
+   
 
 	public static List<Boolean> tableaubin(int a,int b){
     	List<Boolean> t1=new ArrayList<Boolean>(a);
@@ -35,10 +34,10 @@ public class Equity extends Instrument {
     	return t1;
     }
 
-    
-	public void generate() {
+    @Override
+	public void generate(Generals g,Referential ref, int montant,int date) {
 	
-	int montant_total_jour=5;//remplir avec general
+	int montant_total_jour=montant;//remplir avec general
 	double rand1, rand2;
 	double v;
 	//calcul des  tolérances
@@ -68,11 +67,11 @@ public class Equity extends Instrument {
    //prix soumis a tolerance randomquantity
     float price1,price2;		
    //nombre de jour de simulation en dur
-    int day_simulation=20;
-    //start date
-    int day_start=0;
-   //le jour courant
-    int numero_jour_courant=0;
+//    int day_simulation=number;
+//    //start date
+//    int day_start=0;
+//   //le jour courant
+//    int numero_jour_courant=0;
    //les tableaux de distribution de sell/buy; National/international
     //List<boolean> t1,t2; 
     List<Boolean> t1;
@@ -89,7 +88,7 @@ public class Equity extends Instrument {
  
     
 //boucle while parcourant les jours de simulation
-      while(numero_jour_courant<=day_simulation){
+  //    while(numero_jour_courant<=day_simulation){
 //durant un jour:
 //calcul des tableaux de distribution
           	  
@@ -131,8 +130,8 @@ public class Equity extends Instrument {
 	   quantity2=(int) (rand12*to2tradeamount/price2);
        
 	   
-       Tradeequity tq1= new Tradeequity(day_start+day_simulation,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
-       Tradeequity tq2= new Tradeequity(day_start+day_simulation,t2.get(i+1),price2,quantity2,d2,c2,tr2,iins2,cur2,port2);
+       Tradeequity tq1= new Tradeequity(date,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
+       Tradeequity tq2= new Tradeequity(date,t2.get(i+1),price2,quantity2,d2,c2,tr2,iins2,cur2,port2);
        // Tradeequity tq2=
        g.addTradevent(tq1);
        g.addTradevent(tq2);
@@ -144,7 +143,7 @@ public class Equity extends Instrument {
 		//montant_total_jour += montant_total_jour*;
 		
 		
-	}
+	//}
 	
 
 

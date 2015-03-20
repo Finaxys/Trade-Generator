@@ -5,6 +5,6 @@ import java.util.ArrayList;
 	public abstract class Instrument
 	{
 		String name;
-		public abstract void  generate();
+		public void  generate (Generals g,Referential ref, int montant,int date){}
 	
 	}
