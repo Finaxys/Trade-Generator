@@ -151,7 +151,7 @@ public class LoadXML
 				if (((Node) ebusinessunit).getNodeType() != Node.ELEMENT_NODE)
 					continue;
 
-				System.out.println("-- BusinessUnit : " + ebusinessunit.getAttribute("name"));
+				// System.out.println("-- BusinessUnit : " + ebusinessunit.getAttribute("name"));
 
 				// Get instruments
 				NodeList ninstruments = ebusinessunit.getElementsByTagName("instrument");
@@ -162,7 +162,7 @@ public class LoadXML
 						continue; 
 
 					// Manage all instrument (Only equity for now)
-					if (eins.getAttribute("name") != "equity")
+					if (!eins.getAttribute("name").equalsIgnoreCase("equity"))
 						continue;
 
 					Equity equity = new Equity();
@@ -175,7 +175,7 @@ public class LoadXML
 					equity.volumetry_tolerance = Integer.parseInt(getContent(eins, "volumetrytolerance"));
 					instruments.add(equity);
 
-					System.out.println("Instrument >> " + eins.getAttribute("name"));
+					// System.out.println("Instrument >> " + eins.getAttribute("name"));
 				}
 
 				// Get portfolios
@@ -186,7 +186,7 @@ public class LoadXML
 					if (((Node) eportfolio).getNodeType() != Node.ELEMENT_NODE)
 						continue;
 
-					System.out.println("Portfolio >> " + eportfolio.getAttribute("name"));
+					// System.out.println("Portfolio >> " + eportfolio.getAttribute("name"));
 
 					// Get books
 					NodeList nbooks = eportfolio.getElementsByTagName("book");
@@ -198,7 +198,7 @@ public class LoadXML
 
 						books.add(new Book(ebook.getAttribute("name"), ebook.getAttribute("currency"), ebook.getAttribute("instrument"), Integer.parseInt(ebook.getAttribute("ratio"))));
 
-						System.out.println("Book >> " + ebook.getAttribute("name"));
+						// System.out.println("Book >> " + ebook.getAttribute("name"));
 					}
 
 					portfolios.add(new Portfolio(eportfolio.getAttribute("name"), Integer.parseInt(eportfolio.getAttribute("ratio")), books));
@@ -239,7 +239,7 @@ public class LoadXML
 					continue;
 
 
-				System.out.println("currency >> " + ecurrency.getAttribute("name"));
+				// System.out.println("currency >> " + ecurrency.getAttribute("name"));
 
 				// Get instruments
 				NodeList ninstruments = ecurrency.getElementsByTagName("instrument");
@@ -250,7 +250,7 @@ public class LoadXML
 						continue;
 
 
-					System.out.println("Instru >> " + einstrument.getAttribute("name"));
+					// System.out.println("Instru >> " + einstrument.getAttribute("name"));
 
 					// Get traders
 					NodeList ntraders = einstrument.getElementsByTagName("trader");
@@ -263,7 +263,7 @@ public class LoadXML
 						traders.add(new Referential.Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
 						_ref.Traders = traders;
 
-						System.out.println("Trader >> " + etrader.getAttribute("name"));
+						// System.out.println("Trader >> " + etrader.getAttribute("name"));
 					}
 
 					instruments.add(_ref.new Instrument(einstrument.getAttribute("name")));

@@ -13,8 +13,13 @@ public class Businessunit
 	public Instrument getInstrument(String ins_str)
 	{    
 		for (Instrument ins : lins)
+		{
 			if (ins.name.equalsIgnoreCase(ins_str))
 				return (ins);
+		}
+
+		System.out.println("Seek ins " + ins_str);
+
 
 		return (null);
 	}
