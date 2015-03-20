@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 class Referential
 {
 	public List<Counterpart> Counterparts;
+	public List<Product> Products;
 	public List<Currency> Currencies;
 	public List<Depositary> Depositaries;
 	public List<Instrument> Instruments;
@@ -48,6 +49,16 @@ class Referential
 			this.name = name;
 			this.country = country;
 		}
+	}
+
+	public class Product
+	{
+		public String name;
+		public String type;
+		public String isin;
+		public String libelle;
+		public String country;
+		public float price;
 	}
 
 	public class Depositary

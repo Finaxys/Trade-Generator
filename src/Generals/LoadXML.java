@@ -11,11 +11,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import Generals.Referential.Counterpart;
-import Generals.Referential.Currency;
-import Generals.Referential.Depositary;
-import Generals.Referential.Instrument;
-
 class LoadXML
 {
 	interface CbReferential {
@@ -49,6 +44,23 @@ class LoadXML
 				counterpart.code =  getContent(eElement, "code");
 				counterpart.name =  getContent(eElement, "name");
 				ref.Counterparts.add(counterpart);
+			}
+		});
+
+		loadReferential("products.xml", "product", new CbReferential() {
+			public void init(Referential ref) {
+				ref.Products = new ArrayList<Referential.Product>();
+			}
+			
+			public void execute(Referential ref, Element eElement) {
+				Referential.Product product = ref.new Product();
+				product.name =  getContent(eElement, "type");
+				product.type =  getContent(eElement, "type");
+				product.isin =  getContent(eElement, "isin");
+				product.libelle =  getContent(eElement, "libelle");
+				product.country =  getContent(eElement, "country");
+				product.price =  Float.parseFloat(getContent(eElement, "price"));
+				ref.Products.add(product);
 			}
 		});
 		

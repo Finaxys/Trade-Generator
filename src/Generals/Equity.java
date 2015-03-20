@@ -1,11 +1,9 @@
 package Generals;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 
 
 public class Equity extends Instrument {
@@ -82,7 +80,7 @@ public class Equity extends Instrument {
     Referential.Depositary d1,d2;
     Referential.Counterpart c1,c2;
     Referential.Trader tr1,tr2;
-    Referential.Instrument iins1,iins2;
+    Referential.Product pro1,pro2;
     Referential.Currency cur1,cur2;
     Referential.Portfolio port1,port2;
  
@@ -114,24 +112,24 @@ public class Equity extends Instrument {
 	    c2=ref.getRandomElement(ref.Counterparts);
 	   tr1=ref.getRandomElement(ref.Traders);
 	   tr2=ref.getRandomElement(ref.Traders);
-	   iins1=ref.getRandomElement(ref.Instruments);
-	   iins2=ref.getRandomElement(ref.Instruments);
+	   pro1=ref.getRandomElement(ref.Products);
+	   pro2=ref.getRandomElement(ref.Products);
 	   cur1=ref.getRandomElement(ref.Currencies);
 	   cur2=ref.getRandomElement(ref.Currencies);
 	   port1=ref.getRandomElement(ref.Portfolios);
 	   port2=ref.getRandomElement(ref.Portfolios);
 
 
-	   price1=iins1.price;
-	   price2=iins2.price;
+	   price1=pro1.price;
+	   price2=pro2.price;
 	   price1=(float) (price1*(1+randomquantity3/100));
 	   price2=(float) (price2*(1+randomquantity4/100));
 	   quantity1=(int) (rand12*to2tradeamount/price1);
 	   quantity2=(int) (rand12*to2tradeamount/price2);
        
 	   
-       Tradeequity tq1= new Tradeequity(date,t2.get(i),price1,quantity1,d1,c1,tr1,iins1,cur1,port1);
-       Tradeequity tq2= new Tradeequity(date,t2.get(i+1),price2,quantity2,d2,c2,tr2,iins2,cur2,port2);
+       Tradeequity tq1= new Tradeequity(date,t2.get(i),price1,quantity1,d1,c1,tr1,pro1,cur1,port1);
+       Tradeequity tq2= new Tradeequity(date,t2.get(i+1),price2,quantity2,d2,c2,tr2,pro2,cur2,port2);
        // Tradeequity tq2=
        g.addTradevent(tq1);
        g.addTradevent(tq2);
