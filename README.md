@@ -11,4 +11,6 @@ Generateur de trades
 - Quantity null for action---> dont create TradeEvent
 - GetRandom to override for random under Criteria( example: buy product respect instrument type/ devise
 - add to book: list of product owned 
+- optimiser:exemple: Math.random  -> Random //parallelise.
+- xml en dur
 (- re-think equity generation...)
