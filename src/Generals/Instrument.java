@@ -6,5 +6,14 @@ import java.util.ArrayList;
 	{
 		String name;
 		public void  generate (Generals g,Referential ref, int montant,int date){}
+		
+		@Override
+		public boolean equals(Object ins)
+		{
+			if (!(ins instanceof Instrument))
+				return (false);
+
+			return (((Instrument)ins).name.equalsIgnoreCase(this.name));
+		}
 	
 	}
