@@ -63,7 +63,7 @@ public class TradeGenerator
 		}
 
 		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println(estimatedTime * 100000 / 1000 / 60 / 60);
+		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 
 	}	
 }
