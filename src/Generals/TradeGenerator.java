@@ -15,10 +15,10 @@ public class TradeGenerator
 		long startTime = System.currentTimeMillis();
 
 
-		Referential ref = new Referential();	
-		Generals gen = null;
+		Referential ref = Referential.getInstance();	
+		Generals gen = Generals.getInstance();
 
-		gen = LoadXML.init(ref);
+		LoadXML.init(ref);
 
 		int simulate_days = Integer.parseInt(args[0]);
 		int amount_per_book;

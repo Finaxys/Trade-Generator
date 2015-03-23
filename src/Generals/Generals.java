@@ -11,12 +11,22 @@ import java.util.ArrayList;
 		
 		public void addTradevent(Tradeevents tn){ te.add(tn);}
 		
- 		public Generals(String nom_de_la_banque, int total_buget, String owncountry,
-		ArrayList<Businessunit> bu) {
-			super();
-			
+		private Generals()
+		{
+			super();	
+		}
+		
+		private static Generals INSTANCE = new Generals();
+		
+		public static Generals getInstance()
+		{	
+			return INSTANCE;
+		}
+		
+ 		public void init(String nom_de_la_banque, int total_buget, String owncountry,
+		ArrayList<Businessunit> bu) 
+ 		{
 			this.te = new ArrayList<Tradeevents>();
-
 			this.nom_de_la_banque = nom_de_la_banque;
 			this.total_buget = total_buget;
 			this.owncountry = owncountry;

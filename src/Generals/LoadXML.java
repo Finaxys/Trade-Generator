@@ -25,7 +25,7 @@ public class LoadXML
 		return (elem.getElementsByTagName(name).item(0).getTextContent());
 	}
 
-	static public Generals init(Referential ref)
+	static public void init(Referential ref)
 	{
 		_ref = ref;
 
@@ -88,8 +88,7 @@ public class LoadXML
 		});
 
 		loadTraders();
-
-		return (loadGeneralSettings());
+		loadGeneralSettings();
 	}
 
 	static public void loadReferential(String filename, String elem, CbReferential cb)
@@ -123,7 +122,7 @@ public class LoadXML
 		}
 	}
 
-	static public Generals loadGeneralSettings()
+	static public void loadGeneralSettings()
 	{
 		try
 		{
@@ -207,11 +206,10 @@ public class LoadXML
 				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), instruments, portfolios));
 			}
 
-			return new Generals(getContent(esetting, "bank_name"), Integer.parseInt(getContent(esetting, "total_budget")), getContent(esetting, "owncountry"), businessunits);
+			Generals.getInstance().init(getContent(esetting, "bank_name"), Integer.parseInt(getContent(esetting, "total_budget")), getContent(esetting, "owncountry"), businessunits);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 
 	static public void loadTraders()
@@ -219,8 +217,8 @@ public class LoadXML
 		try
 		{
 			ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
-			ArrayList<Referential.Instrument>	instruments = new ArrayList<Referential.Instrument>();
-			ArrayList<Referential.Trader>	traders = new ArrayList<Referential.Trader>();
+			ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
+			ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
 
 
 			File fXmlFile = new File("referential/traders.xml");

@@ -13,6 +13,15 @@ class Referential
 	public List<Trader> Traders;
 	public List<Portfolio> Portfolios;
 	
+	private Referential(){}
+	
+	private static Referential INSTANCE = new Referential();
+	
+	public static Referential getInstance()
+	{
+		return INSTANCE;
+	}
+	
 	public <T> T getRandomElement(List<T> list)
 	{
         Random randomGenerator = new Random();
