@@ -51,49 +51,17 @@ public class Tradeequity implements Tradeevents {
 	}
 
 	public String toXml() {
-		DocumentBuilderFactory icFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder icBuilder;
-
-		try {
-			icBuilder = icFactory.newDocumentBuilder();
-			Document doc = icBuilder.newDocument();
-			Element trade = doc.createElement("trade");
-			doc.appendChild(trade);
-
-			// append child elements to root element
-			trade.setAttribute("id", "XXX");
-			trade.appendChild(getTradeElement(doc, trade, "way", buy.equals(Boolean.TRUE) ? "buy" : "sell"));
-			trade.appendChild(getTradeElement(doc, trade, "type", "equity"));
-			trade.appendChild(getTradeElement(doc, trade, "product", pro1.libelle));
-			trade.appendChild(getTradeElement(doc, trade, "quantity", Integer.toString(quantity)));
-			trade.appendChild(getTradeElement(doc, trade, "price", Float.toString(prix)));
-			trade.appendChild(getTradeElement(doc, trade, "currency", cur1.code));
-			trade.appendChild(getTradeElement(doc, trade, "trader", tr1.codeptf));
-			Calendar c = new GregorianCalendar();
-			c.add(Calendar.DAY_OF_MONTH, date);
-			Date d = c.getTime();
-			trade.appendChild(getTradeElement(doc, trade, "tradedate", d.getDay() + "/" + d.getDate() + "/" + d.getYear()));
-
-			// output DOM XML to console 
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes"); 
-			DOMSource source = new DOMSource(doc);
-			StreamResult xml = new StreamResult(new StringWriter());
-			transformer.transform(source, xml);
-
-			return (xml.getWriter().toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
 		
-		return ("");
+		StringBuilder Document = new StringBuilder();
+
+		Document.append("<trade>\n<way>" + (buy.equals(Boolean.TRUE) ? "buy" : "sell") + "<way>\n");
+		Document.append("<type>equity</type>\n");
+		Document.append("<product>" + pro1.libelle + "<product>\n");
+		Document.append("<quantity>" + Integer.toString(quantity) + "<quantity>\n");
+		Document.append("<price>" + Float.toString(prix) + "<price>\n");
+		Document.append("<currency>" + cur1.code + "<currency>\n");
+		Document.append("<trader>" + tr1.codeptf + "<trader>\n</trade>\n");
+			
+		return Document.toString();
 	}
-	 
-	    // utility method to create text node
-	    private static Node getTradeElement(Document doc, Element element, String name, String value) {
-	        Element node = doc.createElement(name);
-	        node.appendChild(doc.createTextNode(value));
-	        return node;
-	    }
 }

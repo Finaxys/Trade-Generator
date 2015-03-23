@@ -1,8 +1,11 @@
 package Generals;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 
 public class TradeGenerator
@@ -38,29 +41,25 @@ public class TradeGenerator
 		
 
 		// Create file BATCH MODE
-		FileOutputStream fop = null;
-		File file;
-		try
-		{
-			file = new File("trades.xml");
-			fop = new FileOutputStream(file);
-			if (!file.exists())
-				file.createNewFile();
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("trades.xml", "UTF-8");
+
+			writer.write("<traders>\n");
 
 			for (Tradeevents trade : gen.te)
-			{
-				String xmlString = trade.toXml();
-				byte[] contentInBytes = xmlString.getBytes();
-				fop.write(contentInBytes);
-			}
-
-			fop.flush();
-			fop.close();
+				writer.write(trade.toXml());
+			
+			writer.write("</traders>");
+			writer.close();
 
 			System.out.println("Done");
-
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		long estimatedTime = System.currentTimeMillis() - startTime;
