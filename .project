@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/Generals/Way.java</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/Downloads/hbase/HBase-Test/src/main/java/domain/Way.java</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
