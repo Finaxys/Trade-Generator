@@ -210,6 +210,12 @@ public class LoadXML
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		// Add cross references
+		for (Businessunit bu : Generals.getInstance().bu)
+			for (Portfolio pt : bu.lpor)
+				for (Book b : pt.lb)
+					b.pt = pt;
 	}
 
 	static public void loadTraders()
