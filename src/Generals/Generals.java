@@ -3,12 +3,6 @@ package Generals;
 import java.util.ArrayList;
 
 	public class Generals {
-		public enum OutputFormat
-		{
-			CSV,
-			JSON,
-			XML
-		}
 
 		public String nom_de_la_banque;
 		public int total_buget; 

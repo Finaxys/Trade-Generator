@@ -129,7 +129,8 @@ public class LoadXML
 			ArrayList<Instrument>	instruments = new ArrayList<Instrument>();
 			ArrayList<Portfolio>	portfolios = new ArrayList<Portfolio>();
 			ArrayList<Businessunit>	businessunits = new ArrayList<Businessunit>();
-			ArrayList<Book>	books = new ArrayList<Book>();
+			ArrayList<Book>			books = new ArrayList<Book>();
+			ArrayList<Output>		outputs = new ArrayList<Output>();
 
 			File fXmlFile = new File("params/generalinfs.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -194,7 +195,20 @@ public class LoadXML
 					portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));
 				}
 
-				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), instruments, portfolios));
+				// Get outputs
+				NodeList noutputs = ebusinessunit.getElementsByTagName("output");
+				for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
+				{
+					Element eoutput = (Element) noutputs.item(ipf);
+					if (((Node) eoutput).getNodeType() != Node.ELEMENT_NODE)
+						continue;
+
+					ArrayList<String> ins = new ArrayList<String>();
+					ins.add(getContent(eoutput, "instrument"));
+					outputs.add(new Output(getContent(esetting, "format"), getContent(eoutput, "path"), ins, Boolean.parseBoolean(getContent(eoutput, "isStp")), getContent(eoutput, "layer")));
+				}
+
+				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), outputs, instruments, portfolios));
 			}
 
 			Generals.getInstance().init(getContent(esetting, "name"), Integer.parseInt(getContent(esetting, "budget")), getContent(esetting, "ownCountry"), businessunits);

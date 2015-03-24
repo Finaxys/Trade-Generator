@@ -21,7 +21,7 @@ public class Businessunit
 		return (null);
 	}
 
-	public Businessunit(String name, int ratio, ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
+	public Businessunit(String name, int ratio, ArrayList<Output> lop, ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
 	{
 		super();
 		this.name = name;
