@@ -15,7 +15,6 @@ public class TradeGenerator
 	{
 		long startTime = System.currentTimeMillis();
 
-
 		Referential ref = Referential.getInstance();	
 		Generals gen = Generals.getInstance();
 
@@ -40,7 +39,6 @@ public class TradeGenerator
 					}
 		
 		
-
 		// Create file BATCH MODE
 		PrintWriter writer;
 		try {

@@ -166,12 +166,12 @@ public class LoadXML
 
 					Equity equity = new Equity();
 					equity.name = "equity";
-					equity.owncountry = Integer.parseInt(getContent(eins, "ownCountry"));
-					equity.Partsell = Integer.parseInt(getContent(eins, "partSell"));
-					equity.is_stp = Boolean.parseBoolean(getContent(eins, "isStp"));
-					equity.repartition_tolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+					equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+					equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
+					equity.isStp = Boolean.parseBoolean(getContent(eins, "isStp"));
+					equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
 					equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-					equity.volumetry_tolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+					equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
 					instruments.add(equity);
 
 					// System.out.println("Instrument >> " + eins.getAttribute("name"));

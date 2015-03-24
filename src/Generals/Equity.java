@@ -9,12 +9,12 @@ import java.util.Random;
 public class Equity extends Instrument 
 {
 
-	public int Partsell;
-	public int owncountry;
+	public int partSell;
+	public int ownCountry;
 	public int volumetry;
-	public double volumetry_tolerance;
-	public double repartition_tolerance;
-	public Boolean is_stp;
+	public double volumetryTolerance;
+	public double repartitionTolerance;
+	public Boolean isStp;
 
 	public static List<Way> tableaubin(int size, int ratio)
 	{
@@ -46,8 +46,8 @@ public class Equity extends Instrument
 		double toleredVolumetry;
 		Random	random = new Random();
 
-		rand1 = this.repartition_tolerance * 2 * (random.nextDouble()-0.5)/100;
-		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble()-0.5)/100;
+		rand1 = this.repartitionTolerance * 2 * (random.nextDouble()-0.5)/100;
+		rand2 = this.volumetryTolerance * 2 * (random.nextDouble()-0.5)/100;
 		amountPerDay += rand1 * amountPerDay;
 		
 		//calculation of number of trades to distribute per day
@@ -74,9 +74,9 @@ public class Equity extends Instrument
 		Referential.Currency cur1,cur2;
 		Referential.Portfolio port1,port2;
 
-		t1 = tableaubin(roundedVolume, this.owncountry);
+		t1 = tableaubin(roundedVolume, this.ownCountry);
 
-		t2 = tableaubin(roundedVolume, this.Partsell);
+		t2 = tableaubin(roundedVolume, this.partSell);
 		
 		for (int i = 0; i < roundedVolume; i = i + 2) 
 		{
