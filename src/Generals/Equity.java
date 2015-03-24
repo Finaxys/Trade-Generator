@@ -3,6 +3,7 @@ package Generals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Equity extends Instrument 
@@ -35,7 +36,7 @@ public class Equity extends Instrument
 	}
 
 	@Override
-	public void generate(int amount,int date) 
+	public void generate(Book book, int amount, int date) 
 	{
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();		
@@ -43,9 +44,10 @@ public class Equity extends Instrument
 		int amountPerDay = amount;
 		double rand1, rand2;
 		double toleredVolumetry;
+		Random	random = new Random();
 
-		rand1 = this.repartition_tolerance * 2 * (Math.random()-0.5)/100;
-		rand2 = this.volumetry_tolerance * 2 * (Math.random()-0.5)/100;
+		rand1 = this.repartition_tolerance * 2 * (random.nextDouble()-0.5)/100;
+		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble()-0.5)/100;
 		amountPerDay += rand1 * amountPerDay;
 		
 		//calculation of number of trades to distribute per day
@@ -83,8 +85,8 @@ public class Equity extends Instrument
 			randToleranceQuantities = (float)Math.random();
 			
 			//set random price -+3%
-			randomquantity1 = 6 * (Math.random() - 0.5);
-			randomquantity2 = 6 * (Math.random() - 0.5);
+			randomquantity1 = 6 * (random.nextDouble() - 0.5);
+			randomquantity2 = 6 * (random.nextDouble() - 0.5);
 			//tirage au sort sous contrainte
 
 			d1 = ref.getRandomElement(ref.Depositaries);
@@ -107,8 +109,8 @@ public class Equity extends Instrument
 			quantity1 = (int) (randToleranceQuantities * to2tradeamount / price1);
 			quantity2 = (int) (randToleranceQuantities * to2tradeamount / price2);
 
-			Tradeequity tq1 = new Tradeequity(date, t2.get(i), price1, quantity1, d1, c1, tr1, pro1, cur1, port1);
-			Tradeequity tq2 = new Tradeequity(date, t2.get(i + 1), price2, quantity2, d2, c2, tr2, pro2, cur2, port2);
+			Tradeequity tq1 = new Tradeequity(book, date, t2.get(i), price1, quantity1, d1, c1, tr1, pro1, cur1, port1);
+			Tradeequity tq2 = new Tradeequity(book, date, t2.get(i + 1), price2, quantity2, d2, c2, tr2, pro2, cur2, port2);
 
 			generals.addTradevent(tq1);
 			generals.addTradevent(tq2);

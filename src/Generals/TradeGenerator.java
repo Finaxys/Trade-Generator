@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 
 
 public class TradeGenerator
@@ -34,7 +35,7 @@ public class TradeGenerator
 							Instrument t = bu.getInstrument(b.ins);
 							amount_per_book = (int) (gen.total_buget * bu.ratio * port.ratio * b.ratio / 1000000);
 
-							t.generate(amount_per_book, j);
+							t.generate(b, amount_per_book, j);
 						}  
 					}
 		
