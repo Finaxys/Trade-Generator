@@ -1,50 +1,74 @@
-<general_settings>
-  <bank_name>Finaxys Bank</bank_name>
-  <bank_system>BFI</bank_system>
-  <total_budget>10000000</total_budget>
+<generalSettings>
+  <name>Finaxys Bank</name>
+  <side>BuySide</side>
+  <budget>10000000</budget>
   <owncountry>EU</owncountry>
-  <bussinessunits>
-    <businessunit name="ged" ratio="100" >
+  <outputPath>.</outputPath>
+  <bussinessUnits>
+    <businessUnit name="ged" ratio="100" >
       <instruments>	
 	<instrument name="equity" ratio="99">
-	  <tolerancerep>2</tolerancerep> 
-	  <partsell>20</partsell> 
-	  <owncountry>20</owncountry> 
+	  <toleranceRep>2</toleranceRep> 
+	  <partSell>20</partSell> 
+	  <ownCountry>20</ownCountry> 
 	  <volumetry>1000</volumetry> 
-	  <volumetrytolerance>2</volumetrytolerance> 
-	  <isstp>0</isstp> 
+	  <volumetryTolerance>2</volumetryTolerance> 
+	  <isStp>0</isStp> 
 	</instrument>
 	<instrument name="loandepo" ratio="1">
-	  <tolerancerep>2</tolerancerep> 
+	  <toleranceRep>2</toleranceRep> 
 	  <partsell>20</partsell> 
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
-	  <volumetrytolerance>2</volumetrytolerance> 
+	  <volumetryTolerance>2</volumetryTolerance> 
 	  <isstp>0</isstp> 
 	</instrument>
       </instruments>
       <portfolios>
 	<portfolio name="?equity?" ratio="80">
 	  <books>
-	    <book name="bookequityeuro" currency="EUR" instrument="equity" ratio="60"/>
-	    <book name="bookfundingeuro" currency="EUR"
-	    	instrument="loandepo" ratio="20" />
-	    <book name="EQUOTHERS" currency="OTH" instrument="OTH" ratio="20" />
+	    <book name="bookequityeuro"/>
+			<filter>
+				<filter type="instrument" value="equity"/>
+				<filter type="currency" value="EUR"/>	
+			</filter>
+	    <book name="bookfundingeuro"/>
+			<filter>
+				<filter type="instrument" value="loandepo"/>
+				<filter type="currency" value="EUR"/>
+			</filter>
+	    <book name="EQUOTHERS"/>
+			<filter>
+				<filter type="instrument" value="OTH"/>
+				<filter type="currency" value="OTH"/>	
+			</filter>
 	  </books>
 	</portfolio>
 	<portfolio name="?derivative?" ratio="20">
 	  <books>
-	    <book name="bookdervius" currency="USD" instrument="deriv"
-	    	ratio="25" />
-	    <book name="bookfundingus" currency="USD" instrument="loandepo"
-	    	ratio="25" />
-	    <book name="DERIVFUNDEUR" currency="EUR" instrument="loandepo"
-	    	ratio="45" />
-	    <book name="DERIVOTHERS" currency="OTH" instrument="OTH"
-	    	ratio="5" />
+	    <book name="bookdervius"/>
+			<filter>
+				<filter type="instrument" value="deriv"/>
+				<filter type="currency" value="USD"/>	
+			</filter>
+	    <book name="bookfundingus"/>
+			<filter>
+				<filter type="instrument" value="loandepo"/>
+				<filter type="currency" value="USD"/>	
+			</filter>
+	    <book name="DERIVFUNDEUR"/>
+			<filter>
+				<filter type="instrument" value="loandepo"/>
+				<filter type="currency" value="EUR"/>	
+			</filter>
+	    <book name="DERIVOTHERS"/>
+			<filter>
+				<filter type="instrument" value="OTH"/>
+				<filter type="currency" value="OTH"/>	
+			</filter>
 	  </books>
 	</portfolio>
       </portfolios>
-    </businessunit>
-  </bussinessunits>
-</general_settings>
+    </businessUnit>
+  </bussinessUnits>
+</generalSettings>
