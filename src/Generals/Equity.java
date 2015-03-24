@@ -16,23 +16,23 @@ public class Equity extends Instrument
 	public double repartition_tolerance;
 	public Boolean is_stp;
 
-	public static List<Boolean> tableaubin(int size, int ratio)
+	public static List<Way> tableaubin(int size, int ratio)
 	{
-		List<Boolean> boolArray = new ArrayList<Boolean>(size);
+		List<Way> BuyArray = new ArrayList<Way>(size);
 		int j;
 		int national = (ratio * size) / 100;
 		
 		for (int i = 0; i < size; ++i)
-			boolArray.add(Boolean.FALSE);
+			BuyArray.add(Way.SELL);
 		
-		boolArray.set(0, Boolean.FALSE);
+		BuyArray.set(0, Way.SELL);
 
 		for (j = 0; j <= national; j++)
-			boolArray.set(j, Boolean.TRUE);
+			BuyArray.set(j, Way.BUY);
 
-		Collections.shuffle(boolArray);
+		Collections.shuffle(BuyArray);
 
-		return (boolArray);
+		return (BuyArray);
 	}
 
 	@Override
@@ -63,8 +63,8 @@ public class Equity extends Instrument
 		int quantity1, quantity2;
 		float price1,price2;		 
 		
-		List<Boolean> t1;
-		List<Boolean> t2;
+		List<Way> t1;
+		List<Way> t2;
 		
 		//declaration des tirages au sort sous contrainte
 		Referential.Depositary d1,d2;
