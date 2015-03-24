@@ -33,7 +33,10 @@ public class Tradeequity extends Tradeevents
 	public String toXml() 
 	{	
 		StringBuilder Document = new StringBuilder();
-		Document.append("<trade>\n<way>" + (way.equals(way.BUY) ? "BUY" : "sell") + "<way>\n");
+		Document.append("<trade>\n");
+		Document.append("<way>" + (way.equals(way.BUY) ? "BUY" : "sell") + "<way>\n");
+		Document.append("<business>" + book.pt.bu.name + "</business>\n");
+		Document.append("<portfolio>" + book.pt.name + "</portfolio>\n");
 		Document.append("<book>" + book.name + "</book>\n");
 		Document.append("<type>equity</type>\n");
 		Document.append("<product>" + product.libelle + "<product>\n");
