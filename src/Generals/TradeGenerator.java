@@ -35,7 +35,7 @@ public class TradeGenerator
 							Instrument t = bu.getInstrument(b.ins);
 							amount_per_book = (int) (gen.total_buget * bu.ratio * port.ratio * b.ratio / 1000000);
 
-							t.generate(amount_per_book, j);
+							t.generate(b, amount_per_book, j);
 						}  
 					}
 		

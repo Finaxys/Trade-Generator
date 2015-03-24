@@ -36,7 +36,7 @@ public class Equity extends Instrument
 	}
 
 	@Override
-	public void generate(int amount,int date) 
+	public void generate(Book book, int amount, int date) 
 	{
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();		
@@ -109,8 +109,8 @@ public class Equity extends Instrument
 			quantity1 = (int) (randToleranceQuantities * to2tradeamount / price1);
 			quantity2 = (int) (randToleranceQuantities * to2tradeamount / price2);
 
-			Tradeequity tq1 = new Tradeequity(date, t2.get(i), price1, quantity1, d1, c1, tr1, pro1, cur1, port1);
-			Tradeequity tq2 = new Tradeequity(date, t2.get(i + 1), price2, quantity2, d2, c2, tr2, pro2, cur2, port2);
+			Tradeequity tq1 = new Tradeequity(book, date, t2.get(i), price1, quantity1, d1, c1, tr1, pro1, cur1, port1);
+			Tradeequity tq2 = new Tradeequity(book, date, t2.get(i + 1), price2, quantity2, d2, c2, tr2, pro2, cur2, port2);
 
 			generals.addTradevent(tq1);
 			generals.addTradevent(tq2);

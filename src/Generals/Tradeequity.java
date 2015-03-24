@@ -21,7 +21,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 
-public class Tradeequity implements Tradeevents {
+public class Tradeequity extends Tradeevents {
 
 	int date;
 	Boolean buy;
@@ -34,11 +34,11 @@ public class Tradeequity implements Tradeevents {
 	Referential.Currency cur1;
 	Referential.Portfolio port1;
 
-	public Tradeequity(int date, Boolean buy, float prix, int quantity,
+	public Tradeequity(Book book, int date, Boolean buy, float prix, int quantity,
 			Referential.Depositary d1, Referential.Counterpart c1, Referential.Trader tr1, Referential.Product pro1,
 			Referential.Currency cur1, Referential.Portfolio port1) {
-		super();
-		this.date = date;
+		super(book, date);
+
 		this.buy = buy;
 		this.prix = prix;
 		this.quantity = quantity;
@@ -50,11 +50,13 @@ public class Tradeequity implements Tradeevents {
 		this.port1 = port1;
 	}
 
+	@Override
 	public String toXml() {
 		
 		StringBuilder Document = new StringBuilder();
 
 		Document.append("<trade>\n<way>" + (buy.equals(Boolean.TRUE) ? "buy" : "sell") + "<way>\n");
+		Document.append("<book>" + book.name + "</book>\n");
 		Document.append("<type>equity</type>\n");
 		Document.append("<product>" + pro1.libelle + "<product>\n");
 		Document.append("<quantity>" + Integer.toString(quantity) + "<quantity>\n");
