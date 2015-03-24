@@ -3,6 +3,13 @@ package Generals;
 import java.util.ArrayList;
 
 	public class Generals {
+		public enum OutputFormat
+		{
+			CSV,
+			JSON,
+			XML
+		}
+
 		public String nom_de_la_banque;
 		public int total_buget; 
 		public String owncountry;
@@ -31,5 +38,14 @@ import java.util.ArrayList;
 			this.total_buget = total_buget;
 			this.owncountry = owncountry;
 			this.bu = bu;
+//
+//			try
+//			{
+//				format = OutputFormat.valueOf(sformat.toUpperCase());
+//			} catch (IllegalArgumentException e)
+//			{
+//				format = OutputFormat.XML;
+//				// TODO - Throw Parsing ex with continuing boolean
+//			}
 		}
 	}

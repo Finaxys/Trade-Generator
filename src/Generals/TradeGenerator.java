@@ -33,7 +33,7 @@ public class TradeGenerator
 						if (b.ins.equalsIgnoreCase("equity"))
 						{
 							Instrument t = bu.getInstrument(b.ins);
-							amount_per_book = (int) (gen.total_buget * bu.ratio * port.ratio * b.ratio / 1000000);
+							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
 
 							t.generate(b, amount_per_book, j);
 						}  

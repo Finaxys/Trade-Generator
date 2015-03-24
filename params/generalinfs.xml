@@ -3,46 +3,48 @@
   <side>BuySide</side>
   <budget>10000000</budget>
   <ownCountry>EU</ownCountry>
-  <outputPath>.</outputPath>
   <bussinessUnits>
-    <businessUnit name="ged" ratio="100" >
+    <businessUnit name="ged" ratio="100">
+      <workflow>
+	<output>
+	  <format>XML</format>
+	  <path>.</path>
+	  <instrument>equity</instrument>
+	  <isStp>0</isStp>
+	  <layer>FS</layer>
+	</output>
+      </workflow>
       <instruments>	
-	<instrument name="equity" ratio="99">
+	<instrument name="equity">
 	  <toleranceRep>2</toleranceRep> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>1000</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <isStp>0</isStp> 
 	</instrument>
-	<instrument name="loandepo" ratio="1">
+	<instrument name="loandepo">
 	  <toleranceRep>2</toleranceRep> 
 	  <partsell>20</partsell> 
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <isStp>0</isStp> 
 	</instrument>
       </instruments>
       <portfolios>
-	<portfolio name="?equity?" ratio="80">
+	<portfolio name="?equity?">
 	  <books>
-	    <book name="bookequityeuro" currency="EUR" instrument="equity" ratio="60"/>
+	    <book name="bookequityeuro" currency="EUR" instrument="equity"/>
 	    <book name="bookfundingeuro" currency="EUR"
-	    	instrument="loandepo" ratio="20" />
-	    <book name="EQUOTHERS" currency="OTH" instrument="OTH" ratio="20" />
+	      instrument="loandepo"/>
+	    <book name="EQUOTHERS" currency="OTH" instrument="OTH"/>
 	  </books>
 	</portfolio>
-	<portfolio name="?derivative?" ratio="20">
+	<portfolio name="?derivative?">
 	  <books>
-	    <book name="bookdervius" currency="USD" instrument="deriv"
-	    	ratio="25" />
-	    <book name="bookfundingus" currency="USD" instrument="loandepo"
-	    	ratio="25" />
-	    <book name="DERIVFUNDEUR" currency="EUR" instrument="loandepo"
-	    	ratio="45" />
-	    <book name="DERIVOTHERS" currency="OTH" instrument="OTH"
-	    	ratio="5" />
+	    <book name="bookdervius" currency="USD" instrument="deriv"/>
+	    <book name="bookfundingus" currency="USD" instrument="loandepo"/>
+	    <book name="DERIVFUNDEUR" currency="EUR" instrument="loandepo"/>
+	    <book name="DERIVOTHERS" currency="OTH" instrument="OTH"/>
 	  </books>
 	</portfolio>
       </portfolios>

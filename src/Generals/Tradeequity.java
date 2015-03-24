@@ -51,8 +51,8 @@ public class Tradeequity extends Tradeevents {
 	}
 
 	@Override
-	public String toXml() {
-		
+	public String toXml()
+	{
 		StringBuilder Document = new StringBuilder();
 
 		Document.append("<trade>\n<way>" + (way.equals(way.BUY) ? "BUY" : "sell") + "<way>\n");
