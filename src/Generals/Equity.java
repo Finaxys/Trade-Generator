@@ -36,8 +36,11 @@ public class Equity extends Instrument
 	}
 
 	@Override
-	public void generate(Generals generals, Referential ref, int amount,int date) 
+	public void generate(int amount,int date) 
 	{
+		Referential ref = Referential.getInstance();
+		Generals generals = Generals.getInstance();		
+		
 		int amountPerDay = amount;
 		double rand1, rand2;
 		double toleredVolumetry;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 	public abstract class Instrument
 	{
 		String name;
-		public void  generate (Generals g,Referential ref, int montant,int date){}
+		public void  generate (int montant,int date){}
 		
 		@Override
 		public boolean equals(Object ins)
