@@ -1,9 +1,7 @@
 package Generals;
 
-public enum Way {
-
-		BUY,
-		SELL;
-		
-
+public enum Way 
+{
+	BUY,
+	SELL;		
 }
