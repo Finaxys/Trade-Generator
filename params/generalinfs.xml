@@ -2,7 +2,7 @@
   <name>Finaxys Bank</name>
   <side>BuySide</side>
   <budget>10000000</budget>
-  <owncountry>EU</owncountry>
+  <ownCountry>EU</ownCountry>
   <outputPath>.</outputPath>
   <bussinessUnits>
     <businessUnit name="ged" ratio="100" >
@@ -21,51 +21,28 @@
 	  <owncountry>20</owncountry> 
 	  <volumetry>1000</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <isstp>0</isstp> 
+	  <isStp>0</isStp> 
 	</instrument>
       </instruments>
       <portfolios>
 	<portfolio name="?equity?" ratio="80">
 	  <books>
-	    <book name="bookequityeuro"/>
-			<filter>
-				<filter type="instrument" value="equity"/>
-				<filter type="currency" value="EUR"/>	
-			</filter>
-	    <book name="bookfundingeuro"/>
-			<filter>
-				<filter type="instrument" value="loandepo"/>
-				<filter type="currency" value="EUR"/>
-			</filter>
-	    <book name="EQUOTHERS"/>
-			<filter>
-				<filter type="instrument" value="OTH"/>
-				<filter type="currency" value="OTH"/>	
-			</filter>
+	    <book name="bookequityeuro" currency="EUR" instrument="equity" ratio="60"/>
+	    <book name="bookfundingeuro" currency="EUR"
+	    	instrument="loandepo" ratio="20" />
+	    <book name="EQUOTHERS" currency="OTH" instrument="OTH" ratio="20" />
 	  </books>
 	</portfolio>
 	<portfolio name="?derivative?" ratio="20">
 	  <books>
-	    <book name="bookdervius"/>
-			<filter>
-				<filter type="instrument" value="deriv"/>
-				<filter type="currency" value="USD"/>	
-			</filter>
-	    <book name="bookfundingus"/>
-			<filter>
-				<filter type="instrument" value="loandepo"/>
-				<filter type="currency" value="USD"/>	
-			</filter>
-	    <book name="DERIVFUNDEUR"/>
-			<filter>
-				<filter type="instrument" value="loandepo"/>
-				<filter type="currency" value="EUR"/>	
-			</filter>
-	    <book name="DERIVOTHERS"/>
-			<filter>
-				<filter type="instrument" value="OTH"/>
-				<filter type="currency" value="OTH"/>	
-			</filter>
+	    <book name="bookdervius" currency="USD" instrument="deriv"
+	    	ratio="25" />
+	    <book name="bookfundingus" currency="USD" instrument="loandepo"
+	    	ratio="25" />
+	    <book name="DERIVFUNDEUR" currency="EUR" instrument="loandepo"
+	    	ratio="45" />
+	    <book name="DERIVOTHERS" currency="OTH" instrument="OTH"
+	    	ratio="5" />
 	  </books>
 	</portfolio>
       </portfolios>

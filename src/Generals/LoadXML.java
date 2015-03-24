@@ -138,11 +138,11 @@ public class LoadXML
 			doc.getDocumentElement().normalize();
 
 			// Get general setting bank
-			NodeList settings = doc.getElementsByTagName("general_settings");
+			NodeList settings = doc.getElementsByTagName("generalSettings");
 			Element esetting = (Element) settings.item(0);
 
 			// Get businessunits
-			NodeList nbusinessunits = doc.getElementsByTagName("businessunit");
+			NodeList nbusinessunits = doc.getElementsByTagName("businessUnit");
 			for (int ibu = 0; ibu < nbusinessunits.getLength(); ibu++)
 			{
 				Element ebusinessunit = (Element) nbusinessunits.item(ibu);
@@ -166,12 +166,12 @@ public class LoadXML
 
 					Equity equity = new Equity();
 					equity.name = "equity";
-					equity.owncountry = Integer.parseInt(getContent(eins, "owncountry"));
-					equity.Partsell = Integer.parseInt(getContent(eins, "partsell"));
-					equity.is_stp = Boolean.parseBoolean(getContent(eins, "isstp"));
-					equity.repartition_tolerance = Integer.parseInt(getContent(eins, "tolerancerep"));
+					equity.owncountry = Integer.parseInt(getContent(eins, "ownCountry"));
+					equity.Partsell = Integer.parseInt(getContent(eins, "partSell"));
+					equity.is_stp = Boolean.parseBoolean(getContent(eins, "isStp"));
+					equity.repartition_tolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
 					equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-					equity.volumetry_tolerance = Integer.parseInt(getContent(eins, "volumetrytolerance"));
+					equity.volumetry_tolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
 					instruments.add(equity);
 
 					// System.out.println("Instrument >> " + eins.getAttribute("name"));
@@ -206,7 +206,7 @@ public class LoadXML
 				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), instruments, portfolios));
 			}
 
-			Generals.getInstance().init(getContent(esetting, "bank_name"), Integer.parseInt(getContent(esetting, "total_budget")), getContent(esetting, "owncountry"), businessunits);
+			Generals.getInstance().init(getContent(esetting, "name"), Integer.parseInt(getContent(esetting, "budget")), getContent(esetting, "ownCountry"), businessunits);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
