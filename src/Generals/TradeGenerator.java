@@ -40,40 +40,12 @@ public class TradeGenerator
 						}  
 					}
 
-			OutputManager.getInstance().outputTrades(gen.te);
+			OutputManager.getInstance().outputTrades();
 		}
 		
-		
-		// Create file BATCH MODE
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter("trades.xml", "UTF-8");
-
-			writer.write("<traders>" + System.lineSeparator());
-
-			for (TradeEvent trade : gen.te)
-			{
-				ArrayList<TradeEvent.Node>	nodes = trade.getNodes();
-				writer.write("<trade>" + System.lineSeparator());
-				for (TradeEvent.Node node : nodes)
-					writeXMLNode(writer, node);
-				writer.write("</trade>" + System.lineSeparator());
-			}
-			
-			writer.write("</traders>");
-			writer.close();
-
-			System.out.println("Done");
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
+		System.out.println("Done");
 	}	
 	
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)

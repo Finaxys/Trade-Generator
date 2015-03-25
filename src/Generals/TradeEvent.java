@@ -10,8 +10,11 @@ public abstract class TradeEvent {
 		public ArrayList<Node>	nodes;
 	}
 
+	Referential.Currency 	currency;
+	Referential.Portfolio 	portfolio;
 	public Book				book;
 	public int				date;
+	public Instrument		instrument;
 	protected ArrayList<Node>	nodes;
 	
 	public TradeEvent(Book book, int date) {

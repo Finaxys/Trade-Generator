@@ -9,7 +9,7 @@ public abstract class Instrument
 	
 	public void tradeGenerated(TradeEvent trade)
 	{
-		Generals.getInstance().te.add(trade);
+		trade.book.pt.bu.addTradeEvent(trade);
 	}
 
 	@Override

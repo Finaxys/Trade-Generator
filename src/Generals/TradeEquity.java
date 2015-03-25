@@ -12,8 +12,6 @@ public class TradeEquity extends TradeEvent
 	Referential.Counterpart counterpart;
 	Referential.Trader trader;
 	Referential.Product product;
-	Referential.Currency currency;
-	Referential.Portfolio portfolio;
 
 	public TradeEquity(Book book, int date, Way way, float prix, int quantity,
 			Referential.Depositary d1, Referential.Counterpart c1, Referential.Trader tr1, Referential.Product pro1,
