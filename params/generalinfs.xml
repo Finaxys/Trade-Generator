@@ -8,7 +8,7 @@
       <workflow>
 	<output>
 	  <format>XML</format>
-	  <path>.</path>
+	  <path>trades.xml</path>
 	  <instrument>equity</instrument>
 	  <isStp>0</isStp>
 	  <layer>FS</layer>

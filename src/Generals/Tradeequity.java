@@ -1,5 +1,7 @@
 package Generals;
 
+import java.util.ArrayList;
+
 public class Tradeequity extends Tradeevents 
 {
 	int date;
@@ -30,14 +32,14 @@ public class Tradeequity extends Tradeevents
 	}
 
 	@Override
-	public String toXml() 
+	public String toXML() 
 	{	
 		StringBuilder Document = new StringBuilder();
 		Document.append("<trade>\n");
-		Document.append("<way>" + (way.equals(way.BUY) ? "BUY" : "sell") + "<way>\n");
 		Document.append("<business>" + book.pt.bu.name + "</business>\n");
 		Document.append("<portfolio>" + book.pt.name + "</portfolio>\n");
 		Document.append("<book>" + book.name + "</book>\n");
+		Document.append("<way>" + (way.equals(way.BUY) ? "BUY" : "sell") + "<way>\n");
 		Document.append("<type>equity</type>\n");
 		Document.append("<product>" + product.libelle + "<product>\n");
 		Document.append("<quantity>" + Integer.toString(quantity) + "<quantity>\n");
@@ -45,5 +47,16 @@ public class Tradeequity extends Tradeevents
 		Document.append("<currency>" + currency.code + "<currency>\n");
 		Document.append("<trader>" + trader.codeptf + "<trader>\n</trade>\n");			
 		return Document.toString();
+	}
+	
+	@Override
+	public String toCSV()
+	{
+		return ("");
+	}
+
+	@Override
+	public ArrayList<Node> getNodes() {
+		return null;
 	}
 }

@@ -47,7 +47,7 @@ public class TradeGenerator
 			writer.write("<traders>\n");
 
 			for (Tradeevents trade : gen.te)
-				writer.write(trade.toXml());
+				writer.write(trade.toXML());
 			
 			writer.write("</traders>");
 			writer.close();
