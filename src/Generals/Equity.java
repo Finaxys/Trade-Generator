@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class Equity extends Instrument 
 {
-
 	public int partSell;
 	public int ownCountry;
 	public int volumetry;

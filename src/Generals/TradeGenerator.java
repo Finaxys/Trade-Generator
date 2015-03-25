@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 
 public class TradeGenerator
@@ -44,10 +45,16 @@ public class TradeGenerator
 		try {
 			writer = new PrintWriter("trades.xml", "UTF-8");
 
-			writer.write("<traders>\n");
+			writer.write("<traders>" + System.lineSeparator());
 
 			for (Tradeevents trade : gen.te)
-				writer.write(trade.toXML());
+			{
+				ArrayList<Tradeevents.Node>	nodes = trade.getNodes();
+				writer.write("<trade>" + System.lineSeparator());
+				for (Tradeevents.Node node : nodes)
+					writeXMLNode(writer, node);
+				writer.write("</trade>" + System.lineSeparator());
+			}
 			
 			writer.write("</traders>");
 			writer.close();
@@ -64,4 +71,19 @@ public class TradeGenerator
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 	}	
+	
+	static void writeXMLNode(PrintWriter writer, Tradeevents.Node node)
+	{
+		// Check if there is nodes inside node -> recursion
+		if (node.nodes != null)
+		{
+			writer.write("<" + node.name + ">" + System.lineSeparator());
+			for (Tradeevents.Node n : node.nodes)
+				writeXMLNode(writer, n);
+			writer.write("</" + node.name + ">" + System.lineSeparator());
+		}
+		// Only simple node -> print it
+		else
+			writer.write("<" + node.name + ">" + node.value + "</" + node.name + ">" + System.lineSeparator());
+	}
 }

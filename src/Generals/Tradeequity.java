@@ -32,31 +32,22 @@ public class Tradeequity extends Tradeevents
 	}
 
 	@Override
-	public String toXML() 
-	{	
-		StringBuilder Document = new StringBuilder();
-		Document.append("<trade>\n");
-		Document.append("<business>" + book.pt.bu.name + "</business>\n");
-		Document.append("<portfolio>" + book.pt.name + "</portfolio>\n");
-		Document.append("<book>" + book.name + "</book>\n");
-		Document.append("<way>" + (way.equals(way.BUY) ? "BUY" : "sell") + "<way>\n");
-		Document.append("<type>equity</type>\n");
-		Document.append("<product>" + product.libelle + "<product>\n");
-		Document.append("<quantity>" + Integer.toString(quantity) + "<quantity>\n");
-		Document.append("<price>" + Float.toString(prix) + "<price>\n");
-		Document.append("<currency>" + currency.code + "<currency>\n");
-		Document.append("<trader>" + trader.codeptf + "<trader>\n</trade>\n");			
-		return Document.toString();
-	}
-	
-	@Override
-	public String toCSV()
-	{
-		return ("");
-	}
-
-	@Override
 	public ArrayList<Node> getNodes() {
-		return null;
+		nodes = new ArrayList<Node>();
+
+		addNode(nodes, "business", book.pt.bu.name, null);
+		addNode(nodes, "portfolio", book.pt.name, null);
+		addNode(nodes, "book", book.name, null);
+		addNode(nodes, "way", way.equals(way.BUY) ? "BUY" : "sell", null);
+		addNode(nodes, "type", "equity", null);
+		ArrayList<Node> products = new ArrayList<Node>();
+		addNode(products, "name", "bob", null);
+		addNode(products, "type", "tarace", null);
+		addNode(nodes, "product", product.libelle, products);
+		addNode(nodes, "quantity", Integer.toString(quantity), null);
+		addNode(nodes, "price", Float.toString(prix), null);
+		addNode(nodes, "currency", currency.code, null);
+		addNode(nodes, "trader", trader.codeptf, null);
+		return (nodes);
 	}
 }
