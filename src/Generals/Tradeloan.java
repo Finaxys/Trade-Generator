@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -25,12 +26,12 @@ import Generals.Referential.Currency;
 import Generals.Referential.Depositary;
 import Generals.Referential.Trader;
 
-public class Tradeloan extends Tradeevents {
+public class Tradeloan extends TradeEvent {
 	public int montant;
     Referential.Depositary depositary;
 	Referential.Counterpart counterpart;
 	Way way;
-	Way taux;
+	Typetaux taux;
 	Referential.Trader trader;
 	Referential.Currency devise;	
 	public float valeur_taux;
@@ -38,9 +39,9 @@ public class Tradeloan extends Tradeevents {
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
 	
-	public Tradeloan(Book book, int date, int montant,Way way, Way taux, Depositary depositary,
+	public Tradeloan(Book book, int date, int montant,Way way, Typetaux taux, Depositary depositary,
 			Counterpart counterpart, Trader trader,
-			Currency devise, float valeur_taux, Term durée,
+			Currency devise, float valeur_taux, Term frequence_remboursement,
 			BaseCalcul basecalcul) {
 		super(book, date);
 		this.montant=montant;
@@ -51,7 +52,7 @@ public class Tradeloan extends Tradeevents {
 		this.trader = trader;
 		this.devise = devise;
 		this.valeur_taux = valeur_taux;
-		this.durée = durée;
+		this.durée = frequence_remboursement;
 		this.basecalcul = basecalcul;
 		
 	}
@@ -63,12 +64,13 @@ public class Tradeloan extends Tradeevents {
 
 
 
-		@Override
-		public String toXml() {
-			
 
-			
-				
-			return "eee";
+
+
+
+		@Override
+		public ArrayList<Node> getNodes() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}

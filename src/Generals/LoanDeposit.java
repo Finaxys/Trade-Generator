@@ -23,6 +23,7 @@ public int part_taux_variable;
 public int durée;
 BaseCalcul basecalcul;
 public Boolean is_stp;
+private Class Locality;
 
 public LoanDeposit(String devise, int partloan, int owncountry, int volumetry,
 		double volumetry_tolerance, double repartition_tolerance,
@@ -71,9 +72,9 @@ public void generate(Book book, int amount, int date)
 	Referential.Currency cur1;
 //	Referential.Portfolio port1,port2;
 
-	List<Way> t1 = tableaubin(roundedVolume, this.owncountry);
-	List<Way> t2 = tableaubin(roundedVolume, this.Partloan);
-	List<Way> t3=  tableaubin(roundedVolume, this.part_taux_variable);
+	List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,Locality.class);
+	List<Way> t2 = tableaubin(roundedVolume, this.Partloan,Way.class);
+	List<Typetaux> t3=  tableaubin(roundedVolume, this.part_taux_variable,Typetaux.class);
 	
 	
 	
