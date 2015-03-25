@@ -59,7 +59,6 @@ public class Tradeloan extends TradeEvent {
 
 		@Override
 		public ArrayList<Node> getNodes() {
-			// TODO Auto-generated method stub
 			return null;
 		}
-	}
+}

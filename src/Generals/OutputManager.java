@@ -6,7 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class OutputManager {
-	static private OutputManager instance = new OutputManager();
+	static private OutputManager 	instance = new OutputManager();
+	static private PrintWriter		writer;
 	
 	private OutputManager() {}
 
@@ -17,7 +18,7 @@ public class OutputManager {
 	
 	static public void outputTrades()
 	{
-		PrintWriter		writer;
+		ArrayList<TradeEvent>	te_remaining;
 
 		try {
 
@@ -25,12 +26,16 @@ public class OutputManager {
 				for (Output output : bu.lop)
 				{
 					writer = new PrintWriter(output.path, "UTF-8");
-//
-//					for (TradeEvent trade : bu.te)
-//					{
-//						if (trade.)
-//							outputTrade(trade);
-//					}
+					te_remaining = new ArrayList<TradeEvent>();
+
+					for (TradeEvent trade : bu.te)
+						if (output.instrument.contains(trade.instrument))
+							outputTrade(output, trade);
+						else
+							te_remaining.add(trade);
+					
+					bu.te = te_remaining;
+					writer.close();
 				}
 
 		} catch (FileNotFoundException e1) {
@@ -40,20 +45,33 @@ public class OutputManager {
 		}
 	}
 	
-	static public void outputTrade(TradeEvent trade)
+	static public void outputTrade(Output output, TradeEvent trade)
 	{
-					
-//					writer.write("<traders>" + System.lineSeparator());
-//					for (TradeEvent trade : gen.te)
-//					{
-//					ArrayList<TradeEvent.Node>	nodes = trade.getNodes();
-//					writer.write("<trade>" + System.lineSeparator());
-//					for (TradeEvent.Node node : nodes)
-//					writeXMLNode(writer, node);
-//					writer.write("</trade>" + System.lineSeparator());
-//					}
+		if (output.format.equals(Output.OutputFormat.XML))
+		{
+			writer.write("<trade>" + System.lineSeparator());
+			for (TradeEvent.Node node : trade.getNodes())
+				writeXMLNode(node);
+			writer.write("</trade>" + System.lineSeparator());
+		}
+		else if (output.format.equals(Output.OutputFormat.CSV))
+		{
+
+		}
+	}
 		
-//					writer.write("</traders>");
-//					writer.close();
+	static private void writeXMLNode(TradeEvent.Node node)
+	{
+		// Check if there is nodes inside node -> recursion
+		if (node.nodes != null)
+		{
+			writer.write("<" + node.name + ">" + System.lineSeparator());
+			for (TradeEvent.Node n : node.nodes)
+				writeXMLNode(n);
+			writer.write("</" + node.name + ">" + System.lineSeparator());
+		}
+		// Only simple node -> print it
+		else
+			writer.write("<" + node.name + ">" + node.value + "</" + node.name + ">" + System.lineSeparator());
 	}
 }
