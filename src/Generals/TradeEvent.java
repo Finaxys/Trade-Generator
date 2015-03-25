@@ -2,7 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 
-public abstract class Tradeevents {
+public abstract class TradeEvent {
 	public class Node
 	{
 		public String			name;
@@ -14,7 +14,7 @@ public abstract class Tradeevents {
 	public int				date;
 	protected ArrayList<Node>	nodes;
 	
-	public Tradeevents(Book book, int date) {
+	public TradeEvent(Book book, int date) {
 		this.book = book;
 		this.date = date;
 	}

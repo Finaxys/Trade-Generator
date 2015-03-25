@@ -9,7 +9,7 @@
 	<output>
 	  <format>XML</format>
 	  <path>trades.xml</path>
-	  <instrument>equity,loandepo</instrument>
+	  <instrument>all</instrument>
 	  <isStp>0</isStp>
 	  <layer>FS</layer>
 	</output>

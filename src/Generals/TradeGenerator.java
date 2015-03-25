@@ -26,6 +26,7 @@ public class TradeGenerator
 		int j;
 
 		for (j = 0; j <= simulate_days; j++)
+		{
 			for (Businessunit bu : gen.bu)
 				for (Portfolio port :  bu.lpor)
 					for (Book b : port.lb)
@@ -38,6 +39,7 @@ public class TradeGenerator
 							t.generate(b, amount_per_book, j);
 						}  
 					}
+		}
 		
 		
 		// Create file BATCH MODE
@@ -47,11 +49,11 @@ public class TradeGenerator
 
 			writer.write("<traders>" + System.lineSeparator());
 
-			for (Tradeevents trade : gen.te)
+			for (TradeEvent trade : gen.te)
 			{
-				ArrayList<Tradeevents.Node>	nodes = trade.getNodes();
+				ArrayList<TradeEvent.Node>	nodes = trade.getNodes();
 				writer.write("<trade>" + System.lineSeparator());
-				for (Tradeevents.Node node : nodes)
+				for (TradeEvent.Node node : nodes)
 					writeXMLNode(writer, node);
 				writer.write("</trade>" + System.lineSeparator());
 			}
@@ -72,13 +74,13 @@ public class TradeGenerator
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 	}	
 	
-	static void writeXMLNode(PrintWriter writer, Tradeevents.Node node)
+	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
 	{
 		// Check if there is nodes inside node -> recursion
 		if (node.nodes != null)
 		{
 			writer.write("<" + node.name + ">" + System.lineSeparator());
-			for (Tradeevents.Node n : node.nodes)
+			for (TradeEvent.Node n : node.nodes)
 				writeXMLNode(writer, n);
 			writer.write("</" + node.name + ">" + System.lineSeparator());
 		}

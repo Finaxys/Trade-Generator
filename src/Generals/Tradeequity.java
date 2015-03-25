@@ -2,7 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 
-public class Tradeequity extends Tradeevents 
+public class Tradeequity extends TradeEvent 
 {
 	int date;
 	float prix;
