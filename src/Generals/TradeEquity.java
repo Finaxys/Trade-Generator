@@ -2,7 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 
-public class Tradeequity extends TradeEvent 
+public class TradeEquity extends TradeEvent 
 {
 	int date;
 	float prix;
@@ -15,7 +15,7 @@ public class Tradeequity extends TradeEvent
 	Referential.Currency currency;
 	Referential.Portfolio portfolio;
 
-	public Tradeequity(Book book, int date, Way way, float prix, int quantity,
+	public TradeEquity(Book book, int date, Way way, float prix, int quantity,
 			Referential.Depositary d1, Referential.Counterpart c1, Referential.Trader tr1, Referential.Product pro1,
 			Referential.Currency cur1, Referential.Portfolio port1) 
 	{

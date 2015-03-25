@@ -39,6 +39,8 @@ public class TradeGenerator
 							t.generate(b, amount_per_book, j);
 						}  
 					}
+
+			OutputManager.getInstance().outputTrades(gen.te);
 		}
 		
 		
