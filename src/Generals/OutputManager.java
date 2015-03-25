@@ -25,12 +25,12 @@ public class OutputManager {
 				for (Output output : bu.lop)
 				{
 					writer = new PrintWriter(output.path, "UTF-8");
-
-					for (TradeEvent trade : bu.te)
-					{
-						if (trade.)
-							outputTrade(trade);
-					}
+//
+//					for (TradeEvent trade : bu.te)
+//					{
+//						if (trade.)
+//							outputTrade(trade);
+//					}
 				}
 
 		} catch (FileNotFoundException e1) {
@@ -43,7 +43,7 @@ public class OutputManager {
 	static public void outputTrade(TradeEvent trade)
 	{
 					
-					writer.write("<traders>" + System.lineSeparator());
+//					writer.write("<traders>" + System.lineSeparator());
 //					for (TradeEvent trade : gen.te)
 //					{
 //					ArrayList<TradeEvent.Node>	nodes = trade.getNodes();
@@ -53,7 +53,7 @@ public class OutputManager {
 //					writer.write("</trade>" + System.lineSeparator());
 //					}
 		
-					writer.write("</traders>");
-					writer.close();
+//					writer.write("</traders>");
+//					writer.close();
 	}
 }

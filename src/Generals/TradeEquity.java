@@ -13,7 +13,7 @@ public class TradeEquity extends TradeEvent
 	Referential.Trader trader;
 	Referential.Product product;
 
-	public TradeEquity(Book book, int date, Way way, float prix, int quantity,
+	public TradeEquity(Instrument instrument, Book book, int date, Way way, float prix, int quantity,
 			Referential.Depositary d1, Referential.Counterpart c1, Referential.Trader tr1, Referential.Product pro1,
 			Referential.Currency cur1, Referential.Portfolio port1) 
 	{
@@ -27,6 +27,7 @@ public class TradeEquity extends TradeEvent
 		this.product = pro1;
 		this.currency = cur1;
 		this.portfolio = port1;
+		this.instrument = instrument;
 	}
 
 	@Override

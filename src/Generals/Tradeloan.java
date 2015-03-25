@@ -39,7 +39,7 @@ public class Tradeloan extends TradeEvent {
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
 	
-	public Tradeloan(Book book, int date, int montant,Way way, Typetaux taux, Depositary depositary,
+	public Tradeloan(Instrument instrument, Book book, int date, int montant,Way way, Typetaux taux, Depositary depositary,
 			Counterpart counterpart, Trader trader,
 			Currency devise, float valeur_taux, Term frequence_remboursement,
 			BaseCalcul basecalcul) {
@@ -54,19 +54,8 @@ public class Tradeloan extends TradeEvent {
 		this.valeur_taux = valeur_taux;
 		this.durée = frequence_remboursement;
 		this.basecalcul = basecalcul;
-		
+		this.instrument = instrument;
 	}
-
-
-
-		
-
-
-
-
-
-
-
 
 		@Override
 		public ArrayList<Node> getNodes() {

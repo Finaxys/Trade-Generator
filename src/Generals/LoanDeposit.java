@@ -105,8 +105,8 @@ public void generate(Book book, int amount, int date)
 
 		
          
-		Tradeloan tl = new Tradeloan(book,date,Loanpertrade.get(i),t2.get(i),t3.get(i),d1,c1,tr1,cur1,valeur_taux*random.nextFloat(),Term.getRandom(),BaseCalcul.getRandom());
-		generals.addTradevent(tl);
+		Tradeloan tl = new Tradeloan(this, book,date,Loanpertrade.get(i),t2.get(i),t3.get(i),d1,c1,tr1,cur1,valeur_taux*random.nextFloat(),Term.getRandom(),BaseCalcul.getRandom());
+		tradeGenerated(tl);
 		
 	}
 }
