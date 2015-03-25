@@ -9,7 +9,7 @@
 	<output>
 	  <format>XML</format>
 	  <path>trades.xml</path>
-	  <instrument>equity</instrument>
+	  <instrument>equity,loandepo</instrument>
 	  <isStp>0</isStp>
 	  <layer>FS</layer>
 	</output>
@@ -24,8 +24,8 @@
 	</instrument>
 	<instrument name="loandepo">
 	  <toleranceRep>2</toleranceRep> 
-	  <partsell>20</partsell> 
-	  <owncountry>20</owncountry> 
+	  <partSell>20</partSell> 
+	  <ownCountry>20</ownCountry> 
 	  <volumetry>1000</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>

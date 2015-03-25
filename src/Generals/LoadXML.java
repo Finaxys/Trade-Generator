@@ -2,6 +2,7 @@ package Generals;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -160,17 +161,28 @@ public class LoadXML
 						continue; 
 
 					// Manage all instrument (Only equity for now)
-					if (!eins.getAttribute("name").equalsIgnoreCase("equity"))
-						continue;
-
-					Equity equity = new Equity();
-					equity.name = "equity";
-					equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-					equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
-					equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-					equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-					equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
-					instruments.add(equity);
+					if (eins.getAttribute("name").equalsIgnoreCase("equity"))
+					{
+						Equity equity = new Equity();
+						equity.name = "equity";
+						equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+						equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
+						equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+						equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
+						equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+						instruments.add(equity);
+					}
+					else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
+					{
+						Equity loandepo = new Equity();
+						loandepo.name = "loandepo";
+						loandepo.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+						loandepo.partSell = Integer.parseInt(getContent(eins, "partSell"));
+						loandepo.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+						loandepo.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
+						loandepo.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+						instruments.add(loandepo);
+					}
 				}
 
 				// Get portfolios
@@ -203,9 +215,25 @@ public class LoadXML
 					if (((Node) eoutput).getNodeType() != Node.ELEMENT_NODE)
 						continue;
 
-					ArrayList<String> ins = new ArrayList<String>();
-					ins.add(getContent(eoutput, "instrument"));
-					outputs.add(new Output(getContent(esetting, "format"), getContent(eoutput, "path"), ins, Boolean.parseBoolean(getContent(eoutput, "isStp")), getContent(eoutput, "layer")));
+					String sinst = getContent(eoutput, "instrument");
+					ArrayList<Instrument> opins = new ArrayList<Instrument>();
+					if (sinst.equalsIgnoreCase("all"))
+						opins.addAll(instruments);
+					else
+					{
+						ArrayList<String> sins = new ArrayList<String>(Arrays.asList(sinst.split("\\s*,\\s*")));
+						
+						// Get Instrument ref for each output
+						for (String str : sins)
+							for (Instrument inst : instruments)
+								if (str.equals(inst.name))
+								{
+									opins.add(inst);
+									break;
+								}
+					}
+
+					outputs.add(new Output(getContent(esetting, "format"), getContent(eoutput, "path"), opins, Boolean.parseBoolean(getContent(eoutput, "isStp")), getContent(eoutput, "layer")));
 				}
 
 				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), outputs, instruments, portfolios));
@@ -217,6 +245,7 @@ public class LoadXML
 		}
 		
 		// Add cross references
+		// Set Ref BU/PORT for Books
 		for (Businessunit bu : Generals.getInstance().bu)
 			for (Portfolio pt : bu.lpor)
 			{

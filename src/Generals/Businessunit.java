@@ -9,6 +9,7 @@ public class Businessunit
 	public int ratio;
 	public ArrayList<Instrument> lins;
 	public ArrayList<Portfolio> lpor;
+	public ArrayList<Output>	lop;
 
 	public Instrument getInstrument(String ins_str)
 	{    
@@ -28,6 +29,7 @@ public class Businessunit
 		this.ratio = ratio;
 		this.lins = lins;
 		this.lpor = lpor;
+		this.lop = lop;
 	}
 }
 

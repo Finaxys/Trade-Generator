@@ -19,11 +19,11 @@ public class Output {
 
 		public OutputFormat 		format;
 		public String				path;
-		public ArrayList<String>	instrument;
+		public ArrayList<Instrument>	instrument;
 		public Boolean				isStp;
 		public Layer				layer;
 		
-		Output(String f, String path, ArrayList<String> ins, Boolean stp, String lay)
+		Output(String f, String path, ArrayList<Instrument> ins, Boolean stp, String lay)
 		{
 			format = OutputFormat.valueOf(f.toUpperCase());
 			this.path = path;
