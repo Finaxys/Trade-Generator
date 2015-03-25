@@ -17,11 +17,11 @@ public class Output {
 			HBASE
 		}
 
-		public OutputFormat 		format;
-		public String				path;
+		public OutputFormat 			format;
+		public String					path;
 		public ArrayList<Instrument>	instrument;
-		public Boolean				isStp;
-		public Layer				layer;
+		public Boolean					isStp;
+		public Layer					layer;
 		
 		Output(String f, String path, ArrayList<Instrument> ins, Boolean stp, String lay)
 		{

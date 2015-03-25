@@ -33,10 +33,24 @@
       <portfolios>
 	<portfolio name="?equity?">
 	  <books>
-	    <book name="bookequityeuro" currency="EUR" instrument="equity"/>
-	    <book name="bookfundingeuro" currency="EUR"
-	      instrument="loandepo"/>
-	    <book name="EQUOTHERS" currency="OTH" instrument="OTH"/>
+	    <book name="bookequityeuro">
+	      <filters>
+		<filter type="instrument" value="equity"/>
+		<filter type="currency" value="EUR"/>
+	      </filters>
+	    </book>
+	    <book name="bookfundingeuro">
+	      <filters>
+		<filter type="instrument" value="loandepo"/>
+		<filter type="currency" value="EUR,USD"/>
+	      </filters>
+	    </book>
+	    <book name="EQUOTHERS">
+	      <filters>
+		<filter type="instrument" value="OTH"/>
+		<filter type="currency" value="OTH"/>
+	      </filters>
+	    </book>
 	  </books>
 	</portfolio>
 	<portfolio name="?derivative?">

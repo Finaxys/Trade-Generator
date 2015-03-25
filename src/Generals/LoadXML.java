@@ -3,6 +3,7 @@ package Generals;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -11,6 +12,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import Generals.Referential.Currency;
 
 public class LoadXML
 {
@@ -127,12 +130,6 @@ public class LoadXML
 	{
 		try
 		{
-			ArrayList<Instrument>	instruments = new ArrayList<Instrument>();
-			ArrayList<Portfolio>	portfolios = new ArrayList<Portfolio>();
-			ArrayList<Businessunit>	businessunits = new ArrayList<Businessunit>();
-			ArrayList<Book>			books = new ArrayList<Book>();
-			ArrayList<Output>		outputs = new ArrayList<Output>();
-
 			File fXmlFile = new File("params/generalinfs.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -144,9 +141,15 @@ public class LoadXML
 			Element esetting = (Element) settings.item(0);
 
 			// Get businessunits
+			ArrayList<Businessunit>	businessunits = new ArrayList<Businessunit>();
 			NodeList nbusinessunits = doc.getElementsByTagName("businessUnit");
 			for (int ibu = 0; ibu < nbusinessunits.getLength(); ibu++)
 			{
+				ArrayList<Instrument>	instruments = new ArrayList<Instrument>();
+				ArrayList<Portfolio>	portfolios = new ArrayList<Portfolio>();
+				ArrayList<Book>			books = new ArrayList<Book>();
+				ArrayList<Output>		outputs = new ArrayList<Output>();
+			
 				Element ebusinessunit = (Element) nbusinessunits.item(ibu);
 
 				if (((Node) ebusinessunit).getNodeType() != Node.ELEMENT_NODE)
@@ -200,8 +203,35 @@ public class LoadXML
 						Element ebook = (Element) nbooks.item(ibook);
 						if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
 							continue;
+						
+						ArrayList<Currency>		bcurrencies = new ArrayList<Currency>();
+						ArrayList<Instrument>	binstruments = new ArrayList<Instrument>();
 
-						books.add(new Book(ebook.getAttribute("name"), ebook.getAttribute("currency"), ebook.getAttribute("instrument")));
+						// Get filters
+						NodeList nfilters = ebook.getElementsByTagName("filter");
+						for (int ifilter = 0; ifilter < nfilters.getLength(); ifilter++)
+						{
+							Element efilter = (Element) nfilters.item(ifilter);
+							
+							List<String> vfilter = Arrays.asList(efilter.getAttribute("value").split("\\s*,\\s*"));
+							
+							if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
+							{
+								for (String str : vfilter)
+									for (Instrument ins : instruments)
+										if (str.equals(ins.name))
+											binstruments.add(ins);
+							}
+							else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
+							{
+								for (String str : vfilter)
+									for (Currency cur : _ref.Currencies)
+										if (str.equals(cur.name))
+											bcurrencies.add(cur);
+							}
+						}
+							
+						books.add(new Book(ebook.getAttribute("name"), bcurrencies, binstruments));
 					}
 
 					portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));

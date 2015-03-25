@@ -30,9 +30,9 @@ public class TradeGenerator
 				for (Portfolio port :  bu.lpor)
 					for (Book b : port.lb)
 					{
-						if (b.ins.equalsIgnoreCase("equity"))
+						if (b.ins.size() > 0  && b.ins.get(0).name.equalsIgnoreCase("equity"))
 						{
-							Instrument t = bu.getInstrument(b.ins);
+							Instrument t = b.ins.get(0);
 							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
 
 							t.generate(b, amount_per_book, j);

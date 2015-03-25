@@ -3,7 +3,6 @@ package Generals;
 
 public abstract class Instrument
 {
-	public Output		output;
 	String 				name;
 
 	public void  generate (Book b, int montant,int date){}

@@ -40,10 +40,7 @@ public class Tradeequity extends Tradeevents
 		addNode(nodes, "book", book.name, null);
 		addNode(nodes, "way", way.equals(way.BUY) ? "BUY" : "sell", null);
 		addNode(nodes, "type", "equity", null);
-		ArrayList<Node> products = new ArrayList<Node>();
-		addNode(products, "name", "bob", null);
-		addNode(products, "type", "tarace", null);
-		addNode(nodes, "product", product.libelle, products);
+		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
 		addNode(nodes, "price", Float.toString(prix), null);
 		addNode(nodes, "currency", currency.code, null);
