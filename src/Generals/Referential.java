@@ -27,6 +27,52 @@ class Referential
         Random randomGenerator = new Random();
         return (list.get(randomGenerator.nextInt(list.size())));
 	}
+	
+	public <T> List<T> subList(List<T> list,String field,String filter)
+	{
+        List<T> subT = null;
+        Iterator itr = list.iterator();
+        while(itr.hasNext()) 
+        {
+        	try {
+				if(itr.getClass().getField(field).equals(filter))
+					subT.add((T) itr);
+				
+				} catch (NoSuchFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+        	
+        }
+    return (subT);
+	}
+	
+	
+	public <T> List<T> exList(List<T> list,String field,String filter)
+	{
+        List<T> subT = null;
+        Iterator itr = list.iterator();
+        while(itr.hasNext()) 
+        {
+        	try {
+				if(!itr.getClass().getField(field).equals(filter))
+					subT.add((T) itr);
+				
+				} catch (NoSuchFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+        	
+        		}
+        return (subT);
+	}
+
 
 	public class Counterpart
 	{

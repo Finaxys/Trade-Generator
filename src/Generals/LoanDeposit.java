@@ -9,7 +9,6 @@ import Generals.Referential.Portfolio;
 
 
 public class LoanDeposit extends Instrument {
-//http://www.fimarkets.com/pages/pret_emprunt_de_titres.php
 //type de taux (fixe/variable), base de calcul, valeur du taux, devise, durée
 public String devise;
 public int Partloan;
@@ -66,9 +65,7 @@ public void generate(Book book, int amount, int date)
 	Referential.Depositary d1;
 	Referential.Counterpart c1;
 	Referential.Trader tr1;
-//	Referential.Product pro1,pro2;
 	Referential.Currency cur1;
-//	Referential.Portfolio port1,port2;
 
 	List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,Locality.class);
 	List<Way> t2 = tableaubin(roundedVolume, this.Partloan,Way.class);
@@ -78,14 +75,6 @@ public void generate(Book book, int amount, int date)
 	
 	for (int i = 0; i < roundedVolume; i = i + 1) 
 	{
-
-		//sharing of amount per trade
-//		randToleranceQuantities = (float)Math.random();
-		
-		//set random price -+3%
-//		randomquantity1 = 6 * (random.nextDouble() - 0.5);
-//		randomquantity2 = 6 * (random.nextDouble() - 0.5);
-		//tirage au sort sous contrainte
         
 		d1 = ref.getRandomElement(ref.Depositaries);
 		
@@ -93,15 +82,15 @@ public void generate(Book book, int amount, int date)
 		
 		tr1 = ref.getRandomElement(ref.Traders);
 	
-		cur1 = ref.getRandomElement(ref.Currencies);
-		
-		
-		
-		//Portfolio port1 = ref.getRandomElement(ref.Portfolios);
-		
+		 
+		if (t1.get(i).toString()=="NATIONAL")
+		{ 
+			cur1=ref.subList(ref.Currencies, "Country", generals.owncountry).get(0);
+		}
 
-
-		
+		{
+			cur1 = ref.getRandomElement(ref.exList(ref.Currencies, "Country", generals.owncountry));
+		}		
          
 		Tradeloan tl = new Tradeloan(this, book,date,Loanpertrade.get(i),t2.get(i),t3.get(i),d1,c1,tr1,cur1,valeur_taux*random.nextFloat(),Term.getRandom(),BaseCalcul.getRandom());
 		tradeGenerated(tl);
