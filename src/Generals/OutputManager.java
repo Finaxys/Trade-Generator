@@ -16,28 +16,21 @@ public class OutputManager {
 		return (instance);
 	}
 	
-	static public void outputTrades()
+	public void outputTrades()
 	{
-		ArrayList<TradeEvent>	te_remaining;
-
 		try {
-
 			for (Businessunit bu : Generals.getInstance().bu)
 				for (Output output : bu.lop)
 				{
 					writer = new PrintWriter(output.path, "UTF-8");
-					te_remaining = new ArrayList<TradeEvent>();
 
-					for (TradeEvent trade : bu.te)
-						if (output.instruments.contains(trade.instrument))
-							outputTrade(output, trade);
-						else
-							te_remaining.add(trade);
-					
-					bu.te = te_remaining;
+					for (TradeEvent trade : output.te)
+						writeTrade(trade);
+
 					writer.close();
+					
+					output.te.clear();
 				}
-
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (UnsupportedEncodingException e1) {
@@ -45,22 +38,37 @@ public class OutputManager {
 		}
 	}
 	
-	static private void outputTrade(Output output, TradeEvent trade)
+	public void outputTrade(TradeEvent trade)
 	{
-		if (output.format.equals(Output.OutputFormat.XML))
+		try {
+			writer = new PrintWriter(trade.instrument.output.path, "UTF-8");
+
+			writeTrade(trade);
+
+			writer.close();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	private void writeTrade(TradeEvent trade)
+	{
+		if (trade.instrument.output.format.equals(Output.OutputFormat.XML))
 		{
 			writer.write("<trade>" + System.lineSeparator());
 			for (TradeEvent.Node node : trade.getNodes())
 				writeXMLNode(node);
 			writer.write("</trade>" + System.lineSeparator());
 		}
-		else if (output.format.equals(Output.OutputFormat.CSV))
+		else if (trade.instrument.output.format.equals(Output.OutputFormat.CSV))
 		{
 
 		}
 	}
 		
-	static private void writeXMLNode(TradeEvent.Node node)
+	private void writeXMLNode(TradeEvent.Node node)
 	{
 		// Check if there is nodes inside node -> recursion
 		if (node.nodes != null)

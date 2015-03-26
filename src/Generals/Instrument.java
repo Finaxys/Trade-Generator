@@ -15,7 +15,9 @@ public abstract class Instrument
 	
 	public void tradeGenerated(TradeEvent trade)
 	{
-		trade.book.pt.bu.addTradeEvent(trade);
+		if (trade.instrument.output.isStp)
+			OutputManager.getInstance().outputTrade(trade);
+		trade.instrument.output.addTradeEvent(trade);
 	}
 
 	public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio, Class<T> e)

@@ -10,9 +10,6 @@ public class Businessunit
 	public ArrayList<Instrument> lins;
 	public ArrayList<Portfolio> lpor;
 	public ArrayList<Output>	lop;
-	public ArrayList<TradeEvent> te;
-	
-	public void addTradeEvent(TradeEvent tn){ te.add(tn);}
 
 	public Instrument getInstrument(String ins_str)
 	{    
@@ -28,7 +25,6 @@ public class Businessunit
 	public Businessunit(String name, int ratio, ArrayList<Output> lop, ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
 	{
 		super();
-		this.te = new ArrayList<TradeEvent>();
 		this.name = name;
 		this.ratio = ratio;
 		this.lins = lins;

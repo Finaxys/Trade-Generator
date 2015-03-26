@@ -22,6 +22,9 @@ public class Output {
 		public ArrayList<Instrument>	instruments;
 		public Boolean					isStp;
 		public Layer					layer;
+		public ArrayList<TradeEvent>	te = new ArrayList<TradeEvent>();
+	
+		public void addTradeEvent(TradeEvent tn){ te.add(tn);}
 		
 		Output(String f, String path, ArrayList<Instrument> ins, Boolean stp, String lay)
 		{
