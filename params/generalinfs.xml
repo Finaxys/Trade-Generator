@@ -19,13 +19,13 @@
 	  <toleranceRep>2</toleranceRep> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
-	  <volumetry>1000</volumetry> 
+	  <volumetry>10</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
 	  <partLoan>50</partLoan> 
 	  <ownCountry>40</ownCountry> 
-	  <volumetry>100</volumetry> 
+	  <volumetry>5</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	  <repartitionTolerance>2</repartitionTolerance> 
 	  <rateValue>20</rateValue> 

@@ -105,6 +105,7 @@ public class OutputManager {
 	public void outputTrade(Output output, TradeEvent trade)
 	{
 		try {
+			//System.out.println("X");
 			writer = new PrintWriter(Integer.toString(trade.date) + "-" + trade.id + output.path, "UTF-8");
 			writeTrade(output, trade);
 			writer.close();
