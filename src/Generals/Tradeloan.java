@@ -38,7 +38,6 @@ public class Tradeloan extends TradeEvent {
 	public Term term;
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
-	private Instrument instrument;
 	
 	public Tradeloan(Instrument instrument, Book book, int date, int montant,Way way, Typetaux rate, Depositary depositary,
 			Counterpart counterpart, Trader trader,
@@ -61,6 +60,22 @@ public class Tradeloan extends TradeEvent {
 		@Override
 		public ArrayList<Node> getNodes() {
 			// TODO Auto-generated method stub
-			return null;
+		nodes = new ArrayList<Node>();
+
+		addNode(nodes, "business", book.pt.bu.name, null);
+		addNode(nodes, "portfolio", book.pt.name, null);
+		addNode(nodes, "book", book.name, null);
+		addNode(nodes, "way", way.equals(Way.BUY) ? "LOAN" : "DEPO", null);
+		addNode(nodes, "type", "loandepo", null);
+		addNode(nodes, "amount", Integer.toString(amount), null);
+		addNode(nodes, "depositary", depositary.code, null);
+		addNode(nodes, "counterpart", counterpart.code, null);
+		addNode(nodes, "rate", rate.name(), null);
+		addNode(nodes, "trader", trader.codeptf, null);
+		addNode(nodes, "currency", currency.name, null);
+		addNode(nodes, "rateValue", Float.toString(rateValue), null);
+		addNode(nodes, "term", term.name(), null);
+		addNode(nodes, "basecalcul", basecalcul.name(), null);
+		return (nodes);
 		}
 	}

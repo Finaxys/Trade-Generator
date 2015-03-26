@@ -29,7 +29,7 @@ public class OutputManager {
 					te_remaining = new ArrayList<TradeEvent>();
 
 					for (TradeEvent trade : bu.te)
-						if (output.instrument.contains(trade.instrument))
+						if (output.instruments.contains(trade.instrument))
 							outputTrade(output, trade);
 						else
 							te_remaining.add(trade);
@@ -45,7 +45,7 @@ public class OutputManager {
 		}
 	}
 	
-	static public void outputTrade(Output output, TradeEvent trade)
+	static private void outputTrade(Output output, TradeEvent trade)
 	{
 		if (output.format.equals(Output.OutputFormat.XML))
 		{

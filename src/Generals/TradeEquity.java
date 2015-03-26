@@ -37,7 +37,7 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "business", book.pt.bu.name, null);
 		addNode(nodes, "portfolio", book.pt.name, null);
 		addNode(nodes, "book", book.name, null);
-		addNode(nodes, "way", way.equals(way.BUY) ? "BUY" : "sell", null);
+		addNode(nodes, "way", way.equals(Way.BUY) ? "BUY" : "sell", null);
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);

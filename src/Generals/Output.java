@@ -19,7 +19,7 @@ public class Output {
 
 		public OutputFormat 			format;
 		public String					path;
-		public ArrayList<Instrument>	instrument;
+		public ArrayList<Instrument>	instruments;
 		public Boolean					isStp;
 		public Layer					layer;
 		
@@ -27,7 +27,7 @@ public class Output {
 		{
 			format = OutputFormat.valueOf(f.toUpperCase());
 			this.path = path;
-			instrument = ins;
+			instruments = ins;
 			isStp = stp;
 			layer = Layer.valueOf(lay);
 		}

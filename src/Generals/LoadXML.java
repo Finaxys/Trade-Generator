@@ -275,8 +275,9 @@ public class LoadXML
 		}
 		
 		// Add cross references
-		// Set Ref BU/PORT for Books
 		for (Businessunit bu : Generals.getInstance().bu)
+		{
+			// Set Ref BU/PORT for Books
 			for (Portfolio pt : bu.lpor)
 			{
 				pt.bu = bu;
@@ -284,6 +285,11 @@ public class LoadXML
 				for (Book b : pt.lb)
 					b.pt = pt;
 			}
+			// Set ref output into instrument
+			for (Output output : bu.lop)
+				for (Instrument ins : output.instruments)
+					ins.output = output;
+		}
 	}
 
 	static public void loadTraders()
