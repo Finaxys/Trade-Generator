@@ -39,12 +39,11 @@ public class Equity extends Instrument
 	{
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();		
-		
 		int amountPerDay = amount;
 		double rand1, rand2;
 		double toleredVolumetry;
 		Random	random = new Random();
-
+		
 		rand1 = this.repartitionTolerance * 2 * (random.nextDouble()-0.5)/100;
 		rand2 = this.volumetryTolerance * 2 * (random.nextDouble()-0.5)/100;
 		amountPerDay += rand1 * amountPerDay;
@@ -57,62 +56,55 @@ public class Equity extends Instrument
  
 		float randToleranceQuantities;
 		
-		double randomquantity1, randomquantity2;
+		double randomquantity;
 		double to2tradeamount = (amountPerDay / roundedVolume);
-		int quantity1, quantity2;
-		float price1,price2;		 
+		int quantity;
+		float price;		 
 		
-		List<Way> t1;
-		List<Way> t2;
+		List<Way> t1,t2;
+		
 		
 		//declaration des tirages au sort sous contrainte
-		Referential.Depositary d1,d2;
-		Referential.Counterpart c1,c2;
-		Referential.Trader tr1,tr2;
-		Referential.Product pro1,pro2;
-		Referential.Currency cur1,cur2;
-		Referential.Portfolio port1,port2;
-
+		Referential.Depositary d;
+		Referential.Counterpart c;
+		Referential.Trader tr;
+		Referential.Product pro;
+		Referential.Currency cur;
+		Referential.Portfolio port;
+		List<Referential.Product> Listequity=ref.subList(ref.Products, "type", "Equity");
 		t1 = tableaubin(roundedVolume, this.ownCountry);
-
 		t2 = tableaubin(roundedVolume, this.partSell);
-		
-		for (int i = 0; i < roundedVolume; i = i + 2) 
+		for (int i = 0; i < roundedVolume;i++) 
 		{
 
 			//sharing of amount per trade
 			randToleranceQuantities = (float)Math.random();
 			
 			//set random price -+3%
-			randomquantity1 = 6 * (random.nextDouble() - 0.5);
-			randomquantity2 = 6 * (random.nextDouble() - 0.5);
+			randomquantity = 6 * (random.nextDouble() - 0.5);
+			
 			//tirage au sort sous contrainte
 
-			d1 = ref.getRandomElement(ref.Depositaries);
-			d2 = ref.getRandomElement(ref.Depositaries);
-			c1 = ref.getRandomElement(ref.Counterparts);
-			c2 = ref.getRandomElement(ref.Counterparts);
-			tr1 = ref.getRandomElement(ref.Traders);
-			tr2 = ref.getRandomElement(ref.Traders);
-			pro1 = ref.getRandomElement(ref.Products);
-			pro2 = ref.getRandomElement(ref.Products);
-			cur1 = ref.getRandomElement(ref.Currencies);
-			cur2 = ref.getRandomElement(ref.Currencies);
-			port1 = ref.getRandomElement(ref.Portfolios);
-			port2 = ref.getRandomElement(ref.Portfolios);
-
-			price1 = pro1.price;
-			price2 = pro2.price;
-			price1 = (float) (price1 * ( 1 + randomquantity1 / 100));
-			price2 = (float) (price2 * (1 + randomquantity2 / 100));
-			quantity1 = (int) (randToleranceQuantities * to2tradeamount / price1);
-			quantity2 = (int) (randToleranceQuantities * to2tradeamount / price2);
-
-			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), price1, quantity1, d1, c1, tr1, pro1, cur1, port1);
-			TradeEquity tq2 = new TradeEquity(this, book, date, t2.get(i + 1), price2, quantity2, d2, c2, tr2, pro2, cur2, port2);
-
+			d = ref.getRandomElement(ref.Depositaries);
+			c = ref.getRandomElement(ref.Counterparts);
+			tr = ref.getRandomElement(ref.Traders);
+			
+			if (t1.get(i).toString()=="NATIONAL")
+			{ 
+				cur=ref.subList(ref.Currencies, "Country", generals.owncountry).get(0);
+			}
+			{
+				cur = ref.getRandomElement(ref.exList(ref.Currencies, "Country", generals.owncountry));
+			}
+		    
+			pro = ref.getRandomElement(Listequity);
+			port = ref.getRandomElement(ref.Portfolios);
+			price = pro.price;
+			price = (float) (price * ( 1 + randomquantity/ 100));
+			quantity = (int) (randToleranceQuantities * to2tradeamount / price);
+			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), price, quantity, d, c, tr, pro, cur, port);
 			tradeGenerated(tq1);
-			tradeGenerated(tq2);
+			
 		}
 	}
 }
