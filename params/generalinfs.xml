@@ -7,7 +7,7 @@
     <businessUnit name="ged" ratio="100">
       <workflow>
 	<output>
-	  <format>XML</format>
+	  <format>CSV</format>
 	  <path>trades.xml</path>
 	  <instrument>all</instrument>
 	  <isStp>0</isStp>

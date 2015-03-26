@@ -28,14 +28,5 @@ import java.util.ArrayList;
 			this.total_buget = total_buget;
 			this.owncountry = owncountry;
 			this.bu = bu;
-//
-//			try
-//			{
-//				format = OutputFormat.valueOf(sformat.toUpperCase());
-//			} catch (IllegalArgumentException e)
-//			{
-//				format = OutputFormat.XML;
-//				// TODO - Throw Parsing ex with continuing boolean
-//			}
 		}
 	}
