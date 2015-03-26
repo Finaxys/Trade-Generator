@@ -27,38 +27,40 @@ import Generals.Referential.Depositary;
 import Generals.Referential.Trader;
 
 public class Tradeloan extends TradeEvent {
-	public int montant;
+	public int amount;
     Referential.Depositary depositary;
 	Referential.Counterpart counterpart;
 	Way way;
-	Typetaux taux;
+	Typetaux rate;
 	Referential.Trader trader;
-	Referential.Currency devise;	
-	public float valeur_taux;
-	public Term durée;
+	Referential.Currency currency;	
+	public float rateValue;
+	public Term term;
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
+	private Instrument instrument;
 	
-	public Tradeloan(Instrument instrument, Book book, int date, int montant,Way way, Typetaux taux, Depositary depositary,
+	public Tradeloan(Instrument instrument, Book book, int date, int montant,Way way, Typetaux rate, Depositary depositary,
 			Counterpart counterpart, Trader trader,
-			Currency devise, float valeur_taux, Term frequence_remboursement,
+			Currency currency, float rateValue, Term term,
 			BaseCalcul basecalcul) {
 		super(book, date);
-		this.montant=montant;
+		this.amount=montant;
 		this.depositary = depositary;
 		this.counterpart = counterpart;
 		this.way = way;
-		this.taux = taux;
+		this.rate = rate;
 		this.trader = trader;
-		this.devise = devise;
-		this.valeur_taux = valeur_taux;
-		this.durée = frequence_remboursement;
+		this.currency = currency;
+		this.rateValue = rateValue;
+		this.term = term;
 		this.basecalcul = basecalcul;
 		this.instrument = instrument;
 	}
 
 		@Override
 		public ArrayList<Node> getNodes() {
+			// TODO Auto-generated method stub
 			return null;
 		}
-}
+	}
