@@ -33,15 +33,16 @@ public abstract class Instrument
 
 	public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio, Class<T> e)
 	{   
-		List<T> TrueArray = new ArrayList<T>(size);
-		int j;
-		int national = (ratio * size) / 100;
+		List<T> TrueArray = new ArrayList<T>();
+		int j,i;
+		int national = (ratio * (size-1)) / 100;
 		T tp1=e.getEnumConstants()[0];
 		T tp2=e.getEnumConstants()[1];
 		
-		for (int i = 0; i < size; i++)
-			TrueArray.set(i,tp1);
-		
+		for (i = 0; i < size; i++)
+			System.out.println("a");
+			TrueArray.add(tp1);
+		   
 			
 		for (j = 0; j <= national; j++)
 			TrueArray.set(j, tp2);

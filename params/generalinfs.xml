@@ -7,10 +7,10 @@
     <businessUnit name="ged" ratio="100">
       <workflow>
 	<output>
-	  <format>XML</format>
-	  <path>trades.xml</path>
+	  <format>CSV</format>
+	  <path>trades</path>
 	  <instrument>all</instrument>
-	  <isStp>0</isStp>
+	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
       </workflow>
@@ -19,13 +19,13 @@
 	  <toleranceRep>2</toleranceRep> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
-	  <volumetry>1000</volumetry> 
+	  <volumetry>10</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
 	  <partLoan>50</partLoan> 
 	  <ownCountry>40</ownCountry> 
-	  <volumetry>100</volumetry> 
+	  <volumetry>5</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	  <repartitionTolerance>2</repartitionTolerance> 
 	  <rateValue>20</rateValue> 
@@ -39,13 +39,13 @@
 	    <book name="bookequityeuro">
 	      <filters>
 		<filter type="instrument" value="equity"/>
-		<filter type="currency" value="EUR"/>
+		<filter type="currency" value="EU"/>
 	      </filters>
 	    </book>
 	    <book name="bookfundingeuro">
 	      <filters>
 		<filter type="instrument" value="loandepo"/>
-		<filter type="currency" value="EUR,USD"/>
+		<filter type="currency" value="EU,USD"/>
 	      </filters>
 	    </book>
 	    <book name="EQUOTHERS">

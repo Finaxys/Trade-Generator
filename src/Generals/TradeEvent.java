@@ -10,6 +10,8 @@ public abstract class TradeEvent {
 		public ArrayList<Node>	nodes;
 	}
 
+	static long				counter = 0;
+	long					id;
 	Referential.Currency 	currency;
 	Referential.Portfolio 	portfolio;
 	public Book				book;
@@ -18,6 +20,7 @@ public abstract class TradeEvent {
 	protected ArrayList<Node>	nodes;
 	
 	public TradeEvent(Book book, int date) {
+		id = ++counter;
 		this.book = book;
 		this.date = date;
 	}
