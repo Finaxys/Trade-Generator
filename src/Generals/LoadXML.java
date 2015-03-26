@@ -156,115 +156,13 @@ public class LoadXML
 					continue;
 
 				// Get instruments
-				NodeList ninstruments = ebusinessunit.getElementsByTagName("instrument");
-				for (int iins = 0; iins < ninstruments.getLength(); iins++)
-				{
-					Element eins = (Element) ninstruments.item(iins);
-					if (((Node) eins).getNodeType() != Node.ELEMENT_NODE)
-						continue; 
-
-					// Manage all instrument (Only equity for now)
-					if (eins.getAttribute("name").equalsIgnoreCase("equity"))
-					{
-						Equity equity = new Equity();
-						equity.name = "equity";
-						equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-						equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
-						equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-						equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-						equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
-						instruments.add(equity);
-					}
-					else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
-					{
-						Equity loandepo = new Equity();
-						loandepo.name = "loandepo";
-//						loandepo.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-//						loandepo.partSell = Integer.parseInt(getContent(eins, "partSell"));
-//						loandepo.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-//						loandepo.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-//						loandepo.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
-						instruments.add(loandepo);
-					}
-				}
+				getInstruments(ebusinessunit, instruments);
 
 				// Get portfolios
-				NodeList nportfolios = ebusinessunit.getElementsByTagName("portfolio");
-				for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
-				{
-					Element eportfolio = (Element) nportfolios.item(ipf);
-					if (((Node) eportfolio).getNodeType() != Node.ELEMENT_NODE)
-						continue;
-
-					// Get books
-					NodeList nbooks = eportfolio.getElementsByTagName("book");
-					for (int ibook = 0; ibook < nbooks.getLength(); ibook++)
-					{
-						Element ebook = (Element) nbooks.item(ibook);
-						if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
-							continue;
-						
-						ArrayList<Currency>		bcurrencies = new ArrayList<Currency>();
-						ArrayList<Instrument>	binstruments = new ArrayList<Instrument>();
-
-						// Get filters
-						NodeList nfilters = ebook.getElementsByTagName("filter");
-						for (int ifilter = 0; ifilter < nfilters.getLength(); ifilter++)
-						{
-							Element efilter = (Element) nfilters.item(ifilter);
-							
-							List<String> vfilter = Arrays.asList(efilter.getAttribute("value").split("\\s*,\\s*"));
-							
-							if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
-							{
-								for (String str : vfilter)
-									for (Instrument ins : instruments)
-										if (str.equals(ins.name))
-											binstruments.add(ins);
-							}
-							else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
-							{
-								for (String str : vfilter)
-									for (Currency cur : _ref.Currencies)
-										if (str.equalsIgnoreCase(cur.code))
-											bcurrencies.add(cur);
-							}
-						}
-							
-						books.add(new Book(ebook.getAttribute("name"), bcurrencies, binstruments));
-					}
-
-					portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));
-				}
+				getPortfolios( ebusinessunit, portfolios, books, instruments);
 
 				// Get outputs
-				NodeList noutputs = ebusinessunit.getElementsByTagName("output");
-				for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
-				{
-					Element eoutput = (Element) noutputs.item(ipf);
-					if (((Node) eoutput).getNodeType() != Node.ELEMENT_NODE)
-						continue;
-
-					String sinst = getContent(eoutput, "instrument");
-					ArrayList<Instrument> opins = new ArrayList<Instrument>();
-					if (sinst.equalsIgnoreCase("all"))
-						opins.addAll(instruments);
-					else
-					{
-						ArrayList<String> sins = new ArrayList<String>(Arrays.asList(sinst.split("\\s*,\\s*")));
-						
-						// Get Instrument ref for each output
-						for (String str : sins)
-							for (Instrument inst : instruments)
-								if (str.equals(inst.name))
-								{
-									opins.add(inst);
-									break;
-								}
-					}
-
-					outputs.add(new Output(getContent(esetting, "format"), getContent(eoutput, "path"), opins, Boolean.parseBoolean(getContent(eoutput, "isStp")), getContent(eoutput, "layer")));
-				}
+				getOutputs(ebusinessunit, esetting, outputs, instruments);
 
 				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), outputs, instruments, portfolios));
 			}
@@ -275,17 +173,7 @@ public class LoadXML
 		}
 		
 		// Add cross references
-		for (Businessunit bu : Generals.getInstance().bu)
-		{
-			// Set Ref BU/PORT for Books
-			for (Portfolio pt : bu.lpor)
-			{
-				pt.bu = bu;
-
-				for (Book b : pt.lb)
-					b.pt = pt;
-			}
-		}
+		crossReferences();
 	}
 
 	static public void loadTraders()
@@ -339,6 +227,147 @@ public class LoadXML
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private static void getFilters(Element ebook, ArrayList<Instrument> binstruments, ArrayList<Currency> bcurrencies, ArrayList<Instrument> instruments)
+	{
+		NodeList nfilters = ebook.getElementsByTagName("filter");
+		for (int ifilter = 0; ifilter < nfilters.getLength(); ifilter++)
+		{
+			Element efilter = (Element) nfilters.item(ifilter);
+			
+			List<String> vfilter = Arrays.asList(efilter.getAttribute("value").split("\\s*,\\s*"));
+			
+			if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
+			{
+				for (String str : vfilter)
+					for (Instrument ins : instruments)
+						if (str.equals(ins.name))
+							binstruments.add(ins);
+			}
+			else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
+			{
+				for (String str : vfilter)
+					for (Currency cur : _ref.Currencies)
+						if (str.equals(cur.code))
+							bcurrencies.add(cur);
+			}
+		}
+	}
+	
+	private static void getOutputs(Element ebusinessunit, Element esetting, ArrayList<Output> outputs, ArrayList<Instrument> instruments)
+	{
+		NodeList noutputs = ebusinessunit.getElementsByTagName("output");
+		for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
+		{
+			Element eoutput = (Element) noutputs.item(ipf);
+			if (((Node) eoutput).getNodeType() != Node.ELEMENT_NODE)
+				continue;
+
+			String sinst = getContent(eoutput, "instrument");
+			ArrayList<Instrument> opins = new ArrayList<Instrument>();
+			if (sinst.equalsIgnoreCase("all"))
+				opins.addAll(instruments);
+			else
+			{
+				ArrayList<String> sins = new ArrayList<String>(Arrays.asList(sinst.split("\\s*,\\s*")));
+				
+				// Get Instrument ref for each output
+				for (String str : sins)
+					for (Instrument inst : instruments)
+						if (str.equals(inst.name))
+						{
+							opins.add(inst);
+							break;
+						}
+			}
+			outputs.add(new Output(getContent(esetting, "format"), getContent(eoutput, "path"), opins, Boolean.parseBoolean(getContent(eoutput, "isStp")), getContent(eoutput, "layer")));
+		}
+	}
+	
+	private static void getPortfolios(Element ebusinessunit, ArrayList<Portfolio> portfolios, ArrayList<Book> books, ArrayList<Instrument> instruments)
+	{
+		NodeList nportfolios = ebusinessunit.getElementsByTagName("portfolio");
+		for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
+		{
+			Element eportfolio = (Element) nportfolios.item(ipf);
+			if (((Node) eportfolio).getNodeType() != Node.ELEMENT_NODE)
+				continue;
+
+			getBooks(eportfolio, books, instruments);
+
+			portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));
+		}
+	}
+	
+	private static void getBooks(Element eportfolio, ArrayList<Book> books, ArrayList<Instrument> instruments)
+	{
+		// Get books
+		NodeList nbooks = eportfolio.getElementsByTagName("book");
+		for (int ibook = 0; ibook < nbooks.getLength(); ibook++)
+		{
+			Element ebook = (Element) nbooks.item(ibook);
+			if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
+				continue;
+					
+			ArrayList<Currency>		bcurrencies = new ArrayList<Currency>();
+			ArrayList<Instrument>	binstruments = new ArrayList<Instrument>();
+
+			// Get filters
+			getFilters(ebook, binstruments, bcurrencies, instruments);
+							
+			books.add(new Book(ebook.getAttribute("name"), bcurrencies, binstruments));
+		}
+	}
+	
+	private static void getInstruments(Element ebusinessunit, ArrayList<Instrument> instruments)
+	{
+		NodeList ninstruments = ebusinessunit.getElementsByTagName("instrument");
+		for (int iins = 0; iins < ninstruments.getLength(); iins++)
+		{
+			Element eins = (Element) ninstruments.item(iins);
+			if (((Node) eins).getNodeType() != Node.ELEMENT_NODE)
+				continue; 
+
+			// Manage all instrument (Only equity for now)
+			if (eins.getAttribute("name").equalsIgnoreCase("equity"))
+			{
+				Equity equity = new Equity();
+				equity.name = "equity";
+				equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+				equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
+				equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+				equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
+				equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+				instruments.add(equity);
+			}
+			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
+			{
+				Equity loandepo = new Equity();
+				loandepo.name = "loandepo";
+//				loandepo.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+//				loandepo.partSell = Integer.parseInt(getContent(eins, "partSell"));
+//				loandepo.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+//				loandepo.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
+//				loandepo.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+				instruments.add(loandepo);
+			}
+		}
+	}
+	
+	private static void crossReferences()
+	{
+		for (Businessunit bu : Generals.getInstance().bu)
+		{
+			// Set Ref BU/PORT for Books
+			for (Portfolio pt : bu.lpor)
+			{
+				pt.bu = bu;
+
+				for (Book b : pt.lb)
+					b.pt = pt;
+			}
 		}
 	}
 
