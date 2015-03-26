@@ -8,9 +8,9 @@
       <workflow>
 	<output>
 	  <format>CSV</format>
-	  <path>trades.xml</path>
+	  <path>trades</path>
 	  <instrument>all</instrument>
-	  <isStp>0</isStp>
+	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
       </workflow>

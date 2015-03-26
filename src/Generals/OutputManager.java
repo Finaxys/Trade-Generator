@@ -22,7 +22,7 @@ public class OutputManager {
 			for (Businessunit bu : Generals.getInstance().bu)
 				for (Output output : bu.lop)
 				{
-					writer = new PrintWriter(output.path, "UTF-8");
+					writer = new PrintWriter(output.path + "." + output.format.toString().toLowerCase(), "UTF-8");
 					
 					outputByFormat(output);
 
@@ -105,8 +105,7 @@ public class OutputManager {
 	public void outputTrade(Output output, TradeEvent trade)
 	{
 		try {
-			//System.out.println("X");
-			writer = new PrintWriter(Integer.toString(trade.date) + "-" + trade.id + output.path, "UTF-8");
+			writer = new PrintWriter(Integer.toString(trade.date) + "-" + trade.id + output.path + "." + output.format.toString().toLowerCase(), "UTF-8");
 			writeTrade(output, trade);
 			writer.close();
 		} catch (FileNotFoundException e1) {
