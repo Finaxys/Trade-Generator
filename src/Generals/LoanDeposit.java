@@ -22,7 +22,6 @@ public int tolerance_taux_var;
 public int part_taux_variable;
 public int durée;
 BaseCalcul basecalcul;
-public Boolean is_stp;
 private Class Locality;
 
 public LoanDeposit(String devise, int partloan, int owncountry, int volumetry,
@@ -39,7 +38,6 @@ public LoanDeposit(String devise, int partloan, int owncountry, int volumetry,
 	this.valeur_taux = valeur_taux;
 	this.tolerance_taux_var = tolerance_taux_var;
 	this.part_taux_variable = part_taux_variable;
-	this.is_stp = is_stp;
 }
 
 @Override

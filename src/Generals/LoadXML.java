@@ -179,11 +179,11 @@ public class LoadXML
 					{
 						Equity loandepo = new Equity();
 						loandepo.name = "loandepo";
-						loandepo.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-						loandepo.partSell = Integer.parseInt(getContent(eins, "partSell"));
-						loandepo.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-						loandepo.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-						loandepo.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+//						loandepo.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+//						loandepo.partSell = Integer.parseInt(getContent(eins, "partSell"));
+//						loandepo.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+//						loandepo.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
+//						loandepo.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
 						instruments.add(loandepo);
 					}
 				}
@@ -226,7 +226,7 @@ public class LoadXML
 							{
 								for (String str : vfilter)
 									for (Currency cur : _ref.Currencies)
-										if (str.equals(cur.name))
+										if (str.equalsIgnoreCase(cur.code))
 											bcurrencies.add(cur);
 							}
 						}

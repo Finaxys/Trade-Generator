@@ -23,11 +23,14 @@
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
-	  <toleranceRep>2</toleranceRep> 
-	  <partSell>20</partSell> 
-	  <ownCountry>20</ownCountry> 
-	  <volumetry>1000</volumetry> 
+	  <partLoan>50</partLoan> 
+	  <ownCountry>40</ownCountry> 
+	  <volumetry>100</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
+	  <repartitionTolerance>2</repartitionTolerance> 
+	  <rateValue>20</rateValue> 
+	  <rateValueTolerance>2</rateValueTolerance> 
+	  <partRateVariable>2</partRateVariable> 
 	</instrument>
       </instruments>
       <portfolios>
