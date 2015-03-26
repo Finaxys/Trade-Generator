@@ -9,15 +9,26 @@ import java.util.Random;
 public abstract class Instrument
 {
 	String 				name;
-	Output				output;
 
 	public void  generate (Book b, int montant,int date){}
 	
+	static public Output getOutputFromTrade(TradeEvent trade)
+	{
+		for (Output op : trade.book.pt.bu.lop)
+			if (op.instruments.contains(trade.instrument))
+				return (op);
+
+		return (null);
+	}
+	
 	public void tradeGenerated(TradeEvent trade)
 	{
-		if (trade.instrument.output.isStp)
-			OutputManager.getInstance().outputTrade(trade);
-		trade.instrument.output.addTradeEvent(trade);
+		Output	output = getOutputFromTrade(trade);
+
+		if (output.isStp)
+			OutputManager.getInstance().outputTrade(output, trade);
+		else
+			output.addTradeEvent(trade);
 	}
 
 	public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio, Class<T> e)

@@ -25,7 +25,7 @@ public class OutputManager {
 					writer = new PrintWriter(output.path, "UTF-8");
 
 					for (TradeEvent trade : output.te)
-						writeTrade(trade);
+						writeTrade(output, trade);
 
 					writer.close();
 					
@@ -38,12 +38,12 @@ public class OutputManager {
 		}
 	}
 	
-	public void outputTrade(TradeEvent trade)
+	public void outputTrade(Output output, TradeEvent trade)
 	{
 		try {
-			writer = new PrintWriter(trade.instrument.output.path, "UTF-8");
+			writer = new PrintWriter(output.path, "UTF-8");
 
-			writeTrade(trade);
+			writeTrade(output, trade);
 
 			writer.close();
 		} catch (FileNotFoundException e1) {
@@ -53,16 +53,16 @@ public class OutputManager {
 		}
 	}
 
-	private void writeTrade(TradeEvent trade)
+	private void writeTrade(Output output, TradeEvent trade)
 	{
-		if (trade.instrument.output.format.equals(Output.OutputFormat.XML))
+		if (output.format.equals(Output.OutputFormat.XML))
 		{
 			writer.write("<trade>" + System.lineSeparator());
 			for (TradeEvent.Node node : trade.getNodes())
 				writeXMLNode(node);
 			writer.write("</trade>" + System.lineSeparator());
 		}
-		else if (trade.instrument.output.format.equals(Output.OutputFormat.CSV))
+		else if (output.format.equals(Output.OutputFormat.CSV))
 		{
 
 		}

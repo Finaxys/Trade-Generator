@@ -285,10 +285,6 @@ public class LoadXML
 				for (Book b : pt.lb)
 					b.pt = pt;
 			}
-			// Set ref output into instrument
-			for (Output output : bu.lop)
-				for (Instrument ins : output.instruments)
-					ins.output = output;
 		}
 	}
 
