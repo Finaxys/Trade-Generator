@@ -33,6 +33,7 @@ class Referential
 	{
         List<T> subT = null;
         Iterator itr = list.iterator();
+        System.out.println("a");
         while(itr.hasNext()) 
         {
         	try {
