@@ -18,7 +18,7 @@
 	<instrument name="equity">
 	  <toleranceRep>2</toleranceRep> 
 	  <partSell>20</partSell> 
-	  <xownCountry>20</xownCountry> 
+	  <ownCountry>20</ownCountry> 
 	  <volumetry>10</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>

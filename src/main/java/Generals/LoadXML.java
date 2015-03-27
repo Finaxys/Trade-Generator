@@ -22,14 +22,22 @@ public class LoadXML
 	{
 		public void init(Referential ref);
 
-		public void execute(Referential ref, Element elem);
+		public void execute(Referential ref, Element elem) throws CustomParsingException;
 	}
 
 	private static Referential _ref;
 
-	static public String getContent(Element elem, String name)
+	static public String getContent(Element elem, String name) throws CustomParsingException
 	{
-		return (elem.getElementsByTagName(name).item(0).getTextContent());
+		String content;
+		try
+		{
+			content = elem.getElementsByTagName(name).item(0).getTextContent();
+		} catch (Exception e)
+		{
+			throw new CustomParsingException("Name tag invalid: " + name, true);
+		}
+		return (content);
 	}
 
 	static public void init(Referential ref) throws CustomParsingException
@@ -44,7 +52,7 @@ public class LoadXML
 				ref.Counterparts = new ArrayList<Referential.Counterpart>();
 			}
 
-			public void execute(Referential ref, Element eElement)
+			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Counterpart counterpart = ref.new Counterpart();
 				counterpart.code = getContent(eElement, "code");
@@ -60,7 +68,7 @@ public class LoadXML
 				ref.Products = new ArrayList<Referential.Product>();
 			}
 
-			public void execute(Referential ref, Element eElement)
+			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Product product = ref.new Product();
 				product.name = getContent(eElement, "type");
@@ -80,7 +88,7 @@ public class LoadXML
 				ref.Depositaries = new ArrayList<Referential.Depositary>();
 			}
 
-			public void execute(Referential ref, Element eElement)
+			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Depositary depositary = ref.new Depositary();
 				depositary.code = getContent(eElement, "code");
@@ -96,7 +104,7 @@ public class LoadXML
 				ref.Portfolios = new ArrayList<Referential.Portfolio>();
 			}
 
-			public void execute(Referential ref, Element eElement)
+			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Portfolio portfolio = ref.new Portfolio();
 				portfolio.codeptf = getContent(eElement, "codeptf");
@@ -297,7 +305,7 @@ public class LoadXML
 	}
 
 	private static void getOutputs(Element ebusinessunit, Element esetting,
-			ArrayList<Output> outputs, ArrayList<Instrument> instruments)
+			ArrayList<Output> outputs, ArrayList<Instrument> instruments) throws CustomParsingException
 	{
 		NodeList noutputs = ebusinessunit.getElementsByTagName("output");
 		for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
@@ -371,7 +379,7 @@ public class LoadXML
 	}
 
 	private static void getInstruments(Element ebusinessunit,
-			ArrayList<Instrument> instruments)
+			ArrayList<Instrument> instruments) throws CustomParsingException
 	{
 		NodeList ninstruments = ebusinessunit
 				.getElementsByTagName("instrument");
@@ -386,16 +394,11 @@ public class LoadXML
 			{
 				Equity equity = new Equity();
 				equity.name = "equity";
-				equity.ownCountry = Integer.parseInt(getContent(eins,
-						"ownCountry"));
-				equity.partSell = Integer
-						.parseInt(getContent(eins, "partSell"));
-				equity.repartitionTolerance = Integer.parseInt(getContent(eins,
-						"toleranceRep"));
-				equity.volumetry = Integer.parseInt(getContent(eins,
-						"volumetry"));
-				equity.volumetryTolerance = Integer.parseInt(getContent(eins,
-						"volumetryTolerance"));
+				equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
+				equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
+				equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
+				equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
+				equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
 				instruments.add(equity);
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
