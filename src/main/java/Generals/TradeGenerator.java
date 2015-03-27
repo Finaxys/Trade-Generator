@@ -11,7 +11,20 @@ public class TradeGenerator
 		Referential ref = Referential.getInstance();
 		Generals gen = Generals.getInstance();
 
-		LoadXML.init(ref);
+		try
+		{
+			LoadXML.init(ref);
+		} catch (CustomParsingException e)
+		{
+			System.out.println("Problem while parsing informations :");
+			System.out.println(e.getMessage());
+			if (e.aborting())
+			{
+				System.out.println("Aborting program");
+				System.exit(-1);
+			}
+			System.out.println("Problem handled. Continuing operation. Fix it next time.");
+		}
 
 		int simulate_days = Integer.parseInt(args[0]);
 		int amount_per_book;
