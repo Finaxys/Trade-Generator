@@ -106,7 +106,13 @@ public class LoadXML
 			}
 		});
 
-		loadTraders();
+		try
+		{
+			loadTraders();
+		} catch (Exception e)
+		{
+			throw new CustomParsingException("Traders :" + e.getMessage(), true);
+		}
 		loadGeneralSettings();
 	}
 
@@ -115,7 +121,7 @@ public class LoadXML
 	{
 		try
 		{
-			File fXmlFile = new File("xreferential/" + filename);
+			File fXmlFile = new File("referential/" + filename);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -145,7 +151,7 @@ public class LoadXML
 		}
 	}
 
-	static public void loadGeneralSettings()
+	static public void loadGeneralSettings() throws CustomParsingException
 	{
 		try
 		{
@@ -196,17 +202,15 @@ public class LoadXML
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			throw new CustomParsingException("Settings : " + e.getMessage(), true);
 		}
 
 		// Add cross references
 		crossReferences();
 	}
 
-	static public void loadTraders()
+	static public void loadTraders() throws Exception
 	{
-		try
-		{
 			ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
 			ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
 			ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
@@ -261,11 +265,6 @@ public class LoadXML
 								.getAttribute("country")));
 				_ref.Currencies = currencies;
 			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	private static void getFilters(Element ebook,
