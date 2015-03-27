@@ -1,22 +1,14 @@
 package Generals;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-
 
 public class TradeGenerator
-{	
+{
 	public static void main(String[] args)
 	{
 		long startTime = System.currentTimeMillis();
 
-		Referential ref = Referential.getInstance();	
+		Referential ref = Referential.getInstance();
 		Generals gen = Generals.getInstance();
 
 		LoadXML.init(ref);
@@ -28,26 +20,27 @@ public class TradeGenerator
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
-				for (Portfolio port :  bu.lpor)
+				for (Portfolio port : bu.lpor)
 					for (Book b : port.lb)
 					{
-						if (b.ins.size() > 0  && b.ins.get(0).name.equalsIgnoreCase("equity"))
+						if (b.ins.size() > 0
+								&& b.ins.get(0).name.equalsIgnoreCase("equity"))
 						{
 							Instrument t = b.ins.get(0);
 							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
 
 							t.generate(b, amount_per_book, j);
-						}  
+						}
 					}
 
 			OutputManager.getInstance().outputTrades();
 		}
-		
+
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
-	}	
-	
+	}
+
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
 	{
 		// Check if there is nodes inside node -> recursion
@@ -60,6 +53,7 @@ public class TradeGenerator
 		}
 		// Only simple node -> print it
 		else
-			writer.write("<" + node.name + ">" + node.value + "</" + node.name + ">" + System.lineSeparator());
+			writer.write("<" + node.name + ">" + node.value + "</" + node.name
+					+ ">" + System.lineSeparator());
 	}
 }

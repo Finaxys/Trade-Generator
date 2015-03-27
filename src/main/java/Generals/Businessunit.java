@@ -1,7 +1,6 @@
 package Generals;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Businessunit
 {
@@ -9,10 +8,10 @@ public class Businessunit
 	public int ratio;
 	public ArrayList<Instrument> lins;
 	public ArrayList<Portfolio> lpor;
-	public ArrayList<Output>	lop;
+	public ArrayList<Output> lop;
 
 	public Instrument getInstrument(String ins_str)
-	{    
+	{
 		for (Instrument ins : lins)
 		{
 			if (ins.name.equalsIgnoreCase(ins_str))
@@ -22,7 +21,8 @@ public class Businessunit
 		return (null);
 	}
 
-	public Businessunit(String name, int ratio, ArrayList<Output> lop, ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
+	public Businessunit(String name, int ratio, ArrayList<Output> lop,
+			ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
 	{
 		super();
 		this.name = name;
@@ -32,4 +32,3 @@ public class Businessunit
 		this.lop = lop;
 	}
 }
-

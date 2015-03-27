@@ -2,7 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 
-public class TradeEquity extends TradeEvent 
+public class TradeEquity extends TradeEvent
 {
 	int date;
 	float prix;
@@ -13,9 +13,11 @@ public class TradeEquity extends TradeEvent
 	Referential.Trader trader;
 	Referential.Product product;
 
-	public TradeEquity(Instrument instrument, Book book, int date, Way way, float prix, int quantity,
-			Referential.Depositary d1, Referential.Counterpart c1, Referential.Trader tr1, Referential.Product pro1,
-			Referential.Currency cur1, Referential.Portfolio port1) 
+	public TradeEquity(Instrument instrument, Book book, int date, Way way,
+			float prix, int quantity, Referential.Depositary d1,
+			Referential.Counterpart c1, Referential.Trader tr1,
+			Referential.Product pro1, Referential.Currency cur1,
+			Referential.Portfolio port1)
 	{
 		super(book, date);
 		this.way = way;
@@ -31,7 +33,8 @@ public class TradeEquity extends TradeEvent
 	}
 
 	@Override
-	public ArrayList<Node> getNodes() {
+	public ArrayList<Node> getNodes()
+	{
 		nodes = new ArrayList<Node>();
 
 		addNode(nodes, "business", book.pt.bu.name, null);

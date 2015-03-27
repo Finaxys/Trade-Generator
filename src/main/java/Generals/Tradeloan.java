@@ -26,25 +26,27 @@ import Generals.Referential.Currency;
 import Generals.Referential.Depositary;
 import Generals.Referential.Trader;
 
-public class Tradeloan extends TradeEvent {
+public class Tradeloan extends TradeEvent
+{
 	public int amount;
-    Referential.Depositary depositary;
+	Referential.Depositary depositary;
 	Referential.Counterpart counterpart;
 	Way way;
 	Typetaux rate;
 	Referential.Trader trader;
-	Referential.Currency currency;	
+	Referential.Currency currency;
 	public float rateValue;
 	public Term term;
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
-	
-	public Tradeloan(Instrument instrument, Book book, int date, int montant,Way way, Typetaux rate, Depositary depositary,
-			Counterpart counterpart, Trader trader,
-			Currency currency, float rateValue, Term term,
-			BaseCalcul basecalcul) {
+
+	public Tradeloan(Instrument instrument, Book book, int date, int montant,
+			Way way, Typetaux rate, Depositary depositary,
+			Counterpart counterpart, Trader trader, Currency currency,
+			float rateValue, Term term, BaseCalcul basecalcul)
+	{
 		super(book, date);
-		this.amount=montant;
+		this.amount = montant;
 		this.depositary = depositary;
 		this.counterpart = counterpart;
 		this.way = way;
@@ -57,9 +59,10 @@ public class Tradeloan extends TradeEvent {
 		this.instrument = instrument;
 	}
 
-		@Override
-		public ArrayList<Node> getNodes() {
-			// TODO Auto-generated method stub
+	@Override
+	public ArrayList<Node> getNodes()
+	{
+		// TODO Auto-generated method stub
 		nodes = new ArrayList<Node>();
 
 		addNode(nodes, "business", book.pt.bu.name, null);
@@ -77,5 +80,5 @@ public class Tradeloan extends TradeEvent {
 		addNode(nodes, "term", term.name(), null);
 		addNode(nodes, "basecalcul", basecalcul.name(), null);
 		return (nodes);
-		}
 	}
+}

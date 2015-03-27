@@ -1,6 +1,5 @@
 package Generals;
 
-
 class GeneralSettings
 {
 	public String bankSystem;

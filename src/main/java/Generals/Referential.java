@@ -13,68 +13,78 @@ class Referential
 	public List<Instrument> Instruments;
 	public List<Trader> Traders;
 	public List<Portfolio> Portfolios;
-	
-	private Referential(){}
-	
+
+	private Referential()
+	{
+	}
+
 	private static Referential INSTANCE = new Referential();
-	
+
 	public static Referential getInstance()
 	{
 		return INSTANCE;
 	}
-	
+
 	public <T> T getRandomElement(List<T> list)
 	{
-        Random randomGenerator = new Random();
-        return (list.get(randomGenerator.nextInt(list.size())));
-	}
-	
-	public <T> List<T> subList(List<T> list,String field,String filter)
-	{
-        List<T> subT = null;
-        Iterator itr = list.iterator();
-        System.out.println("a");
-        while(itr.hasNext()) 
-        {
-        	try {
-				if(itr.getClass().getField(field).equals(filter))
-					subT.add((T) itr);
-				
-				} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				}
-        	
-        }
-    return (subT);
-	}
-	
-	
-	public <T> List<T> exList(List<T> list,String field,String filter)
-	{
-        List<T> subT = null;
-        Iterator itr = list.iterator();
-        while(itr.hasNext()) 
-        {
-        	try {
-				if(!itr.getClass().getField(field).equals(filter))
-					subT.add((T) itr);
-				
-				} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				}
-        	
-        		}
-        return (subT);
+		Random randomGenerator = new Random();
+		return (list.get(randomGenerator.nextInt(list.size())));
 	}
 
+	public <T> List<T> subList(List<T> list, String field, String filter)
+	{
+		List<T> subT = null;
+		Iterator itr = list.iterator();
+		System.out.println("a");
+		while (itr.hasNext())
+		{
+			try
+			{
+				if (itr.getClass().getField(field).equals(filter))
+					subT.add((T) itr);
+
+			}
+			catch (NoSuchFieldException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return (subT);
+	}
+
+	public <T> List<T> exList(List<T> list, String field, String filter)
+	{
+		List<T> subT = null;
+		Iterator itr = list.iterator();
+		while (itr.hasNext())
+		{
+			try
+			{
+				if (!itr.getClass().getField(field).equals(filter))
+					subT.add((T) itr);
+
+			}
+			catch (NoSuchFieldException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return (subT);
+	}
 
 	public class Counterpart
 	{
@@ -87,8 +97,11 @@ class Referential
 		public String code;
 		public String name;
 		public String country;
-		
-		public Currency(){}
+
+		public Currency()
+		{
+		}
+
 		public Currency(String code, String name, String country)
 		{
 			this.code = code;
@@ -116,9 +129,12 @@ class Referential
 	public class Instrument
 	{
 		public String name;
-		
-		public Instrument(){}
-		public Instrument (String name)
+
+		public Instrument()
+		{
+		}
+
+		public Instrument(String name)
 		{
 			this.name = name;
 		}
@@ -128,8 +144,8 @@ class Referential
 	{
 		public String name;
 		public String codeptf;
-		
-		public Trader (String name, String codeptf)
+
+		public Trader(String name, String codeptf)
 		{
 			this.name = name;
 			this.codeptf = codeptf;
@@ -143,5 +159,3 @@ class Referential
 		public String codeptf;
 	}
 }
-
-	

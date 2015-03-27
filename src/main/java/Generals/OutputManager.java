@@ -5,38 +5,47 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class OutputManager {
-	static private OutputManager 	instance = new OutputManager();
-	static private PrintWriter		writer;
-	
-	private OutputManager() {}
+public class OutputManager
+{
+	static private OutputManager instance = new OutputManager();
+	static private PrintWriter writer;
+
+	private OutputManager()
+	{
+	}
 
 	static public OutputManager getInstance()
 	{
 		return (instance);
 	}
-	
+
 	public void outputTrades()
 	{
-		try {
+		try
+		{
 			for (Businessunit bu : Generals.getInstance().bu)
 				for (Output output : bu.lop)
 				{
-					writer = new PrintWriter(output.path + "." + output.format.toString().toLowerCase(), "UTF-8");
-					
+					writer = new PrintWriter(output.path + "."
+							+ output.format.toString().toLowerCase(), "UTF-8");
+
 					outputByFormat(output);
 
 					writer.close();
-					
+
 					output.te.clear();
 				}
-		} catch (FileNotFoundException e1) {
+		}
+		catch (FileNotFoundException e1)
+		{
 			e1.printStackTrace();
-		} catch (UnsupportedEncodingException e1) {
+		}
+		catch (UnsupportedEncodingException e1)
+		{
 			e1.printStackTrace();
 		}
 	}
-	
+
 	private void outputByFormat(Output output)
 	{
 		if (output.format == Output.OutputFormat.XML)
@@ -50,8 +59,8 @@ public class OutputManager {
 	{
 		for (Instrument ins : output.instruments)
 		{
-			ArrayList<TradeEvent>	te_remaining = new ArrayList<TradeEvent>();
-			boolean					first = true;
+			ArrayList<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
+			boolean first = true;
 
 			for (TradeEvent trade : output.te)
 			{
@@ -81,15 +90,15 @@ public class OutputManager {
 			first = true;
 		}
 	}
-	
-	private  void writeXMLTrade(TradeEvent trade)
+
+	private void writeXMLTrade(TradeEvent trade)
 	{
 		writer.write("<trade>" + System.lineSeparator());
 		for (TradeEvent.Node node : trade.getNodes())
 			writeXMLNode(node);
 		writer.write("</trade>" + System.lineSeparator());
 	}
-	
+
 	private void writeCSVTrade(TradeEvent trade)
 	{
 		ArrayList<TradeEvent.Node> nodes = trade.getNodes();
@@ -104,13 +113,20 @@ public class OutputManager {
 
 	public void outputTrade(Output output, TradeEvent trade)
 	{
-		try {
-			writer = new PrintWriter(Integer.toString(trade.date) + "-" + trade.id + output.path + "." + output.format.toString().toLowerCase(), "UTF-8");
+		try
+		{
+			writer = new PrintWriter(Integer.toString(trade.date) + "-"
+					+ trade.id + output.path + "."
+					+ output.format.toString().toLowerCase(), "UTF-8");
 			writeTrade(output, trade);
 			writer.close();
-		} catch (FileNotFoundException e1) {
+		}
+		catch (FileNotFoundException e1)
+		{
 			e1.printStackTrace();
-		} catch (UnsupportedEncodingException e1) {
+		}
+		catch (UnsupportedEncodingException e1)
+		{
 			e1.printStackTrace();
 		}
 	}
@@ -122,7 +138,7 @@ public class OutputManager {
 		else if (output.format.equals(Output.OutputFormat.CSV))
 			writeCSVTrade(trade);
 	}
-		
+
 	private void writeXMLNode(TradeEvent.Node node)
 	{
 		// Check if there is nodes inside node -> recursion
@@ -135,6 +151,7 @@ public class OutputManager {
 		}
 		// Only simple node -> print it
 		else
-			writer.write("<" + node.name + ">" + node.value + "</" + node.name + ">" + System.lineSeparator());
+			writer.write("<" + node.name + ">" + node.value + "</" + node.name
+					+ ">" + System.lineSeparator());
 	}
 }

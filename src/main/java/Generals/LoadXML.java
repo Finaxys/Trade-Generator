@@ -17,8 +17,10 @@ import Generals.Referential.Currency;
 
 public class LoadXML
 {
-	interface CbReferential {
+	interface CbReferential
+	{
 		public void init(Referential ref);
+
 		public void execute(Referential ref, Element elem);
 	}
 
@@ -34,59 +36,71 @@ public class LoadXML
 		_ref = ref;
 
 		// Load Static Informations
-		loadReferential("counterparts.xml", "counterpart", new CbReferential() {
-			public void init(Referential ref) {
+		loadReferential("counterparts.xml", "counterpart", new CbReferential()
+		{
+			public void init(Referential ref)
+			{
 				ref.Counterparts = new ArrayList<Referential.Counterpart>();
 			}
 
-			public void execute(Referential ref, Element eElement) {
+			public void execute(Referential ref, Element eElement)
+			{
 				Referential.Counterpart counterpart = ref.new Counterpart();
-				counterpart.code =  getContent(eElement, "code");
-				counterpart.name =  getContent(eElement, "name");
+				counterpart.code = getContent(eElement, "code");
+				counterpart.name = getContent(eElement, "name");
 				ref.Counterparts.add(counterpart);
 			}
 		});
 
-		loadReferential("products.xml", "product", new CbReferential() {
-			public void init(Referential ref) {
+		loadReferential("products.xml", "product", new CbReferential()
+		{
+			public void init(Referential ref)
+			{
 				ref.Products = new ArrayList<Referential.Product>();
 			}
 
-			public void execute(Referential ref, Element eElement) {
+			public void execute(Referential ref, Element eElement)
+			{
 				Referential.Product product = ref.new Product();
-				product.name =  getContent(eElement, "type");
-				product.type =  getContent(eElement, "type");
-				product.isin =  getContent(eElement, "isin");
-				product.libelle =  getContent(eElement, "libelle");
-				product.country =  getContent(eElement, "country");
-				product.price =  Float.parseFloat(getContent(eElement, "price"));
+				product.name = getContent(eElement, "type");
+				product.type = getContent(eElement, "type");
+				product.isin = getContent(eElement, "isin");
+				product.libelle = getContent(eElement, "libelle");
+				product.country = getContent(eElement, "country");
+				product.price = Float.parseFloat(getContent(eElement, "price"));
 				ref.Products.add(product);
 			}
 		});
 
-		loadReferential("depositaries.xml", "depositary", new CbReferential() {
-			public void init(Referential ref) {
+		loadReferential("depositaries.xml", "depositary", new CbReferential()
+		{
+			public void init(Referential ref)
+			{
 				ref.Depositaries = new ArrayList<Referential.Depositary>();
 			}
 
-			public void execute(Referential ref, Element eElement) {
+			public void execute(Referential ref, Element eElement)
+			{
 				Referential.Depositary depositary = ref.new Depositary();
-				depositary.code =  getContent(eElement, "code");
-				depositary.libelle =  getContent(eElement, "libelle");
+				depositary.code = getContent(eElement, "code");
+				depositary.libelle = getContent(eElement, "libelle");
 				ref.Depositaries.add(depositary);
 			}
 		});
 
-		loadReferential("portfolios.xml", "portfolio", new CbReferential() {
-			public void init(Referential ref) {
+		loadReferential("portfolios.xml", "portfolio", new CbReferential()
+		{
+			public void init(Referential ref)
+			{
 				ref.Portfolios = new ArrayList<Referential.Portfolio>();
 			}
 
-			public void execute(Referential ref, Element eElement) {
+			public void execute(Referential ref, Element eElement)
+			{
 				Referential.Portfolio portfolio = ref.new Portfolio();
 				portfolio.codeptf = getContent(eElement, "codeptf");
 				portfolio.country = getContent(eElement, "country");
-				portfolio.type =  getContent(eElement, "type");
+				portfolio.type = getContent(eElement, "type");
 				ref.Portfolios.add(portfolio);
 			}
 		});
@@ -95,12 +109,14 @@ public class LoadXML
 		loadGeneralSettings();
 	}
 
-	static public void loadReferential(String filename, String elem, CbReferential cb)
+	static public void loadReferential(String filename, String elem,
+			CbReferential cb)
 	{
 		try
 		{
 			File fXmlFile = new File("referential/" + filename);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 
@@ -121,7 +137,9 @@ public class LoadXML
 					cb.execute(_ref, eElement);
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -131,7 +149,8 @@ public class LoadXML
 		try
 		{
 			File fXmlFile = new File("params/generalinfs.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
@@ -141,15 +160,15 @@ public class LoadXML
 			Element esetting = (Element) settings.item(0);
 
 			// Get businessunits
-			ArrayList<Businessunit>	businessunits = new ArrayList<Businessunit>();
+			ArrayList<Businessunit> businessunits = new ArrayList<Businessunit>();
 			NodeList nbusinessunits = doc.getElementsByTagName("businessUnit");
 			for (int ibu = 0; ibu < nbusinessunits.getLength(); ibu++)
 			{
-				ArrayList<Instrument>	instruments = new ArrayList<Instrument>();
-				ArrayList<Portfolio>	portfolios = new ArrayList<Portfolio>();
-				ArrayList<Book>			books = new ArrayList<Book>();
-				ArrayList<Output>		outputs = new ArrayList<Output>();
-			
+				ArrayList<Instrument> instruments = new ArrayList<Instrument>();
+				ArrayList<Portfolio> portfolios = new ArrayList<Portfolio>();
+				ArrayList<Book> books = new ArrayList<Book>();
+				ArrayList<Output> outputs = new ArrayList<Output>();
+
 				Element ebusinessunit = (Element) nbusinessunits.item(ibu);
 
 				if (((Node) ebusinessunit).getNodeType() != Node.ELEMENT_NODE)
@@ -159,19 +178,26 @@ public class LoadXML
 				getInstruments(ebusinessunit, instruments);
 
 				// Get portfolios
-				getPortfolios( ebusinessunit, portfolios, books, instruments);
+				getPortfolios(ebusinessunit, portfolios, books, instruments);
 
 				// Get outputs
 				getOutputs(ebusinessunit, esetting, outputs, instruments);
 
-				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit.getAttribute("ratio")), outputs, instruments, portfolios));
+				businessunits.add(new Businessunit(ebusinessunit
+						.getAttribute("name"), Integer.parseInt(ebusinessunit
+						.getAttribute("ratio")), outputs, instruments,
+						portfolios));
 			}
 
-			Generals.getInstance().init(getContent(esetting, "name"), Integer.parseInt(getContent(esetting, "budget")), getContent(esetting, "ownCountry"), businessunits);
-		} catch (Exception e) {
+			Generals.getInstance().init(getContent(esetting, "name"),
+					Integer.parseInt(getContent(esetting, "budget")),
+					getContent(esetting, "ownCountry"), businessunits);
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
-		
+
 		// Add cross references
 		crossReferences();
 	}
@@ -185,7 +211,8 @@ public class LoadXML
 			ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
 
 			File fXmlFile = new File("referential/traders.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
@@ -199,7 +226,8 @@ public class LoadXML
 					continue;
 
 				// Get instruments
-				NodeList ninstruments = ecurrency.getElementsByTagName("instrument");
+				NodeList ninstruments = ecurrency
+						.getElementsByTagName("instrument");
 				for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++)
 				{
 					Element einstrument = (Element) ninstruments.item(iinstru);
@@ -207,38 +235,50 @@ public class LoadXML
 						continue;
 
 					// Get traders
-					NodeList ntraders = einstrument.getElementsByTagName("trader");
+					NodeList ntraders = einstrument
+							.getElementsByTagName("trader");
 					for (int itrader = 0; itrader < ntraders.getLength(); itrader++)
 					{
 						Element etrader = (Element) ntraders.item(itrader);
 						if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
 							continue;
 
-						traders.add(new Referential.Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
+						traders.add(new Referential.Trader(etrader
+								.getAttribute("name"), etrader
+								.getAttribute("codeptf")));
 						_ref.Traders = traders;
 					}
 
-					instruments.add(_ref.new Instrument(einstrument.getAttribute("name")));
+					instruments.add(_ref.new Instrument(einstrument
+							.getAttribute("name")));
 					_ref.Instruments = instruments;
 				}
 
-				currencies.add(_ref.new Currency(ecurrency.getAttribute("code"), ecurrency.getAttribute("name"), ecurrency.getAttribute("country")));
+				currencies.add(_ref.new Currency(
+						ecurrency.getAttribute("code"), ecurrency
+								.getAttribute("name"), ecurrency
+								.getAttribute("country")));
 				_ref.Currencies = currencies;
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
-	
-	private static void getFilters(Element ebook, ArrayList<Instrument> binstruments, ArrayList<Currency> bcurrencies, ArrayList<Instrument> instruments)
+
+	private static void getFilters(Element ebook,
+			ArrayList<Instrument> binstruments,
+			ArrayList<Currency> bcurrencies, ArrayList<Instrument> instruments)
 	{
 		NodeList nfilters = ebook.getElementsByTagName("filter");
 		for (int ifilter = 0; ifilter < nfilters.getLength(); ifilter++)
 		{
 			Element efilter = (Element) nfilters.item(ifilter);
-			
-			List<String> vfilter = Arrays.asList(efilter.getAttribute("value").split("\\s*,\\s*"));
-			
+
+			List<String> vfilter = Arrays.asList(efilter.getAttribute("value")
+					.split("\\s*,\\s*"));
+
 			if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
 			{
 				for (String str : vfilter)
@@ -255,8 +295,9 @@ public class LoadXML
 			}
 		}
 	}
-	
-	private static void getOutputs(Element ebusinessunit, Element esetting, ArrayList<Output> outputs, ArrayList<Instrument> instruments)
+
+	private static void getOutputs(Element ebusinessunit, Element esetting,
+			ArrayList<Output> outputs, ArrayList<Instrument> instruments)
 	{
 		NodeList noutputs = ebusinessunit.getElementsByTagName("output");
 		for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
@@ -271,8 +312,9 @@ public class LoadXML
 				opins.addAll(instruments);
 			else
 			{
-				ArrayList<String> sins = new ArrayList<String>(Arrays.asList(sinst.split("\\s*,\\s*")));
-				
+				ArrayList<String> sins = new ArrayList<String>(
+						Arrays.asList(sinst.split("\\s*,\\s*")));
+
 				// Get Instrument ref for each output
 				for (String str : sins)
 					for (Instrument inst : instruments)
@@ -282,11 +324,15 @@ public class LoadXML
 							break;
 						}
 			}
-			outputs.add(new Output(getContent(esetting, "format"), getContent(eoutput, "path"), opins, Boolean.parseBoolean(getContent(eoutput, "isStp")), getContent(eoutput, "layer")));
+			outputs.add(new Output(getContent(esetting, "format"), getContent(
+					eoutput, "path"), opins, Boolean.parseBoolean(getContent(
+					eoutput, "isStp")), getContent(eoutput, "layer")));
 		}
 	}
-	
-	private static void getPortfolios(Element ebusinessunit, ArrayList<Portfolio> portfolios, ArrayList<Book> books, ArrayList<Instrument> instruments)
+
+	private static void getPortfolios(Element ebusinessunit,
+			ArrayList<Portfolio> portfolios, ArrayList<Book> books,
+			ArrayList<Instrument> instruments)
 	{
 		NodeList nportfolios = ebusinessunit.getElementsByTagName("portfolio");
 		for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
@@ -297,11 +343,13 @@ public class LoadXML
 
 			getBooks(eportfolio, books, instruments);
 
-			portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));
+			portfolios
+					.add(new Portfolio(eportfolio.getAttribute("name"), books));
 		}
 	}
-	
-	private static void getBooks(Element eportfolio, ArrayList<Book> books, ArrayList<Instrument> instruments)
+
+	private static void getBooks(Element eportfolio, ArrayList<Book> books,
+			ArrayList<Instrument> instruments)
 	{
 		// Get books
 		NodeList nbooks = eportfolio.getElementsByTagName("book");
@@ -310,52 +358,65 @@ public class LoadXML
 			Element ebook = (Element) nbooks.item(ibook);
 			if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
 				continue;
-					
-			ArrayList<Currency>		bcurrencies = new ArrayList<Currency>();
-			ArrayList<Instrument>	binstruments = new ArrayList<Instrument>();
+
+			ArrayList<Currency> bcurrencies = new ArrayList<Currency>();
+			ArrayList<Instrument> binstruments = new ArrayList<Instrument>();
 
 			// Get filters
 			getFilters(ebook, binstruments, bcurrencies, instruments);
-							
-			books.add(new Book(ebook.getAttribute("name"), bcurrencies, binstruments));
+
+			books.add(new Book(ebook.getAttribute("name"), bcurrencies,
+					binstruments));
 		}
 	}
-	
-	private static void getInstruments(Element ebusinessunit, ArrayList<Instrument> instruments)
+
+	private static void getInstruments(Element ebusinessunit,
+			ArrayList<Instrument> instruments)
 	{
-		NodeList ninstruments = ebusinessunit.getElementsByTagName("instrument");
+		NodeList ninstruments = ebusinessunit
+				.getElementsByTagName("instrument");
 		for (int iins = 0; iins < ninstruments.getLength(); iins++)
 		{
 			Element eins = (Element) ninstruments.item(iins);
 			if (((Node) eins).getNodeType() != Node.ELEMENT_NODE)
-				continue; 
+				continue;
 
 			// Manage all instrument (Only equity for now)
 			if (eins.getAttribute("name").equalsIgnoreCase("equity"))
 			{
 				Equity equity = new Equity();
 				equity.name = "equity";
-				equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-				equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
-				equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-				equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-				equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+				equity.ownCountry = Integer.parseInt(getContent(eins,
+						"ownCountry"));
+				equity.partSell = Integer
+						.parseInt(getContent(eins, "partSell"));
+				equity.repartitionTolerance = Integer.parseInt(getContent(eins,
+						"toleranceRep"));
+				equity.volumetry = Integer.parseInt(getContent(eins,
+						"volumetry"));
+				equity.volumetryTolerance = Integer.parseInt(getContent(eins,
+						"volumetryTolerance"));
 				instruments.add(equity);
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
 			{
 				Equity loandepo = new Equity();
 				loandepo.name = "loandepo";
-//				loandepo.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-//				loandepo.partSell = Integer.parseInt(getContent(eins, "partSell"));
-//				loandepo.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-//				loandepo.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-//				loandepo.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+				// loandepo.ownCountry = Integer.parseInt(getContent(eins,
+				// "ownCountry"));
+				// loandepo.partSell = Integer.parseInt(getContent(eins,
+				// "partSell"));
+				// loandepo.repartitionTolerance =
+				// Integer.parseInt(getContent(eins, "toleranceRep"));
+				// loandepo.volumetry = Integer.parseInt(getContent(eins,
+				// "volumetry"));
+				// loandepo.volumetryTolerance =
+				// Integer.parseInt(getContent(eins, "volumetryTolerance"));
 				instruments.add(loandepo);
 			}
 		}
 	}
-	
+
 	private static void crossReferences()
 	{
 		for (Businessunit bu : Generals.getInstance().bu)
