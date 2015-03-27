@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import sun.security.pkcs.ParsingException;
 import Generals.Referential.Currency;
 
 public class LoadXML
@@ -31,7 +32,7 @@ public class LoadXML
 		return (elem.getElementsByTagName(name).item(0).getTextContent());
 	}
 
-	static public void init(Referential ref)
+	static public void init(Referential ref) throws CustomParsingException
 	{
 		_ref = ref;
 
@@ -110,11 +111,11 @@ public class LoadXML
 	}
 
 	static public void loadReferential(String filename, String elem,
-			CbReferential cb)
+			CbReferential cb) throws CustomParsingException
 	{
 		try
 		{
-			File fXmlFile = new File("referential/" + filename);
+			File fXmlFile = new File("xreferential/" + filename);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -140,7 +141,7 @@ public class LoadXML
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			throw new CustomParsingException("Referential : " + e.getMessage(), true);
 		}
 	}
 
