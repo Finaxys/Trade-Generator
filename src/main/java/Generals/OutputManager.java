@@ -1,5 +1,6 @@
 package Generals;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -18,6 +19,17 @@ public class OutputManager
 	{
 		return (instance);
 	}
+	
+	@SuppressWarnings("unused")
+	private PrintWriter getWriter(final String path) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		File check = new File(path);
+
+		if (!check.exists())
+			check.getParentFile().mkdirs();
+		
+		return (new PrintWriter(path, "UTF-8"));
+	}
 
 	public void outputTrades()
 	{
@@ -29,8 +41,7 @@ public class OutputManager
 					String date = "";
 					if (output.te.size() > 0)
 						date = Integer.toString(output.te.get(0).date);
-					writer = new PrintWriter(output.path + "/" + date + "."
-							+ output.format.toString().toLowerCase(), "UTF-8");
+					writer = getWriter(output.path + "/" + date + "."+ output.format.toString().toLowerCase());
 
 					outputByFormat(output);
 
@@ -118,9 +129,9 @@ public class OutputManager
 	{
 		try
 		{
-			writer = new PrintWriter(output.path + "/" + Integer.toString(trade.date) + "-"
+			writer = getWriter(output.path + "/" + Integer.toString(trade.date) + "-"
 					+ trade.id + "."
-					+ output.format.toString().toLowerCase(), "UTF-8");
+					+ output.format.toString().toLowerCase());
 			writeTrade(output, trade);
 			writer.close();
 		}
