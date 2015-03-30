@@ -1,0 +1,70 @@
+<generalSettings>
+  <name>Finaxys Bank</name>
+  <side>BuySide</side>
+  <budget>10000000</budget>
+  <ownCountry>EU</ownCountry>
+  <bussinessUnits>
+    <businessUnit name="ged" ratio="100">
+      <workflow>
+	<output>
+	  <format>CSV</format>
+	  <path>trades</path>
+	  <instrument>all</instrument>
+	  <isStp>false</isStp>
+	  <layer>FS</layer>
+	</output>
+      </workflow>
+      <instruments>	
+	<instrument name="equity">
+	  <toleranceRep>2</toleranceRep> 
+	  <partSell>20</partSell> 
+	  <ownCountry>20</ownCountry> 
+	  <volumetry>10</volumetry> 
+	  <volumetryTolerance>2</volumetryTolerance> 
+	</instrument>
+	<instrument name="loandepo">
+	  <partLoan>50</partLoan> 
+	  <ownCountry>40</ownCountry> 
+	  <volumetry>5</volumetry> 
+	  <volumetryTolerance>2</volumetryTolerance> 
+	  <repartitionTolerance>2</repartitionTolerance> 
+	  <rateValue>20</rateValue> 
+	  <rateValueTolerance>2</rateValueTolerance> 
+	  <partRateVariable>2</partRateVariable> 
+	</instrument>
+      </instruments>
+      <portfolios>
+	<portfolio name="?equity?">
+	  <books>
+	    <book name="bookequityeuro">
+	      <filters>
+		<filter type="instrument" value="equity"/>
+		<filter type="currency" value="EU"/>
+	      </filters>
+	    </book>
+	    <book name="bookfundingeuro">
+	      <filters>
+		<filter type="instrument" value="loandepo"/>
+		<filter type="currency" value="EU,USD"/>
+	      </filters>
+	    </book>
+	    <book name="EQUOTHERS">
+	      <filters>
+		<filter type="instrument" value="OTH"/>
+		<filter type="currency" value="OTH"/>
+	      </filters>
+	    </book>
+	  </books>
+	</portfolio>
+	<portfolio name="?derivative?">
+	  <books>
+	    <book name="bookdervius" currency="USD" instrument="deriv"/>
+	    <book name="bookfundingus" currency="USD" instrument="loandepo"/>
+	    <book name="DERIVFUNDEUR" currency="EUR" instrument="loandepo"/>
+	    <book name="DERIVOTHERS" currency="OTH" instrument="OTH"/>
+	  </books>
+	</portfolio>
+      </portfolios>
+    </businessUnit>
+  </bussinessUnits>
+</generalSettings>
