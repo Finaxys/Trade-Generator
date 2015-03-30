@@ -9,10 +9,16 @@ import java.util.ArrayList;
 public class OutputManager
 {
 	static private OutputManager instance = new OutputManager();
-	static private PrintWriter writer;
+	static private PrintWriter	writer;
+	final static private String		OUTPUT_PATH = "trades/";
+	final static private String		OUTPUT_ENCODING = "UTF-8";
 
 	private OutputManager()
 	{
+		File check = new File(OUTPUT_PATH + "test");
+
+		if (!check.exists())
+			check.getParentFile().mkdirs();
 	}
 
 	static public OutputManager getInstance()
@@ -21,14 +27,25 @@ public class OutputManager
 	}
 	
 	@SuppressWarnings("unused")
-	private PrintWriter getWriter(final String path) throws FileNotFoundException, UnsupportedEncodingException
+	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		File check = new File(path);
-
-		if (!check.exists())
-			check.getParentFile().mkdirs();
+		String path = OUTPUT_PATH + Integer.toString(trade.date) + "-"
+					+ trade.id + "."
+					+ output.format.toString().toLowerCase();
 		
-		return (new PrintWriter(path, "UTF-8"));
+		return (new PrintWriter(path, OUTPUT_ENCODING));
+	}
+	
+	private PrintWriter getWriter(Output output) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		String date = "";
+
+		if (output.te.size() > 0)
+			date = Integer.toString(output.te.get(0).date);
+
+		String path = OUTPUT_PATH + "[" + output.id + "]-" + date + "." + output.format.toString().toLowerCase();
+		
+		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
 
 	public void outputTrades()
@@ -38,10 +55,7 @@ public class OutputManager
 			for (Businessunit bu : Generals.getInstance().bu)
 				for (Output output : bu.lop)
 				{
-					String date = "";
-					if (output.te.size() > 0)
-						date = Integer.toString(output.te.get(0).date);
-					writer = getWriter(output.path + "/" + date + "."+ output.format.toString().toLowerCase());
+					writer = getWriter(output);
 
 					outputByFormat(output);
 
@@ -129,9 +143,7 @@ public class OutputManager
 	{
 		try
 		{
-			writer = getWriter(output.path + "/" + Integer.toString(trade.date) + "-"
-					+ trade.id + "."
-					+ output.format.toString().toLowerCase());
+			writer = getWriter(output, trade);
 			writeTrade(output, trade);
 			writer.close();
 		}

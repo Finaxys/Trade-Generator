@@ -74,7 +74,6 @@ public abstract class Instrument
 		for (int i = 0; i < volumetry; i++)
 			T.set(i, T.get(i) * montant / somme);
 		
-		System.out.println();
 		return T;
 	}
 

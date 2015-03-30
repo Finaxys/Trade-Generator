@@ -9,8 +9,15 @@
 	<output>
 	  <format>CSV</format>
 	  <path>trades</path>
-	  <instrument>all</instrument>
+	  <instrument>equity</instrument>
 	  <isStp>false</isStp>
+	  <layer>FS</layer>
+	</output>
+	<output>
+	  <format>CSV</format>
+	  <path>trades</path>
+	  <instrument>loandepo</instrument>
+	  <isStp>true</isStp>
 	  <layer>FS</layer>
 	</output>
       </workflow>

@@ -55,10 +55,8 @@ public class LoanDeposit extends Instrument
 		amountPerDay += rand1 * amountPerDay;
 		
 		// calculation of number of trades to distribute per day
-		System.out.println(amountPerDay);
 		toleredVolumetry = (1 - rand2) * volumetry;
 		int roundedVolume = (int) toleredVolumetry;
-		System.out.println(roundedVolume+" 54545");
 	
 		List<Integer> Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
 
@@ -76,10 +74,6 @@ public class LoanDeposit extends Instrument
 		List<Typetaux> t3 = tableaubin(roundedVolume, this.part_taux_variable,
 				Typetaux.class);
 		
-		System.out.println("IN");
-		System.out.println(Loanpertrade.size());
-		System.out.println(t2.size());
-		System.out.println(t3.size());
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{
 
