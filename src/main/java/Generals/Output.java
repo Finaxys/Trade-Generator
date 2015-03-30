@@ -22,7 +22,7 @@ public class Output
 	public ArrayList<TradeEvent> te = new ArrayList<TradeEvent>();
 
 	public void addTradeEvent(TradeEvent tn)
-	{   Report.add(tn);
+	{   
 		te.add(tn);
 	}
 

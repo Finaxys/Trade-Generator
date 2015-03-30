@@ -1,4 +1,7 @@
 package Generals;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 public class Report {
@@ -7,12 +10,12 @@ public class Report {
 
 
 Referential ref;
-ArrayList<TradeEvent> liste;
+public static ArrayList<TradeEvent> liste;
 
 private Report()
 {	
 	super();	
-	this.liste=new ArrayList<TradeEvent>();
+	Report.liste=new ArrayList<TradeEvent>();
 		
 }
 
@@ -25,119 +28,70 @@ public static Report getInstance()
 
 public static void add(TradeEvent te){
 	
-	getInstance().liste.add(te);
+	Report.liste.add(te);
 }
 
-public static ArrayList<TradeEvent> ConcatSortOutput(){
-	ArrayList<TradeEvent> AllOutput= new ArrayList<TradeEvent>(); 
-//	
-//	for (Businessunit bu:gen.bu)
-//	{
-//	 for (Output output: bu.lop)
-//	 {
-//		 for (TradeEvent te: output.te)
-//		 {   
-//			 AllOutput.add(te);
-//		 }
-//	 }
-//	}
-	Collections.sort(AllOutput);
+public static void ConcatSortOutput(){
+
 	
-	return (AllOutput);
+	Collections.sort(Report.liste);
 }	
-//
-//public ArrayList<TradeEvent> filtre(ArrayList<TradeEvent> t,int p,String str)
-//{  ArrayList<TradeEvent> Al=new ArrayList<TradeEvent>();
-//   for (TradeEvent te: t)
-//	  
-//	   {
-//	   
-//	   try {
-//		if (te.getClass().getFields()[p].get(te).equals(str))
-//			   {Al.add(te);}
-//	} catch (IllegalArgumentException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	} catch (IllegalAccessException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	} catch (SecurityException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//		  
-//	   
-//	   };
-//return Al;
-//}
 
-public static void report(ArrayList<TradeEvent> lists){
-	
-	TradeEvent te=lists.get(0);
-	Collections.sort(lists);
-	int nombre_transaction=1;
 
-	float montant=te.amount;
-	int i=0;
+public static void report(ArrayList<TradeEvent> lists){	
 	
-while (i<lists.size())
-{   if (i==lists.size()-1)
-	{
-	montant=montant+lists.get(i).amount;
-	nombre_transaction++;
-	System.out.println("Date: "+te.date + "Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Sens: "+te.way.name()+"/n"+"Nombre d'opération: "+nombre_transaction+"/n"+"Somme transférée: "+montant);
-	}
-    {
-    	if (i!=0)
-    	{
-    		if (lists.get(i).compareTo(te)==0)
-    		{
-    			montant=montant+lists.get(i).amount;
-    			nombre_transaction++;
-    		}
-    		{
-    			System.out.println("Date: "+te.date + "Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Sens: "+te.way.name()+"/n"+"Nombre d'opération: "+nombre_transaction+"/n"+"Somme transférée: "+montant);
-    			nombre_transaction=1;
-    			montant=lists.get(i).amount;
-    		}
-	
-	
-    	}
-	
-	
-	te=lists.get(i);
-    }
-	i++;
-	
+		File ff=new File("C:\\Users\\finaxys\\Desktop\\workspace\\report"); // définir l'arborescence
+		try {
+			ff.createNewFile();
+		
+		final FileWriter ffw=new FileWriter(ff);
+
+		TradeEvent te;
+		te=lists.get(0);
+		int nombre_transaction=1;
+		float montant=te.amount;
+		int i=0;
+		while (i<lists.size())
+		{   	
+			if (i==lists.size()-1)
+			{
+			montant=montant+lists.get(i).amount;
+			nombre_transaction++;
+			ffw.write("Date: "+te.date + "Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Sens: "+te.way.name());
+			ffw.write("\r\n ");
+			ffw.write("Nombre d'opération: "+nombre_transaction);
+			ffw.write("\r\n ");
+			ffw.write("Somme transférée: "+montant);
+			ffw.write("\r\n ");
+			}
+			{
+				if (lists.get(i).compareTo(te)==0)
+				{
+					montant=montant+lists.get(i).amount;
+					nombre_transaction++;
+				}else
+				{
+					ffw.write("Date: "+te.date + " Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Sens: "+te.way.name());
+					ffw.write("\r\n ");
+					ffw.write("Nombre d'opération: "+nombre_transaction);
+					ffw.write("\r\n ");
+					ffw.write("Somme transférée: "+montant);
+					ffw.write("\r\n ");
+					nombre_transaction=1;
+					montant=lists.get(i).amount;				
+				}
+				
+			te=lists.get(i);
+			}
+		i++;
+		}
+		ffw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 }
-	//System.out.println(Integer.toString(index));
-
-//private ArrayList<ArrayList<TradeEvent>> sort(ArrayList<TradeEvent> Lte,
-//		ArrayList<ArrayList<TradeEvent>> classeur) {
-//	for( TradeEvent te: Lte)
-//	{
-//		sortunity(te,classeur);
-//	}
-//	return classeur;
-//	
-//}
-//
-//private void sortunity(TradeEvent te, ArrayList<ArrayList<TradeEvent>> classeur) {
-//	switch (te.instrument.name){ 
-//	case "Equity": 
-//	classeur.get(0).add(te);
-//	break;
-//	case "LoanDeposit":
-//	classeur.get(1).add(te);
-//	break;
-//	default:
-//	break;
-//	}
-//	
-//	
-//}
 
 
-	
-}
 }

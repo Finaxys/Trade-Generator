@@ -27,7 +27,7 @@ public abstract class Instrument
 	public void tradeGenerated(TradeEvent trade)
 	{
 		Output output = getOutputFromTrade(trade);
-
+		Report.add(trade);
 		if (output.isStp)
 			OutputManager.getInstance().outputTrade(output, trade);
 		else
