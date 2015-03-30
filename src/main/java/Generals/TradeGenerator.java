@@ -24,11 +24,6 @@ public class TradeGenerator
 		
 	
 		
-		System.out.println(dev1.getClass().getFields()[1]);
-		slt=(ArrayList<Devise>) Referential.subList(lt, "devise", "eur");
-		System.out.println(slt.size());
-		for (Devise d:slt)
-			System.out.println(d.country);
 		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();
