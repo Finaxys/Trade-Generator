@@ -76,7 +76,7 @@ public class TradeGenerator
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
 		Collections.sort(Report.getInstance().liste);
-		Report.report(Report.getInstance().liste);
+//		Report.report(Report.getInstance().liste);
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
