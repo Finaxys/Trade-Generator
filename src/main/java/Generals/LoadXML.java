@@ -403,18 +403,10 @@ public class LoadXML
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
 			{
-				Equity loandepo = new Equity();
+				LoanDeposit loandepo = new LoanDeposit(Integer.parseInt(getContent(eins, "partLoan")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
+						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "repartitionTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
+						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
 				loandepo.name = "loandepo";
-				// loandepo.ownCountry = Integer.parseInt(getContent(eins,
-				// "ownCountry"));
-				// loandepo.partSell = Integer.parseInt(getContent(eins,
-				// "partSell"));
-				// loandepo.repartitionTolerance =
-				// Integer.parseInt(getContent(eins, "toleranceRep"));
-				// loandepo.volumetry = Integer.parseInt(getContent(eins,
-				// "volumetry"));
-				// loandepo.volumetryTolerance =
-				// Integer.parseInt(getContent(eins, "volumetryTolerance"));
 				instruments.add(loandepo);
 			}
 		}

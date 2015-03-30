@@ -11,8 +11,8 @@ public class LoanDeposit extends Instrument
 	public int Partloan;
 	public int owncountry;
 	public int volumetry;
-	public double volumetry_tolerance;
-	public double repartition_tolerance;
+	public int volumetry_tolerance;
+	public int repartition_tolerance;
 	public float valeur_taux;
 	public int tolerance_taux_var;
 	public int part_taux_variable;
@@ -20,14 +20,13 @@ public class LoanDeposit extends Instrument
 	BaseCalcul basecalcul;
 	private Class Locality;
 
-	public LoanDeposit(String devise, int partloan, int owncountry,
-			int volumetry, double volumetry_tolerance,
-			double repartition_tolerance, int valeur_taux,
-			int tolerance_taux_var, int part_taux_variable, int durée,
-			Boolean is_stp)
+	public LoanDeposit(int partloan, int owncountry,
+			int volumetry, int volumetry_tolerance,
+			int repartition_tolerance, int valeur_taux,
+			int tolerance_taux_var, int part_taux_variable)
 	{
 		super();
-		this.devise = devise;
+		this.devise = "EUR";
 		Partloan = partloan;
 		this.owncountry = owncountry;
 		this.volumetry = volumetry;
@@ -73,6 +72,8 @@ public class LoanDeposit extends Instrument
 		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
 		List<Typetaux> t3 = tableaubin(roundedVolume, this.part_taux_variable,
 				Typetaux.class);
+		
+		System.out.println("IN");
 
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{

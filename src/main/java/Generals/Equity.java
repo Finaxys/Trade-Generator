@@ -48,6 +48,7 @@ public class Equity extends Instrument
 		Referential.Product pro;
 		Referential.Currency cur = null;
 		Referential.Portfolio port;
+			
 		// List<Referential.Product> Listequity=ref.subList(ref.Products,
 		// "type", "equity");
 		// t1 = Instrument.tableaubin(roundedVolume,
@@ -58,7 +59,7 @@ public class Equity extends Instrument
 
 			// sharing of amount per trade
 			randToleranceQuantities = (float) Math.random();
-
+			
 			// set random price -+3%
 			randomquantity = 6 * (random.nextDouble() - 0.5);
 

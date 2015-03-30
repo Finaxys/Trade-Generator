@@ -22,6 +22,8 @@ public abstract class Instrument
 		return (null);
 	}
 
+	static int cnt = 0;
+
 	public void tradeGenerated(TradeEvent trade)
 	{
 		Output output = getOutputFromTrade(trade);
@@ -31,6 +33,7 @@ public abstract class Instrument
 		else
 			output.addTradeEvent(trade);
 	}
+	
 
 	public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio,
 			Class<T> e)

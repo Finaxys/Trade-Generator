@@ -26,7 +26,10 @@ public class OutputManager
 			for (Businessunit bu : Generals.getInstance().bu)
 				for (Output output : bu.lop)
 				{
-					writer = new PrintWriter(output.path + "."
+					String date = "";
+					if (output.te.size() > 0)
+						date = Integer.toString(output.te.get(0).date);
+					writer = new PrintWriter(output.path + "/" + date + "."
 							+ output.format.toString().toLowerCase(), "UTF-8");
 
 					outputByFormat(output);
@@ -115,8 +118,8 @@ public class OutputManager
 	{
 		try
 		{
-			writer = new PrintWriter(Integer.toString(trade.date) + "-"
-					+ trade.id + output.path + "."
+			writer = new PrintWriter(output.path + "/" + Integer.toString(trade.date) + "-"
+					+ trade.id + "."
 					+ output.format.toString().toLowerCase(), "UTF-8");
 			writeTrade(output, trade);
 			writer.close();
