@@ -24,7 +24,7 @@ public class Output
 	static int	counter = 0;
 
 	public void addTradeEvent(TradeEvent tn)
-	{   Report.add(tn);
+	{   
 		te.add(tn);
 	}
 
