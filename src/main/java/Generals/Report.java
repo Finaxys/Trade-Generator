@@ -57,7 +57,7 @@ public static void report(ArrayList<TradeEvent> lists){
 			{
 			montant=montant+lists.get(i).amount;
 			nombre_transaction++;
-			ffw.write("Date: "+te.date + "Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Sens: "+te.way.name());
+			ffw.write("Date: "+te.date + "Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Instrument: "+te.instrument+" Sens: "+te.way.name());
 			ffw.write("\r\n ");
 			ffw.write("Nombre d'opération: "+nombre_transaction);
 			ffw.write("\r\n ");

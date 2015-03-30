@@ -56,6 +56,9 @@ public class LoanDeposit extends Instrument
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
 		int roundedVolume = (int) toleredVolumetry;	
+
+
+
 	
 		List<Integer> Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
 
@@ -72,6 +75,7 @@ public class LoanDeposit extends Instrument
 		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
 		List<Typetaux> t3 = tableaubin(roundedVolume, this.part_taux_variable,
 				Typetaux.class);
+		
 		
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{
