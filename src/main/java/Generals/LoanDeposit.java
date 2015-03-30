@@ -53,10 +53,13 @@ public class LoanDeposit extends Instrument
 		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
 		amountPerDay += rand1 * amountPerDay;
-
+		
 		// calculation of number of trades to distribute per day
+		System.out.println(amountPerDay);
 		toleredVolumetry = (1 - rand2) * volumetry;
 		int roundedVolume = (int) toleredVolumetry;
+		System.out.println(roundedVolume+" 54545");
+	
 		List<Integer> Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
 
 		// List<Way> t;
@@ -74,7 +77,9 @@ public class LoanDeposit extends Instrument
 				Typetaux.class);
 		
 		System.out.println("IN");
-
+		System.out.println(Loanpertrade.size());
+		System.out.println(t2.size());
+		System.out.println(t3.size());
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{
 
@@ -86,15 +91,15 @@ public class LoanDeposit extends Instrument
 
 			if (t1.get(i).toString() == "NATIONAL")
 			{
-				cur1 = ref.subList(ref.Currencies, "Country",
+				cur1 = ref.subList(ref.Currencies, "country",
 						generals.owncountry).get(0);
 			}
 
 			{
 				cur1 = ref.getRandomElement(ref.exList(ref.Currencies,
-						"Country", generals.owncountry));
+						"country", generals.owncountry));
 			}
-
+			
 			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
 					t2.get(i), t3.get(i), d1, c1, tr1, cur1, valeur_taux
 							* random.nextFloat(), Term.getRandom(),

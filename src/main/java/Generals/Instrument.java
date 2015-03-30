@@ -45,10 +45,9 @@ public abstract class Instrument
 		T tp2 = e.getEnumConstants()[1];
 
 		for (i = 0; i < size; i++)
-			System.out.println("a");
 		TrueArray.add(tp1);
 
-		for (j = 0; j <= national; j++)
+		for (j = 0; j < national; j++)
 			TrueArray.set(j, tp2);
 
 		Collections.shuffle(TrueArray);
@@ -59,20 +58,23 @@ public abstract class Instrument
 	public static List<Integer> Sparsemoney(int volumetry, int montant)
 
 	{
-		List<Integer> T = new ArrayList<Integer>(volumetry);
+		List<Integer> T = new ArrayList<Integer>();
+		
 		Random random = new Random();
 		int somme = 0;
-		int volumetryorder = (int) 0.1 * volumetry;
-		int randint;
+		int volumetryorder = Math.max((int) 0.1 * volumetry,3);
+		int randint=0;
 
-		for (int i = 0; i <= T.size(); i++)
-		{
+		for (int i = 0; i < volumetry; i++)
+		{		
 			randint = random.nextInt(volumetryorder);
-			T.set(i, randint);
+			somme=somme+randint;
+			T.add(randint);
 		}
-		for (int i = 0; i <= T.size(); i++)
+		for (int i = 0; i < volumetry; i++)
 			T.set(i, T.get(i) * montant / somme);
-
+		
+		System.out.println();
 		return T;
 	}
 

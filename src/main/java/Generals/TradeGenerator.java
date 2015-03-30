@@ -1,12 +1,34 @@
 package Generals;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class TradeGenerator
 {
 	public static void main(String[] args)
 	{
+		Devise dev5=new Devise("france","eur");
+		Devise dev4=new Devise("france1","eur");
+		Devise dev3=new Devise("france1","eur1");
+		Devise dev2=new Devise("france1","eur");
+		Devise dev1=new Devise("france","eur1");
+		
+		ArrayList<Devise> lt=new ArrayList<Devise>();
+		lt.add(dev1);
+		lt.add(dev3);
+		lt.add(dev5);
+		lt.add(dev2);
+		lt.add(dev4);
+		ArrayList<Devise> slt=new ArrayList<Devise>();
+		
+	
+		
+		System.out.println(dev1.getClass().getFields()[1]);
+		slt=(ArrayList<Devise>) Referential.subList(lt, "devise", "eur");
+		System.out.println(slt.size());
+		for (Devise d:slt)
+			System.out.println(d.country);
 		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();

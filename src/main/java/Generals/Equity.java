@@ -49,11 +49,11 @@ public class Equity extends Instrument
 		Referential.Currency cur = null;
 		Referential.Portfolio port;
 			
-		// List<Referential.Product> Listequity=ref.subList(ref.Products,
-		// "type", "equity");
-		// t1 = Instrument.tableaubin(roundedVolume,
-		// this.ownCountry,Locality.class);
-		// t2 = Instrument.tableaubin(roundedVolume, this.partSell,Way.class);
+		 List<Referential.Product> Listequity=Referential.subList(ref.Products,
+		 "type", "EQUITY");
+		 t1 = Instrument.tableaubin(roundedVolume,
+		 this.ownCountry,Locality.class);
+		 t2 = Instrument.tableaubin(roundedVolume, this.partSell,Way.class);
 		for (int i = 0; i < roundedVolume; i++)
 		{
 
@@ -65,28 +65,24 @@ public class Equity extends Instrument
 
 			// tirage au sort sous contrainte
 
-			d = ref.getRandomElement(ref.Depositaries);
-			c = ref.getRandomElement(ref.Counterparts);
-			tr = ref.getRandomElement(ref.Traders);
-			cur = ref.getRandomElement(ref.Currencies);
-			// System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());System.out.println(t1.get(i).toString());
-			// if (t1.get(i).toString()=="NATIONAL")
-			// {
-			// cur=ref.subList(ref.Currencies, "Country",
-			// generals.owncountry).get(0);
-			// }
-			// {
-			// cur = ref.getRandomElement(ref.exList(ref.Currencies, "Country",
-			// generals.owncountry));
-			// }
-			pro = ref.getRandomElement(ref.Products);
-			// pro = ref.getRandomElement(Listequity);
-			port = ref.getRandomElement(ref.Portfolios);
+			d = Referential.getRandomElement(ref.Depositaries);
+			c = Referential.getRandomElement(ref.Counterparts);
+			tr = Referential.getRandomElement(ref.Traders);
+			cur = Referential.getRandomElement(ref.Currencies);
+			 if (t1.get(i).toString()=="NATIONAL")
+			 {
+			 cur=Referential.subList(ref.Currencies, "country",
+			 generals.owncountry).get(0);
+			 }
+			 {
+			 cur = Referential.getRandomElement(Referential.exList(ref.Currencies, "country",
+			 generals.owncountry));
+			 }
+			pro = Referential.getRandomElement(Listequity);
+			port = Referential.getRandomElement(ref.Portfolios);
 			price = pro.price;
 			price = (float) (price * (1 + randomquantity / 100));
 			quantity = (int) (randToleranceQuantities * to2tradeamount / price);
-			// TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i),
-			// price, quantity, d, c, tr, pro, cur, port);
 			TradeEquity tq1 = new TradeEquity(this, book, date, Way.BUY, price,
 					quantity, d, c, tr, pro, cur, port);
 			tradeGenerated(tq1);
