@@ -3,8 +3,8 @@ package Generals;
 public class Devise
 {
 
-	String country;
-	String devise;
+	public String country;
+	public String devise;
 
 	public Devise(String country, String devise)
 	{

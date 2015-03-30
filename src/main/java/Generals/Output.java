@@ -20,15 +20,18 @@ public class Output
 	public Boolean isStp;
 	public Layer layer;
 	public ArrayList<TradeEvent> te = new ArrayList<TradeEvent>();
+	public int	id;
+	static int	counter = 0;
 
 	public void addTradeEvent(TradeEvent tn)
-	{
+	{   Report.add(tn);
 		te.add(tn);
 	}
 
 	Output(String f, String path, ArrayList<Instrument> ins, Boolean stp,
 			String lay)
 	{
+		id = counter++;
 		format = OutputFormat.valueOf(f.toUpperCase());
 		this.path = path;
 		instruments = ins;

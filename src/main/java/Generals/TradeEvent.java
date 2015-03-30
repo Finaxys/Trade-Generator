@@ -2,8 +2,20 @@ package Generals;
 
 import java.util.ArrayList;
 
-public abstract class TradeEvent
+public abstract class TradeEvent implements Comparable<TradeEvent>
 {
+	Way  way;
+	static long counter = 0;
+	long id;
+	Referential.Currency currency;
+	Referential.Portfolio portfolio;
+	public Book book;
+	public Integer date;
+	public Instrument instrument;
+	protected ArrayList<Node> nodes;
+	float amount;
+	
+	
 	public class Node
 	{
 		public String name;
@@ -11,20 +23,14 @@ public abstract class TradeEvent
 		public ArrayList<Node> nodes;
 	}
 
-	static long counter = 0;
-	long id;
-	Referential.Currency currency;
-	Referential.Portfolio portfolio;
-	public Book book;
-	public int date;
-	public Instrument instrument;
-	protected ArrayList<Node> nodes;
 
-	public TradeEvent(Book book, int date)
+	public TradeEvent(Book book, int date, Way way, float amount)
 	{
 		id = ++counter;
 		this.book = book;
 		this.date = date;
+		this.way = way;
+		this.amount=amount;
 	}
 
 	public abstract ArrayList<Node> getNodes();
@@ -38,4 +44,20 @@ public abstract class TradeEvent
 		node.nodes = nodes;
 		root.add(node);
 	}
+	
+	public int compareTo(TradeEvent trade) 
+	{
+		 if (!(this.date==trade.date))
+	            return this.date.compareTo(trade.date);
+	     if (!this.book.pt.bu.name.equalsIgnoreCase(trade.book.pt.bu.name))
+	            return this.book.pt.bu.name.compareTo(trade.book.pt.bu.name);
+	     if (!this.book.pt.name.equalsIgnoreCase(trade.book.pt.name))
+	            return this.book.pt.name.compareTo(trade.book.pt.name);
+	     if (!this.book.name.equalsIgnoreCase(trade.book.name))
+	            return this.book.name.compareTo(trade.book.name);
+	     if (!this.instrument.name.equalsIgnoreCase(trade.instrument.name))
+	            return this.instrument.name.compareTo(trade.instrument.name);
+	     return this.way.compareTo(trade.way);
+	}
+	
 }

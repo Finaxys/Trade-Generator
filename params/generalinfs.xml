@@ -2,7 +2,7 @@
   <name>Finaxys Bank</name>
   <side>BuySide</side>
   <budget>10000000</budget>
-  <ownCountry>EU</ownCountry>
+  <ownCountry>FR</ownCountry>
   <bussinessUnits>
     <businessUnit name="ged" ratio="100">
       <workflow>
@@ -13,19 +13,26 @@
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
+	<!-- <output> -->
+	<!--   <format>CSV</format> -->
+	<!--   <path>trades</path> -->
+	<!--   <instrument>loandepo</instrument> -->
+	<!--   <isStp>true</isStp> -->
+	<!--   <layer>FS</layer> -->
+	<!-- </output> -->
       </workflow>
       <instruments>	
 	<instrument name="equity">
 	  <toleranceRep>2</toleranceRep> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
-	  <volumetry>10</volumetry> 
+	  <volumetry>100</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
 	  <partLoan>50</partLoan> 
 	  <ownCountry>40</ownCountry> 
-	  <volumetry>5</volumetry> 
+	  <volumetry>10</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	  <repartitionTolerance>2</repartitionTolerance> 
 	  <rateValue>20</rateValue> 

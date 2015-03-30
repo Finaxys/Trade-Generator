@@ -1,5 +1,6 @@
 package Generals;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -8,15 +9,43 @@ import java.util.ArrayList;
 public class OutputManager
 {
 	static private OutputManager instance = new OutputManager();
-	static private PrintWriter writer;
+	static private PrintWriter	writer;
+	final static private String		OUTPUT_PATH = "trades/";
+	final static private String		OUTPUT_ENCODING = "UTF-8";
 
 	private OutputManager()
 	{
+		File check = new File(OUTPUT_PATH + "test");
+
+		if (!check.exists())
+			check.getParentFile().mkdirs();
 	}
 
 	static public OutputManager getInstance()
 	{
 		return (instance);
+	}
+	
+	@SuppressWarnings("unused")
+	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		String path = OUTPUT_PATH + Integer.toString(trade.date) + "-"
+					+ trade.id + "."
+					+ output.format.toString().toLowerCase();
+		
+		return (new PrintWriter(path, OUTPUT_ENCODING));
+	}
+	
+	private PrintWriter getWriter(Output output) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		String date = "";
+
+		if (output.te.size() > 0)
+			date = Integer.toString(output.te.get(0).date);
+
+		String path = OUTPUT_PATH + "[" + output.id + "]-" + date + "." + output.format.toString().toLowerCase();
+		
+		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
 
 	public void outputTrades()
@@ -26,8 +55,7 @@ public class OutputManager
 			for (Businessunit bu : Generals.getInstance().bu)
 				for (Output output : bu.lop)
 				{
-					writer = new PrintWriter(output.path + "."
-							+ output.format.toString().toLowerCase(), "UTF-8");
+					writer = getWriter(output);
 
 					outputByFormat(output);
 
@@ -115,9 +143,7 @@ public class OutputManager
 	{
 		try
 		{
-			writer = new PrintWriter(Integer.toString(trade.date) + "-"
-					+ trade.id + output.path + "."
-					+ output.format.toString().toLowerCase(), "UTF-8");
+			writer = getWriter(output, trade);
 			writeTrade(output, trade);
 			writer.close();
 		}

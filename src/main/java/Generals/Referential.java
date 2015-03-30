@@ -1,5 +1,6 @@
 package Generals;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -25,62 +26,53 @@ public class Referential
 		return INSTANCE;
 	}
 
-	public <T> T getRandomElement(List<T> list)
+	public static <T> T getRandomElement(List<T> list)
 	{
 		Random randomGenerator = new Random();
 		return (list.get(randomGenerator.nextInt(list.size())));
 	}
 
-	public <T> List<T> subList(List<T> list, String field, String filter)
+	public static <T> List<T> subList(List<T> list, String field, String filter)
 	{
-		List<T> subT = null;
-		Iterator itr = list.iterator();
-		System.out.println("a");
-		while (itr.hasNext())
+		List<T> subT = new ArrayList<T>();
+		for (T te:list)
 		{
-			try
-			{
-				if (itr.getClass().getField(field).equals(filter))
-					subT.add((T) itr);
-
-			}
-			catch (NoSuchFieldException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (SecurityException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			try {
+					if (te.getClass().getField(field).get(te).equals(filter))
+						subT.add((T) te);
+				} catch (IllegalArgumentException | IllegalAccessException
+						| NoSuchFieldException | SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 		}
+		
 		return (subT);
 	}
 
-	public <T> List<T> exList(List<T> list, String field, String filter)
+	public static <T> List<T> exList(List<T> list, String field, String filter)
 	{
-		List<T> subT = null;
-		Iterator itr = list.iterator();
-		while (itr.hasNext())
+		List<T> subT = new ArrayList<T>();
+		for (T te:list)
 		{
-			try
-			{
-				if (!itr.getClass().getField(field).equals(filter))
-					subT.add((T) itr);
+				try {
+					if (!te.getClass().getField(field).get(te).equals(filter))
+						subT.add((T) te);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-			}
-			catch (NoSuchFieldException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (SecurityException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
 		}
 		return (subT);

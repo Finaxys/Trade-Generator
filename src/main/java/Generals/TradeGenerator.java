@@ -1,11 +1,34 @@
 package Generals;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TradeGenerator
 {
 	public static void main(String[] args)
 	{
+		Devise dev5=new Devise("france","eur");
+		Devise dev4=new Devise("france1","eur");
+		Devise dev3=new Devise("france1","eur1");
+		Devise dev2=new Devise("france1","eur");
+		Devise dev1=new Devise("france","eur1");
+		
+		ArrayList<Devise> lt=new ArrayList<Devise>();
+		lt.add(dev1);
+		lt.add(dev3);
+		lt.add(dev5);
+		lt.add(dev2);
+		lt.add(dev4);
+		ArrayList<Devise> slt=new ArrayList<Devise>();
+		
+	
+		
+		System.out.println(dev1.getClass().getFields()[1]);
+		slt=(ArrayList<Devise>) Referential.subList(lt, "devise", "eur");
+		System.out.println(slt.size());
+		for (Devise d:slt)
+			System.out.println(d.country);
 		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();
@@ -30,18 +53,19 @@ public class TradeGenerator
 		int amount_per_book;
 		int j;
 
+		int counter = 0;
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
 				for (Portfolio port : bu.lpor)
 					for (Book b : port.lb)
 					{
-						if (b.ins.size() > 0
-								&& b.ins.get(0).name.equalsIgnoreCase("equity"))
+						if (b.ins.size() > 0 &&
+							(b.ins.get(0).name.equalsIgnoreCase("equity") || b.ins.get(0).name.equalsIgnoreCase("loandepo")))
 						{
 							Instrument t = b.ins.get(0);
 							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
-
+							
 							t.generate(b, amount_per_book, j);
 						}
 					}
@@ -52,6 +76,8 @@ public class TradeGenerator
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
+		Collections.sort(Report.getInstance().liste);
+//		Report.report(Report.getInstance().liste);
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)

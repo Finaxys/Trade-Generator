@@ -28,10 +28,10 @@ import Generals.Referential.Trader;
 
 public class Tradeloan extends TradeEvent
 {
-	public int amount;
+	
 	Referential.Depositary depositary;
 	Referential.Counterpart counterpart;
-	Way way;
+
 	Typetaux rate;
 	Referential.Trader trader;
 	Referential.Currency currency;
@@ -40,16 +40,16 @@ public class Tradeloan extends TradeEvent
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
 
-	public Tradeloan(Instrument instrument, Book book, int date, int montant,
+	public Tradeloan(Instrument instrument, Book book, int date, int amount,
 			Way way, Typetaux rate, Depositary depositary,
 			Counterpart counterpart, Trader trader, Currency currency,
 			float rateValue, Term term, BaseCalcul basecalcul)
 	{
-		super(book, date);
-		this.amount = montant;
+		super(book, date,way, amount);
+	
 		this.depositary = depositary;
 		this.counterpart = counterpart;
-		this.way = way;
+
 		this.rate = rate;
 		this.trader = trader;
 		this.currency = currency;
@@ -70,7 +70,7 @@ public class Tradeloan extends TradeEvent
 		addNode(nodes, "book", book.name, null);
 		addNode(nodes, "way", way.equals(Way.BUY) ? "LOAN" : "DEPO", null);
 		addNode(nodes, "type", "loandepo", null);
-		addNode(nodes, "amount", Integer.toString(amount), null);
+		addNode(nodes, "amount", Float.toString(amount), null);
 		addNode(nodes, "depositary", depositary.code, null);
 		addNode(nodes, "counterpart", counterpart.code, null);
 		addNode(nodes, "rate", rate.name(), null);

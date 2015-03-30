@@ -193,7 +193,6 @@ public class LoadXML
 			{
 				ArrayList<Instrument> instruments = new ArrayList<Instrument>();
 				ArrayList<Portfolio> portfolios = new ArrayList<Portfolio>();
-				ArrayList<Book> books = new ArrayList<Book>();
 				ArrayList<Output> outputs = new ArrayList<Output>();
 
 				Element ebusinessunit = (Element) nbusinessunits.item(ibu);
@@ -205,7 +204,7 @@ public class LoadXML
 				getInstruments(ebusinessunit, instruments);
 
 				// Get portfolios
-				getPortfolios(ebusinessunit, portfolios, books, instruments);
+				getPortfolios(ebusinessunit, portfolios, instruments);
 
 				// Get outputs
 				getOutputs(ebusinessunit, esetting, outputs, instruments);
@@ -351,8 +350,7 @@ public class LoadXML
 	}
 
 	private static void getPortfolios(Element ebusinessunit,
-			ArrayList<Portfolio> portfolios, ArrayList<Book> books,
-			ArrayList<Instrument> instruments)
+			ArrayList<Portfolio> portfolios, ArrayList<Instrument> instruments)
 	{
 		NodeList nportfolios = ebusinessunit.getElementsByTagName("portfolio");
 		for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
@@ -361,6 +359,7 @@ public class LoadXML
 			if (((Node) eportfolio).getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
+			ArrayList<Book> books = new ArrayList<Book>();
 			getBooks(eportfolio, books, instruments);
 
 			portfolios
@@ -368,8 +367,7 @@ public class LoadXML
 		}
 	}
 
-	private static void getBooks(Element eportfolio, ArrayList<Book> books,
-			ArrayList<Instrument> instruments)
+	private static void getBooks(Element eportfolio, ArrayList<Book> books, ArrayList<Instrument> instruments)
 	{
 		// Get books
 		NodeList nbooks = eportfolio.getElementsByTagName("book");
@@ -415,18 +413,10 @@ public class LoadXML
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
 			{
-				Equity loandepo = new Equity();
+				LoanDeposit loandepo = new LoanDeposit(Integer.parseInt(getContent(eins, "partLoan")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
+						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "repartitionTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
+						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
 				loandepo.name = "loandepo";
-				// loandepo.ownCountry = Integer.parseInt(getContent(eins,
-				// "ownCountry"));
-				// loandepo.partSell = Integer.parseInt(getContent(eins,
-				// "partSell"));
-				// loandepo.repartitionTolerance =
-				// Integer.parseInt(getContent(eins, "toleranceRep"));
-				// loandepo.volumetry = Integer.parseInt(getContent(eins,
-				// "volumetry"));
-				// loandepo.volumetryTolerance =
-				// Integer.parseInt(getContent(eins, "volumetryTolerance"));
 				instruments.add(loandepo);
 			}
 		}
