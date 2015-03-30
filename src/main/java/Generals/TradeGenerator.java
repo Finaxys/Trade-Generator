@@ -1,6 +1,7 @@
 package Generals;
 
 import java.io.PrintWriter;
+import java.util.Collections;
 
 public class TradeGenerator
 {
@@ -52,6 +53,8 @@ public class TradeGenerator
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
+		Collections.sort(Report.getInstance().liste);
+		Report.report(Report.getInstance().liste);
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)

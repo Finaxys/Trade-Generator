@@ -5,23 +5,22 @@ import java.util.ArrayList;
 public class TradeEquity extends TradeEvent
 {
 	int date;
-	float prix;
+	
 	int quantity;
-	Way way;
+	
 	Referential.Depositary depositary;
 	Referential.Counterpart counterpart;
 	Referential.Trader trader;
 	Referential.Product product;
 
 	public TradeEquity(Instrument instrument, Book book, int date, Way way,
-			float prix, int quantity, Referential.Depositary d1,
+			float amount, int quantity, Referential.Depositary d1,
 			Referential.Counterpart c1, Referential.Trader tr1,
 			Referential.Product pro1, Referential.Currency cur1,
 			Referential.Portfolio port1)
 	{
-		super(book, date);
-		this.way = way;
-		this.prix = prix;
+		super(book, date, way,amount);
+	
 		this.quantity = quantity;
 		this.depositary = d1;
 		this.counterpart = c1;
@@ -44,7 +43,7 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
-		addNode(nodes, "price", Float.toString(prix), null);
+		addNode(nodes, "price", Float.toString(amount), null);
 		addNode(nodes, "currency", currency.code, null);
 		addNode(nodes, "trader", trader.codeptf, null);
 		return (nodes);
