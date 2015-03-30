@@ -9,7 +9,7 @@ public class TradeGenerator
 {
 	public static void main(String[] args)
 	{
-		
+
 		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();

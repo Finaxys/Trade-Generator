@@ -12,8 +12,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import sun.security.pkcs.ParsingException;
 import Generals.Referential.Currency;
 
 public class LoadXML
@@ -23,6 +21,18 @@ public class LoadXML
 		public void init(Referential ref);
 
 		public void execute(Referential ref, Element elem) throws CustomParsingException;
+	}
+	
+	private static String pathGeneralInfs;
+	
+	public static String getPathGeneralInfs()
+	{
+		return (pathGeneralInfs);
+	}
+	
+	public static void setPathGeneralInfs(String pathGeneralsInfs)
+	{
+		pathGeneralInfs = pathGeneralsInfs;
 	}
 
 	private static Referential _ref;
@@ -40,6 +50,7 @@ public class LoadXML
 		return (content);
 	}
 
+	
 	static public void init(Referential ref) throws CustomParsingException
 	{
 		_ref = ref;
@@ -121,6 +132,7 @@ public class LoadXML
 		{
 			throw new CustomParsingException("Traders :" + e.getMessage(), true);
 		}
+		setPathGeneralInfs("params/generalinfs.xml");
 		loadGeneralSettings();
 	}
 
@@ -163,7 +175,7 @@ public class LoadXML
 	{
 		try
 		{
-			File fXmlFile = new File("params/generalinfs.xml");
+			File fXmlFile = new File(getPathGeneralInfs());
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
