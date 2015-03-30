@@ -53,6 +53,7 @@ public class TradeGenerator
 		int amount_per_book;
 		int j;
 
+		int counter = 0;
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
@@ -64,7 +65,7 @@ public class TradeGenerator
 						{
 							Instrument t = b.ins.get(0);
 							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
-
+							
 							t.generate(b, amount_per_book, j);
 						}
 					}

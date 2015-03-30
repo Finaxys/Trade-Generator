@@ -9,17 +9,17 @@
 	<output>
 	  <format>CSV</format>
 	  <path>trades</path>
-	  <instrument>equity</instrument>
+	  <instrument>all</instrument>
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
-	<output>
-	  <format>CSV</format>
-	  <path>trades</path>
-	  <instrument>loandepo</instrument>
-	  <isStp>true</isStp>
-	  <layer>FS</layer>
-	</output>
+	<!-- <output> -->
+	<!--   <format>CSV</format> -->
+	<!--   <path>trades</path> -->
+	<!--   <instrument>loandepo</instrument> -->
+	<!--   <isStp>true</isStp> -->
+	<!--   <layer>FS</layer> -->
+	<!-- </output> -->
       </workflow>
       <instruments>	
 	<instrument name="equity">
