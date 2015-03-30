@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-class Referential
+public class Referential
 {
 	public List<Counterpart> Counterparts;
 	public List<Product> Products;

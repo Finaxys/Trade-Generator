@@ -7,7 +7,7 @@ import java.util.Random;
 
 public abstract class Instrument
 {
-	String name;
+	public String name;
 
 	public void generate(Book b, int montant, int date)
 	{
