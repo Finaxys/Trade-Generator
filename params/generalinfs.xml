@@ -2,7 +2,7 @@
   <name>Finaxys Bank</name>
   <side>BuySide</side>
   <budget>10000000</budget>
-  <ownCountry>EU</ownCountry>
+  <ownCountry>FR</ownCountry>
   <bussinessUnits>
     <businessUnit name="ged" ratio="100">
       <workflow>
