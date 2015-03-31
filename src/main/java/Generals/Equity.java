@@ -82,6 +82,8 @@ public class Equity extends Instrument
 			pro = Referential.getRandomElement(Listequity);
 			port = Referential.getRandomElement(ref.Portfolios);
 			price = pro.price;
+			price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
+	
 			price = (float) (price * (1 + randomquantity / 100));
 			quantity = (int) (randToleranceQuantities * to2tradeamount / price);
 			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), price,

@@ -89,16 +89,29 @@ public class Referential
 		public String code;
 		public String name;
 		public String country;
-
+		public float change;
+		
 		public Currency()
 		{
 		}
+		
 
 		public Currency(String code, String name, String country)
 		{
 			this.code = code;
 			this.name = name;
 			this.country = country;
+		}
+		
+		public  Currency getCurrencybycountry(String country)
+		{ for (int i=0;i<Currencies.size();i++ )
+			if (Currencies.get(i).country==country)
+			{
+				return Currencies.get(i);
+				
+			}
+		return null;
+		
 		}
 	}
 

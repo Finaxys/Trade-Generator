@@ -52,8 +52,8 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	         return (int) (this.date.getTime()-trade.date.getTime());
 //	     if (!this.book.pt.bu.name.equalsIgnoreCase(trade.book.pt.bu.name))
 //	    	 return 1;
-//	     if (!this.book.pt.name.equalsIgnoreCase(trade.book.pt.name))
-//	    	 return 1;
+	     if (!this.book.pt.name.equalsIgnoreCase(trade.book.pt.name))
+	    	 return this.book.pt.name.compareTo(trade.book.pt.name);
 	     if (!this.book.name.equalsIgnoreCase(trade.book.name))
 	    	 return this.book.name.compareTo(trade.book.name);
 	     if (!this.instrument.name.equalsIgnoreCase(trade.instrument.name))

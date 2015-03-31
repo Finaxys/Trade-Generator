@@ -20,11 +20,11 @@ public class LoanDeposit extends Instrument
 	public int durée;
 	BaseCalcul basecalcul;
 
-	public LoanDeposit(int partloan, int owncountry,
+	public 
+	{LoanDeposit(int partloan, int owncountry,
 			int volumetry, int volumetry_tolerance,
 			int repartition_tolerance, int valeur_taux,
 			int tolerance_taux_var, int part_taux_variable)
-	{
 		super();
 		this.devise = "EUR";
 		Partloan = partloan;

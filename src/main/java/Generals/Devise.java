@@ -1,5 +1,7 @@
 package Generals;
 
+import Generals.Referential.Currency;
+
 public class Devise
 {
 
@@ -12,4 +14,6 @@ public class Devise
 		this.country = country;
 		this.devise = devise;
 	}
+
+	
 }
