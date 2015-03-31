@@ -115,6 +115,7 @@ public class Referential
 		public String name;
 		public String country;
 		public List<Instrument> Instruments;
+		public float change;
 
 		public Currency()
 		{
@@ -125,6 +126,17 @@ public class Referential
 			this.code = code;
 			this.name = name;
 			this.country = country;
+		}
+		
+		public  Currency getCurrencybycountry(String country)
+		{ for (int i=0;i<Currencies.size();i++ )
+			if (Currencies.get(i).country==country)
+			{
+				return Currencies.get(i);
+				
+			}
+		return null;
+		
 		}
 	}
 

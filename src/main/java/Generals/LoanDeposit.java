@@ -1,5 +1,6 @@
 package Generals;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -22,8 +23,7 @@ public class LoanDeposit extends Instrument
 	public LoanDeposit(int partloan, int owncountry,
 			int volumetry, int volumetry_tolerance,
 			int repartition_tolerance, int valeur_taux,
-			int tolerance_taux_var, int part_taux_variable)
-	{
+			int tolerance_taux_var, int part_taux_variable){
 		super();
 		this.devise = "EUR";
 		Partloan = partloan;
@@ -37,7 +37,7 @@ public class LoanDeposit extends Instrument
 	}
 
 	@Override
-	public void generate(Book book, int amount, int date)
+	public void generate(Book book, int amount, Date date)
 	{
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();

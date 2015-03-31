@@ -40,7 +40,7 @@ public class Tradeloan extends TradeEvent
 	BaseCalcul basecalcul;
 	public Boolean is_stp;
 
-	public Tradeloan(Instrument instrument, Book book, int date, int amount,
+	public Tradeloan(Instrument instrument, Book book, Date date, int amount,
 			Way way, Typetaux rate, Depositary depositary,
 			Counterpart counterpart, Trader trader, Currency currency,
 			float rateValue, Term term, BaseCalcul basecalcul)

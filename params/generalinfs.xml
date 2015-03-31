@@ -4,13 +4,13 @@
   <budget>10000000</budget>
   <ownCountry>FR</ownCountry>
   <bussinessUnits>
-    <businessUnit name="ged" ratio="100">
+    <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
 	  <format>CSV</format>
 	  <path>trades</path>
 	  <instrument>all</instrument>
-	  <isStp>false</isStp>
+	  <isStp>true</isStp>
 	  <layer>FS</layer>
 	</output>
 	<!-- <output> -->
@@ -21,7 +21,7 @@
 	<!--   <layer>FS</layer> -->
 	<!-- </output> -->
       </workflow>
-      <instruments>	
+      <instruments>
 	<instrument name="equity">
 	  <toleranceRep>2</toleranceRep> 
 	  <partSell>20</partSell> 

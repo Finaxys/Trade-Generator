@@ -209,10 +209,21 @@ public class LoadXML
 
 				// Get outputs
 				getOutputs(ebusinessunit, esetting, outputs, instruments);
+				
+				// Get Main Instrument
+				Instrument	main_ins = null;
+				for (Instrument ins : instruments)
+					if (ins.name.equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
+					{
+						main_ins = ins;
+						break;
+					}
+				if (main_ins == null)
+					throw new CustomParsingException("Business unit missing main instrument", true);
 
 				businessunits.add(new Businessunit(ebusinessunit
 						.getAttribute("name"), Integer.parseInt(ebusinessunit
-						.getAttribute("ratio")), outputs, instruments,
+						.getAttribute("ratio")), main_ins, outputs, instruments,
 						portfolios));
 			}
 

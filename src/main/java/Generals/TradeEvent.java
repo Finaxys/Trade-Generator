@@ -1,6 +1,7 @@
 package Generals;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
@@ -10,7 +11,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	Referential.Currency currency;
 	Referential.Portfolio portfolio;
 	public Book book;
-	public Integer date;
+	public Date date;
 	public Instrument instrument;
 	protected ArrayList<Node> nodes;
 	float amount;
@@ -24,7 +25,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	}
 
 
-	public TradeEvent(Book book, int date, Way way, float amount)
+	public TradeEvent(Book book, Date date, Way way, float amount)
 	{
 		id = ++counter;
 		this.book = book;
@@ -47,12 +48,12 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	
 	public int compareTo(TradeEvent trade) 
 	{
-		 if (!(this.date==trade.date))
-	         return this.date-trade.date;
+		 if (!(this.date.equals(trade.date)))
+	         return (int) (this.date.getTime()-trade.date.getTime());
 //	     if (!this.book.pt.bu.name.equalsIgnoreCase(trade.book.pt.bu.name))
 //	    	 return 1;
-//	     if (!this.book.pt.name.equalsIgnoreCase(trade.book.pt.name))
-//	    	 return 1;
+	     if (!this.book.pt.name.equalsIgnoreCase(trade.book.pt.name))
+	    	 return this.book.pt.name.compareTo(trade.book.pt.name);
 	     if (!this.book.name.equalsIgnoreCase(trade.book.name))
 	    	 return this.book.name.compareTo(trade.book.name);
 	     if (!this.instrument.name.equalsIgnoreCase(trade.instrument.name))
