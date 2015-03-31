@@ -242,63 +242,60 @@ public class LoadXML
 
 	static public void loadTraders() throws Exception
 	{
-			
-			
-			
+		File fXmlFile = new File("referential/traders.xml");
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+				.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(fXmlFile);
+		doc.getDocumentElement().normalize();
 
-			File fXmlFile = new File("referential/traders.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
+		ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
 
-			// Get currencies
-			NodeList ncurrencies = doc.getElementsByTagName("currency");
-			for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
+		// Get currencies
+		NodeList ncurrencies = doc.getElementsByTagName("currency");
+		for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
+		{
+			ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
+
+			Element ecurrency = (Element) ncurrencies.item(icurrencies);
+			if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
+				continue;
+
+			// Get instruments
+			NodeList ninstruments = ecurrency
+					.getElementsByTagName("instrument");
+			for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++)
 			{
-				ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
-				Element ecurrency = (Element) ncurrencies.item(icurrencies);
-				if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
+				ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
+
+				Element einstrument = (Element) ninstruments.item(iinstru);
+				if (((Node) einstrument).getNodeType() != Node.ELEMENT_NODE)
 					continue;
 
-				// Get instruments
-				NodeList ninstruments = ecurrency
-						.getElementsByTagName("instrument");
-				for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++)
+				// Get traders
+				NodeList ntraders = einstrument
+						.getElementsByTagName("trader");
+				for (int itrader = 0; itrader < ntraders.getLength(); itrader++)
 				{
-					ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
-					Element einstrument = (Element) ninstruments.item(iinstru);
-					if (((Node) einstrument).getNodeType() != Node.ELEMENT_NODE)
+					Element etrader = (Element) ntraders.item(itrader);
+					if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
 						continue;
 
-					// Get traders
-					NodeList ntraders = einstrument
-							.getElementsByTagName("trader");
-					for (int itrader = 0; itrader < ntraders.getLength(); itrader++)
-					{
-						ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
-						Element etrader = (Element) ntraders.item(itrader);
-						if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
-							continue;
-
-						traders.add(new Referential.Trader(etrader
-								.getAttribute("name"), etrader
-								.getAttribute("codeptf")));
-						_ref.Currencies.get(icurrencies).Instruments.get(iinstru).Traders = traders;
-					}
-
-					instruments.add(_ref.new Instrument(einstrument
-							.getAttribute("name")));
-					_ref.Currencies.get(icurrencies).Instruments = instruments;
+					traders.add(new Referential.Trader(etrader
+							.getAttribute("name"), etrader
+							.getAttribute("codeptf")));
 				}
 
-				currencies.add(_ref.new Currency(
-						ecurrency.getAttribute("code"), ecurrency
-								.getAttribute("name"), ecurrency
-								.getAttribute("country")));
-				_ref.Currencies = currencies;
+				Referential.Instrument instrument = _ref.new Instrument(einstrument.getAttribute("name"));
+				instrument.Traders = traders;
+				instruments.add(instrument);
 			}
+
+			Referential.Currency currency = _ref.new Currency(ecurrency.getAttribute("code"), ecurrency.getAttribute("name"), ecurrency.getAttribute("country"));
+			currency.Instruments = instruments;
+			currencies.add(currency);
+		}
+		_ref.Currencies = currencies;
 	}
 
 	private static void getFilters(Element ebook,
@@ -360,7 +357,7 @@ public class LoadXML
 			}
 			outputs.add(new Output(getContent(esetting, "format"), getContent(
 					eoutput, "path"), opins, Boolean.parseBoolean(getContent(
-					eoutput, "isStp")), getContent(eoutput, "layer")));
+							eoutput, "isStp")), getContent(eoutput, "layer")));
 		}
 	}
 
@@ -378,7 +375,7 @@ public class LoadXML
 			getBooks(eportfolio, books, instruments);
 
 			portfolios
-					.add(new Portfolio(eportfolio.getAttribute("name"), books));
+			.add(new Portfolio(eportfolio.getAttribute("name"), books));
 		}
 	}
 
