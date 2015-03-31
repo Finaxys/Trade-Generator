@@ -35,7 +35,8 @@ public class Equity extends Instrument
 		float randToleranceQuantities;
 
 		double randomquantity;
-		double to2tradeamount = (amountPerDay / roundedVolume);
+		List<Integer> Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
+		
 		int quantity;
 		float price;
 
@@ -85,8 +86,8 @@ public class Equity extends Instrument
 			//price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
 	
 			price = (float) (price * (1 + randomquantity / 100));
-			quantity = (int) (randToleranceQuantities * to2tradeamount / price);
-			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), price,
+			quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
+			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity*price,
 					quantity, d, c, tr, pro, cur, port);
 			tradeGenerated(tq1);
 

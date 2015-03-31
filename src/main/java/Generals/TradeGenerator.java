@@ -43,11 +43,14 @@ public class TradeGenerator
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
-				//main instrument ratio
+			{//main instrument ratio
 				//get nombre de book avec main instrument
+		
 				for (Portfolio port : bu.lpor)
-					for (Book b : port.lb)
 					{
+					
+					for (Book b : port.lb)
+					{	
 						if (b.ins.size() > 0 &&
 							(b.ins.contains(bu.main_instrument)))
 						{
@@ -62,8 +65,8 @@ public class TradeGenerator
 							t.generate(b,(int) amount_per_book*5/100, calendar.getTime());
 							}
 						}
-					}
-
+					}}
+			}
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
 		}
@@ -72,7 +75,7 @@ public class TradeGenerator
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
 		Report.ConcatSortOutput();
-		Report.report(Report.liste);
+		Report.report(Report.liste,simulate_days);
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
