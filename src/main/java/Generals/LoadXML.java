@@ -217,6 +217,8 @@ public class LoadXML
 						main_ins = ins;
 						break;
 					}
+				if (main_ins == null)
+					throw new CustomParsingException("Business unit missing main instrument", true);
 
 				businessunits.add(new Businessunit(ebusinessunit
 						.getAttribute("name"), Integer.parseInt(ebusinessunit
