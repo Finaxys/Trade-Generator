@@ -250,7 +250,7 @@ public class LoadXML
 		doc.getDocumentElement().normalize();
 
 		ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
-
+		
 		// Get currencies
 		NodeList ncurrencies = doc.getElementsByTagName("currency");
 		for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
