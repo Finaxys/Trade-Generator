@@ -1,5 +1,6 @@
 package Generals;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +38,7 @@ public class LoanDeposit extends Instrument
 	}
 
 	@Override
-	public void generate(Book book, int amount, int date)
+	public void generate(Book book, int amount, Date date)
 	{
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();

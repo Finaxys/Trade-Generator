@@ -1,8 +1,11 @@
 package Generals;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class TradeGenerator
@@ -35,6 +38,8 @@ public class TradeGenerator
 		int j;
 
 		int counter = 0;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
@@ -47,10 +52,11 @@ public class TradeGenerator
 							Instrument t = b.ins.get(0);
 							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
 							
-							t.generate(b, amount_per_book, j);
+							t.generate(b, amount_per_book, calendar.getTime());
 						}
 					}
 
+			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
 		}
 

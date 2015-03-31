@@ -2,6 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ public abstract class Instrument
 {
 	public String name;
 
-	public void generate(Book b, int montant, int date)
+	public void generate(Book b, int montant, Date date)
 	{
 	}
 

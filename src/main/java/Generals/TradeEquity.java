@@ -1,11 +1,10 @@
 package Generals;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TradeEquity extends TradeEvent
 {
-	int date;
-	
 	int quantity;
 	
 	Referential.Depositary depositary;
@@ -13,7 +12,7 @@ public class TradeEquity extends TradeEvent
 	Referential.Trader trader;
 	Referential.Product product;
 
-	public TradeEquity(Instrument instrument, Book book, int date, Way way,
+	public TradeEquity(Instrument instrument, Book book, Date date, Way way,
 			float amount, int quantity, Referential.Depositary d1,
 			Referential.Counterpart c1, Referential.Trader tr1,
 			Referential.Product pro1, Referential.Currency cur1,

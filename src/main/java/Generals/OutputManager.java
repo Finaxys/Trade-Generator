@@ -4,7 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OutputManager
 {
@@ -26,12 +31,19 @@ public class OutputManager
 		return (instance);
 	}
 	
+	private String getStringDate(Date date)
+	{
+		return null;
+		
+	}
+	
 	@SuppressWarnings("unused")
 	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		String path = OUTPUT_PATH + Integer.toString(trade.date) + "-"
-					+ trade.id + "."
-					+ output.format.toString().toLowerCase();
+		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+
+		String path = OUTPUT_PATH + "stp" + trade.id + "-" + formater.format(trade.date) +
+					"." + output.format.toString().toLowerCase();
 		
 		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
@@ -39,11 +51,12 @@ public class OutputManager
 	private PrintWriter getWriter(Output output) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		String date = "";
+		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
 		if (output.te.size() > 0)
-			date = Integer.toString(output.te.get(0).date);
+			date = formater.format(output.te.get(0).date);
 
-		String path = OUTPUT_PATH + "[" + output.id + "]-" + date + "." + output.format.toString().toLowerCase();
+		String path = OUTPUT_PATH + "batch" + output.id + "-" + date + "." + output.format.toString().toLowerCase();
 		
 		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
