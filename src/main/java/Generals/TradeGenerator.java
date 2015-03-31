@@ -38,16 +38,24 @@ public class TradeGenerator
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
+				//main instrument ratio
+				//get nombre de book avec main instrument
 				for (Portfolio port : bu.lpor)
 					for (Book b : port.lb)
 					{
 						if (b.ins.size() > 0 &&
-							(b.ins.get(0).name.equalsIgnoreCase("equity") || b.ins.get(0).name.equalsIgnoreCase("loandepo")))
+							(b.ins.contains(bu.main_instrument)))
 						{
-							Instrument t = b.ins.get(0);
+							Instrument t = bu.main_instrument;
 							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
 							
 							t.generate(b, amount_per_book, j);
+							for (int i=0;i<b.ins.size();i++)
+							{
+							t=b.ins.get(i);
+							if (!(t.equals(bu.main_instrument)))
+							t.generate(b,(int) amount_per_book*5/100, j);
+							}
 						}
 					}
 
