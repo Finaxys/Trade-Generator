@@ -40,7 +40,7 @@ public static void ConcatSortOutput(){
 
 public static void report(ArrayList<TradeEvent> lists){	
 	
-		File ff=new File("C:\\Users\\finaxys\\Desktop\\workspace\\report"); // définir l'arborescence
+		File ff=new File("report"); // définir l'arborescence
 		try {
 			ff.createNewFile();
 		

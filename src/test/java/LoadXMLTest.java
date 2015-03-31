@@ -1,4 +1,3 @@
-import Generals.Businessunit;
 import Generals.CustomParsingException;
 import Generals.Generals;
 import Generals.LoadXML;
@@ -59,7 +58,7 @@ public class LoadXMLTest extends TestCase
 	{
 		LoadXML.setPathGeneralInfs("src/test/java/generalinfs.xml");
 		testInit();
-		System.out.println("Verification of the values contained in the lists.");
+		System.out.println("Verification of the values contained in the lists. It should match the generalinfs file.");
 		// bu
 		for (int indexBu = 0; indexBu < gen.bu.size(); indexBu++)
 		{
@@ -70,7 +69,14 @@ public class LoadXMLTest extends TestCase
 			{
 				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).name.toString());
 				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).lpor.get(indexPort).lb.size(); indexBook++)
-					System.out.println("Instrument " + (indexBook + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).name.toString());
+				{
+					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).name.toString());
+					for (int indexIns = 0; indexIns <  gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
+						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.get(indexIns).name);
+					for (int indexCur = 0; indexCur <  gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
+						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.get(indexCur).code);
+				}
+					
 			}
 		}
 		// instruments
