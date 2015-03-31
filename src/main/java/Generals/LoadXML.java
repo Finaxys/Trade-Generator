@@ -130,6 +130,7 @@ public class LoadXML
 			loadTraders();
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			throw new CustomParsingException("Traders :" + e.getMessage(), true);
 		}
 		setPathGeneralInfs("params/generalinfs.xml");
@@ -230,9 +231,9 @@ public class LoadXML
 
 	static public void loadTraders() throws Exception
 	{
-			ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
-			ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
-			ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
+			
+			
+			
 
 			File fXmlFile = new File("referential/traders.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
@@ -245,6 +246,7 @@ public class LoadXML
 			NodeList ncurrencies = doc.getElementsByTagName("currency");
 			for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
 			{
+				ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
 				Element ecurrency = (Element) ncurrencies.item(icurrencies);
 				if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
 					continue;
@@ -254,6 +256,7 @@ public class LoadXML
 						.getElementsByTagName("instrument");
 				for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++)
 				{
+					ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
 					Element einstrument = (Element) ninstruments.item(iinstru);
 					if (((Node) einstrument).getNodeType() != Node.ELEMENT_NODE)
 						continue;
@@ -263,6 +266,7 @@ public class LoadXML
 							.getElementsByTagName("trader");
 					for (int itrader = 0; itrader < ntraders.getLength(); itrader++)
 					{
+						ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
 						Element etrader = (Element) ntraders.item(itrader);
 						if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
 							continue;
@@ -270,12 +274,12 @@ public class LoadXML
 						traders.add(new Referential.Trader(etrader
 								.getAttribute("name"), etrader
 								.getAttribute("codeptf")));
-						_ref.Traders = traders;
+						_ref.Currencies.get(icurrencies).Instruments.get(iinstru).Traders = traders;
 					}
 
 					instruments.add(_ref.new Instrument(einstrument
 							.getAttribute("name")));
-					_ref.Instruments = instruments;
+					_ref.Currencies.get(icurrencies).Instruments = instruments;
 				}
 
 				currencies.add(_ref.new Currency(

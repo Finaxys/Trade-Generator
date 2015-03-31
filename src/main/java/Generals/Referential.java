@@ -11,8 +11,7 @@ public class Referential
 	public List<Product> Products;
 	public List<Currency> Currencies;
 	public List<Depositary> Depositaries;
-	public List<Instrument> Instruments;
-	public List<Trader> Traders;
+
 	public List<Portfolio> Portfolios;
 
 	private Referential()
@@ -35,47 +34,73 @@ public class Referential
 	public static <T> List<T> subList(List<T> list, String field, String filter)
 	{
 		List<T> subT = new ArrayList<T>();
-		for (T te:list)
+		for (T te : list)
 		{
-			try {
-					if (te.getClass().getField(field).get(te).equals(filter))
-						subT.add((T) te);
-				} catch (IllegalArgumentException | IllegalAccessException
-						| NoSuchFieldException | SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			try
+			{
+				if (te.getClass().getField(field).get(te).equals(filter))
+					subT.add((T) te);
+			}
+			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
-		
+
 		return (subT);
 	}
 
 	public static <T> List<T> exList(List<T> list, String field, String filter)
 	{
 		List<T> subT = new ArrayList<T>();
-		for (T te:list)
+		for (T te : list)
 		{
-				try {
-					if (!te.getClass().getField(field).get(te).equals(filter))
-						subT.add((T) te);
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+			try
+			{
+				if (!te.getClass().getField(field).get(te).equals(filter))
+					subT.add((T) te);
+			}
+			catch (IllegalArgumentException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 		return (subT);
+	}
+
+	public static Trader getTrader(Referential ref, String country, String nameIns)
+	{
+		for (int iCur = 0; iCur < ref.Currencies.size(); iCur++)
+		{
+			if (ref.Currencies.get(iCur).country.equals(country))
+			{
+				for (int iIns = 0; iIns < ref.Currencies.get(iCur).Instruments.size(); iIns++)
+				{
+					if (ref.Currencies.get(iCur).Instruments.get(iIns).name.equals(nameIns))
+						return getRandomElement(ref.Currencies.get(iCur).Instruments.get(iIns).Traders);
+				}
+			}
+		}
+		return (null);
 	}
 
 	public class Counterpart
@@ -89,6 +114,7 @@ public class Referential
 		public String code;
 		public String name;
 		public String country;
+		public List<Instrument> Instruments;
 
 		public Currency()
 		{
@@ -121,6 +147,7 @@ public class Referential
 	public class Instrument
 	{
 		public String name;
+		public List<Trader> Traders;
 
 		public Instrument()
 		{

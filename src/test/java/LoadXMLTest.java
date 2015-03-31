@@ -36,12 +36,6 @@ public class LoadXMLTest extends TestCase
 		assertNotNull("L'instance est créée", loadxml);
 	}
 
-	/*
-	 * public void testInit() {
-	 * 
-	 * loadxml.init(ref); }
-	 */
-
 	public void testInit()
 	{
 		try
@@ -58,7 +52,7 @@ public class LoadXMLTest extends TestCase
 	{
 		LoadXML.setPathGeneralInfs("src/test/java/generalinfs.xml");
 		testInit();
-		System.out.println("Verification of the values contained in the lists. It should match the generalinfs file.");
+		System.out.println("Verification of the values contained in the lists match the generalinfs file.");
 		// bu
 		for (int indexBu = 0; indexBu < gen.bu.size(); indexBu++)
 		{
@@ -71,44 +65,36 @@ public class LoadXMLTest extends TestCase
 				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).lpor.get(indexPort).lb.size(); indexBook++)
 				{
 					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).name.toString());
-					for (int indexIns = 0; indexIns <  gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
-						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.get(indexIns).name);
-					for (int indexCur = 0; indexCur <  gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
-						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.get(indexCur).code);
+					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
+						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : "
+								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.get(indexIns).name);
+					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
+						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : "
+								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.get(indexCur).code);
 				}
-					
+
 			}
 		}
-		// instruments
-		// portfolios
-		// outputs
 	}
+
+	/*public void testLoadTrader() throws Exception
+	{
+		testInit();
+		System.out.println("Check if values of the trader file are recovered.");
+		for (int indexCur = 0; indexCur < ref.Currencies.size(); indexCur++)
+		{
+			System.out.println("Currency " + (indexCur + 1) + " : " + ref.Currencies.get(indexCur).code + " " + ref.Currencies.get(indexCur).name + " "
+					+ ref.Currencies.get(indexCur).country);
+			for (int indexIns = 0; indexIns < ref.Currencies.get(indexCur).Instruments.size(); indexCur++)
+			{
+				System.out.println("Instruments " + (indexIns + 1) + ref.Currencies.get(indexCur).Instruments.get(indexIns).name);
+
+			}
+		}
+	}*/
 
 	/*
 	 * public void testLoadTraders() { LoadXML.loadTraders(); }
 	 */
 
-	/*
-	 * public void testGetContent() { assertEquals("Contenu de getcontent",
-	 * "pouet", loadxml.getContent(elem, name)()); }
-	 * 
-	 * public void testSetNom() { personne.setNom("nom2");
-	 * assertEquals("Est ce que nom est correct", "nom2", personne.getNom());
-	 * try { personne.setNom(null);
-	 * fail("IllegalArgumentException non levée avec la propriété nom à null");
-	 * } catch (IllegalArgumentException iae) { // ignorer l'exception puisque
-	 * le test est OK (l'exception est levée) } }
-	 * 
-	 * public void testGetPrenom() {
-	 * assertEquals("Est ce que prenom est correct", "prenom1",
-	 * personne.getPrenom()); }
-	 * 
-	 * public void testSetPrenom() { personne.setPrenom("prenom2");
-	 * assertEquals("Est ce que prenom est correct", "prenom2",
-	 * personne.getPrenom()); } }
-	 */
 }
-// chargement des settings
-// création de trades
-// fichier corrompu
-// pas de fichier
