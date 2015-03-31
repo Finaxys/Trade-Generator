@@ -63,6 +63,7 @@ public static void report(ArrayList<TradeEvent> lists){
 			ffw.write("\r\n ");
 			ffw.write("Somme transférée: "+montant);
 			ffw.write("\r\n ");
+			ffw.write("\r\n ");
 			}
 			{
 				if (lists.get(i).compareTo(te)==0)
@@ -71,11 +72,12 @@ public static void report(ArrayList<TradeEvent> lists){
 					nombre_transaction++;
 				}else
 				{
-					ffw.write("Date: "+te.date + " Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Sens: "+te.way.name());
+					ffw.write("Date: "+te.date + " Path: "+te.book.pt.bu.name + "/ "+te.book.pt.name+"/ "+te.book.name +" Instrument: "+te.instrument.name+" Sens: "+te.way.name());
 					ffw.write("\r\n ");
 					ffw.write("Nombre d'opération: "+nombre_transaction);
 					ffw.write("\r\n ");
 					ffw.write("Somme transférée: "+montant);
+					ffw.write("\r\n ");
 					ffw.write("\r\n ");
 					nombre_transaction=1;
 					montant=lists.get(i).amount;				
