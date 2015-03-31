@@ -77,24 +77,25 @@ public class LoadXMLTest extends TestCase
 		}
 	}
 
-	/*public void testLoadTrader() throws Exception
+	public void testLoadTrader() throws Exception
 	{
+
 		testInit();
-		System.out.println("Check if values of the trader file are recovered.");
+		System.out.println("\nCheck if values of the trader file are recovered.");
+		System.out.println("Size currencies = " + ref.Currencies.size());
 		for (int indexCur = 0; indexCur < ref.Currencies.size(); indexCur++)
 		{
 			System.out.println("Currency " + (indexCur + 1) + " : " + ref.Currencies.get(indexCur).code + " " + ref.Currencies.get(indexCur).name + " "
 					+ ref.Currencies.get(indexCur).country);
-			for (int indexIns = 0; indexIns < ref.Currencies.get(indexCur).Instruments.size(); indexCur++)
+			System.out.println("Size instru = " + ref.Currencies.get(indexCur).Instruments.size());
+			for (int indexIns = 0; indexIns < ref.Currencies.get(indexCur).Instruments.size(); indexIns++)
 			{
-				System.out.println("Instruments " + (indexIns + 1) + ref.Currencies.get(indexCur).Instruments.get(indexIns).name);
-
+				System.out.println("Instrument " + (indexIns + 1) + " " + ref.Currencies.get(indexCur).Instruments.get(indexIns).name);
+				for (int indexTra = 0; indexTra < ref.Currencies.get(indexCur).Instruments.get(indexIns).Traders.size(); indexTra++)
+					System.out.println("Trader " + (indexTra + 1) + " " + ref.Currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).name
+							+ " " + ref.Currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).codeptf);
 			}
 		}
-	}*/
-
-	/*
-	 * public void testLoadTraders() { LoadXML.loadTraders(); }
-	 */
+	}
 
 }
