@@ -8,7 +8,6 @@ public enum BaseCalcul
 
 	public static BaseCalcul getRandom()
 	{
-		// TODO Auto-generated method stub
 		Random random = new Random();
 		return BaseCalcul.values()[random
 				.nextInt(BaseCalcul.values().length - 1)];
