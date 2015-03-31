@@ -32,4 +32,16 @@ public class Businessunit
 		this.lpor = lpor;
 		this.lop = lop;
 	}
+	
+	public int getMainInstrumentCount()
+	{
+		int	cnt = 0;
+		
+		for (Portfolio port : lpor)
+			for (Book book : port.lb)
+				if (book.ins.contains(main_instrument))
+					++cnt;
+
+		return (cnt);
+	}
 }

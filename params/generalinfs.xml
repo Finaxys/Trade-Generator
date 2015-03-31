@@ -10,7 +10,7 @@
 	  <format>CSV</format>
 	  <path>trades</path>
 	  <instrument>all</instrument>
-	  <isStp>true</isStp>
+	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
 	<!-- <output> -->

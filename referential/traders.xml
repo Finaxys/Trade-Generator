@@ -37,7 +37,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -82,7 +82,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -126,7 +126,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -172,7 +172,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -218,7 +218,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -263,7 +263,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -309,7 +309,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -355,7 +355,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -400,7 +400,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -445,7 +445,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -490,7 +490,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -535,7 +535,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -580,7 +580,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
@@ -626,7 +626,7 @@
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
-      <instrument name="loan">
+      <instrument name="loandepo">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
 	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
       </instrument>
