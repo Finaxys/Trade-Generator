@@ -69,7 +69,7 @@ public class LoanDeposit extends Instrument
 		Referential.Counterpart c1;
 		Referential.Trader tr1;
 		Referential.Currency cur1;
-
+		
 		List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,
 				Locality.class);
 		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);

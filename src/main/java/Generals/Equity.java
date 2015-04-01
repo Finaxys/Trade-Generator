@@ -69,7 +69,6 @@ public class Equity extends Instrument
 
 			d = Referential.getRandomElement(ref.Depositaries);
 			c = Referential.getRandomElement(ref.Counterparts);
-			//chopper en rdm les traders à partir du pays et de l'instrument, cur.country
 			cur = Referential.getRandomElement(ref.Currencies);
 			tr = Referential.getTrader(ref, cur.country, "equity");
 			
