@@ -30,7 +30,7 @@
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
-	  <montant>100000</montant>
+	  <montant>1000</montant>
 	  <partLoan>50</partLoan> 
 	  <ownCountry>40</ownCountry> 
 	  <volumetry>10</volumetry> 
