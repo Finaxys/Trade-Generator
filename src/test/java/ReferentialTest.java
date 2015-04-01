@@ -5,6 +5,7 @@ import Generals.Referential.Trader;
 import Generals.TradeGenerator;
 import junit.framework.TestCase;
 
+
 public class ReferentialTest extends TestCase
 {
 	private static Referential ref = Referential.getInstance();
@@ -30,5 +31,10 @@ public class ReferentialTest extends TestCase
 		if (trader == null)
 			System.out.println("trader is null");
 		System.out.println("name trader : " + trader.name);
+		System.out.println("codeptf trader : " + trader.codeptf);
+		
+		
+
+		
 	}
 }
