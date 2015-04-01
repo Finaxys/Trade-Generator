@@ -100,7 +100,7 @@ public class LoanDeposit extends Instrument
 //			Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
 
 			
-			tr1 = ref.getTrader(ref, cur1.country, "laondepo");
+			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
 			
 			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
 
