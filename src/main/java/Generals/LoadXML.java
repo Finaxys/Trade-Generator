@@ -50,6 +50,20 @@ public class LoadXML
 		return (content);
 	}
 
+	static public String getOptContent(Element elem, String name, String opt)
+	{
+		String content;
+		try
+		{
+			content = elem.getElementsByTagName(name).item(0).getTextContent();
+		} catch (Exception e)
+		{
+			return (opt);
+		}
+		return (content);
+	}
+
+
 	
 	static public void init(Referential ref) throws CustomParsingException
 	{
@@ -421,6 +435,7 @@ public class LoadXML
 				equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
 				equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
 				equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+				equity.montant = Integer.parseInt(getOptContent(eins, "montant", "-1"));
 				instruments.add(equity);
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
@@ -429,6 +444,7 @@ public class LoadXML
 						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "repartitionTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
 						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
 				loandepo.name = "loandepo";
+				loandepo.montant = Integer.parseInt(getOptContent(eins, "montant", "-1"));
 				instruments.add(loandepo);
 			}
 		}

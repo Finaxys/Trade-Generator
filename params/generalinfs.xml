@@ -13,13 +13,13 @@
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
-	<!-- <output> -->
-	<!--   <format>CSV</format> -->
-	<!--   <path>trades</path> -->
-	<!--   <instrument>loandepo</instrument> -->
-	<!--   <isStp>false</isStp> -->
-	<!--   <layer>FS</layer> -->
-	<!-- </output> -->
+	<output>
+	  <format>CSV</format>
+	  <path>trades</path>
+	  <instrument>loandepo</instrument>
+	  <isStp>false</isStp>
+	  <layer>FS</layer>
+	</output>
       </workflow>
       <instruments>
 	<instrument name="equity">
@@ -30,6 +30,7 @@
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
+	  <montant>100000</montant>
 	  <partLoan>50</partLoan> 
 	  <ownCountry>40</ownCountry> 
 	  <volumetry>10</volumetry> 
