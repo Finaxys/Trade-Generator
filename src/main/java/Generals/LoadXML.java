@@ -369,7 +369,7 @@ public class LoadXML
 							break;
 						}
 			}
-			outputs.add(new Output(getContent(esetting, "format"), getContent(
+			outputs.add(new Output(getContent(eoutput, "format"), getContent(
 					eoutput, "path"), opins, Boolean.parseBoolean(getContent(
 							eoutput, "isStp")), getContent(eoutput, "layer")));
 		}

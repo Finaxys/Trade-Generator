@@ -1,7 +1,7 @@
 <generalSettings>
   <name>Finaxys Bank</name>
-  <side>BuySide</side>
-  <budget>10000000</budget>
+  <side>SellSide</side>
+  <budget>10000</budget>
   <ownCountry>FR</ownCountry>
   <bussinessUnits>
     <businessUnit name="ged" ratio="100" instrument="equity">
@@ -9,17 +9,17 @@
 	<output>
 	  <format>XML</format>
 	  <path>trades</path>
-	  <instrument>all</instrument>
+	  <instrument>equity</instrument>
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
-	<!-- <output> -->
-	<!--   <format>CSV</format> -->
-	<!--   <path>trades</path> -->
-	<!--   <instrument>loandepo</instrument> -->
-	<!--   <isStp>false</isStp> -->
-	<!--   <layer>FS</layer> -->
-	<!-- </output> -->
+	<output>
+	  <format>CSV</format>
+	  <path>trades</path>
+	  <instrument>loandepo</instrument>
+	  <isStp>true</isStp>
+	  <layer>FS</layer>
+	</output>
       </workflow>
       <instruments>
 	<instrument name="equity">
