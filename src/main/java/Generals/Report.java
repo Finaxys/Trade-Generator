@@ -15,7 +15,7 @@ public class Report {
 Referential ref;
 public static ArrayList<TradeEvent> liste;
 
-final static private String		OUTPUT_PATH = "report";
+final static private String		OUTPUT_PATH = "report.csv";
 final static private String		OUTPUT_ENCODING = "UTF-8";
 static private PrintWriter	writer;
 private Report()
@@ -145,7 +145,7 @@ public static void report(ArrayList<TradeEvent> lists,int j){
 		NS=NS+NE;
 		
 
-		writer.flush();
+		writer.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
