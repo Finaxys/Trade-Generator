@@ -88,17 +88,12 @@ public class Referential
 
 	public static Trader getTrader(Referential ref, String country, String nameIns)
 	{
-		for (int iCur = 0; iCur < ref.Currencies.size(); iCur++)
-		{
-			if (ref.Currencies.get(iCur).country.equals(country))
-			{
-				for (int iIns = 0; iIns < ref.Currencies.get(iCur).Instruments.size(); iIns++)
-				{
-					if (ref.Currencies.get(iCur).Instruments.get(iIns).name.equals(nameIns))
-						return getRandomElement(ref.Currencies.get(iCur).Instruments.get(iIns).Traders);
-				}
-			}
-		}
+		for (Referential.Currency cur : ref.Currencies)
+			if (cur.country.equals(country))
+				for (Referential.Instrument ins : cur.Instruments)
+					if (ins.name.equals(nameIns))
+						return getRandomElement(ins.Traders);
+
 		return (null);
 	}
 
