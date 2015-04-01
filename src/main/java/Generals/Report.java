@@ -145,11 +145,11 @@ public static void report(ArrayList<TradeEvent> lists,int j){
 		NS=NS+NE;
 		
 
+		writer.flush();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 }
 
 
