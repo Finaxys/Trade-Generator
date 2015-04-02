@@ -80,15 +80,15 @@ public class TradeGenerator
 //				//load
 //				while(instrumentgenerator!=null)
 //				{
-//				Instrument insrandom=getrandomins();
-//				Currency currandom=getrandomdevise();
-//				Book book= match(bu,insrandom,currandom);
+//					Instrument insrandom=getrandomins();
+//					Currency currandom=getrandomdevise();
+//					Book book= match(bu,insrandom,currandom);
 //				
-//				insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
+//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
 //				}
 //			}
-//			
 			
+
 			
 			
 			

@@ -4,6 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import Generals.Referential.Counterpart;
+import Generals.Referential.Currency;
+import Generals.Referential.Depositary;
+import Generals.Referential.Trader;
+
 public class LoanDeposit extends Instrument
 {
 
@@ -103,13 +108,13 @@ public class LoanDeposit extends Instrument
 			
 			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
 			
-//			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
-//
-//					t2.get(i), t3.get(i), d1, c1, tr1, cur1, valeur_taux
-//							* random.nextDouble(), Term.getRandom(),
-//					BaseCalcul.getRandom());
-//			tradeGenerated(tl);
-
+			TradeLoan tl = new TradeLoan(this, "eference", t2.get(i), date, date,
+					c1, book, date,
+					date,(double ) 45, Indexation.EIBOR, "isni",
+					RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
+					BaseCalcul.methode1, null, amount,
+					cur1, d1, tr1);
+			tradeGenerated(tl);
 		}
 	}
 
