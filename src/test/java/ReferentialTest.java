@@ -17,7 +17,7 @@ public class ReferentialTest extends TestCase
 		l.add(11);
 		l.add(12);
 		l.add(13);
-		int result = Referential.getRandomElement(l);
+		int result = ref.getRandomElement(l);
 		System.out.println(result);
 	}
 	
@@ -27,7 +27,7 @@ public class ReferentialTest extends TestCase
 		String country = new String("CN");
 
 		TradeGenerator.main(new String[] {"10"});
-		Trader trader = Referential.getTrader(ref, country, instrument);
+		Trader trader = ref.getTrader(ref, country, instrument);
 		if (trader == null)
 			System.out.println("trader is null");
 		System.out.println("name trader : " + trader.name);
