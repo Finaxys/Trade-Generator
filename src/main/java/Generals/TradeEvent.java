@@ -1,10 +1,11 @@
 package Generals;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
+
 	private static long counter = 0;
 	private long id;
 	protected Referential.Currency currency;
@@ -12,7 +13,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	protected Book book;
 	private Date date;
 	protected Instrument instrument;
-	protected ArrayList<Node> nodes;
+	protected List<Node> nodes;
 	protected float amount;
 	private String reference;
 	private Way way;
@@ -21,12 +22,13 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	private String counterpart;
 	private ProductType product;
 
+
 	
 	public class Node
 	{
 		public String name;
 		public String value; // If empty take list of nodes
-		public ArrayList<Node> nodes;
+		public List<Node> nodes;
 	}
 
 
@@ -39,10 +41,10 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 		this.amount=amount;
 	}
 
-	public abstract ArrayList<Node> getNodes();
+	public abstract List<Node> getNodes();
 
-	public void addNode(ArrayList<Node> root, String name, String value,
-			ArrayList<Node> nodes)
+	public void addNode(List<Node> root, String name, String value,
+			List<Node> nodes)
 	{
 		Node node = new Node();
 		node.name = name;

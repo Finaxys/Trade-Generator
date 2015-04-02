@@ -12,7 +12,6 @@ public class TradeGenerator
 {
 	public static void main(String[] args)
 	{
-
 		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();
@@ -50,8 +49,9 @@ public class TradeGenerator
 					
 					for (Book b : port.lb)
 					{	
+
 						if (b.ins.size() > 0 && (b.ins.contains(bu.main_instrument)))
-							{	amount_per_book = (int) (gen.total_buget * bu.ratio / (dis*1000));
+							{	amount_per_book = (int) (gen.budget * bu.ratio / (dis*1000));
 								for (int i=0;i<b.ins.size();i++)
 								{
 									Instrument t=b.ins.get(i);
@@ -64,6 +64,7 @@ public class TradeGenerator
 									}
 
 								}
+
 							}
 						else
 							{if (j==0)

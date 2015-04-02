@@ -17,8 +17,9 @@ public abstract class Instrument
 
 	static public Output getOutputFromTrade(TradeEvent trade)
 	{
+
 		for (Output op : trade.getBook().pt.bu.lop)
-			if (op.instruments.contains(trade.getInstrument()))
+			if (op.getInstruments().contains(trade.getInstrument()))
 				return (op);
 
 		return (null);
@@ -30,7 +31,7 @@ public abstract class Instrument
 	{
 		Output output = getOutputFromTrade(trade);
 		Report.add(trade);
-		if (output.isStp)
+		if (output.isStp())
 			OutputManager.getInstance().outputTrade(output, trade);
 		else
 			output.addTradeEvent(trade);

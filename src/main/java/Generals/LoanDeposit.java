@@ -6,9 +6,10 @@ import java.util.Random;
 
 public class LoanDeposit extends Instrument
 {
+
 	// type de taux (fixe/variable), base de calcul, valeur du taux, devise,
 	// durée
-	private String devise;
+
 	private int Partloan;
 	private int owncountry;
 	private int volumetry;
@@ -19,6 +20,9 @@ public class LoanDeposit extends Instrument
 	private int part_taux_variable;
 	private int durée;
 	private BaseCalcul basecalcul;
+	private String devise;
+
+
 
 	public LoanDeposit(int partloan, int owncountry,
 			int volumetry, int volumetry_tolerance,
@@ -80,19 +84,17 @@ public class LoanDeposit extends Instrument
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{
 
-			d1 = ref.getRandomElement(ref.Depositaries);
+			d1 = Referential.getRandomElement(ref.Depositaries);
 
-			c1 = ref.getRandomElement(ref.Counterparts);
+			c1 = Referential.getRandomElement(ref.Counterparts);
 			
 			if (t1.get(i).toString() == "NATIONAL")
 			{
-				cur1 = ref.subList(ref.Currencies, "country",
-						generals.owncountry).get(0);
+				cur1 = Referential.subList(ref.Currencies, "country", generals.owncountry).get(0);
 			}
 
 			{
-				cur1 = ref.getRandomElement(ref.exList(ref.Currencies,
-						"country", generals.owncountry));
+				cur1 = Referential.getRandomElement(Referential.exList(ref.Currencies, "country", generals.owncountry));
 			}
 
 //			float change=1/Referential.getInstance().getdevise(generals.owncountry).change*cur1.change;
@@ -100,7 +102,7 @@ public class LoanDeposit extends Instrument
 //			Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
 
 			
-			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
+			tr1 = Referential.getTrader(ref, cur1.country, "loandepo");
 			
 			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
 

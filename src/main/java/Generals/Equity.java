@@ -71,21 +71,21 @@ public class Equity extends Instrument
 			c = Referential.getRandomElement(ref.Counterparts);
 			cur = Referential.getRandomElement(ref.Currencies);
 			tr = Referential.getTrader(ref, cur.country, "equity");
-			
-			 if (t1.get(i).toString()=="NATIONAL")
-			 {
-			 cur=Referential.subList(ref.Currencies, "country",
-			 generals.owncountry).get(0);
-			 }
-			 {
-			 cur = Referential.getRandomElement(Referential.exList(ref.Currencies, "country",
-			 generals.owncountry));
-			 }
+
+			if (t1.get(i).toString() == "NATIONAL")
+			{
+				cur=Referential.subList(ref.Currencies, "country",
+						generals.owncountry).get(0);
+			}
+			{
+				cur = Referential.getRandomElement(Referential.exList(ref.Currencies, "country",
+						generals.owncountry));
+			}
 			pro = Referential.getRandomElement(Listequity);
 			port = Referential.getRandomElement(ref.Portfolios);
 			price = pro.price;
 			//price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
-	
+
 			price = (float) (price * (1 + randomquantity / 100));
 			quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
 			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity*price,

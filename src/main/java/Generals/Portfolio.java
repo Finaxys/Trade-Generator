@@ -1,14 +1,14 @@
 package Generals;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Portfolio
 {
 	public String name;
-	public ArrayList<Book> lb;
+	public List<Book> lb;
 	public Businessunit bu;
 
-	public Portfolio(String nom, ArrayList<Book> lb)
+	public Portfolio(String nom, List<Book> lb)
 	{
 		this.name = nom;
 		this.lb = lb;

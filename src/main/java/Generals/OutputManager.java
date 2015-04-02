@@ -4,17 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 public class OutputManager
 {
-	static private OutputManager instance = new OutputManager();
-	static private PrintWriter	writer;
+	static private OutputManager	instance = new OutputManager();
+	static private PrintWriter		writer;
 	final static private String		OUTPUT_PATH = "trades/";
 	final static private String		OUTPUT_ENCODING = "UTF-8";
 
@@ -31,19 +28,16 @@ public class OutputManager
 		return (instance);
 	}
 	
-	private String getStringDate(Date date)
-	{
-		return null;
-		
-	}
-	
-	@SuppressWarnings("unused")
 	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
+
+	
+
 		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
-					"." + output.format.toString().toLowerCase();
+					"." + output.getFormat().toString().toLowerCase();
+
 		
 		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
@@ -53,10 +47,12 @@ public class OutputManager
 		String date = "";
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
-		if (output.te.size() > 0)
-			date = formater.format(output.te.get(0).getDate());
 
-		String path = OUTPUT_PATH + "batch" + output.id + "-" + date + "." + output.format.toString().toLowerCase();
+		if (output.getTrades().size() > 0)
+			date = formater.format(output.getTrades().get(0).getDate());
+
+
+		String path = OUTPUT_PATH + "batch" + output.getId() + "-" + date + "." + output.getFormat().toString().toLowerCase();
 		
 		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
@@ -74,7 +70,7 @@ public class OutputManager
 
 					writer.close();
 
-					output.te.clear();
+					output.getTrades().clear();
 				}
 		}
 		catch (FileNotFoundException e1)
@@ -89,21 +85,21 @@ public class OutputManager
 
 	private void outputByFormat(Output output)
 	{
-		if (output.format == Output.OutputFormat.XML)
-			for (TradeEvent trade : output.te)
+		if (output.getFormat() == Output.OutputFormat.XML)
+			for (TradeEvent trade : output.getTrades())
 				writeXMLTrade(trade);
-		else if (output.format == Output.OutputFormat.CSV)
+		else if (output.getFormat() == Output.OutputFormat.CSV)
 			manageCSV(output);
 	}
 
 	private void manageCSV(Output output)
 	{
-		for (Instrument ins : output.instruments)
+		for (Instrument ins : output.getInstruments())
 		{
-			ArrayList<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
+			List<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
 			boolean first = true;
 
-			for (TradeEvent trade : output.te)
+			for (TradeEvent trade : output.getTrades())
 			{
 				// Only one instrument at a time to keep them together
 				if (trade.getInstrument() != ins)
@@ -120,14 +116,14 @@ public class OutputManager
 					continue;
 				}
 
-				ArrayList<TradeEvent.Node> nodes = trade.getNodes();
+				List<TradeEvent.Node> nodes = trade.getNodes();
 
 				for (TradeEvent.Node node : nodes)
 					writer.write(node.value + ",");
 				writer.write(System.lineSeparator());
 			}
 
-			output.te = te_remaining;
+			output.setTrades(te_remaining);
 			first = true;
 		}
 	}
@@ -142,7 +138,7 @@ public class OutputManager
 
 	private void writeCSVTrade(TradeEvent trade)
 	{
-		ArrayList<TradeEvent.Node> nodes = trade.getNodes();
+		List<TradeEvent.Node> nodes = trade.getNodes();
 
 		for (TradeEvent.Node node : nodes)
 			writer.write(node.name + ",");
@@ -172,9 +168,9 @@ public class OutputManager
 
 	private void writeTrade(Output output, TradeEvent trade)
 	{
-		if (output.format.equals(Output.OutputFormat.XML))
+		if (output.getFormat().equals(Output.OutputFormat.XML))
 			writeXMLTrade(trade);
-		else if (output.format.equals(Output.OutputFormat.CSV))
+		else if (output.getFormat().equals(Output.OutputFormat.CSV))
 			writeCSVTrade(trade);
 	}
 
