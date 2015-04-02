@@ -12,7 +12,7 @@ public class Output
 	private Layer 					layer;
 	private List<TradeEvent>		te;
 	private int						id;
-	static int						counter = 0;
+	static 	int						counter = 0;
 
 	public void addTradeEvent(TradeEvent tn)
 	{   

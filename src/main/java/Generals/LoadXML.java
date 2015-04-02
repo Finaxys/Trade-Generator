@@ -427,11 +427,11 @@ public class LoadXML
 			{
 				Equity equity = new Equity();
 				equity.setName("equity");
-				equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
-				equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
-				equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
-				equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
-				equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
+				equity.setOwnCountry(Integer.parseInt(getContent(eins, "ownCountry")));
+				equity.setPartSell(Integer.parseInt(getContent(eins, "partSell")));
+				equity.setRepartitionTolerance(Integer.parseInt(getContent(eins, "toleranceRep")));
+				equity.setVolumetry(Integer.parseInt(getContent(eins, "volumetry")));
+				equity.setVolumetryTolerance(Integer.parseInt(getContent(eins, "volumetryTolerance")));
 				equity.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
 				instruments.add(equity);
 			}
