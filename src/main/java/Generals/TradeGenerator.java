@@ -3,6 +3,7 @@ package Generals;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class TradeGenerator
 {
@@ -71,8 +72,27 @@ public class TradeGenerator
 						}
 					}
 
-				}
 			}
+		}
+//			for ( Businessunit bu: gen.bu)
+//			{	
+//				LinkedList<Instrument> instrumentgenerator=Init(bu);
+//				//load
+//				while(instrumentgenerator!=null)
+//				{
+//				Instrument insrandom=getrandomins();
+//				Currency currandom=getrandomdevise();
+//				Book book= match(bu,insrandom,currandom);
+//				
+//				insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
+//				}
+//			}
+//			
+			
+			
+			
+			
+			
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
 		}
@@ -83,6 +103,16 @@ public class TradeGenerator
 		Report.ConcatSortOutput();
 //		Report.report(Report.liste, simulate_days);
 //		System.out.println("Report done");
+	}
+
+	private static Date instrumentGenerator(Instrument insrandom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static LinkedList<Instrument> Init(Businessunit bu) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)

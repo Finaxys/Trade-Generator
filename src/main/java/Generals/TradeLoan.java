@@ -10,7 +10,7 @@ import Generals.Referential.Depositary;
 import Generals.Referential.Portfolio;
 import Generals.Referential.Trader;
 
-public class Tradeloan extends TradeEvent
+public class TradeLoan extends TradeEvent
 {
 	private Date 				valueDate;
 	private Date 				maturityDate;
@@ -23,22 +23,13 @@ public class Tradeloan extends TradeEvent
 	private Term				term;
 	private BaseCalcul			basecalcul;
 	private Boolean 			is_stp;
-	private double			amount;				
+	private double				amount;				
 	protected Referential.Currency 		currency;
 	protected Referential.Depositary 	depositary;
 	protected Referential.Trader 		trader;
 
 
-
-
-
-
-
-
-
-
-
-	public Tradeloan(String reference, Way way, Date date, Date tradeDate,
+	public TradeLoan(String reference, Way way, Date date, Date tradeDate,
 			Counterpart counterpart, Book book, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,
@@ -62,16 +53,6 @@ public class Tradeloan extends TradeEvent
 		this.trader = trader;
 	}
 
-
-
-
-
-
-
-
-
-
-
 	@Override
 	public List<Node> getNodes()
 	{
@@ -91,8 +72,8 @@ public class Tradeloan extends TradeEvent
 		addNode(nodes, "term", term.name(), null);
 		addNode(nodes, "basecalcul", basecalcul.name(), null);
 		addNode(nodes, "spread", Double.toString(spread), null);
-		addNode(nodes, "valueDate", basecalcul.name(), null);
-		addNode(nodes, "basecalcul", basecalcul.name(), null);
+		addNode(nodes, "valueDate", valueDate.toString(), null);
+//		addNode(nodes, "basecalcul", basecalcul.name(), null);
 		return (nodes);
 	}
 }
