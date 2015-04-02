@@ -51,7 +51,7 @@ public class Equity extends Instrument
 		Referential.Currency cur = null;
 		Referential.Portfolio port;
 			
-		 List<Referential.Product> Listequity=Referential.subList(ref.Products,
+		 List<Referential.Product> Listequity=ref.subList(ref.products,
 		 "type", "EQUITY");
 		 t1 = Instrument.tableaubin(roundedVolume,
 		 this.ownCountry,Locality.class);
@@ -67,22 +67,22 @@ public class Equity extends Instrument
 
 			// tirage au sort sous contrainte
 
-			d = Referential.getRandomElement(ref.Depositaries);
-			c = Referential.getRandomElement(ref.Counterparts);
-			cur = Referential.getRandomElement(ref.Currencies);
-			tr = Referential.getTrader(ref, cur.country, "equity");
+			d = ref.getRandomElement(ref.depositaries);
+			c = ref.getRandomElement(ref.counterparts);
+			cur = ref.getRandomElement(ref.currencies);
+			tr = ref.getTrader(ref, cur.country, "equity");
 
 			if (t1.get(i).toString() == "NATIONAL")
 			{
-				cur=Referential.subList(ref.Currencies, "country",
+				cur=ref.subList(ref.currencies, "country",
 						generals.owncountry).get(0);
 			}
 			{
-				cur = Referential.getRandomElement(Referential.exList(ref.Currencies, "country",
+				cur = ref.getRandomElement(ref.exList(ref.currencies, "country",
 						generals.owncountry));
 			}
-			pro = Referential.getRandomElement(Listequity);
-			port = Referential.getRandomElement(ref.Portfolios);
+			pro = ref.getRandomElement(Listequity);
+			port = ref.getRandomElement(ref.portfolios);
 			price = pro.price;
 			//price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
 

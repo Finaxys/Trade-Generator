@@ -78,17 +78,17 @@ public class LoanDeposit extends Instrument
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{
 
-			d1 = Referential.getRandomElement(ref.Depositaries);
+			d1 = ref.getRandomElement(ref.depositaries);
 
-			c1 = Referential.getRandomElement(ref.Counterparts);
+			c1 = ref.getRandomElement(ref.counterparts);
 			
 			if (t1.get(i).toString() == "NATIONAL")
 			{
-				cur1 = Referential.subList(ref.Currencies, "country", generals.owncountry).get(0);
+				cur1 = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
 			}
 
 			{
-				cur1 = Referential.getRandomElement(Referential.exList(ref.Currencies, "country", generals.owncountry));
+				cur1 = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
 			}
 
 //			float change=1/Referential.getInstance().getdevise(generals.owncountry).change*cur1.change;
@@ -96,7 +96,7 @@ public class LoanDeposit extends Instrument
 //			Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
 
 			
-			tr1 = Referential.getTrader(ref, cur1.country, "loandepo");
+			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
 			
 			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
 
