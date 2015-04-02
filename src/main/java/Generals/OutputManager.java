@@ -109,7 +109,6 @@ public class OutputManager
 			System.out.println(str);
 
 		System.out.println("---");
-		System.out.println("---");
 
 		for (Instrument ins : output.getInstruments())
 		{

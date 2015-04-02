@@ -11,7 +11,6 @@ import Generals.Referential.Trader;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
-
 	private static long 			counter = 0;
 	private long 					id;
 	protected Referential.Currency 	currency;
@@ -58,9 +57,6 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 		public String 				value; // If empty take list of nodes
 		public List<Node> 			nodes;
 	}
-
-
-	
 
 	public abstract List<Node> getNodes();
 

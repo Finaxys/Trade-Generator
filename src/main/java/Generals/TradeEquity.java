@@ -13,8 +13,8 @@ import Generals.Referential.Trader;
 
 public class TradeEquity extends TradeEvent
 {
-	private int quantity;
-	private Referential.Product product;
+	private int					quantity;
+	private Referential.Product	product;
 
 	public TradeEquity(long id, Currency currency, Portfolio portfolio,
 			Book book, Instrument instrument, List<Node> nodes, float amount,

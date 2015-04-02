@@ -12,28 +12,17 @@ import Generals.Referential.Trader;
 
 public class Tradeloan extends TradeEvent
 {
-
-
-	private Date 						valueDate;
-	private Date 						maturityDate;
-	private Double 						national;	
-	private Indexation					index;
-	private String 						ISIN;	
-	private RateType 					rate;
-	private Double 						rateValue;
-	private Double 						spread;
-	private Term term;
-	private BaseCalcul basecalcul;
-	private Boolean is_stp;
-
-
-
-
-
-
-
-
-
+	private Date 			valueDate;
+	private Date 			maturityDate;
+	private Double 			national;	
+	private Indexation		index;
+	private String 			ISIN;	
+	private RateType 		rate;
+	private Double 			rateValue;
+	private Double 			spread;
+	private Term			term;
+	private BaseCalcul		basecalcul;
+	private Boolean 		is_stp;
 
 	public Tradeloan(long id, Currency currency, Portfolio portfolio,
 			Book book, Instrument instrument, List<Node> nodes, float amount,
@@ -58,15 +47,6 @@ public class Tradeloan extends TradeEvent
 		this.basecalcul = basecalcul;
 		this.is_stp = is_stp;
 	}
-
-
-
-
-
-
-
-
-
 
 	@Override
 	public List<Node> getNodes()
