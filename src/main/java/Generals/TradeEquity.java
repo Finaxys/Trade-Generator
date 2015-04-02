@@ -35,9 +35,9 @@ public class TradeEquity extends TradeEvent
 	{
 		nodes = new ArrayList<Node>();
 
-		addNode(nodes, "business", book.pt.bu.getName(), null);
-		addNode(nodes, "portfolio", book.pt.name, null);
-		addNode(nodes, "book", book.name, null);
+		addNode(nodes, "business", book.getPortFolios().bu.getName(), null);
+		addNode(nodes, "portfolio", book.getPortFolios().name, null);
+		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);

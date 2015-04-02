@@ -457,7 +457,7 @@ public class LoadXML
 				pt.bu = bu;
 
 				for (Book b : pt.lb)
-					b.pt = pt;
+					b.setPortFolios(pt);
 			}
 		}
 	}

@@ -99,7 +99,7 @@ public class Businessunit
 		
 		for (Portfolio port : portfolios)
 			for (Book book : port.lb)
-				if (book.ins.contains(mainInstrument))
+				if (book.getInstruments().contains(mainInstrument))
 					++cnt;
 
 		return (cnt);

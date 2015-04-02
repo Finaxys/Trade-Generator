@@ -47,12 +47,12 @@ public class TradeGenerator
 
 					for (Book b : port.lb)
 					{
-						if (b.ins.size() > 0 && (b.ins.contains(bu.getMainInstrument())))
+						if (b.getInstruments().size() > 0 && (b.getInstruments().contains(bu.getMainInstrument())))
 						{
 							amount_per_book = (int) (gen.budget * bu.getRatio() / (dis * 1000));
-							for (int i = 0; i < b.ins.size(); i++)
+							for (int i = 0; i < b.getInstruments().size(); i++)
 							{
-								Instrument t = b.ins.get(i);
+								Instrument t = b.getInstruments().get(i);
 								if (!(t.equals(bu.getMainInstrument())))
 								{
 									t.generate(b, t.getMontant(), calendar.getTime());
@@ -66,7 +66,7 @@ public class TradeGenerator
 						else
 						{
 							if (j == 0)
-								System.out.println("book mal rangé: " + b.name);
+								System.out.println("book mal rangé: " + b.getName());
 						}
 					}
 
