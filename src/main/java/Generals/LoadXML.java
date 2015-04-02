@@ -454,10 +454,10 @@ public class LoadXML
 			// Set Ref BU/PORT for Books
 			for (Portfolio pt : bu.getPortfolios())
 			{
-				pt.bu = bu;
+				pt.setBu(bu);
 
-				for (Book b : pt.lb)
-					b.pt = pt;
+				for (Book b : pt.getLb())
+					b.setPt(pt);
 			}
 		}
 	}

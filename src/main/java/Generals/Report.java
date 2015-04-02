@@ -60,7 +60,7 @@ public static void writeCSTrade(TradeEvent te, int nombre_op,float montant) thro
 	
 	String s=System.lineSeparator();
 	
-	writer.write(te.getDate() +","+te.getBook().pt.bu.getName()+","+te.getBook().pt.name +","+te.getBook().name +","+te.getInstrument()+","+te.getWay() +","+nombre_op+","+montant +","+ s);
+	writer.write(te.getDate() +","+te.getBook().getPt().getBu().getName()+","+te.getBook().getPt().getName() +","+te.getBook().getName() +","+te.getInstrument()+","+te.getWay() +","+nombre_op+","+montant +","+ s);
 //	writer.write(System.lineSeparator());
 //	writer.write(te.date.toString() +",");
 //	writer.write(System.lineSeparator());

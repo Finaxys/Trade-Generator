@@ -61,16 +61,16 @@ public class LoadXMLTest extends TestCase
 				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).getInstruments().get(indexInstru).getName().toString());
 			for (int indexPort = 0; indexPort < gen.bu.get(indexBu).getPortfolios().size(); indexPort++)
 			{
-				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).name.toString());
-				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.size(); indexBook++)
+				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).getName().toString());
+				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().size(); indexBook++)
 				{
-					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).name.toString());
-					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
+					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getName().toString());
+					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getIns().size(); indexIns++)
 						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : "
-								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).ins.get(indexIns).getName());
-					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
+								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getIns().get(indexIns).getName());
+					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).cur.size(); indexCur++)
 						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : "
-								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).cur.get(indexCur).code);
+								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).cur.get(indexCur).code);
 				}
 
 			}

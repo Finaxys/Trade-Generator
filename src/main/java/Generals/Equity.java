@@ -88,8 +88,8 @@ public class Equity extends Instrument
 
 			price = (float) (price * (1 + randomquantity / 100));
 			quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
-			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity * price, quantity, d, c, tr, pro, cur, port);
-			tradeGenerated(tq1);
+//			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity * price, quantity, d, c, tr, pro, cur, port);
+//			tradeGenerated(tq1);
 
 		}
 	}
