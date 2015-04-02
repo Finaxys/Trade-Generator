@@ -38,9 +38,7 @@ public class TradeGenerator
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
-			{// main instrument ratio
-				// get nombre de book avec main instrument
-
+			{
 				dis = bu.getMainInstrumentCount();
 				for (Portfolio port : bu.getPortfolios())
 				{
