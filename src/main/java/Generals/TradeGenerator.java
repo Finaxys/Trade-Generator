@@ -45,22 +45,22 @@ public class TradeGenerator
 			{//main instrument ratio
 				//get nombre de book avec main instrument
 		
-				for (Portfolio port : bu.lpor)
+				for (Portfolio port : bu.getPortfolios())
 					{
 					
 					for (Book b : port.lb)
 					{	
 						if (b.ins.size() > 0 &&
-							(b.ins.contains(bu.main_instrument)))
+							(b.ins.contains(bu.getMainInstrument())))
 						{
-							Instrument t = bu.main_instrument;
-							amount_per_book = (int) (gen.budget * bu.ratio / 1000);
+							Instrument t = bu.getMainInstrument();
+							amount_per_book = (int) (gen.budget * bu.getRatio() / 1000);
 							
 							t.generate(b, amount_per_book, calendar.getTime());
 							for (int i=0;i<b.ins.size();i++)
 							{
 							t=b.ins.get(i);
-							if (!(t.equals(bu.main_instrument)))
+							if (!(t.equals(bu.getMainInstrument())))
 							t.generate(b,(int) amount_per_book*5/100, calendar.getTime());
 							}
 						}
