@@ -18,13 +18,23 @@ public class TradeEquity extends TradeEvent
 	private Referential.Product			product;
 	protected Referential.Depositary 	depositary;
 	protected Referential.Trader 		trader;
+
+	public TradeEquity(Instrument instrument, String reference, Way way, Date date, Date tradeDate,
+			Counterpart counterpart,Book book, double price, int quantity,
+			Product product, Depositary depositary)
+	{
+		super(reference, way, date, tradeDate, counterpart, book, instrument);
+		this.price = price;
+		this.quantity = quantity;
+		this.product = product;
+		this.depositary = depositary;
+	}
 	
-
-
 	@Override
 	public List<Node> getNodes()
 	{
 		nodes = new ArrayList<Node>();
+
 		addNode(nodes, "business", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);
 		addNode(nodes, "book", book.getName(), null);
@@ -33,23 +43,8 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
 		addNode(nodes, "price", Double.toString(price), null);
-		addNode(nodes, "trader", trader.codeptf, null);
+		addNode(nodes, "counterpart", counterpart.code, null);
+
 		return (nodes);
 	}
-
-
-
-	public TradeEquity(String reference, Way way, Date date, Date tradeDate,
-			Counterpart counterpart,Book book, double price, int quantity,
-			Product product, Depositary depositary) {
-		super(reference, way, date, tradeDate, counterpart, book);
-		this.price = price;
-		this.quantity = quantity;
-		this.product = product;
-		this.depositary = depositary;
-	}
-
-
-
-
 }

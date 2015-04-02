@@ -22,20 +22,19 @@ public class TradeLoan extends TradeEvent
 	private Double 				spread;
 	private Term				term;
 	private BaseCalcul			basecalcul;
-	private Boolean 			is_stp;
 	private double				amount;				
 	protected Referential.Currency 		currency;
 	protected Referential.Depositary 	depositary;
 	protected Referential.Trader 		trader;
 
 
-	public TradeLoan(String reference, Way way, Date date, Date tradeDate,
+	public TradeLoan(Instrument instrument, String reference, Way way, Date date, Date tradeDate,
 			Counterpart counterpart, Book book, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,
 			BaseCalcul basecalcul, Boolean is_stp, double amount,
 			Currency currency, Depositary depositary, Trader trader) {
-		super(reference, way, date, tradeDate, counterpart, book);
+		super(reference, way, date, tradeDate, counterpart, book, instrument);
 		this.valueDate = valueDate;
 		this.maturityDate = maturityDate;
 		this.national = national;
@@ -46,7 +45,6 @@ public class TradeLoan extends TradeEvent
 		this.spread = spread;
 		this.term = term;
 		this.basecalcul = basecalcul;
-		this.is_stp = is_stp;
 		this.amount = amount;
 		this.currency = currency;
 		this.depositary = depositary;

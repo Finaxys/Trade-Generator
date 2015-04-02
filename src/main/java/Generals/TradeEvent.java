@@ -25,14 +25,15 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	protected boolean 					is_Stp=true;
 	protected List<Node> 				nodes;
 	
-	public TradeEvent( String reference, Way way, Date date,
-			Date tradeDate, Counterpart counterpart, Book book) {
+	public TradeEvent(String reference, Way way, Date date,
+			Date tradeDate, Counterpart counterpart, Book book, Instrument instrument) {
 		super();
 		this.id = counter++;
 		this.reference = reference;
 		this.way = way;
 		this.date = date;
 		this.tradeDate = tradeDate;
+		this.instrument = instrument;
 		this.counterpart = counterpart;
 		this.book=book;
 	}
