@@ -6,12 +6,11 @@ import java.util.Random;
 
 public class Referential
 {
-	public List<Counterpart> Counterparts;
-	public List<Product> Products;
-	public List<Currency> Currencies;
-	public List<Depositary> Depositaries;
-
-	public List<Portfolio> Portfolios;
+	public List<Counterpart> counterparts;
+	public List<Product> products;
+	public List<Currency> currencies;
+	public List<Depositary> depositaries;
+	public List<Portfolio> portfolios;
 
 	private Referential()
 	{
@@ -24,13 +23,13 @@ public class Referential
 		return INSTANCE;
 	}
 
-	public static <T> T getRandomElement(List<T> list)
+	public <T> T getRandomElement(List<T> list)
 	{
 		Random randomGenerator = new Random();
 		return (list.get(randomGenerator.nextInt(list.size())));
 	}
 
-	public static <T> List<T> subList(List<T> list, String field, String filter)
+	public <T> List<T> subList(List<T> list, String field, String filter)
 	{
 		List<T> subT = new ArrayList<T>();
 		for (T te : list)
@@ -51,7 +50,7 @@ public class Referential
 		return (subT);
 	}
 
-	public static <T> List<T> exList(List<T> list, String field, String filter)
+	public <T> List<T> exList(List<T> list, String field, String filter)
 	{
 		List<T> subT = new ArrayList<T>();
 		for (T te : list)
@@ -71,9 +70,9 @@ public class Referential
 		return (subT);
 	}
 
-	public static Trader getTrader(Referential ref, String country, String nameIns)
+	public Trader getTrader(Referential ref, String country, String nameIns)
 	{
-		for (Referential.Currency cur : ref.Currencies)
+		for (Referential.Currency cur : ref.currencies)
 			if (cur.country.equals(country))
 				for (Referential.Instrument ins : cur.Instruments)
 					if (ins.name.equals(nameIns))
@@ -108,14 +107,11 @@ public class Referential
 		}
 		
 		public  Currency getCurrencybycountry(String country)
-		{ for (int i=0;i<Currencies.size();i++ )
-			if (Currencies.get(i).country==country)
-			{
-				return Currencies.get(i);
-				
-			}
-		return null;
-		
+		{
+			for (int i=0;i<currencies.size();i++ )
+				if (currencies.get(i).country==country)
+					return currencies.get(i);
+			return null;
 		}
 	}
 
@@ -150,7 +146,7 @@ public class Referential
 		}
 	}
 
-	static public class Trader
+	public class Trader
 	{
 		public String name;
 		public String codeptf;

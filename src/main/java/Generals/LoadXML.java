@@ -74,7 +74,7 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.Counterparts = new ArrayList<Referential.Counterpart>();
+				ref.counterparts = new ArrayList<Referential.Counterpart>();
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
@@ -82,7 +82,7 @@ public class LoadXML
 				Referential.Counterpart counterpart = ref.new Counterpart();
 				counterpart.code = getContent(eElement, "code");
 				counterpart.name = getContent(eElement, "name");
-				ref.Counterparts.add(counterpart);
+				ref.counterparts.add(counterpart);
 			}
 		});
 
@@ -90,7 +90,7 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.Products = new ArrayList<Referential.Product>();
+				ref.products = new ArrayList<Referential.Product>();
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
@@ -102,7 +102,7 @@ public class LoadXML
 				product.libelle = getContent(eElement, "libelle");
 				product.country = getContent(eElement, "country");
 				product.price = Float.parseFloat(getContent(eElement, "price"));
-				ref.Products.add(product);
+				ref.products.add(product);
 			}
 		});
 
@@ -110,7 +110,7 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.Depositaries = new ArrayList<Referential.Depositary>();
+				ref.depositaries = new ArrayList<Referential.Depositary>();
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
@@ -118,7 +118,7 @@ public class LoadXML
 				Referential.Depositary depositary = ref.new Depositary();
 				depositary.code = getContent(eElement, "code");
 				depositary.libelle = getContent(eElement, "libelle");
-				ref.Depositaries.add(depositary);
+				ref.depositaries.add(depositary);
 			}
 		});
 
@@ -126,7 +126,7 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.Portfolios = new ArrayList<Referential.Portfolio>();
+				ref.portfolios = new ArrayList<Referential.Portfolio>();
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
@@ -135,7 +135,7 @@ public class LoadXML
 				portfolio.codeptf = getContent(eElement, "codeptf");
 				portfolio.country = getContent(eElement, "country");
 				portfolio.type = getContent(eElement, "type");
-				ref.Portfolios.add(portfolio);
+				ref.portfolios.add(portfolio);
 			}
 		});
 
@@ -227,7 +227,7 @@ public class LoadXML
 				// Get Main Instrument
 				Instrument	main_ins = null;
 				for (Instrument ins : instruments)
-					if (ins.name.equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
+					if (ins.getName().equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
 					{
 						main_ins = ins;
 						break;
@@ -295,9 +295,7 @@ public class LoadXML
 					if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
 						continue;
 
-					traders.add(new Referential.Trader(etrader
-							.getAttribute("name"), etrader
-							.getAttribute("codeptf")));
+					traders.add(_ref.new Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
 				}
 
 				Referential.Instrument instrument = _ref.new Instrument(einstrument.getAttribute("name"));
@@ -309,7 +307,7 @@ public class LoadXML
 			currency.Instruments = instruments;
 			currencies.add(currency);
 		}
-		_ref.Currencies = currencies;
+		_ref.currencies = currencies;
 	}
 
 	private static void getFilters(Element ebook,
@@ -328,13 +326,13 @@ public class LoadXML
 			{
 				for (String str : vfilter)
 					for (Instrument ins : instruments)
-						if (str.equals(ins.name))
+						if (str.equals(ins.getName()))
 							binstruments.add(ins);
 			}
 			else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
 			{
 				for (String str : vfilter)
-					for (Currency cur : _ref.Currencies)
+					for (Currency cur : _ref.currencies)
 						if (str.equals(cur.code))
 							bcurrencies.add(cur);
 			}
@@ -363,7 +361,7 @@ public class LoadXML
 				// Get Instrument ref for each output
 				for (String str : sins)
 					for (Instrument inst : instruments)
-						if (str.equals(inst.name))
+						if (str.equals(inst.getName()))
 						{
 							opins.add(inst);
 							break;
@@ -428,13 +426,13 @@ public class LoadXML
 			if (eins.getAttribute("name").equalsIgnoreCase("equity"))
 			{
 				Equity equity = new Equity();
-				equity.name = "equity";
+				equity.setName("equity");
 				equity.ownCountry = Integer.parseInt(getContent(eins, "ownCountry"));
 				equity.partSell = Integer.parseInt(getContent(eins, "partSell"));
 				equity.repartitionTolerance = Integer.parseInt(getContent(eins, "toleranceRep"));
 				equity.volumetry = Integer.parseInt(getContent(eins, "volumetry"));
 				equity.volumetryTolerance = Integer.parseInt(getContent(eins, "volumetryTolerance"));
-				equity.montant = Integer.parseInt(getOptContent(eins, "montant", "-1"));
+				equity.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
 				instruments.add(equity);
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
@@ -442,8 +440,8 @@ public class LoadXML
 				LoanDeposit loandepo = new LoanDeposit(Integer.parseInt(getContent(eins, "partLoan")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
 						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "repartitionTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
 						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
-				loandepo.name = "loandepo";
-				loandepo.montant = Integer.parseInt(getOptContent(eins, "montant", "-1"));
+				loandepo.setName("loandepo");
+				loandepo.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
 				instruments.add(loandepo);
 			}
 		}

@@ -58,7 +58,7 @@ public class LoadXMLTest extends TestCase
 		{
 			System.out.println("Business unit " + (indexBu + 1) + " : " + gen.bu.get(indexBu).name.toString());
 			for (int indexInstru = 0; indexInstru < gen.bu.get(indexBu).lins.size(); indexInstru++)
-				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).lins.get(indexInstru).name.toString());
+				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).lins.get(indexInstru).getName().toString());
 			for (int indexPort = 0; indexPort < gen.bu.get(indexBu).lpor.size(); indexPort++)
 			{
 				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).name.toString());
@@ -67,7 +67,7 @@ public class LoadXMLTest extends TestCase
 					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).name.toString());
 					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
 						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : "
-								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.get(indexIns).name);
+								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.get(indexIns).getName());
 					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
 						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : "
 								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.get(indexCur).code);

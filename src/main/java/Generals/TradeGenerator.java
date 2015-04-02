@@ -1,12 +1,8 @@
 package Generals;
 
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 public class TradeGenerator
 {
@@ -20,7 +16,8 @@ public class TradeGenerator
 		try
 		{
 			LoadXML.init(ref);
-		} catch (CustomParsingException e)
+		}
+		catch (CustomParsingException e)
 		{
 			System.out.println("Problem while parsing informations :");
 			System.out.println(e.getMessage());
@@ -35,36 +32,45 @@ public class TradeGenerator
 		int simulate_days = Integer.parseInt(args[0]);
 		int amount_per_book;
 		int j;
-
-		int counter = 0;
+		int dis;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
-			{//main instrument ratio
-				//get nombre de book avec main instrument
-		
+			{// main instrument ratio
+				// get nombre de book avec main instrument
+
+				dis = bu.getMainInstrumentCount();
 				for (Portfolio port : bu.getPortfolios())
-					{
-					
+				{
+
 					for (Book b : port.lb)
-					{	
-						if (b.ins.size() > 0 &&
-							(b.ins.contains(bu.getMainInstrument())))
+					{
+						if (b.ins.size() > 0 && (b.ins.contains(bu.getMainInstrument())))
 						{
-							Instrument t = bu.getMainInstrument();
-							amount_per_book = (int) (gen.budget * bu.getRatio() / 1000);
-							
-							t.generate(b, amount_per_book, calendar.getTime());
-							for (int i=0;i<b.ins.size();i++)
+							amount_per_book = (int) (gen.budget * bu.getRatio() / (dis * 1000));
+							for (int i = 0; i < b.ins.size(); i++)
 							{
-							t=b.ins.get(i);
-							if (!(t.equals(bu.getMainInstrument())))
-							t.generate(b,(int) amount_per_book*5/100, calendar.getTime());
+								Instrument t = b.ins.get(i);
+								if (!(t.equals(bu.getMainInstrument())))
+								{
+									t.generate(b, t.getMontant(), calendar.getTime());
+								}
+								{
+									t.generate(b, amount_per_book, calendar.getTime());
+								}
+
 							}
 						}
-					}}
+						else
+						{
+							if (j == 0)
+								System.out.println("book mal rangé: " + b.name);
+						}
+					}
+
+				}
 			}
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
@@ -74,7 +80,8 @@ public class TradeGenerator
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
 		Report.ConcatSortOutput();
-		Report.report(Report.liste,simulate_days);
+		Report.report(Report.liste, simulate_days);
+		System.out.println("Report done");
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
@@ -89,7 +96,6 @@ public class TradeGenerator
 		}
 		// Only simple node -> print it
 		else
-			writer.write("<" + node.name + ">" + node.value + "</" + node.name
-					+ ">" + System.lineSeparator());
+			writer.write("<" + node.name + ">" + node.value + "</" + node.name + ">" + System.lineSeparator());
 	}
 }
