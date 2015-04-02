@@ -19,7 +19,7 @@ public class Tradeloan extends TradeEvent
 	private String ISIN;	
 	private Referential.Depositary depositary;
 	private Referential.Counterpart counterpart;
-	private Typetaux rate;
+	private RateType rate;
 	private Referential.Trader trader;
 	private Referential.Currency currency;
 	private Double rateValue;
@@ -29,7 +29,7 @@ public class Tradeloan extends TradeEvent
 	private Boolean is_stp;
 
 	public Tradeloan(Instrument instrument, Book book, Date date, int amount,
-			Way way, Typetaux rate, Depositary depositary,
+			Way way, RateType rate, Depositary depositary,
 			Counterpart counterpart, Trader trader, Currency currency,
 			Double rateValue, Term term, BaseCalcul basecalcul)
 	{
