@@ -6,9 +6,9 @@ public class Businessunit
 {
 	private String name;
 	private int ratio;
-	private List<Instrument> listInstrument;
-	private List<Portfolio> listPortfolio;
-	private List<Output> listOutput;
+	private List<Instrument> instruments;
+	private List<Portfolio> portfolios;
+	private List<Output> outputs;
 	private Instrument mainInstrument;
 
 	public String getName()
@@ -31,34 +31,34 @@ public class Businessunit
 		this.ratio = ratio;
 	}
 
-	public List<Instrument> getListInstrument()
+	public List<Instrument> getInstruments()
 	{
-		return listInstrument;
+		return instruments;
 	}
 
-	public void setListInstrument(List<Instrument> listInstrument)
+	public void setInstruments(List<Instrument> instruments)
 	{
-		this.listInstrument = listInstrument;
+		this.instruments = instruments;
 	}
 
-	public List<Portfolio> getListPortfolio()
+	public List<Portfolio> getPortfolios()
 	{
-		return listPortfolio;
+		return portfolios;
 	}
 
-	public void setListPortfolio(List<Portfolio> listPortfolio)
+	public void setPortfolios(List<Portfolio> portfolios)
 	{
-		this.listPortfolio = listPortfolio;
+		this.portfolios = portfolios;
 	}
 
-	public List<Output> getListOutput()
+	public List<Output> getOutputs()
 	{
-		return listOutput;
+		return outputs;
 	}
 
-	public void setListOutput(List<Output> listOutput)
+	public void setOutputs(List<Output> outputs)
 	{
-		this.listOutput = listOutput;
+		this.outputs = outputs;
 	}
 
 	public Instrument getMainInstrument()
@@ -73,7 +73,7 @@ public class Businessunit
 
 	public Instrument getInstrument(String ins_str)
 	{
-		for (Instrument ins : listInstrument)
+		for (Instrument ins : instruments)
 		{
 			if (ins.name.equalsIgnoreCase(ins_str))
 				return (ins);
@@ -81,23 +81,23 @@ public class Businessunit
 		return (null);
 	}
 
-	public Businessunit(String name, int ratio, Instrument mainInstrument, List<Output> listOutput,
-			List<Instrument> listInstrument, List<Portfolio> listPortfolio)
+	public Businessunit(String name, int ratio, Instrument main_instrument, List<Output> outputs,
+			List<Instrument> instruments, List<Portfolio> portfolios)
 	{
 		super();
-		this.mainInstrument = mainInstrument;
+		this.mainInstrument = main_instrument;
 		this.name = name;
 		this.ratio = ratio;
-		this.listInstrument = listInstrument;
-		this.listPortfolio = listPortfolio;
-		this.listOutput = listOutput;
+		this.instruments = instruments;
+		this.portfolios = portfolios;
+		this.outputs = outputs;
 	}
 	
 	public int getMainInstrumentCount()
 	{
 		int	cnt = 0;
 		
-		for (Portfolio port : listPortfolio)
+		for (Portfolio port : portfolios)
 			for (Book book : port.lb)
 				if (book.ins.contains(mainInstrument))
 					++cnt;
