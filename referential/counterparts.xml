@@ -1,66 +1,66 @@
 <counterparts>
-	<counterpart>
-		<code>BRSGCIB</code>
-		<name>counterpart Societe General Investment Banking</name>
-	</counterpart>
-	<counterpart>
-		<code>BRSGSS</code>
-		<name>counterpart Societe Generale Securities Services</name>
-	</counterpart>
-	<counterpart>
-		<code>BRGDF</code>
-		<name>counterpart GDF Indosuez</name>
-	</counterpart>
-	<counterpart>
-		<code>BRAXA</code>
-		<name>counterpart AXA Investment Management</name>
-	</counterpart>
-	<counterpart>
-		<code>BRCACIB</code>
-		<name>counterpart Credit Agricole Agricole Invesment Banking</name>
-	</counterpart>
-	<counterpart>
-		<code>BRCACH</code>
-		<name>counterpart Credit Agricole Cheuvreux</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRCS</code>
-		<name>counterpart Credit Suisse</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRBNPCIB</code>
-		<name>counterpart BNP Paris Investment Banking</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRBPSS</code>
-		<name>counterpart BNP Paris Securities Services</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRDEUB</code>
-		<name>counterpart Deutch Bank</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRFOR</code>
-		<name>counterpart BNP Paribas Fortis</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRBBVA</code>
-		<name>counterpart BBVA</name>
-	</counterpart>
-	
-	<counterpart>
-		<code>BRSANDIR</code>
-		<name>counterpart Banko Santander</name>
-	</counterpart>
-	<counterpart>
-		<code>BRNAX</code>
-		<name>counterpart Natixis</name>
-	</counterpart>
+  <counterpart>
+    <code>BRSGCIB</code>
+    <name>counterpart Societe General Investment Banking</name>
+  </counterpart>
+  <counterpart>
+    <code>BRSGSS</code>
+    <name>counterpart Societe Generale Securities Services</name>
+  </counterpart>
+  <counterpart>
+    <code>BRGDF</code>
+    <name>counterpart GDF Indosuez</name>
+  </counterpart>
+  <counterpart>
+    <code>BRAXA</code>
+    <name>counterpart AXA Investment Management</name>
+  </counterpart>
+  <counterpart>
+    <code>BRCACIB</code>
+    <name>counterpart Credit Agricole Agricole Invesment Banking</name>
+  </counterpart>
+  <counterpart>
+    <code>BRCACH</code>
+    <name>counterpart Credit Agricole Cheuvreux</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRCS</code>
+    <name>counterpart Credit Suisse</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRBNPCIB</code>
+    <name>counterpart BNP Paris Investment Banking</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRBPSS</code>
+    <name>counterpart BNP Paris Securities Services</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRDEUB</code>
+    <name>counterpart Deutch Bank</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRFOR</code>
+    <name>counterpart BNP Paribas Fortis</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRBBVA</code>
+    <name>counterpart BBVA</name>
+  </counterpart>
+
+  <counterpart>
+    <code>BRSANDIR</code>
+    <name>counterpart Banko Santander</name>
+  </counterpart>
+  <counterpart>
+    <code>BRNAX</code>
+    <name>counterpart Natixis</name>
+  </counterpart>
 </counterparts>	
-	
+

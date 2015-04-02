@@ -55,7 +55,7 @@ public class TradeGenerator
 							(b.ins.contains(bu.main_instrument)))
 						{
 							Instrument t = bu.main_instrument;
-							amount_per_book = (int) (gen.total_buget * bu.ratio / 1000);
+							amount_per_book = (int) (gen.budget * bu.ratio / 1000);
 							
 							t.generate(b, amount_per_book, calendar.getTime());
 							for (int i=0;i<b.ins.size();i++)
