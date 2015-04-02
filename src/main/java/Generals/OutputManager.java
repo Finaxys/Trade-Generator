@@ -32,9 +32,6 @@ public class OutputManager
 	{
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
-
-	
-
 		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
 					"." + output.getFormat().toString().toLowerCase();
 
@@ -47,10 +44,8 @@ public class OutputManager
 		String date = "";
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
-
 		if (output.getTrades().size() > 0)
 			date = formater.format(output.getTrades().get(0).getDate());
-
 
 		String path = OUTPUT_PATH + "batch" + output.getId() + "-" + date + "." + output.getFormat().toString().toLowerCase();
 		
@@ -99,7 +94,8 @@ public class OutputManager
 
 		// Get header
 		for (TradeEvent trade : output.getTrades())
-			if (trade_class.contains(trade.getClass()))
+		{
+			if (!trade_class.contains(trade.getClass()))
 			{
 				trade_class.add(trade.getClass());
 
@@ -107,6 +103,13 @@ public class OutputManager
 					if (!header.contains(node.name))
 						header.add(node.name);
 			}
+		}
+		
+		for (String str : header)
+			System.out.println(str);
+
+		System.out.println("---");
+		System.out.println("---");
 
 		for (Instrument ins : output.getInstruments())
 		{
