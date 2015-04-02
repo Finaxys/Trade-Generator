@@ -21,13 +21,14 @@ public class TradeEquity extends TradeEvent
 
 	public TradeEquity(Instrument instrument, String reference, Way way, Date date, Date tradeDate,
 			Counterpart counterpart,Book book, double price, int quantity,
-			Product product, Depositary depositary)
+			Product product, Depositary depositary,Trader trader)
 	{
 		super(reference, way, date, tradeDate, counterpart, book, instrument);
 		this.price = price;
 		this.quantity = quantity;
 		this.product = product;
 		this.depositary = depositary;
+		this.trader=trader;
 	}
 	
 	@Override
@@ -44,7 +45,10 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
 		addNode(nodes, "price", Double.toString(price), null);
 		addNode(nodes, "counterpart", counterpart.code, null);
-
+		addNode(nodes, "product", product.name, null);
+		addNode(nodes, "depositary", depositary.toString(), null);
+		addNode(nodes, "trader", trader.name, null);
+		
 		return (nodes);
 	}
 }
