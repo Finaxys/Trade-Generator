@@ -80,8 +80,8 @@ public class TradeGenerator
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
 		Report.ConcatSortOutput();
-		Report.report(Report.liste, simulate_days);
-		System.out.println("Report done");
+//		Report.report(Report.liste, simulate_days);
+//		System.out.println("Report done");
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
