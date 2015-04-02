@@ -29,21 +29,26 @@ import Generals.Referential.Trader;
 public class Tradeloan extends TradeEvent
 {
 	
-	Referential.Depositary depositary;
-	Referential.Counterpart counterpart;
-
-	Typetaux rate;
-	Referential.Trader trader;
-	Referential.Currency currency;
-	public float rateValue;
-	public Term term;
-	BaseCalcul basecalcul;
-	public Boolean is_stp;
+	private Date valueDate;
+	private Date maturityDate;
+	private Double national;	
+	private Indexation index;
+	private String ISIN;	
+	private Referential.Depositary depositary;
+	private Referential.Counterpart counterpart;
+	private Typetaux rate;
+	private Referential.Trader trader;
+	private Referential.Currency currency;
+	private Double rateValue;
+	private Double spread;
+	private Term term;
+	private BaseCalcul basecalcul;
+	private Boolean is_stp;
 
 	public Tradeloan(Instrument instrument, Book book, Date date, int amount,
 			Way way, Typetaux rate, Depositary depositary,
 			Counterpart counterpart, Trader trader, Currency currency,
-			float rateValue, Term term, BaseCalcul basecalcul)
+			Double rateValue, Term term, BaseCalcul basecalcul)
 	{
 		super(book, date,way, amount);
 	
@@ -56,7 +61,7 @@ public class Tradeloan extends TradeEvent
 		this.rateValue = rateValue;
 		this.term = term;
 		this.basecalcul = basecalcul;
-		this.instrument = instrument;
+		this.setInstrument(instrument);
 	}
 
 	@Override
@@ -68,7 +73,7 @@ public class Tradeloan extends TradeEvent
 		addNode(nodes, "business", book.pt.bu.name, null);
 		addNode(nodes, "portfolio", book.pt.name, null);
 		addNode(nodes, "book", book.name, null);
-		addNode(nodes, "way", way.equals(Way.BUY) ? "LOAN" : "DEPO", null);
+		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "loandepo", null);
 		addNode(nodes, "amount", Float.toString(amount), null);
 		addNode(nodes, "depositary", depositary.code, null);
@@ -76,7 +81,7 @@ public class Tradeloan extends TradeEvent
 		addNode(nodes, "rate", rate.name(), null);
 		addNode(nodes, "trader", trader.codeptf, null);
 		addNode(nodes, "currency", currency.name, null);
-		addNode(nodes, "rateValue", Float.toString(rateValue), null);
+		addNode(nodes, "rateValue", Double.toString(rateValue), null);
 		addNode(nodes, "term", term.name(), null);
 		addNode(nodes, "basecalcul", basecalcul.name(), null);
 		return (nodes);

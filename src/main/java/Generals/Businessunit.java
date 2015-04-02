@@ -15,7 +15,7 @@ public class Businessunit
 	{
 		for (Instrument ins : lins)
 		{
-			if (ins.name.equalsIgnoreCase(ins_str))
+			if (ins.getName().equalsIgnoreCase(ins_str))
 				return (ins);
 		}
 		return (null);

@@ -5,12 +5,11 @@ import java.util.Date;
 
 public class TradeEquity extends TradeEvent
 {
-	int quantity;
-	
-	Referential.Depositary depositary;
-	Referential.Counterpart counterpart;
-	Referential.Trader trader;
-	Referential.Product product;
+	private int quantity;
+	private Referential.Depositary depositary;
+	private Referential.Counterpart counterpart;
+	private Referential.Trader trader;
+	private Referential.Product product;
 
 	public TradeEquity(Instrument instrument, Book book, Date date, Way way,
 			float amount, int quantity, Referential.Depositary d1,
@@ -27,7 +26,7 @@ public class TradeEquity extends TradeEvent
 		this.product = pro1;
 		this.currency = cur1;
 		this.portfolio = port1;
-		this.instrument = instrument;
+		this.setInstrument(instrument);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "business", book.pt.bu.name, null);
 		addNode(nodes, "portfolio", book.pt.name, null);
 		addNode(nodes, "book", book.name, null);
-		addNode(nodes, "way", way.equals(Way.BUY) ? "BUY" : "sell", null);
+		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);

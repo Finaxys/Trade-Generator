@@ -25,7 +25,7 @@ private Report()
 	Report.liste=new ArrayList<TradeEvent>();
 	try {
 		writer = new PrintWriter(OUTPUT_PATH,OUTPUT_ENCODING);
-		writer.write("Date" +"," +"BussinessUnit"+","+"Portfolio" +"," +"Book" +","+"Instrument" +","+"Sens" +","+"Nombre de transactions"+","+"Montant engagé" +","+System.lineSeparator());
+		writer.write("Date" +"," +"BussinessUnit"+","+"Portfolio" +"," +"Book" +","+"Instrument" +","+"Sens" +","+"Nombre de transactions"+","+"Montant engage" +" EU"+","+System.lineSeparator());
 		
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -60,7 +60,7 @@ public static void writeCSTrade(TradeEvent te, int nombre_op,float montant) thro
 	
 	String s=System.lineSeparator();
 	
-	writer.write(te.date +","+te.book.pt.bu.name+","+te.book.pt.name +","+te.book.name +","+te.way +","+nombre_op+","+montant +","+ s);
+	writer.write(te.getDate() +","+te.getBook().pt.bu.name+","+te.getBook().pt.name +","+te.getBook().name +","+te.getInstrument()+","+te.getWay() +","+nombre_op+","+montant +","+ s);
 //	writer.write(System.lineSeparator());
 //	writer.write(te.date.toString() +",");
 //	writer.write(System.lineSeparator());
@@ -121,7 +121,7 @@ public static void report(ArrayList<TradeEvent> lists,int j){
 			nombre_transaction++;
 			writeCSTrade(te,nombre_transaction,montant);
 
-			if (!lists.get(i).way.name().equalsIgnoreCase("sell")) {MS=MS+montant;NS=NS+nombre_transaction;}else{ME=ME+montant;NE=NE+nombre_transaction;}
+			if (!lists.get(i).getWay().name().equalsIgnoreCase("sell")) {MS=MS+montant;NS=NS+nombre_transaction;}else{ME=ME+montant;NE=NE+nombre_transaction;}
 			}
 			{
 				if (lists.get(i).compareTo(te)==0)
@@ -131,7 +131,7 @@ public static void report(ArrayList<TradeEvent> lists,int j){
 				}else
 				{	writeCSTrade(te,nombre_transaction,montant);
 					
-					if (!lists.get(i).way.name().equalsIgnoreCase("sell")) {MS=MS+montant;NS=NS+nombre_transaction;}else{ME=ME+montant;NE=NE+nombre_transaction;}
+					if (!lists.get(i).getWay().name().equalsIgnoreCase("sell")) {MS=MS+montant;NS=NS+nombre_transaction;}else{ME=ME+montant;NE=NE+nombre_transaction;}
 					nombre_transaction=1;
 					montant=lists.get(i).amount; 
 					

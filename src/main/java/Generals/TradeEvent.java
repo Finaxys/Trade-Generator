@@ -5,17 +5,22 @@ import java.util.Date;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
-	Way  way;
-	static long counter = 0;
-	long id;
-	Referential.Currency currency;
-	Referential.Portfolio portfolio;
-	public Book book;
-	public Date date;
-	public Instrument instrument;
+	private static long counter = 0;
+	private long id;
+	protected Referential.Currency currency;
+	protected Referential.Portfolio portfolio;
+	protected Book book;
+	private Date date;
+	protected Instrument instrument;
 	protected ArrayList<Node> nodes;
-	float amount;
-	
+	protected float amount;
+	private String reference;
+	private Way way;
+	private Date eventDate;
+	private Date tradeDate;
+	private String counterpart;
+	private ProductType product;
+
 	
 	public class Node
 	{
@@ -27,10 +32,10 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 
 	public TradeEvent(Book book, Date date, Way way, float amount)
 	{
-		id = ++counter;
-		this.book = book;
-		this.date = date;
-		this.way = way;
+		setId(++counter);
+		this.setBook(book);
+		this.setDate(date);
+		this.setWay(way);
 		this.amount=amount;
 	}
 
@@ -48,19 +53,59 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	
 	public int compareTo(TradeEvent trade) 
 	{
-		 if (!(this.date.equals(trade.date)))
-	         return (int) (this.date.getTime()-trade.date.getTime());
+		 if (!(this.getDate().equals(trade.getDate())))
+	         return (int) (this.getDate().getTime()-trade.getDate().getTime());
 //	     if (!this.book.pt.bu.name.equalsIgnoreCase(trade.book.pt.bu.name))
 //	    	 return 1;
-	     if (!this.book.pt.name.equalsIgnoreCase(trade.book.pt.name))
-	    	 return this.book.pt.name.compareTo(trade.book.pt.name);
-	     if (!this.book.name.equalsIgnoreCase(trade.book.name))
-	    	 return this.book.name.compareTo(trade.book.name);
-	     if (!this.instrument.name.equalsIgnoreCase(trade.instrument.name))
-	    	 return this.instrument.name.compareTo(trade.instrument.name);
-	     return (this.way.name().compareTo(trade.way.name()));
+	     if (!this.getBook().pt.name.equalsIgnoreCase(trade.getBook().pt.name))
+	    	 return this.getBook().pt.name.compareTo(trade.getBook().pt.name);
+	     if (!this.getBook().name.equalsIgnoreCase(trade.getBook().name))
+	    	 return this.getBook().name.compareTo(trade.getBook().name);
+	     if (!this.instrument.getName().equalsIgnoreCase(trade.getInstrument().getName()))
+	    	 return this.instrument.getName().compareTo(trade.getInstrument().getName());
+	     return (this.getWay().name().compareTo(trade.getWay().name()));
 //	    	return 0; 
 	     }
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public Instrument getInstrument() {
+		return instrument;
+	}
+
+	public void setInstrument(Instrument instrument) {
+		this.instrument = instrument;
+	}
+
+	public Way getWay() {
+		return way;
+	}
+
+	public void setWay(Way way) {
+		this.way = way;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	    	
 	   
 	}

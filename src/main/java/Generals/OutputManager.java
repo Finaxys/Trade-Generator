@@ -42,7 +42,7 @@ public class OutputManager
 	{
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
-		String path = OUTPUT_PATH + "stp" + trade.id + "-" + formater.format(trade.date) +
+		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
 					"." + output.format.toString().toLowerCase();
 		
 		return (new PrintWriter(path, OUTPUT_ENCODING));
@@ -54,7 +54,7 @@ public class OutputManager
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 
 		if (output.te.size() > 0)
-			date = formater.format(output.te.get(0).date);
+			date = formater.format(output.te.get(0).getDate());
 
 		String path = OUTPUT_PATH + "batch" + output.id + "-" + date + "." + output.format.toString().toLowerCase();
 		
@@ -106,7 +106,7 @@ public class OutputManager
 			for (TradeEvent trade : output.te)
 			{
 				// Only one instrument at a time to keep them together
-				if (trade.instrument != ins)
+				if (trade.getInstrument() != ins)
 				{
 					te_remaining.add(trade);
 					continue;

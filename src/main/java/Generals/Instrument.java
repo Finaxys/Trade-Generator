@@ -8,8 +8,8 @@ import java.util.Random;
 
 public abstract class Instrument
 {
-	public String 	name;
-	public int		montant;
+	private String 	name;
+	private int		montant;
 
 	public void generate(Book b, int montant, Date date)
 	{
@@ -17,8 +17,8 @@ public abstract class Instrument
 
 	static public Output getOutputFromTrade(TradeEvent trade)
 	{
-		for (Output op : trade.book.pt.bu.lop)
-			if (op.instruments.contains(trade.instrument))
+		for (Output op : trade.getBook().pt.bu.lop)
+			if (op.instruments.contains(trade.getInstrument()))
 				return (op);
 
 		return (null);
@@ -85,7 +85,23 @@ public abstract class Instrument
 		if (!(ins instanceof Instrument))
 			return (false);
 
-		return (((Instrument) ins).name.equalsIgnoreCase(this.name));
+		return (((Instrument) ins).getName().equalsIgnoreCase(this.getName()));
+	}
+
+	public int getMontant() {
+		return montant;
+	}
+
+	public void setMontant(int montant) {
+		this.montant = montant;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

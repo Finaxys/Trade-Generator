@@ -8,17 +8,17 @@ public class LoanDeposit extends Instrument
 {
 	// type de taux (fixe/variable), base de calcul, valeur du taux, devise,
 	// durée
-	public String devise;
-	public int Partloan;
-	public int owncountry;
-	public int volumetry;
-	public int volumetry_tolerance;
-	public int repartition_tolerance;
-	public float valeur_taux;
-	public int tolerance_taux_var;
-	public int part_taux_variable;
-	public int durée;
-	BaseCalcul basecalcul;
+	private String devise;
+	private int Partloan;
+	private int owncountry;
+	private int volumetry;
+	private int volumetry_tolerance;
+	private int repartition_tolerance;
+	private float valeur_taux;
+	private int tolerance_taux_var;
+	private int part_taux_variable;
+	private int durée;
+	private BaseCalcul basecalcul;
 
 	public LoanDeposit(int partloan, int owncountry,
 			int volumetry, int volumetry_tolerance,
@@ -105,7 +105,7 @@ public class LoanDeposit extends Instrument
 			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
 
 					t2.get(i), t3.get(i), d1, c1, tr1, cur1, valeur_taux
-							* random.nextFloat(), Term.getRandom(),
+							* random.nextDouble(), Term.getRandom(),
 					BaseCalcul.getRandom());
 			tradeGenerated(tl);
 
