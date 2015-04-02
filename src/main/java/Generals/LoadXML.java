@@ -452,7 +452,7 @@ public class LoadXML
 		for (Businessunit bu : Generals.getInstance().bu)
 		{
 			// Set Ref BU/PORT for Books
-			for (Portfolio pt : bu.lpor)
+			for (Portfolio pt : bu.getPortfolios())
 			{
 				pt.bu = bu;
 

@@ -56,21 +56,21 @@ public class LoadXMLTest extends TestCase
 		// bu
 		for (int indexBu = 0; indexBu < gen.bu.size(); indexBu++)
 		{
-			System.out.println("Business unit " + (indexBu + 1) + " : " + gen.bu.get(indexBu).name.toString());
-			for (int indexInstru = 0; indexInstru < gen.bu.get(indexBu).lins.size(); indexInstru++)
-				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).lins.get(indexInstru).getName().toString());
-			for (int indexPort = 0; indexPort < gen.bu.get(indexBu).lpor.size(); indexPort++)
+			System.out.println("Business unit " + (indexBu + 1) + " : " + gen.bu.get(indexBu).getName().toString());
+			for (int indexInstru = 0; indexInstru < gen.bu.get(indexBu).getInstruments().size(); indexInstru++)
+				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).getInstruments().get(indexInstru).getName().toString());
+			for (int indexPort = 0; indexPort < gen.bu.get(indexBu).getPortfolios().size(); indexPort++)
 			{
-				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).name.toString());
-				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).lpor.get(indexPort).lb.size(); indexBook++)
+				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).name.toString());
+				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.size(); indexBook++)
 				{
-					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).name.toString());
-					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
+					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).name.toString());
+					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).ins.size(); indexIns++)
 						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : "
-								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).ins.get(indexIns).getName());
-					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
+								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).ins.get(indexIns).getName());
+					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).cur.size(); indexCur++)
 						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : "
-								+ gen.bu.get(indexBu).lpor.get(indexPort).lb.get(indexBook).cur.get(indexCur).code);
+								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).lb.get(indexBook).cur.get(indexCur).code);
 				}
 
 			}
@@ -82,18 +82,18 @@ public class LoadXMLTest extends TestCase
 
 		testInit();
 		System.out.println("\nCheck if values of the trader file are recovered.");
-		System.out.println("Size currencies = " + ref.Currencies.size());
-		for (int indexCur = 0; indexCur < ref.Currencies.size(); indexCur++)
+		System.out.println("Size currencies = " + ref.currencies.size());
+		for (int indexCur = 0; indexCur < ref.currencies.size(); indexCur++)
 		{
-			System.out.println("Currency " + (indexCur + 1) + " : " + ref.Currencies.get(indexCur).code + " " + ref.Currencies.get(indexCur).name + " "
-					+ ref.Currencies.get(indexCur).country);
-			System.out.println("Size instru = " + ref.Currencies.get(indexCur).Instruments.size());
-			for (int indexIns = 0; indexIns < ref.Currencies.get(indexCur).Instruments.size(); indexIns++)
+			System.out.println("Currency " + (indexCur + 1) + " : " + ref.currencies.get(indexCur).code + " " + ref.currencies.get(indexCur).name + " "
+					+ ref.currencies.get(indexCur).country);
+			System.out.println("Size instru = " + ref.currencies.get(indexCur).Instruments.size());
+			for (int indexIns = 0; indexIns < ref.currencies.get(indexCur).Instruments.size(); indexIns++)
 			{
-				System.out.println("Instrument " + (indexIns + 1) + " " + ref.Currencies.get(indexCur).Instruments.get(indexIns).name);
-				for (int indexTra = 0; indexTra < ref.Currencies.get(indexCur).Instruments.get(indexIns).Traders.size(); indexTra++)
-					System.out.println("Trader " + (indexTra + 1) + " " + ref.Currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).name
-							+ " " + ref.Currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).codeptf);
+				System.out.println("Instrument " + (indexIns + 1) + " " + ref.currencies.get(indexCur).Instruments.get(indexIns).name);
+				for (int indexTra = 0; indexTra < ref.currencies.get(indexCur).Instruments.get(indexIns).Traders.size(); indexTra++)
+					System.out.println("Trader " + (indexTra + 1) + " " + ref.currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).name
+							+ " " + ref.currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).codeptf);
 			}
 		}
 	}

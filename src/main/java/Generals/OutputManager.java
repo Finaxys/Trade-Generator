@@ -62,7 +62,7 @@ public class OutputManager
 		try
 		{
 			for (Businessunit bu : Generals.getInstance().bu)
-				for (Output output : bu.lop)
+				for (Output output : bu.getOutputs())
 				{
 					writer = getWriter(output);
 
