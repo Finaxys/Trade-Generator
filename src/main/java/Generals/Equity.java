@@ -6,12 +6,72 @@ import java.util.Random;
 
 public class Equity extends Instrument
 {
-	public int partSell;
-	public int ownCountry;
-	public int volumetry;
-	public double volumetryTolerance;
-	public double repartitionTolerance;
-	public Boolean isStp;
+	private int partSell;
+	private int ownCountry;
+	private int volumetry;
+	private double volumetryTolerance;
+	private double repartitionTolerance;
+	private Boolean isStp;
+
+	public int getPartSell()
+	{
+		return partSell;
+	}
+
+	public void setPartSell(int partSell)
+	{
+		this.partSell = partSell;
+	}
+
+	public int getOwnCountry()
+	{
+		return ownCountry;
+	}
+
+	public void setOwnCountry(int ownCountry)
+	{
+		this.ownCountry = ownCountry;
+	}
+
+	public int getVolumetry()
+	{
+		return volumetry;
+	}
+
+	public void setVolumetry(int volumetry)
+	{
+		this.volumetry = volumetry;
+	}
+
+	public double getVolumetryTolerance()
+	{
+		return volumetryTolerance;
+	}
+
+	public void setVolumetryTolerance(double volumetryTolerance)
+	{
+		this.volumetryTolerance = volumetryTolerance;
+	}
+
+	public double getRepartitionTolerance()
+	{
+		return repartitionTolerance;
+	}
+
+	public void setRepartitionTolerance(double repartitionTolerance)
+	{
+		this.repartitionTolerance = repartitionTolerance;
+	}
+
+	public Boolean getIsStp()
+	{
+		return isStp;
+	}
+
+	public void setIsStp(Boolean isStp)
+	{
+		this.isStp = isStp;
+	}
 
 	@Override
 	public void generate(Book book, int amount, Date date)
@@ -23,8 +83,7 @@ public class Equity extends Instrument
 		double toleredVolumetry;
 		Random random = new Random();
 
-		rand1 = this.repartitionTolerance * 2 * (random.nextDouble() - 0.5)
-				/ 100;
+		rand1 = this.repartitionTolerance * 2 * (random.nextDouble() - 0.5) / 100;
 		rand2 = this.volumetryTolerance * 2 * (random.nextDouble() - 0.5) / 100;
 		amountPerDay += rand1 * amountPerDay;
 
@@ -36,7 +95,7 @@ public class Equity extends Instrument
 
 		double randomquantity;
 		List<Integer> Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
-		
+
 		int quantity;
 		float price;
 
@@ -50,18 +109,16 @@ public class Equity extends Instrument
 		Referential.Product pro;
 		Referential.Currency cur = null;
 		Referential.Portfolio port;
-			
-		 List<Referential.Product> Listequity=ref.subList(ref.products,
-		 "type", "EQUITY");
-		 t1 = Instrument.tableaubin(roundedVolume,
-		 this.ownCountry,Locality.class);
-		 t2 = Instrument.tableaubin(roundedVolume, this.partSell,Way.class);
+
+		List<Referential.Product> Listequity = ref.subList(ref.products, "type", "EQUITY");
+		t1 = Instrument.tableaubin(roundedVolume, this.ownCountry, Locality.class);
+		t2 = Instrument.tableaubin(roundedVolume, this.partSell, Way.class);
 		for (int i = 0; i < roundedVolume; i++)
 		{
 
 			// sharing of amount per trade
 			randToleranceQuantities = (float) Math.random();
-			
+
 			// set random price -+3%
 			randomquantity = 6 * (random.nextDouble() - 0.5);
 
@@ -74,22 +131,19 @@ public class Equity extends Instrument
 
 			if (t1.get(i).toString() == "NATIONAL")
 			{
-				cur=ref.subList(ref.currencies, "country",
-						generals.owncountry).get(0);
+				cur = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
 			}
 			{
-				cur = ref.getRandomElement(ref.exList(ref.currencies, "country",
-						generals.owncountry));
+				cur = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
 			}
 			pro = ref.getRandomElement(Listequity);
 			port = ref.getRandomElement(ref.portfolios);
 			price = pro.price;
-			//price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
+			// price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
 
 			price = (float) (price * (1 + randomquantity / 100));
 			quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
-			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity*price,
-					quantity, d, c, tr, pro, cur, port);
+			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity * price, quantity, d, c, tr, pro, cur, port);
 			tradeGenerated(tq1);
 
 		}
