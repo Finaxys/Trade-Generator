@@ -6,8 +6,6 @@ import java.util.Random;
 
 public class LoanDeposit extends Instrument
 {
-	// type de taux (fixe/variable), base de calcul, valeur du taux, devise,
-	// durée
 	public String devise;
 	public int Partloan;
 	public int owncountry;

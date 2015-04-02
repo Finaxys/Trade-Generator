@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 public class OutputManager
 {
@@ -31,7 +28,6 @@ public class OutputManager
 		return (instance);
 	}
 	
-	@SuppressWarnings("unused")
 	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
@@ -94,7 +90,7 @@ public class OutputManager
 	{
 		for (Instrument ins : output.getInstruments())
 		{
-			ArrayList<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
+			List<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
 			boolean first = true;
 
 			for (TradeEvent trade : output.getTrades())
@@ -114,7 +110,7 @@ public class OutputManager
 					continue;
 				}
 
-				ArrayList<TradeEvent.Node> nodes = trade.getNodes();
+				List<TradeEvent.Node> nodes = trade.getNodes();
 
 				for (TradeEvent.Node node : nodes)
 					writer.write(node.value + ",");
@@ -136,7 +132,7 @@ public class OutputManager
 
 	private void writeCSVTrade(TradeEvent trade)
 	{
-		ArrayList<TradeEvent.Node> nodes = trade.getNodes();
+		List<TradeEvent.Node> nodes = trade.getNodes();
 
 		for (TradeEvent.Node node : nodes)
 			writer.write(node.name + ",");

@@ -2,6 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class TradeEquity extends TradeEvent
 {
@@ -31,7 +32,7 @@ public class TradeEquity extends TradeEvent
 	}
 
 	@Override
-	public ArrayList<Node> getNodes()
+	public List<Node> getNodes()
 	{
 		nodes = new ArrayList<Node>();
 

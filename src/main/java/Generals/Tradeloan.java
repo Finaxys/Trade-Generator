@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -60,7 +61,7 @@ public class Tradeloan extends TradeEvent
 	}
 
 	@Override
-	public ArrayList<Node> getNodes()
+	public List<Node> getNodes()
 	{
 		// TODO Auto-generated method stub
 		nodes = new ArrayList<Node>();

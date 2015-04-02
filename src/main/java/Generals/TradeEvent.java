@@ -2,6 +2,7 @@ package Generals;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
@@ -13,7 +14,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	public Book book;
 	public Date date;
 	public Instrument instrument;
-	protected ArrayList<Node> nodes;
+	protected List<Node> nodes;
 	float amount;
 	
 	
@@ -21,7 +22,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	{
 		public String name;
 		public String value; // If empty take list of nodes
-		public ArrayList<Node> nodes;
+		public List<Node> nodes;
 	}
 
 
@@ -34,10 +35,10 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 		this.amount=amount;
 	}
 
-	public abstract ArrayList<Node> getNodes();
+	public abstract List<Node> getNodes();
 
-	public void addNode(ArrayList<Node> root, String name, String value,
-			ArrayList<Node> nodes)
+	public void addNode(List<Node> root, String name, String value,
+			List<Node> nodes)
 	{
 		Node node = new Node();
 		node.name = name;
