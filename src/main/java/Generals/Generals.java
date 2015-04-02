@@ -1,6 +1,6 @@
 package Generals;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Generals
 {
@@ -8,7 +8,7 @@ public class Generals
 	public String	bank_name;
 	public int		budget;
 	public String	owncountry;
-	public ArrayList<Businessunit> bu;
+	public List<Businessunit> bu;
 
 	private Generals()
 	{
@@ -23,7 +23,7 @@ public class Generals
 	}
 
 	public void init(String bankname, int budget,
-			String owncountry, ArrayList<Businessunit> bu)
+			String owncountry, List<Businessunit> bu)
 	{
 		this.bank_name = bankname;
 		this.budget = budget;

@@ -202,13 +202,13 @@ public class LoadXML
 			Element esetting = (Element) settings.item(0);
 
 			// Get businessunits
-			ArrayList<Businessunit> businessunits = new ArrayList<Businessunit>();
+			List<Businessunit> businessunits = new ArrayList<Businessunit>();
 			NodeList nbusinessunits = doc.getElementsByTagName("businessUnit");
 			for (int ibu = 0; ibu < nbusinessunits.getLength(); ibu++)
 			{
-				ArrayList<Instrument> instruments = new ArrayList<Instrument>();
-				ArrayList<Portfolio> portfolios = new ArrayList<Portfolio>();
-				ArrayList<Output> outputs = new ArrayList<Output>();
+				List<Instrument> instruments = new ArrayList<Instrument>();
+				List<Portfolio> portfolios = new ArrayList<Portfolio>();
+				List<Output> outputs = new ArrayList<Output>();
 
 				Element ebusinessunit = (Element) nbusinessunits.item(ibu);
 
@@ -263,13 +263,13 @@ public class LoadXML
 		Document doc = dBuilder.parse(fXmlFile);
 		doc.getDocumentElement().normalize();
 
-		ArrayList<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
+		List<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
 		
 		// Get currencies
 		NodeList ncurrencies = doc.getElementsByTagName("currency");
 		for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
 		{
-			ArrayList<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
+			List<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
 
 			Element ecurrency = (Element) ncurrencies.item(icurrencies);
 			if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
@@ -280,7 +280,7 @@ public class LoadXML
 					.getElementsByTagName("instrument");
 			for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++)
 			{
-				ArrayList<Referential.Trader> traders = new ArrayList<Referential.Trader>();
+				List<Referential.Trader> traders = new ArrayList<Referential.Trader>();
 
 				Element einstrument = (Element) ninstruments.item(iinstru);
 				if (((Node) einstrument).getNodeType() != Node.ELEMENT_NODE)
@@ -313,8 +313,8 @@ public class LoadXML
 	}
 
 	private static void getFilters(Element ebook,
-			ArrayList<Instrument> binstruments,
-			ArrayList<Currency> bcurrencies, ArrayList<Instrument> instruments)
+			List<Instrument> binstruments,
+			List<Currency> bcurrencies, List<Instrument> instruments)
 	{
 		NodeList nfilters = ebook.getElementsByTagName("filter");
 		for (int ifilter = 0; ifilter < nfilters.getLength(); ifilter++)
@@ -342,7 +342,7 @@ public class LoadXML
 	}
 
 	private static void getOutputs(Element ebusinessunit, Element esetting,
-			ArrayList<Output> outputs, ArrayList<Instrument> instruments) throws CustomParsingException
+			List<Output> outputs, List<Instrument> instruments) throws CustomParsingException
 	{
 		NodeList noutputs = ebusinessunit.getElementsByTagName("output");
 		for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
@@ -352,12 +352,12 @@ public class LoadXML
 				continue;
 
 			String sinst = getContent(eoutput, "instrument");
-			ArrayList<Instrument> opins = new ArrayList<Instrument>();
+			List<Instrument> opins = new ArrayList<Instrument>();
 			if (sinst.equalsIgnoreCase("all"))
 				opins.addAll(instruments);
 			else
 			{
-				ArrayList<String> sins = new ArrayList<String>(
+				List<String> sins = new ArrayList<String>(
 						Arrays.asList(sinst.split("\\s*,\\s*")));
 
 				// Get Instrument ref for each output
@@ -376,7 +376,7 @@ public class LoadXML
 	}
 
 	private static void getPortfolios(Element ebusinessunit,
-			ArrayList<Portfolio> portfolios, ArrayList<Instrument> instruments)
+			List<Portfolio> portfolios, List<Instrument> instruments)
 	{
 		NodeList nportfolios = ebusinessunit.getElementsByTagName("portfolio");
 		for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
@@ -385,15 +385,14 @@ public class LoadXML
 			if (((Node) eportfolio).getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
-			ArrayList<Book> books = new ArrayList<Book>();
+			List<Book> books = new ArrayList<Book>();
 			getBooks(eportfolio, books, instruments);
 
-			portfolios
-			.add(new Portfolio(eportfolio.getAttribute("name"), books));
+			portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));
 		}
 	}
 
-	private static void getBooks(Element eportfolio, ArrayList<Book> books, ArrayList<Instrument> instruments)
+	private static void getBooks(Element eportfolio, List<Book> books, List<Instrument> instruments)
 	{
 		// Get books
 		NodeList nbooks = eportfolio.getElementsByTagName("book");
@@ -403,8 +402,8 @@ public class LoadXML
 			if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
-			ArrayList<Currency> bcurrencies = new ArrayList<Currency>();
-			ArrayList<Instrument> binstruments = new ArrayList<Instrument>();
+			List<Currency> bcurrencies = new ArrayList<Currency>();
+			List<Instrument> binstruments = new ArrayList<Instrument>();
 
 			// Get filters
 			getFilters(ebook, binstruments, bcurrencies, instruments);
@@ -415,7 +414,7 @@ public class LoadXML
 	}
 
 	private static void getInstruments(Element ebusinessunit,
-			ArrayList<Instrument> instruments) throws CustomParsingException
+			List<Instrument> instruments) throws CustomParsingException
 	{
 		NodeList ninstruments = ebusinessunit
 				.getElementsByTagName("instrument");

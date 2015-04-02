@@ -1,14 +1,15 @@
 package Generals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Businessunit
 {
 	public String name;
 	public int ratio;
-	public ArrayList<Instrument> lins;
-	public ArrayList<Portfolio> lpor;
-	public ArrayList<Output> lop;
+	public List<Instrument> lins;
+	public List<Portfolio> lpor;
+	public List<Output> lop;
 	public Instrument		main_instrument;
 
 	public Instrument getInstrument(String ins_str)
@@ -21,8 +22,8 @@ public class Businessunit
 		return (null);
 	}
 
-	public Businessunit(String name, int ratio, Instrument mainins, ArrayList<Output> lop,
-			ArrayList<Instrument> lins, ArrayList<Portfolio> lpor)
+	public Businessunit(String name, int ratio, Instrument mainins, List<Output> lop,
+			List<Instrument> lins, List<Portfolio> lpor)
 	{
 		super();
 		this.main_instrument = mainins;
