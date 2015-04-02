@@ -12,29 +12,19 @@ import Generals.Referential.Product;
 import Generals.Referential.Trader;
 
 public class TradeEquity extends TradeEvent
-{
-	private int					quantity;
-	private Referential.Product	product;
+{	
+	private double 						price;
+	private int							quantity;
+	private Referential.Product			product;
+	protected Referential.Depositary 	depositary;
+	protected Referential.Trader 		trader;
+	
 
-	public TradeEquity(long id, Currency currency, Portfolio portfolio,
-			Book book, Instrument instrument, List<Node> nodes, float amount,
-			String reference, Way way, Date eventDate, Date tradeDate,
-			ProductType producttype, Depositary depositary,
-			Counterpart counterpart, Trader trader, int quantity,
-			Product product2) {
-		super(id, currency, portfolio, book, instrument, nodes, amount,
-				reference, way, eventDate, tradeDate, producttype, depositary,
-				counterpart, trader);
-		this.quantity = quantity;
-		product = product2;
-	}
 
 	@Override
 	public List<Node> getNodes()
 	{
 		nodes = new ArrayList<Node>();
-
-
 		addNode(nodes, "business", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);
 		addNode(nodes, "book", book.getName(), null);
@@ -42,9 +32,24 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
-		addNode(nodes, "price", Float.toString(amount), null);
-		addNode(nodes, "currency", currency.code, null);
+		addNode(nodes, "price", Double.toString(price), null);
 		addNode(nodes, "trader", trader.codeptf, null);
 		return (nodes);
 	}
+
+
+
+	public TradeEquity(String reference, Way way, Date date, Date tradeDate,
+			Counterpart counterpart,Book book, double price, int quantity,
+			Product product, Depositary depositary) {
+		super(reference, way, date, tradeDate, counterpart, book);
+		this.price = price;
+		this.quantity = quantity;
+		this.product = product;
+		this.depositary = depositary;
+	}
+
+
+
+
 }

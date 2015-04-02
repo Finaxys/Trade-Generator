@@ -4,14 +4,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import Generals.Referential.Counterpart;
+import Generals.Referential.Depositary;
+import Generals.Referential.Portfolio;
+import Generals.Referential.Product;
+import Generals.Referential.Trader;
+import Generals.TradeEvent.Node;
+
 public class Equity extends Instrument
 {
-	private int partSell;
-	private int ownCountry;
-	private int volumetry;
-	private double volumetryTolerance;
-	private double repartitionTolerance;
-	private Boolean isStp;
+	private int 		partSell;
+	private int 		ownCountry;
+	private int 		volumetry;
+	private double 		volumetryTolerance;
+	private double 		repartitionTolerance;
+	private Boolean 	isStp;
 
 	@Override
 	public void generate(Book book, int amount, Date date)
@@ -88,8 +95,8 @@ public class Equity extends Instrument
 
 			price = (float) (price * (1 + randomquantity / 100));
 			quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
-//			TradeEquity tq1 = new TradeEquity(this, book, date, t2.get(i), quantity * price, quantity, d, c, tr, pro, cur, port);
-//			tradeGenerated(tq1);
+			TradeEquity tq1 = new TradeEquity("reference",t2.get(i), date, date, c, book, price,quantity,pro,d);
+			tradeGenerated(tq1);
 
 		}
 	}

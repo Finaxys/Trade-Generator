@@ -11,45 +11,31 @@ import Generals.Referential.Trader;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
-	private static long 			counter = 0;
-	private long 					id;
-	protected Referential.Currency 	currency;
-	protected Referential.Portfolio portfolio;
-	protected Book 					book;
-	protected Instrument 			instrument;
-	protected List<Node> 			nodes;
-	protected float 				amount;
-	private String 					reference;
-	private Way 					way;
-	private Date 					date;
-	private Date 					tradeDate;
-	private ProductType 			product;
-	private Referential.Depositary 	depositary;
-	protected Referential.Counterpart counterpart;
-	protected Referential.Trader 		trader;
-
-	public TradeEvent(long id, Currency currency, Portfolio portfolio,
-			Book book, Instrument instrument, List<Node> nodes, float amount,
-			String reference, Way way, Date eventDate, Date tradeDate,
-			ProductType product, Depositary depositary,
-			Counterpart counterpart, Trader trader) {
+	
+	private static long 				counter = 0;
+	protected long 						id;
+	private String 						reference;
+	private Way 						way;
+	private Date 						date;
+	private Date 						tradeDate;
+	protected Referential.Counterpart 	counterpart;
+	protected Book 						book;
+	protected Referential.Portfolio 	portfolio;
+	protected Instrument 				instrument;
+	protected List<Node> 				nodes;
+	
+	public TradeEvent( String reference, Way way, Date date,
+			Date tradeDate, Counterpart counterpart, Book book) {
 		super();
-		setId(++counter);
-		this.currency = currency;
-		this.portfolio = portfolio;
-		this.book = book;
-		this.instrument = instrument;
-		this.nodes = nodes;
-		this.amount = amount;
+		this.id = counter++;
 		this.reference = reference;
 		this.way = way;
-		this.date = eventDate;
+		this.date = date;
 		this.tradeDate = tradeDate;
-		this.product = product;
-		this.depositary = depositary;
 		this.counterpart = counterpart;
-		this.trader = trader;
+		this.book=book;
 	}
+
 
 	public class Node
 	{

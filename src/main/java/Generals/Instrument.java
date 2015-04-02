@@ -9,11 +9,9 @@ import java.util.Random;
 public abstract class Instrument
 {
 	private String 	name;
-	private int		montant;
+	private int		amount;
 
-	public void generate(Book b, int montant, Date date)
-	{
-	}
+	public abstract void generate(Book b, int amount, Date date);
 
 	static public Output getOutputFromTrade(TradeEvent trade)
 	{
@@ -89,11 +87,11 @@ public abstract class Instrument
 	}
 
 	public int getMontant() {
-		return montant;
+		return amount;
 	}
 
 	public void setMontant(int montant) {
-		this.montant = montant;
+		this.amount = montant;
 	}
 
 	public String getName() {

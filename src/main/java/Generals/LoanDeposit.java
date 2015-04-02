@@ -10,17 +10,17 @@ public class LoanDeposit extends Instrument
 	// type de taux (fixe/variable), base de calcul, valeur du taux, devise,
 	// durée
 
-	private int Partloan;
-	private int owncountry;
-	private int volumetry;
-	private int volumetry_tolerance;
-	private int repartition_tolerance;
-	private float valeur_taux;
-	private int tolerance_taux_var;
-	private int part_taux_variable;
-	private int durée;
-	private BaseCalcul basecalcul;
-	private String devise;
+	private int 				Partloan;
+	private int 				owncountry;
+	private int 				volumetry;
+	private int 				volumetry_tolerance;
+	private int 				repartition_tolerance;
+	private float 				valeur_taux;
+	private int 				tolerance_taux_var;
+	private int 				part_taux_variable;
+	private int 				durée;
+	private BaseCalcul 			basecalcul;
+	private String 				devise;
 	
 
 
@@ -79,7 +79,6 @@ public class LoanDeposit extends Instrument
 		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
 		List<RateType> t3 = tableaubin(roundedVolume, this.part_taux_variable,
 				RateType.class);
-		
 		
 		for (int i = 0; i < roundedVolume; i = i + 1)
 		{

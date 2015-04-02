@@ -12,29 +12,39 @@ import Generals.Referential.Trader;
 
 public class Tradeloan extends TradeEvent
 {
-	private Date 			valueDate;
-	private Date 			maturityDate;
-	private Double 			national;	
-	private Indexation		index;
-	private String 			ISIN;	
-	private RateType 		rate;
-	private Double 			rateValue;
-	private Double 			spread;
-	private Term			term;
-	private BaseCalcul		basecalcul;
-	private Boolean 		is_stp;
+	private Date 				valueDate;
+	private Date 				maturityDate;
+	private Double 				national;	
+	private Indexation			index;
+	private String 				ISIN;	
+	private RateType 			rate;
+	private Double 				rateValue;
+	private Double 				spread;
+	private Term				term;
+	private BaseCalcul			basecalcul;
+	private Boolean 			is_stp;
+	private double			amount;				
+	protected Referential.Currency 		currency;
+	protected Referential.Depositary 	depositary;
+	protected Referential.Trader 		trader;
 
-	public Tradeloan(long id, Currency currency, Portfolio portfolio,
-			Book book, Instrument instrument, List<Node> nodes, float amount,
-			String reference, Way way, Date eventDate, Date tradeDate,
-			ProductType product, Depositary depositary,
-			Counterpart counterpart, Trader trader, Date valueDate,
+
+
+
+
+
+
+
+
+
+
+	public Tradeloan(String reference, Way way, Date date, Date tradeDate,
+			Counterpart counterpart, Book book, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,
-			BaseCalcul basecalcul, Boolean is_stp) {
-		super(id, currency, portfolio, book, instrument, nodes, amount,
-				reference, way, eventDate, tradeDate, product, depositary,
-				counterpart, trader);
+			BaseCalcul basecalcul, Boolean is_stp, double amount,
+			Currency currency, Depositary depositary, Trader trader) {
+		super(reference, way, date, tradeDate, counterpart, book);
 		this.valueDate = valueDate;
 		this.maturityDate = maturityDate;
 		this.national = national;
@@ -46,7 +56,21 @@ public class Tradeloan extends TradeEvent
 		this.term = term;
 		this.basecalcul = basecalcul;
 		this.is_stp = is_stp;
+		this.amount = amount;
+		this.currency = currency;
+		this.depositary = depositary;
+		this.trader = trader;
 	}
+
+
+
+
+
+
+
+
+
+
 
 	@Override
 	public List<Node> getNodes()
@@ -59,7 +83,7 @@ public class Tradeloan extends TradeEvent
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "loandepo", null);
-		addNode(nodes, "amount", Float.toString(amount), null);
+		addNode(nodes, "amount", Double.toString(amount), null);
 		addNode(nodes, "rate", rate.name(), null);
 		addNode(nodes, "trader", trader.codeptf, null);
 		addNode(nodes, "currency", currency.name, null);
