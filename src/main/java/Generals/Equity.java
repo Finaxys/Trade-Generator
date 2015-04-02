@@ -13,66 +13,6 @@ public class Equity extends Instrument
 	private double repartitionTolerance;
 	private Boolean isStp;
 
-	public int getPartSell()
-	{
-		return partSell;
-	}
-
-	public void setPartSell(int partSell)
-	{
-		this.partSell = partSell;
-	}
-
-	public int getOwnCountry()
-	{
-		return ownCountry;
-	}
-
-	public void setOwnCountry(int ownCountry)
-	{
-		this.ownCountry = ownCountry;
-	}
-
-	public int getVolumetry()
-	{
-		return volumetry;
-	}
-
-	public void setVolumetry(int volumetry)
-	{
-		this.volumetry = volumetry;
-	}
-
-	public double getVolumetryTolerance()
-	{
-		return volumetryTolerance;
-	}
-
-	public void setVolumetryTolerance(double volumetryTolerance)
-	{
-		this.volumetryTolerance = volumetryTolerance;
-	}
-
-	public double getRepartitionTolerance()
-	{
-		return repartitionTolerance;
-	}
-
-	public void setRepartitionTolerance(double repartitionTolerance)
-	{
-		this.repartitionTolerance = repartitionTolerance;
-	}
-
-	public Boolean getIsStp()
-	{
-		return isStp;
-	}
-
-	public void setIsStp(Boolean isStp)
-	{
-		this.isStp = isStp;
-	}
-
 	@Override
 	public void generate(Book book, int amount, Date date)
 	{
@@ -83,12 +23,14 @@ public class Equity extends Instrument
 		double toleredVolumetry;
 		Random random = new Random();
 
-		rand1 = this.repartitionTolerance * 2 * (random.nextDouble() - 0.5) / 100;
-		rand2 = this.volumetryTolerance * 2 * (random.nextDouble() - 0.5) / 100;
+		rand1 = this.getRepartitionTolerance() * 2 * (random.nextDouble() - 0.5)
+				/ 100;
+		rand2 = this.getVolumetryTolerance() * 2 * (random.nextDouble() - 0.5) / 100;
+
 		amountPerDay += rand1 * amountPerDay;
 
 		// calculation of number of trades to distribute per day
-		toleredVolumetry = (1 - rand2) * volumetry;
+		toleredVolumetry = (1 - rand2) * getVolumetry();
 		int roundedVolume = (int) toleredVolumetry;
 
 		float randToleranceQuantities;
@@ -109,10 +51,13 @@ public class Equity extends Instrument
 		Referential.Product pro;
 		Referential.Currency cur = null;
 		Referential.Portfolio port;
+		
+		 List<Referential.Product> Listequity=ref.subList(ref.products,
+		 "type", "EQUITY");
+		 t1 = Instrument.tableaubin(roundedVolume,
+		 this.getOwnCountry(),Locality.class);
+		 t2 = Instrument.tableaubin(roundedVolume, this.getPartSell(),Way.class);
 
-		List<Referential.Product> Listequity = ref.subList(ref.products, "type", "EQUITY");
-		t1 = Instrument.tableaubin(roundedVolume, this.ownCountry, Locality.class);
-		t2 = Instrument.tableaubin(roundedVolume, this.partSell, Way.class);
 		for (int i = 0; i < roundedVolume; i++)
 		{
 
@@ -147,5 +92,45 @@ public class Equity extends Instrument
 			tradeGenerated(tq1);
 
 		}
+	}
+
+	public int getOwnCountry() {
+		return ownCountry;
+	}
+
+	public void setOwnCountry(int ownCountry) {
+		this.ownCountry = ownCountry;
+	}
+
+	public int getPartSell() {
+		return partSell;
+	}
+
+	public void setPartSell(int partSell) {
+		this.partSell = partSell;
+	}
+
+	public double getRepartitionTolerance() {
+		return repartitionTolerance;
+	}
+
+	public void setRepartitionTolerance(double repartitionTolerance) {
+		this.repartitionTolerance = repartitionTolerance;
+	}
+
+	public int getVolumetry() {
+		return volumetry;
+	}
+
+	public void setVolumetry(int volumetry) {
+		this.volumetry = volumetry;
+	}
+
+	public double getVolumetryTolerance() {
+		return volumetryTolerance;
+	}
+
+	public void setVolumetryTolerance(double volumetryTolerance) {
+		this.volumetryTolerance = volumetryTolerance;
 	}
 }
