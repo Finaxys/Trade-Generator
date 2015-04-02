@@ -10,7 +10,7 @@ import Generals.Referential.Depositary;
 import Generals.Referential.Portfolio;
 import Generals.Referential.Trader;
 
-public class Tradeloan extends TradeEvent
+public class TradeLoan extends TradeEvent
 {
 	private Date 			valueDate;
 	private Date 			maturityDate;
@@ -21,17 +21,17 @@ public class Tradeloan extends TradeEvent
 	private Double 			rateValue;
 	private Double 			spread;
 	private Term			term;
-	private BaseCalcul		basecalcul;
-	private Boolean 		is_stp;
+	private BaseCalcul		baseCalcul;
+	private Boolean 		isStp;
 
-	public Tradeloan(long id, Currency currency, Portfolio portfolio,
+	public TradeLoan(long id, Currency currency, Portfolio portfolio,
 			Book book, Instrument instrument, List<Node> nodes, float amount,
 			String reference, Way way, Date eventDate, Date tradeDate,
 			ProductType product, Depositary depositary,
 			Counterpart counterpart, Trader trader, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,
-			BaseCalcul basecalcul, Boolean is_stp) {
+			BaseCalcul baseCalcul, Boolean isStp) {
 		super(id, currency, portfolio, book, instrument, nodes, amount,
 				reference, way, eventDate, tradeDate, product, depositary,
 				counterpart, trader);
@@ -44,8 +44,8 @@ public class Tradeloan extends TradeEvent
 		this.rateValue = rateValue;
 		this.spread = spread;
 		this.term = term;
-		this.basecalcul = basecalcul;
-		this.is_stp = is_stp;
+		this.baseCalcul = baseCalcul;
+		this.isStp = isStp;
 	}
 
 	@Override
@@ -65,10 +65,10 @@ public class Tradeloan extends TradeEvent
 		addNode(nodes, "currency", currency.name, null);
 		addNode(nodes, "rateValue", Double.toString(rateValue), null);
 		addNode(nodes, "term", term.name(), null);
-		addNode(nodes, "basecalcul", basecalcul.name(), null);
+		addNode(nodes, "basecalcul", baseCalcul.name(), null);
 		addNode(nodes, "spread", Double.toString(spread), null);
-		addNode(nodes, "valueDate", basecalcul.name(), null);
-		addNode(nodes, "basecalcul", basecalcul.name(), null);
+		addNode(nodes, "valueDate", baseCalcul.name(), null);
+		addNode(nodes, "basecalcul", baseCalcul.name(), null);
 		return (nodes);
 	}
 }
