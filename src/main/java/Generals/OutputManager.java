@@ -35,7 +35,6 @@ public class OutputManager
 		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
 					"." + output.getFormat().toString().toLowerCase();
 
-		
 		return (new PrintWriter(path, OUTPUT_ENCODING));
 	}
 	
@@ -105,15 +104,14 @@ public class OutputManager
 			}
 		}
 		
-		for (String str : header)
-			System.out.println(str);
-
-		System.out.println("---");
-
+		// Header
+		for (String field : header)
+			writer.write(field + ",");
+		writer.write(System.lineSeparator());
+		
 		for (Instrument ins : output.getInstruments())
 		{
 			List<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
-			boolean first = true;
 
 			for (TradeEvent trade : output.getTrades())
 			{
@@ -124,23 +122,25 @@ public class OutputManager
 					continue;
 				}
 
-				// First one : display header fields
-				if (first)
-				{
-					first = false;
-					writeCSVTrade(trade);
-					continue;
-				}
-
 				List<TradeEvent.Node> nodes = trade.getNodes();
 
-				for (TradeEvent.Node node : nodes)
-					writer.write(node.value + ",");
+				// Check each field of header - if not present : empty ','
+				for (String field : header)
+				{
+					for (TradeEvent.Node node : nodes)
+						if (node.name.equals(field))
+						{
+							writer.write(node.value);
+							break;
+						}
+					
+					writer.write(",");
+				}
+
 				writer.write(System.lineSeparator());
 			}
 
 			output.setTrades(te_remaining);
-			first = true;
 		}
 	}
 

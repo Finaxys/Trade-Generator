@@ -9,6 +9,7 @@ public class TradeGenerator
 {
 	public static void main(String[] args)
 	{
+		// Stat
 		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();
@@ -39,10 +40,9 @@ public class TradeGenerator
 		for (j = 0; j <= simulate_days; j++)
 		{
 			for (Businessunit bu : gen.bu)
-			{// main instrument ratio
-				// get nombre de book avec main instrument
-
+			{
 				dis = bu.getMainInstrumentCount();
+
 				for (Portfolio port : bu.getPortfolios())
 				{
 
@@ -97,14 +97,16 @@ public class TradeGenerator
 			OutputManager.getInstance().outputTrades();
 		}
 
-		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
-		System.out.println("Done");
 		Report.ConcatSortOutput();
 //		Report.report(Report.liste, simulate_days);
 //		System.out.println("Report done");
-	}
 
+				// Estimation Stats
+				long estimatedTime = System.currentTimeMillis() - startTime;
+				System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
+				System.out.println("Done");
+	}
+	
 	private static Date instrumentGenerator(Instrument insrandom) {
 		// TODO Auto-generated method stub
 		return null;
