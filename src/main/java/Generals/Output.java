@@ -7,10 +7,10 @@ public class Output
 {
 	private OutputFormat			format;
 	private String					path;
-	private ArrayList<Instrument>	instruments;
+	private List<Instrument>		instruments;
 	private Boolean					isStp;
 	private Layer 					layer;
-	private ArrayList<TradeEvent>	te = new ArrayList<TradeEvent>();
+	private List<TradeEvent>		te;
 	private int						id;
 	static int						counter = 0;
 
@@ -19,9 +19,9 @@ public class Output
 		te.add(tn);
 	}
 
-	Output(String format, String path, ArrayList<Instrument> ins, Boolean stp,
-			String lay)
+	Output(String format, String path, List<Instrument> ins, Boolean stp, String lay)
 	{
+		this.te = new ArrayList<TradeEvent>();
 		this.id = counter++;
 		this.format = OutputFormat.valueOf(format.toUpperCase());
 		this.path = path;
@@ -38,7 +38,7 @@ public class Output
 		return path;
 	}
 
-	public ArrayList<Instrument> getInstruments() {
+	public List<Instrument> getInstruments() {
 		return instruments;
 	}
 
@@ -50,11 +50,11 @@ public class Output
 		return layer;
 	}
 
-	public void	setTrades(ArrayList<TradeEvent> te) {
+	public void	setTrades(List<TradeEvent> te) {
 		this.te = te;
 	}
 
-	public ArrayList<TradeEvent> getTrades() {
+	public List<TradeEvent> getTrades() {
 		return te;
 	}
 

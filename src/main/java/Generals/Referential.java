@@ -61,22 +61,7 @@ public class Referential
 				if (!te.getClass().getField(field).get(te).equals(filter))
 					subT.add((T) te);
 			}
-			catch (IllegalArgumentException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (IllegalAccessException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (NoSuchFieldException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (SecurityException e)
+			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
