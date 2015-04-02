@@ -77,8 +77,8 @@ public class LoanDeposit extends Instrument
 		List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,
 				Locality.class);
 		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
-		List<Typetaux> t3 = tableaubin(roundedVolume, this.part_taux_variable,
-				Typetaux.class);
+		List<RateType> t3 = tableaubin(roundedVolume, this.part_taux_variable,
+				RateType.class);
 		
 		
 		for (int i = 0; i < roundedVolume; i = i + 1)

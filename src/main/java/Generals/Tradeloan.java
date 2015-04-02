@@ -12,36 +12,57 @@ import Generals.Referential.Trader;
 
 public class Tradeloan extends TradeEvent
 {
-	//private MMType mmType;
+
 
 	private Date 						valueDate;
 	private Date 						maturityDate;
 	private Double 						national;	
 	private Indexation					index;
 	private String 						ISIN;	
-	private Typetaux 					rate;
-	private Referential.Trader 			trader;
-	private Referential.Currency 		currency;
+	private RateType 					rate;
 	private Double 						rateValue;
 	private Double 						spread;
+	private Term term;
+	private BaseCalcul basecalcul;
+	private Boolean is_stp;
+
+
+
+
+
+
+
+
+
+
 	public Tradeloan(long id, Currency currency, Portfolio portfolio,
 			Book book, Instrument instrument, List<Node> nodes, float amount,
 			String reference, Way way, Date eventDate, Date tradeDate,
 			ProductType product, Depositary depositary,
-			Counterpart counterpart, Trader trader, Double spread) {
+			Counterpart counterpart, Trader trader, Date valueDate,
+			Date maturityDate, Double national, Indexation index, String iSIN,
+			RateType rate, Double rateValue, Double spread, Term term,
+			BaseCalcul basecalcul, Boolean is_stp) {
 		super(id, currency, portfolio, book, instrument, nodes, amount,
 				reference, way, eventDate, tradeDate, product, depositary,
 				counterpart, trader);
+		this.valueDate = valueDate;
+		this.maturityDate = maturityDate;
+		this.national = national;
+		this.index = index;
+		ISIN = iSIN;
+		this.rate = rate;
+		this.rateValue = rateValue;
 		this.spread = spread;
+		this.term = term;
+		this.basecalcul = basecalcul;
+		this.is_stp = is_stp;
 	}
 
 
 
 
 
-	private Term 						term;
-	private BaseCalcul 					basecalcul;
-	private Boolean 					is_stp;
 
 
 

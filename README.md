@@ -65,7 +65,6 @@ data model de Pierre recupérer champs -> use case reprendre objets métiers à ref
 
 Rangement des trades :
 
-book -> génère des trades qui matche ce book -> pour l instant
 on produit et on range
 instruments qui vont etre des générateurs
 Rangement dans les books

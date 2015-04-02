@@ -94,6 +94,20 @@ public class OutputManager
 
 	private void manageCSV(Output output)
 	{
+		List<Class<? extends TradeEvent>>	trade_class = new ArrayList<Class<? extends TradeEvent>>();
+		List<String>						header = new ArrayList<String>();
+
+		// Get header
+		for (TradeEvent trade : output.getTrades())
+			if (trade_class.contains(trade.getClass()))
+			{
+				trade_class.add(trade.getClass());
+
+				for (TradeEvent.Node node : trade.getNodes())
+					if (!header.contains(node.name))
+						header.add(node.name);
+			}
+
 		for (Instrument ins : output.getInstruments())
 		{
 			List<TradeEvent> te_remaining = new ArrayList<TradeEvent>();

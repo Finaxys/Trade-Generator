@@ -1,4 +1,5 @@
 *.class
+trades/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
