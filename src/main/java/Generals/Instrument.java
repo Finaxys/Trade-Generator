@@ -17,8 +17,7 @@ public abstract class Instrument
 
 	static public Output getOutputFromTrade(TradeEvent trade)
 	{
-
-		for (Output op : trade.getBook().getPortFolios().bu.getOutputs())
+		for (Output op : trade.getBook().getPortFolios().getBu().getOutputs())
 			if (op.getInstruments().contains(trade.getInstrument()))
 				return (op);
 

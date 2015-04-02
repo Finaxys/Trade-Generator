@@ -21,7 +21,7 @@ public class LoanDeposit extends Instrument
 	private int durée;
 	private BaseCalcul basecalcul;
 	private String devise;
-
+	
 
 
 	public LoanDeposit(int partloan, int owncountry,
@@ -104,12 +104,12 @@ public class LoanDeposit extends Instrument
 			
 			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
 			
-			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
-
-					t2.get(i), t3.get(i), d1, c1, tr1, cur1, valeur_taux
-							* random.nextDouble(), Term.getRandom(),
-					BaseCalcul.getRandom());
-			tradeGenerated(tl);
+//			Tradeloan tl = new Tradeloan(this, book, date, Loanpertrade.get(i),
+//
+//					t2.get(i), t3.get(i), d1, c1, tr1, cur1, valeur_taux
+//							* random.nextDouble(), Term.getRandom(),
+//					BaseCalcul.getRandom());
+//			tradeGenerated(tl);
 
 		}
 	}

@@ -45,7 +45,7 @@ public class TradeGenerator
 				for (Portfolio port : bu.getPortfolios())
 				{
 
-					for (Book b : port.lb)
+					for (Book b : port.getLb())
 					{
 						if (b.getInstruments().size() > 0 && (b.getInstruments().contains(bu.getMainInstrument())))
 						{
@@ -53,6 +53,7 @@ public class TradeGenerator
 							for (int i = 0; i < b.getInstruments().size(); i++)
 							{
 								Instrument t = b.getInstruments().get(i);
+
 								if (!(t.equals(bu.getMainInstrument())))
 								{
 									t.generate(b, t.getMontant(), calendar.getTime());
@@ -80,8 +81,8 @@ public class TradeGenerator
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("Done");
 		Report.ConcatSortOutput();
-		Report.report(Report.liste, simulate_days);
-		System.out.println("Report done");
+//		Report.report(Report.liste, simulate_days);
+//		System.out.println("Report done");
 	}
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)

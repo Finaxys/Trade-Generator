@@ -4,30 +4,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import Generals.Referential.Counterpart;
+import Generals.Referential.Currency;
+import Generals.Referential.Depositary;
+import Generals.Referential.Portfolio;
+import Generals.Referential.Product;
+import Generals.Referential.Trader;
+
 public class TradeEquity extends TradeEvent
 {
-	private int quantity;
-	private Referential.Depositary depositary;
-	private Referential.Counterpart counterpart;
-	private Referential.Trader trader;
-	private Referential.Product product;
+	private int					quantity;
+	private Referential.Product	product;
 
-	public TradeEquity(Instrument instrument, Book book, Date date, Way way,
-			float amount, int quantity, Referential.Depositary d1,
-			Referential.Counterpart c1, Referential.Trader tr1,
-			Referential.Product pro1, Referential.Currency cur1,
-			Referential.Portfolio port1)
-	{
-		super(book, date, way,amount);
-	
+	public TradeEquity(long id, Currency currency, Portfolio portfolio,
+			Book book, Instrument instrument, List<Node> nodes, float amount,
+			String reference, Way way, Date eventDate, Date tradeDate,
+			ProductType producttype, Depositary depositary,
+			Counterpart counterpart, Trader trader, int quantity,
+			Product product2) {
+		super(id, currency, portfolio, book, instrument, nodes, amount,
+				reference, way, eventDate, tradeDate, producttype, depositary,
+				counterpart, trader);
 		this.quantity = quantity;
-		this.depositary = d1;
-		this.counterpart = c1;
-		this.trader = tr1;
-		this.product = pro1;
-		this.currency = cur1;
-		this.portfolio = port1;
-		this.setInstrument(instrument);
+		product = product2;
 	}
 
 	@Override
@@ -35,8 +34,9 @@ public class TradeEquity extends TradeEvent
 	{
 		nodes = new ArrayList<Node>();
 
-		addNode(nodes, "business", book.getPortFolios().bu.getName(), null);
-		addNode(nodes, "portfolio", book.getPortFolios().name, null);
+
+		addNode(nodes, "business", book.getPortFolios().getBu().getName(), null);
+		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "equity", null);
