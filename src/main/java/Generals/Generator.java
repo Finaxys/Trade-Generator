@@ -45,6 +45,9 @@ public class Generator
 			{
 				dis = bu.getMainInstrumentCount();
 
+				for (TradeGenerator tgen : bu.getGenerators())
+					tgen.init((int) (gen.budget * bu.getRatio() / (dis * 1000)));
+
 				for (Portfolio port : bu.getPortfolios())
 				{
 
@@ -91,11 +94,13 @@ public class Generator
 				// While there is still a generator with a volumetry > 0
 				while (generators.size() > 0)
 				{
-					TradeGenerator insrandom=getrandomins();
-					Currency currandom=getrandomdevise();
-					Book book= match(bu,insrandom,currandom);
-
-					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
+					
+					
+//					TradeGenerator insrandom=getrandomins();
+//					Currency currandom=getrandomdevise();
+//					Book book= match(bu,insrandom,currandom);
+//
+//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
 				}
 			}
 
