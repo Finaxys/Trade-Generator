@@ -11,6 +11,7 @@ public abstract class Instrument
 	private String 	name;
 	private int		amount;
 
+	public abstract void init();
 	public abstract void generate(Book b, int amount, Date date);
 
 	static public Output getOutputFromTrade(TradeEvent trade)

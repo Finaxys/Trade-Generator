@@ -19,6 +19,12 @@ public class Equity extends Instrument
 	private double 		volumetryTolerance;
 	private double 		repartitionTolerance;
 	private Boolean 	isStp;
+	
+	@Override
+	public void init()
+	{
+		
+	}
 
 	@Override
 	public void generate(Book book, int amount, Date date)
@@ -65,40 +71,35 @@ public class Equity extends Instrument
 		 this.getOwnCountry(),Locality.class);
 		 t2 = Instrument.tableaubin(roundedVolume, this.getPartSell(),Way.class);
 
-		for (int i = 0; i < roundedVolume; i++)
-		{
+		 // sharing of amount per trade
+		 randToleranceQuantities = (float) Math.random();
 
-			// sharing of amount per trade
-			randToleranceQuantities = (float) Math.random();
+		 // set random price -+3%
+		 randomquantity = 6 * (random.nextDouble() - 0.5);
 
-			// set random price -+3%
-			randomquantity = 6 * (random.nextDouble() - 0.5);
+		 // tirage au sort sous contrainte
 
-			// tirage au sort sous contrainte
+		 d = ref.getRandomElement(ref.depositaries);
+		 c = ref.getRandomElement(ref.counterparts);
+		 cur = ref.getRandomElement(ref.currencies);
+		 tr = ref.getTrader(ref, cur.country, "equity");
 
-			d = ref.getRandomElement(ref.depositaries);
-			c = ref.getRandomElement(ref.counterparts);
-			cur = ref.getRandomElement(ref.currencies);
-			tr = ref.getTrader(ref, cur.country, "equity");
+		 if (t1.get(i).toString() == "NATIONAL")
+		 {
+			 cur = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
+		 }
+		 {
+			 cur = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
+		 }
+		 pro = ref.getRandomElement(Listequity);
+		 port = ref.getRandomElement(ref.portfolios);
+		 price = pro.price;
+		 // price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
 
-			if (t1.get(i).toString() == "NATIONAL")
-			{
-				cur = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
-			}
-			{
-				cur = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
-			}
-			pro = ref.getRandomElement(Listequity);
-			port = ref.getRandomElement(ref.portfolios);
-			price = pro.price;
-			// price=price*1/cur.change*Refential.Currency.this.getCurrencybycountry("country").change;
-
-			price = (float) (price * (1 + randomquantity / 100));
-			quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
-			TradeEquity tq1 = new TradeEquity(this, "reference",t2.get(i), date, date, c, book, price,quantity,pro,d,tr);
-			tradeGenerated(tq1);
-
-		}
+		 price = (float) (price * (1 + randomquantity / 100));
+		 quantity = (int) (randToleranceQuantities * Loanpertrade.get(i) / price);
+		 TradeEquity tq1 = new TradeEquity(this, "reference",t2.get(i), date, date, c, book, price,quantity,pro,d,tr);
+		 tradeGenerated(tq1);
 	}
 
 	public int getOwnCountry() {

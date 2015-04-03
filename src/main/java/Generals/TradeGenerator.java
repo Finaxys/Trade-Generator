@@ -1,9 +1,11 @@
 package Generals;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 public class TradeGenerator
 {
@@ -72,22 +74,29 @@ public class TradeGenerator
 						}
 					}
 
+				}
 			}
-		}
-//			for ( Businessunit bu: gen.bu)
-//			{	
-//				LinkedList<Instrument> instrumentgenerator=Init(bu);
-//				//load
-//				while(instrumentgenerator!=null)
-//				{
-//					Instrument insrandom=getrandomins();
-//					Currency currandom=getrandomdevise();
-//					Book book= match(bu,insrandom,currandom);
-//				
-//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
-//				}
-//			}
-			
+
+			// List of instrument available
+			List<Instrument> instruments = new ArrayList<Instrument>();
+			for (Businessunit bu : gen.bu)
+			{	
+				// Init instruments available
+				instruments.addAll(bu.getInstruments());
+				
+				// Init Instrument Generator
+				
+				// While there is still an instrument with a volumetry > 0
+				while(instrumentgenerator!=null)
+				{
+					Instrument insrandom=getrandomins();
+					Currency currandom=getrandomdevise();
+					Book book= match(bu,insrandom,currandom);
+
+					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
+				}
+			}
+
 
 			
 			
