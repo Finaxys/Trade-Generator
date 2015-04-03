@@ -57,7 +57,7 @@ public abstract class TradeGenerator
 	static public void tradeGenerated(TradeEvent trade)
 	{
 		Report.add(trade);
-
+		
 		List<Output> outputs = getOutputsFromTrade(trade);
 		for (Output output : outputs)
 			if (output.isStp())
@@ -85,6 +85,10 @@ public abstract class TradeGenerator
 		Collections.shuffle(TrueArray);
 
 		return (TrueArray);
+	}
+	public static <T extends Enum<T>> T randEnum(Class<T> e){
+	Random rand= new Random();
+		return e.getEnumConstants()[rand.nextInt(e.getEnumConstants().length - 1)];
 	}
 
 	public static List<Integer> Sparsemoney(int volumetry, int montant)

@@ -104,11 +104,17 @@ public class LoanDepositGenerator extends TradeGenerator
 
 		tr1 = ref.getTrader(ref, cur1.country, "loandepo");
 
-		TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
+//		TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
+//				c1, book, date,
+//				date,(double ) 45, Indexation.EIBOR, "isni",
+//				RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
+//				BaseCalcul.methode1, null, amount,
+//				cur1, d1, tr1);
+		TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0), date, date,
 				c1, book, date,
-				date,(double ) 45, Indexation.EIBOR, "isni",
-				RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
-				BaseCalcul.methode1, null, amount,
+				date,(double) 0,TradeGenerator.randEnum(Indexation.class), "isin?",
+				TradeGenerator.randEnum(RateType.class),(double) this.valeur_taux,(double) this.valeur_taux/2, TradeGenerator.randEnum(Term.class),
+				TradeGenerator.randEnum(BaseCalcul.class), Loanpertrade.get(0),
 				cur1, d1, tr1);
 
 		listLocality.remove(0);

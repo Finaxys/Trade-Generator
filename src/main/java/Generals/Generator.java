@@ -94,15 +94,15 @@ public class Generator
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
 		}
-
+System.out.println(Report.liste.size());
 		Report.ConcatSortOutput();
-		//		Report.report(Report.liste, simulate_days);
-		//		System.out.println("Report done");
+				Report.report(Report.liste, days);
+				System.out.println("Report done");
 
 		// Estimation Stats
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
-		System.out.println("Done");
+		System.out.println("OVER");
 	}
 
 	private static Date instrumentGenerator(TradeGenerator insrandom) {
