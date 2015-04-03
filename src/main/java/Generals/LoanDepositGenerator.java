@@ -11,7 +11,7 @@ import Generals.Referential.Trader;
 
 public class LoanDepositGenerator extends TradeGenerator
 {
-	private int 				Partloan;
+	private int 				PartSell;
 	private int 				owncountry;
 	private int 				volumetry_tolerance;
 	private int 				repartition_tolerance;
@@ -34,7 +34,7 @@ public class LoanDepositGenerator extends TradeGenerator
 			int tolerance_taux_var, int part_taux_variable){
 		super();
 		this.devise = "EUR";
-		Partloan = partloan;
+		this.PartSell = partloan;
 		this.owncountry = owncountry;
 		this.volumetry = volumetry;
 		this.volumetry_tolerance = volumetry_tolerance;
@@ -64,7 +64,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		Loanpertrade = Sparsemoney(rounded_volumetry, amountPerDay);
 		listLocality = tableaubin(rounded_volumetry, this.owncountry,
 				Locality.class);
-		listWay = tableaubin(rounded_volumetry, this.Partloan, Way.class);
+		listWay = tableaubin(rounded_volumetry, this.PartSell, Way.class);
 		 listRatetype = tableaubin(rounded_volumetry, this.part_taux_variable,
 				RateType.class);
 	

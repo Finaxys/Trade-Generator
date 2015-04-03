@@ -16,14 +16,14 @@
 	<!-- <output> -->
 	<!--   <format>XML</format> -->
 	<!--   <path>trades</path> -->
-	<!--   <instrument>loandepo</instrument> -->
+	<!--   <instrument>all</instrument> -->
 	<!--   <isStp>true</isStp> -->
 	<!--   <layer>FS</layer> -->
 	<!-- </output> -->
       </workflow>
       <instruments>
 	<instrument name="equity">
-	  <toleranceRep>2</toleranceRep> 
+	  <budgetTolerance>2</budgetTolerance> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>100</volumetry> 
@@ -31,11 +31,11 @@
 	</instrument>
 	<instrument name="loandepo">
 	  <montant>1000</montant>
-	  <partLoan>50</partLoan> 
+	  <partSell>50</partSell> 
 	  <ownCountry>40</ownCountry> 
-	  <volumetry>10</volumetry> 
+	  <volumetry>40</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <repartitionTolerance>2</repartitionTolerance> 
+	  <budgetTolerance>2</budgetTolerance> 
 	  <rateValue>20</rateValue> 
 	  <rateValueTolerance>2</rateValueTolerance> 
 	  <partRateVariable>2</partRateVariable> 

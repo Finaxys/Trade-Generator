@@ -30,7 +30,7 @@ public class OutputManager
 	
 	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
 		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
 					"." + output.getFormat().toString().toLowerCase();
@@ -41,7 +41,7 @@ public class OutputManager
 	private PrintWriter getWriter(Output output) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		String date = "";
-		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
 		if (output.getTrades().size() > 0)
 			date = formater.format(output.getTrades().get(0).getDate());

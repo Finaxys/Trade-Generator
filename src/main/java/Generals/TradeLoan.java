@@ -59,7 +59,7 @@ public class TradeLoan extends TradeEvent
 		// TODO Auto-generated method stub
 		nodes = new ArrayList<Node>();
 
-		addNode(nodes, "business", book.getPortFolios().getBu().getName(), null);
+		addNode(nodes, "businessUnit", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
