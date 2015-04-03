@@ -22,7 +22,6 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	protected Book 						book;
 	protected Referential.Portfolio 	portfolio;
 	protected Instrument 				instrument;
-	protected boolean 					is_Stp=true;
 	protected List<Node> 				nodes;
 	
 	public TradeEvent(String reference, Way way, Date date,
