@@ -17,7 +17,7 @@ public abstract class TradeGenerator
 	static public Output getOutputFromTrade(TradeEvent trade)
 	{
 		for (Output op : trade.getBook().getPortFolios().getBu().getOutputs())
-			if (op.getInstruments().contains(trade.getInstrument()))
+			if (op.getGenerators().contains(trade.getInstrument()))
 				return (op);
 
 		return (null);
