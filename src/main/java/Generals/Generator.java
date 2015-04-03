@@ -11,6 +11,9 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
+//		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
+//		for(int i:Loanpertrade)
+//			System.out.println(i);
 		// Stat
 		long startTime = System.currentTimeMillis();
 
@@ -33,6 +36,12 @@ public class Generator
 			System.out.println("Problem handled. Continuing operation. Fix it next time.");
 		}
 
+//		for (Businessunit bu : gen.bu)
+//			for (Portfolio portfolio : bu.getPortfolios())
+//				for (Book sbook : portfolio.getLb())
+//					for (Referential.Currency cur : sbook.getCurrencies())
+//						System.out.println(sbook.getName() +" >> " + cur.code);
+
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();
 		int						days = Integer.parseInt(args[0]);
@@ -49,7 +58,7 @@ public class Generator
 
 				// Init Instrument Generator
 				for (TradeGenerator tgen : generators)
-					tgen.init(43);
+					tgen.init(43000);
 
 				// While there is still a generator with a volumetry > 0
 				while (generators.size() > 0)
@@ -63,17 +72,21 @@ public class Generator
 					for (Portfolio portfolio : bu.getPortfolios())
 						for (Book sbook : portfolio.getLb())
 							if (sbook.getGenerators().contains(tgen) && sbook.getCurrencies().contains(cur))
+							{
 								book = sbook;
+								break;
+							}
 					
 					// Not found
 					if (book == null)
 						continue;
 
 					// Generate trade and set properties
-					trade = tgen.generate(book, 0, calendar.getTime());
+					trade = tgen.generate(book, calendar.getTime());
 					
 					// Manage output
 					TradeGenerator.tradeGenerated(trade);
+					
 					
 					// Check if Generator volumetry full
 					if (tgen.getTradeGenerated() >= tgen.getRoundedVolumetry())
@@ -84,15 +97,15 @@ public class Generator
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
 		}
-
+System.out.println(Report.liste.size());
 		Report.ConcatSortOutput();
-		//		Report.report(Report.liste, simulate_days);
-		//		System.out.println("Report done");
+				Report.report(Report.liste, days);
+				System.out.println("Report done");
 
 		// Estimation Stats
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
-		System.out.println("Done");
+		System.out.println("OVER");
 	}
 
 	private static Date instrumentGenerator(TradeGenerator insrandom) {

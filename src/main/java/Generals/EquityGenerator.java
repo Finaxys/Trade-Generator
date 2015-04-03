@@ -9,7 +9,7 @@ public class EquityGenerator extends TradeGenerator
 	private int 			partSell;
 	private int 			ownCountry;
 	private double 			volumetryTolerance;
-	private double 			repartitionTolerance;
+	private double 			budgetTolerance;
 	private List<Integer> 	Loanpertrade ;
 	private List<Locality> 	localities;
 	private List<Way> 		ways;
@@ -21,15 +21,15 @@ public class EquityGenerator extends TradeGenerator
 		super.init(amount);
 
 		amountPerDay = amount;
-		double rdmRepartionTolerance;
+		double rdmBudgetTolerance;
 		double rdmVolumetryTolerance;
 		double toleredVolumetry;
 		Random random = new Random();
 
-		rdmRepartionTolerance = this.getRepartitionTolerance() * 2 * (random.nextDouble() - 0.5) / 100;
+		rdmBudgetTolerance = this.getBudgetTolerance() * 2 * (random.nextDouble() - 0.5) / 100;
 		rdmVolumetryTolerance = this.getVolumetryTolerance() * 2 * (random.nextDouble() - 0.5) / 100;
 
-		amountPerDay += rdmRepartionTolerance * amountPerDay;
+		amountPerDay += rdmBudgetTolerance * amountPerDay;
 
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rdmVolumetryTolerance) * volumetry;
@@ -43,9 +43,9 @@ public class EquityGenerator extends TradeGenerator
 	}
 
 	@Override
-	public TradeEvent generate(Book book, int amount, Date date)
+	public TradeEvent generate(Book book, Date date)
 	{
-		super.generate(book, amount, date);
+		super.generate(book,  date);
 
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();
@@ -117,14 +117,14 @@ public class EquityGenerator extends TradeGenerator
 		this.partSell = partSell;
 	}
 
-	public double getRepartitionTolerance()
+	public double getBudgetTolerance()
 	{
-		return repartitionTolerance;
+		return budgetTolerance;
 	}
 
-	public void setRepartitionTolerance(double repartitionTolerance)
+	public void setBudgetTolerance(double budgetTolerance)
 	{
-		this.repartitionTolerance = repartitionTolerance;
+		this.budgetTolerance = budgetTolerance;
 	}
 
 	public double getVolumetryTolerance()

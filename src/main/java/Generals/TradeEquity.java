@@ -1,5 +1,7 @@
 package Generals;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,14 +41,14 @@ public class TradeEquity extends TradeEvent
 	{
 		nodes = new ArrayList<Node>();
 
-		addNode(nodes, "business", book.getPortFolios().getBu().getName(), null);
+		addNode(nodes, "businessUnit", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
-		addNode(nodes, "price", Double.toString(price), null);
+		addNode(nodes, "price", new BigDecimal(price).setScale(2, RoundingMode.HALF_UP).toString(), null);
 		addNode(nodes, "counterpart", counterpart.code, null);
 		addNode(nodes, "product", product.name, null);
 		addNode(nodes, "depositary", depositary.toString(), null);

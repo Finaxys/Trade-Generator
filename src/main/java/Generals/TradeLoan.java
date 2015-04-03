@@ -34,7 +34,7 @@ public class TradeLoan extends TradeEvent
 			Counterpart counterpart, Book book, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,
-			BaseCalcul basecalcul, Boolean is_stp, double amount,
+			BaseCalcul basecalcul, double amount,
 			Currency currency, Depositary depositary, Trader trader) {
 		super(reference, way, date, tradeDate, counterpart, book, instrument);
 		this.valueDate = valueDate;
@@ -61,12 +61,12 @@ public class TradeLoan extends TradeEvent
 		// TODO Auto-generated method stub
 		nodes = new ArrayList<Node>();
 
-		addNode(nodes, "business", book.getPortFolios().getBu().getName(), null);
+		addNode(nodes, "businessUnit", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "loandepo", null);
-		addNode(nodes, "amount", Double.toString(amount), null);
+		addNode(nodes, "amount", Double.toString(this.amount), null);
 		addNode(nodes, "rate", rate.name(), null);
 		addNode(nodes, "trader", trader.codeptf, null);
 		addNode(nodes, "currency", currency.name, null);

@@ -7,23 +7,23 @@
     <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
-	  <format>CSV</format>
+	  <format>XML</format>
 	  <path>trades</path>
 	  <instrument>all</instrument>
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
 	<!-- <output> -->
-	<!--   <format>XML</format> -->
-	<!--   <path>trades</path> -->
-	<!--   <instrument>loandepo</instrument> -->
-	<!--   <isStp>true</isStp> -->
-	<!--   <layer>FS</layer> -->
-	<!-- </output> -->
+	  <!--   <format>XML</format> -->
+	  <!--   <path>trades</path> -->
+	  <!--   <instrument>all</instrument> -->
+	  <!--   <isStp>true</isStp> -->
+	  <!--   <layer>FS</layer> -->
+	  <!-- </output> -->
       </workflow>
       <instruments>
 	<instrument name="equity">
-	  <toleranceRep>2</toleranceRep> 
+	  <budgetTolerance>2</budgetTolerance> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>100</volumetry> 
@@ -31,11 +31,11 @@
 	</instrument>
 	<instrument name="loandepo">
 	  <montant>1000</montant>
-	  <partLoan>50</partLoan> 
+	  <partSell>50</partSell> 
 	  <ownCountry>40</ownCountry> 
-	  <volumetry>10</volumetry> 
+	  <volumetry>40</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <repartitionTolerance>2</repartitionTolerance> 
+	  <budgetTolerance>2</budgetTolerance> 
 	  <rateValue>20</rateValue> 
 	  <rateValueTolerance>2</rateValueTolerance> 
 	  <partRateVariable>2</partRateVariable> 
@@ -47,13 +47,13 @@
 	    <book name="bookequityeuro">
 	      <filters>
 		<filter type="instrument" value="equity"/>
-		<filter type="currency" value="EU"/>
+		<filter type="currency" value="EUR"/>
 	      </filters>
 	    </book>
 	    <book name="bookfundingeuro">
 	      <filters>
 		<filter type="instrument" value="loandepo"/>
-		<filter type="currency" value="EU,USD"/>
+		<filter type="currency" value="EUR,USD"/>
 	      </filters>
 	    </book>
 	    <book name="EQUOTHERS">
@@ -68,10 +68,16 @@
 	  <books>
 	    <book name="bookdervius">
 	      <filters>
-		<filter type="instrument" value="equity,loandepo"></filter><filter type="currency" value="EU"></filter>
-	    </filters></book>
+		<filter type="instrument" value="equity,loandepo"/>
+		<filter type="currency" value="EU"/>
+	      </filters>
+	    </book>
 	    <book name="bookfundingus">
-	      <filters><filter type="instrument" value="loandepo"></filter><filter type="currency" value="EU"></filter></filters></book>
+	      <filters>
+		<filter type="instrument" value="loandepo"></filter>
+		<filter type="currency" value="EU"></filter>
+	      </filters>
+	    </book>
 	    <book name="DERIVFUNDEUR"/>
 	    <book name="DERIVOTHERS"/>
 	  </books>

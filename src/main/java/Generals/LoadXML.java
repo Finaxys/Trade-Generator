@@ -431,6 +431,9 @@ public class LoadXML
 
 			// Get filters
 			getFilters(ebook, bgenerators, bcurrencies, generators);
+		
+			if (bcurrencies.size() == 0 || bgenerators.size() == 0)
+				System.out.println("Book " + ebook.getAttribute("name") + " : filters invalid");
 
 			books.add(new Book(ebook.getAttribute("name"), bcurrencies,
 					bgenerators));
@@ -455,7 +458,7 @@ public class LoadXML
 				equityGenerator.setName("equity");
 				equityGenerator.setOwnCountry(Integer.parseInt(getContent(eins, "ownCountry")));
 				equityGenerator.setPartSell(Integer.parseInt(getContent(eins, "partSell")));
-				equityGenerator.setRepartitionTolerance(Integer.parseInt(getContent(eins, "toleranceRep")));
+				equityGenerator.setBudgetTolerance(Integer.parseInt(getContent(eins, "budgetTolerance")));
 				equityGenerator.setVolumetry(Integer.parseInt(getContent(eins, "volumetry")));
 				equityGenerator.setVolumetryTolerance(Integer.parseInt(getContent(eins, "volumetryTolerance")));
 				equityGenerator.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
@@ -463,8 +466,8 @@ public class LoadXML
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
 			{
-				LoanDepositGenerator loandepositGenerator = new LoanDepositGenerator(Integer.parseInt(getContent(eins, "partLoan")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
-						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "repartitionTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
+				LoanDepositGenerator loandepositGenerator = new LoanDepositGenerator(Integer.parseInt(getContent(eins, "partSell")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
+						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "budgetTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
 						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
 				loandepositGenerator.setName("loandepo");
 				loandepositGenerator.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));

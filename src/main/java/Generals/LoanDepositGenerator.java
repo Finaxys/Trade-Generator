@@ -11,7 +11,7 @@ import Generals.Referential.Trader;
 
 public class LoanDepositGenerator extends TradeGenerator
 {
-	private int 				Partloan;
+	private int 				PartSell;
 	private int 				owncountry;
 	private int 				volumetry_tolerance;
 	private int 				repartition_tolerance;
@@ -34,7 +34,7 @@ public class LoanDepositGenerator extends TradeGenerator
 			int tolerance_taux_var, int part_taux_variable){
 		super();
 		this.devise = "EUR";
-		Partloan = partloan;
+		this.PartSell = partloan;
 		this.owncountry = owncountry;
 		this.volumetry = volumetry;
 		this.volumetry_tolerance = volumetry_tolerance;
@@ -56,7 +56,7 @@ public class LoanDepositGenerator extends TradeGenerator
 				/ 100;
 		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
-		amountPerDay += rand1 * amountPerDay;
+		amountPerDay = (int) (amountPerDay + rand1 * amountPerDay);
 		
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
@@ -64,15 +64,15 @@ public class LoanDepositGenerator extends TradeGenerator
 		Loanpertrade = Sparsemoney(rounded_volumetry, amountPerDay);
 		listLocality = tableaubin(rounded_volumetry, this.owncountry,
 				Locality.class);
-		listWay = tableaubin(rounded_volumetry, this.Partloan, Way.class);
+		listWay = tableaubin(rounded_volumetry, this.PartSell, Way.class);
 		 listRatetype = tableaubin(rounded_volumetry, this.part_taux_variable,
 				RateType.class);
 	
 	}
 	@Override
-	public TradeEvent generate(Book book, int amount, Date date)
+	public TradeEvent generate(Book book, Date date)
 	{	
-		super.generate(book, amount, date);
+		super.generate(book, date);
 
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();
@@ -104,11 +104,17 @@ public class LoanDepositGenerator extends TradeGenerator
 
 		tr1 = ref.getTrader(ref, cur1.code, "loandepo");
 
-		TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
+//		TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
+//				c1, book, date,
+//				date,(double ) 45, Indexation.EIBOR, "isni",
+//				RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
+//				BaseCalcul.methode1, null, amount,
+//				cur1, d1, tr1);
+		TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0), date, date,
 				c1, book, date,
-				date,(double ) 45, Indexation.EIBOR, "isni",
-				RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
-				BaseCalcul.methode1, null, amount,
+				date,(double) 0,TradeGenerator.randEnum(Indexation.class), "isin?",
+				TradeGenerator.randEnum(RateType.class),(double) this.valeur_taux,(double) this.valeur_taux/2, TradeGenerator.randEnum(Term.class),
+				TradeGenerator.randEnum(BaseCalcul.class), Loanpertrade.get(0),
 				cur1, d1, tr1);
 
 		listLocality.remove(0);
