@@ -47,13 +47,13 @@
 	    <book name="bookequityeuro">
 	      <filters>
 		<filter type="instrument" value="equity"/>
-		<filter type="currency" value="EU"/>
+		<filter type="currency" value="EUR"/>
 	      </filters>
 	    </book>
 	    <book name="bookfundingeuro">
 	      <filters>
 		<filter type="instrument" value="loandepo"/>
-		<filter type="currency" value="EU,USD"/>
+		<filter type="currency" value="EUR,USD"/>
 	      </filters>
 	    </book>
 	    <book name="EQUOTHERS">

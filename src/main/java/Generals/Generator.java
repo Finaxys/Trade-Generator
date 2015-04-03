@@ -33,6 +33,12 @@ public class Generator
 			System.out.println("Problem handled. Continuing operation. Fix it next time.");
 		}
 
+//		for (Businessunit bu : gen.bu)
+//			for (Portfolio portfolio : bu.getPortfolios())
+//				for (Book sbook : portfolio.getLb())
+//					for (Referential.Currency cur : sbook.getCurrencies())
+//						System.out.println(sbook.getName() +" >> " + cur.code);
+
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();
 		int						days = Integer.parseInt(args[0]);
@@ -63,7 +69,10 @@ public class Generator
 					for (Portfolio portfolio : bu.getPortfolios())
 						for (Book sbook : portfolio.getLb())
 							if (sbook.getGenerators().contains(tgen) && sbook.getCurrencies().contains(cur))
+							{
 								book = sbook;
+								break;
+							}
 					
 					// Not found
 					if (book == null)
@@ -74,6 +83,7 @@ public class Generator
 					
 					// Manage output
 					TradeGenerator.tradeGenerated(trade);
+					
 					
 					// Check if Generator volumetry full
 					if (tgen.getTradeGenerated() >= tgen.getRoundedVolumetry())
