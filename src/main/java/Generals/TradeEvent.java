@@ -44,7 +44,9 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 		public String 				value; // If empty take list of nodes
 		public List<Node> 			nodes;
 	}
-
+	
+	public abstract double getAmount();
+	
 	public abstract List<Node> getNodes();
 
 	public void addNode(List<Node> root, String name, String value,

@@ -9,9 +9,9 @@ import java.util.Random;
 public abstract class Instrument
 {
 	private String 	name;
-	private int		amount;
+	protected int		amount;
 
-	public abstract void init();
+	public abstract void init(int j);
 	public abstract void generate(Book b, int amount, Date date);
 
 	static public Output getOutputFromTrade(TradeEvent trade)

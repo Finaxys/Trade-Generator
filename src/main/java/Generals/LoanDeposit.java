@@ -49,12 +49,12 @@ public class LoanDeposit extends Instrument
 		this.tolerance_taux_var = tolerance_taux_var;
 		this.part_taux_variable = part_taux_variable;
 	}
-	public void init()
+	public void init(int amount)
 	{		
 		double rand1, rand2;
 		double toleredVolumetry;
 		Random random = new Random();
-
+		amountPerDay=amount;
 		rand1 = this.repartition_tolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
 		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble() - 0.5)
@@ -118,6 +118,7 @@ public class LoanDeposit extends Instrument
 			listLocality.remove(0);
 			listWay.remove(0);
 			listRatetype.remove(0);
+			Loanpertrade.remove(0);
 		}
 	}
 
