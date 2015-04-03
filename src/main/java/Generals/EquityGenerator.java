@@ -15,10 +15,8 @@ public class EquityGenerator extends TradeGenerator
 {
 	private int 		partSell;
 	private int 		ownCountry;
-	private int 		volumetry;
 	private double 		volumetryTolerance;
 	private double 		repartitionTolerance;
-	private Boolean 	isStp;
 	private int  roundedVolumetry;
 	private List<Integer> Loanpertrade ;
 	private List<Locality> t1;
@@ -28,7 +26,6 @@ public class EquityGenerator extends TradeGenerator
 	@Override
 	public void init(int amount)
 	{
-
 		amountPerDay = amount;
 		double rand1, rand2;
 		double toleredVolumetry;
@@ -55,8 +52,10 @@ public class EquityGenerator extends TradeGenerator
 	}
 
 	@Override
-	public void generate(Book book, int amount, Date date)
+	public TradeEvent generate(Book book, int amount, Date date)
 	{
+		super.generate(book, amount, date);
+
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();
 
@@ -105,10 +104,12 @@ public class EquityGenerator extends TradeGenerator
 		 price = (float) (price * (1 + randomquantity / 100));
 		 int quantity = (int) (randToleranceQuantities * Loanpertrade.get(0) / price);
 		 TradeEquity tq1 = new TradeEquity(this, "reference",t2.get(0), date, date, c, book, price,quantity,pro,d,tr);
-		 tradeGenerated(tq1);
+
 		 t1.remove(0);
 		 t2.remove(0);
 		 Loanpertrade.remove(0);
+		 
+		 return (tq1);
 	}
 
 	public int getOwnCountry() {

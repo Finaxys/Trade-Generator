@@ -8,11 +8,26 @@ import java.util.Random;
 
 public abstract class TradeGenerator
 {
-	private String 	name;
-	private int		amount;
+	protected String 	name;
+	protected int		amount;
+	protected int 		volumetry;
+	protected int		trade_generated = 0;
+
+	public int getVolumetry() {
+		return volumetry;
+	}
+
+	public int getTradeGenerated() {
+		return trade_generated;
+	}
 
 	public abstract void init(int amount_day);
-	public abstract void generate(Book b, int amount, Date date);
+	public TradeEvent generate(Book b, int amount, Date date)
+	{
+		++trade_generated;
+
+		return null;
+	}
 	
 	static public List<Output> getOutputsFromTrade(TradeEvent trade)
 	{
@@ -26,7 +41,7 @@ public abstract class TradeGenerator
 	}
 	static int cnt = 0;
 
-	public void tradeGenerated(TradeEvent trade)
+	static public void tradeGenerated(TradeEvent trade)
 	{
 		Report.add(trade);
 

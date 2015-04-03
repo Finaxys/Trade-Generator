@@ -17,7 +17,6 @@ public class LoanDepositGenerator extends TradeGenerator
 
 	private int 				Partloan;
 	private int 				owncountry;
-	private int 				volumetry;
 	private int 				volumetry_tolerance;
 	private int 				repartition_tolerance;
 	private float 				valeur_taux;
@@ -76,8 +75,10 @@ public class LoanDepositGenerator extends TradeGenerator
 	
 	}
 	@Override
-	public void generate(Book book, int amount, Date date)
+	public TradeEvent generate(Book book, int amount, Date date)
 	{	
+		super.generate(book, amount, date);
+
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();
 		// List<Way> t;
@@ -87,43 +88,41 @@ public class LoanDepositGenerator extends TradeGenerator
 		Referential.Counterpart c1;
 		Referential.Trader tr1;
 		Referential.Currency cur1;
-		
-		
-		
 
-			d1 = ref.getRandomElement(ref.depositaries);
+		d1 = ref.getRandomElement(ref.depositaries);
 
-			c1 = ref.getRandomElement(ref.counterparts);
-			
-			if (listLocality.get(0).toString() == "NATIONAL")
-			{
-				cur1 = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
-			}
+		c1 = ref.getRandomElement(ref.counterparts);
 
-			{
-				cur1 = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
-			}
-
-//			float change=1/Referential.getInstance().getdevise(generals.owncountry).change*cur1.change;
-//			int trade=(int) ((int) Loanpertrade.get(i)*change);
-//			Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
-
-			
-			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
-			
-			TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
-					c1, book, date,
-					date,(double ) 45, Indexation.EIBOR, "isni",
-					RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
-					BaseCalcul.methode1, null, amount,
-					cur1, d1, tr1);
-			tradeGenerated(tl);
-			
-			listLocality.remove(0);
-			listWay.remove(0);
-			listRatetype.remove(0);
-			Loanpertrade.remove(0);
+		if (listLocality.get(0).toString() == "NATIONAL")
+		{
+			cur1 = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
 		}
+
+		{
+			cur1 = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
+		}
+
+		//			float change=1/Referential.getInstance().getdevise(generals.owncountry).change*cur1.change;
+		//			int trade=(int) ((int) Loanpertrade.get(i)*change);
+		//			Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
+
+
+		tr1 = ref.getTrader(ref, cur1.country, "loandepo");
+
+		TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
+				c1, book, date,
+				date,(double ) 45, Indexation.EIBOR, "isni",
+				RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
+				BaseCalcul.methode1, null, amount,
+				cur1, d1, tr1);
+
+		listLocality.remove(0);
+		listWay.remove(0);
+		listRatetype.remove(0);
+		Loanpertrade.remove(0);
+
+		return (tl);
 	}
+}
 
 
