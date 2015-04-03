@@ -163,7 +163,7 @@ public class Referential
 	{
 		public String name;
 		public String codeptf;
-
+		
 		public Trader(String name, String codeptf)
 		{
 			this.name = name;
