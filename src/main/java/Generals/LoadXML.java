@@ -322,7 +322,7 @@ public class LoadXML
 			if (efilter.getAttribute("value").equalsIgnoreCase("all"))
 			{
 				if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
-					binstruments.addAll(instruments);
+					binstruments.addAll(generators);
 				else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
 					bcurrencies.addAll(_ref.currencies);
 				continue;
