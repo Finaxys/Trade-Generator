@@ -11,7 +11,7 @@ import Generals.Referential.Product;
 import Generals.Referential.Trader;
 import Generals.TradeEvent.Node;
 
-public class Equity extends Instrument
+public class EquityGenerator extends TradeGenerator
 {
 	private int 		partSell;
 	private int 		ownCountry;
@@ -67,9 +67,9 @@ public class Equity extends Instrument
 		
 		 List<Referential.Product> Listequity=ref.subList(ref.products,
 		 "type", "EQUITY");
-		 t1 = Instrument.tableaubin(roundedVolume,
+		 t1 = TradeGenerator.tableaubin(roundedVolume,
 		 this.getOwnCountry(),Locality.class);
-		 t2 = Instrument.tableaubin(roundedVolume, this.getPartSell(),Way.class);
+		 t2 = TradeGenerator.tableaubin(roundedVolume, this.getPartSell(),Way.class);
 
 		 // sharing of amount per trade
 		 randToleranceQuantities = (float) Math.random();

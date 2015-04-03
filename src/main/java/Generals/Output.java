@@ -7,7 +7,7 @@ public class Output
 {
 	private OutputFormat			format;
 	private String					path;
-	private List<Instrument>		instruments;
+	private List<TradeGenerator>		instruments;
 	private Boolean					isStp;
 	private Layer 					layer;
 	private List<TradeEvent>		te;
@@ -19,7 +19,7 @@ public class Output
 		te.add(tn);
 	}
 
-	Output(String format, String path, List<Instrument> ins, Boolean stp, String lay)
+	Output(String format, String path, List<TradeGenerator> ins, Boolean stp, String lay)
 	{
 		this.te = new ArrayList<TradeEvent>();
 		this.id = counter++;
@@ -38,7 +38,7 @@ public class Output
 		return path;
 	}
 
-	public List<Instrument> getInstruments() {
+	public List<TradeGenerator> getInstruments() {
 		return instruments;
 	}
 

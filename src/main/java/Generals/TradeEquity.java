@@ -19,7 +19,7 @@ public class TradeEquity extends TradeEvent
 	protected Referential.Depositary 	depositary;
 	protected Referential.Trader 		trader;
 
-	public TradeEquity(Instrument instrument, String reference, Way way, Date date, Date tradeDate,
+	public TradeEquity(TradeGenerator instrument, String reference, Way way, Date date, Date tradeDate,
 			Counterpart counterpart,Book book, double price, int quantity,
 			Product product, Depositary depositary,Trader trader)
 	{

@@ -9,7 +9,7 @@ import Generals.Referential.Currency;
 import Generals.Referential.Depositary;
 import Generals.Referential.Trader;
 
-public class LoanDeposit extends Instrument
+public class LoanDepositGenerator extends TradeGenerator
 {
 
 	// type de taux (fixe/variable), base de calcul, valeur du taux, devise,
@@ -29,7 +29,7 @@ public class LoanDeposit extends Instrument
 	
 
 
-	public LoanDeposit(int partloan, int owncountry,
+	public LoanDepositGenerator(int partloan, int owncountry,
 			int volumetry, int volumetry_tolerance,
 			int repartition_tolerance, int valeur_taux,
 			int tolerance_taux_var, int part_taux_variable){
