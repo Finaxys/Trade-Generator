@@ -28,7 +28,7 @@ public class TradeLoan extends TradeEvent
 	protected Referential.Trader 		trader;
 
 
-	public TradeLoan(Instrument instrument, String reference, Way way, Date date, Date tradeDate,
+	public TradeLoan(TradeGenerator instrument, String reference, Way way, Date date, Date tradeDate,
 			Counterpart counterpart, Book book, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,

@@ -6,10 +6,10 @@ public class Businessunit
 {
 	private String name;
 	private int ratio;
-	private List<Instrument> instruments;
+	private List<TradeGenerator> instruments;
 	private List<Portfolio> portfolios;
 	private List<Output> outputs;
-	private Instrument mainInstrument;
+	private TradeGenerator mainInstrument;
 
 	public String getName()
 	{
@@ -31,12 +31,12 @@ public class Businessunit
 		this.ratio = ratio;
 	}
 
-	public List<Instrument> getInstruments()
+	public List<TradeGenerator> getInstruments()
 	{
 		return instruments;
 	}
 
-	public void setInstruments(List<Instrument> instruments)
+	public void setInstruments(List<TradeGenerator> instruments)
 	{
 		this.instruments = instruments;
 	}
@@ -61,19 +61,19 @@ public class Businessunit
 		this.outputs = outputs;
 	}
 
-	public Instrument getMainInstrument()
+	public TradeGenerator getMainInstrument()
 	{
 		return mainInstrument;
 	}
 
-	public void setMainInstrument(Instrument mainInstrument)
+	public void setMainInstrument(TradeGenerator mainInstrument)
 	{
 		this.mainInstrument = mainInstrument;
 	}
 
-	public Instrument getInstrument(String ins_str)
+	public TradeGenerator getInstrument(String ins_str)
 	{
-		for (Instrument ins : instruments)
+		for (TradeGenerator ins : instruments)
 		{
 			if (ins.getName().equalsIgnoreCase(ins_str))
 				return (ins);
@@ -81,8 +81,8 @@ public class Businessunit
 		return (null);
 	}
 
-	public Businessunit(String name, int ratio, Instrument main_instrument, List<Output> outputs,
-			List<Instrument> instruments, List<Portfolio> portfolios)
+	public Businessunit(String name, int ratio, TradeGenerator main_instrument, List<Output> outputs,
+			List<TradeGenerator> instruments, List<Portfolio> portfolios)
 	{
 		super();
 		this.mainInstrument = main_instrument;

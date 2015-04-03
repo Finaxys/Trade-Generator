@@ -11,7 +11,7 @@ import Generals.Referential.Product;
 import Generals.Referential.Trader;
 import Generals.TradeEvent.Node;
 
-public class Equity extends Instrument
+public class EquityGenerator extends TradeGenerator
 {
 	private int 		partSell;
 	private int 		ownCountry;
@@ -24,6 +24,7 @@ public class Equity extends Instrument
 	private List<Locality> t1;
 	private List<Way> t2;
 	private int amountPerDay;
+	
 	@Override
 	public void init(int amount)
 	{
@@ -75,8 +76,9 @@ public class Equity extends Instrument
 		
 		 List<Referential.Product> Listequity=ref.subList(ref.products,
 		 "type", "EQUITY");
-		 
-
+		 t1 = TradeGenerator.tableaubin(this.roundedVolumetry,
+		 this.getOwnCountry(),Locality.class);
+		 t2 = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(),Way.class);
 
 
 		 // tirage au sort sous contrainte

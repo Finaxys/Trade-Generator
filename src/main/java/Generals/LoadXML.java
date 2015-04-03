@@ -206,7 +206,7 @@ public class LoadXML
 			NodeList nbusinessunits = doc.getElementsByTagName("businessUnit");
 			for (int ibu = 0; ibu < nbusinessunits.getLength(); ibu++)
 			{
-				List<Instrument> instruments = new ArrayList<Instrument>();
+				List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
 				List<Portfolio> portfolios = new ArrayList<Portfolio>();
 				List<Output> outputs = new ArrayList<Output>();
 
@@ -216,20 +216,20 @@ public class LoadXML
 					continue;
 
 				// Get instruments
-				getInstruments(ebusinessunit, instruments);
+				getInstruments(ebusinessunit, generators);
 
 				// Get portfolios
-				getPortfolios(ebusinessunit, portfolios, instruments);
+				getPortfolios(ebusinessunit, portfolios, generators);
 
 				// Get outputs
-				getOutputs(ebusinessunit, esetting, outputs, instruments);
+				getOutputs(ebusinessunit, esetting, outputs, generators);
 				
 				// Get Main Instrument
-				Instrument	main_ins = null;
-				for (Instrument ins : instruments)
-					if (ins.getName().equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
+				TradeGenerator	main_ins = null;
+				for (TradeGenerator gen : generators)
+					if (gen.getName().equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
 					{
-						main_ins = ins;
+						main_ins = gen;
 						break;
 					}
 				if (main_ins == null)
@@ -237,7 +237,7 @@ public class LoadXML
 
 				businessunits.add(new Businessunit(ebusinessunit
 						.getAttribute("name"), Integer.parseInt(ebusinessunit
-						.getAttribute("ratio")), main_ins, outputs, instruments,
+						.getAttribute("ratio")), main_ins, outputs, generators,
 						portfolios));
 			}
 
@@ -311,13 +311,22 @@ public class LoadXML
 	}
 
 	private static void getFilters(Element ebook,
-			List<Instrument> binstruments,
-			List<Currency> bcurrencies, List<Instrument> instruments)
+			List<TradeGenerator> binstruments,
+			List<Currency> bcurrencies, List<TradeGenerator> generators)
 	{
 		NodeList nfilters = ebook.getElementsByTagName("filter");
 		for (int ifilter = 0; ifilter < nfilters.getLength(); ifilter++)
 		{
 			Element efilter = (Element) nfilters.item(ifilter);
+
+			if (efilter.getAttribute("value").equalsIgnoreCase("all"))
+			{
+				if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
+					binstruments.addAll(instruments);
+				else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
+					bcurrencies.addAll(_ref.currencies);
+				continue;
+			}
 
 			List<String> vfilter = Arrays.asList(efilter.getAttribute("value")
 					.split("\\s*,\\s*"));
@@ -325,9 +334,9 @@ public class LoadXML
 			if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
 			{
 				for (String str : vfilter)
-					for (Instrument ins : instruments)
-						if (str.equals(ins.getName()))
-							binstruments.add(ins);
+					for (TradeGenerator gen : generators)
+						if (str.equals(gen.getName()))
+							binstruments.add(gen);
 			}
 			else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
 			{
@@ -340,7 +349,7 @@ public class LoadXML
 	}
 
 	private static void getOutputs(Element ebusinessunit, Element esetting,
-			List<Output> outputs, List<Instrument> instruments) throws CustomParsingException
+			List<Output> outputs, List<TradeGenerator> generators) throws CustomParsingException
 	{
 		NodeList noutputs = ebusinessunit.getElementsByTagName("output");
 		for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
@@ -350,9 +359,9 @@ public class LoadXML
 				continue;
 
 			String sinst = getContent(eoutput, "instrument");
-			List<Instrument> opins = new ArrayList<Instrument>();
+			List<TradeGenerator> opins = new ArrayList<TradeGenerator>();
 			if (sinst.equalsIgnoreCase("all"))
-				opins.addAll(instruments);
+				opins.addAll(generators);
 			else
 			{
 				List<String> sins = new ArrayList<String>(
@@ -360,10 +369,10 @@ public class LoadXML
 
 				// Get Instrument ref for each output
 				for (String str : sins)
-					for (Instrument inst : instruments)
-						if (str.equals(inst.getName()))
+					for (TradeGenerator gen : generators)
+						if (str.equals(gen.getName()))
 						{
-							opins.add(inst);
+							opins.add(gen);
 							break;
 						}
 			}
@@ -374,7 +383,7 @@ public class LoadXML
 	}
 
 	private static void getPortfolios(Element ebusinessunit,
-			List<Portfolio> portfolios, List<Instrument> instruments)
+			List<Portfolio> portfolios, List<TradeGenerator> generators)
 	{
 		NodeList nportfolios = ebusinessunit.getElementsByTagName("portfolio");
 		for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
@@ -384,13 +393,13 @@ public class LoadXML
 				continue;
 
 			List<Book> books = new ArrayList<Book>();
-			getBooks(eportfolio, books, instruments);
+			getBooks(eportfolio, books, generators);
 
 			portfolios.add(new Portfolio(eportfolio.getAttribute("name"), books));
 		}
 	}
 
-	private static void getBooks(Element eportfolio, List<Book> books, List<Instrument> instruments)
+	private static void getBooks(Element eportfolio, List<Book> books, List<TradeGenerator> instruments)
 	{
 		// Get books
 		NodeList nbooks = eportfolio.getElementsByTagName("book");
@@ -401,7 +410,7 @@ public class LoadXML
 				continue;
 
 			List<Currency> bcurrencies = new ArrayList<Currency>();
-			List<Instrument> binstruments = new ArrayList<Instrument>();
+			List<TradeGenerator> binstruments = new ArrayList<TradeGenerator>();
 
 			// Get filters
 			getFilters(ebook, binstruments, bcurrencies, instruments);
@@ -412,7 +421,7 @@ public class LoadXML
 	}
 
 	private static void getInstruments(Element ebusinessunit,
-			List<Instrument> instruments) throws CustomParsingException
+			List<TradeGenerator> instruments) throws CustomParsingException
 	{
 		NodeList ninstruments = ebusinessunit
 				.getElementsByTagName("instrument");
@@ -425,24 +434,24 @@ public class LoadXML
 			// Manage all instrument (Only equity for now)
 			if (eins.getAttribute("name").equalsIgnoreCase("equity"))
 			{
-				Equity equity = new Equity();
-				equity.setName("equity");
-				equity.setOwnCountry(Integer.parseInt(getContent(eins, "ownCountry")));
-				equity.setPartSell(Integer.parseInt(getContent(eins, "partSell")));
-				equity.setRepartitionTolerance(Integer.parseInt(getContent(eins, "toleranceRep")));
-				equity.setVolumetry(Integer.parseInt(getContent(eins, "volumetry")));
-				equity.setVolumetryTolerance(Integer.parseInt(getContent(eins, "volumetryTolerance")));
-				equity.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
-				instruments.add(equity);
+				EquityGenerator equityGenerator = new EquityGenerator();
+				equityGenerator.setName("equity");
+				equityGenerator.setOwnCountry(Integer.parseInt(getContent(eins, "ownCountry")));
+				equityGenerator.setPartSell(Integer.parseInt(getContent(eins, "partSell")));
+				equityGenerator.setRepartitionTolerance(Integer.parseInt(getContent(eins, "toleranceRep")));
+				equityGenerator.setVolumetry(Integer.parseInt(getContent(eins, "volumetry")));
+				equityGenerator.setVolumetryTolerance(Integer.parseInt(getContent(eins, "volumetryTolerance")));
+				equityGenerator.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
+				instruments.add(equityGenerator);
 			}
 			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
 			{
-				LoanDeposit loandepo = new LoanDeposit(Integer.parseInt(getContent(eins, "partLoan")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
+				LoanDepositGenerator loandepositGenerator = new LoanDepositGenerator(Integer.parseInt(getContent(eins, "partLoan")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
 						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "repartitionTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
 						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
-				loandepo.setName("loandepo");
-				loandepo.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
-				instruments.add(loandepo);
+				loandepositGenerator.setName("loandepo");
+				loandepositGenerator.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
+				instruments.add(loandepositGenerator);
 			}
 		}
 	}

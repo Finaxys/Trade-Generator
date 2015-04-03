@@ -21,11 +21,11 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	protected Referential.Counterpart 	counterpart;
 	protected Book 						book;
 	protected Referential.Portfolio 	portfolio;
-	protected Instrument 				instrument;
+	protected TradeGenerator 				instrument;
 	protected List<Node> 				nodes;
 	
 	public TradeEvent(String reference, Way way, Date date,
-			Date tradeDate, Counterpart counterpart, Book book, Instrument instrument) {
+			Date tradeDate, Counterpart counterpart, Book book, TradeGenerator instrument) {
 		super();
 		this.id = counter++;
 		this.reference = reference;
@@ -84,11 +84,11 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 		this.book = book;
 	}
 
-	public Instrument getInstrument() {
+	public TradeGenerator getInstrument() {
 		return instrument;
 	}
 
-	public void setInstrument(Instrument instrument) {
+	public void setInstrument(TradeGenerator instrument) {
 		this.instrument = instrument;
 	}
 
