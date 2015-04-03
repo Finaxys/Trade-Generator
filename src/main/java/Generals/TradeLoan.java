@@ -27,6 +27,8 @@ public class TradeLoan extends TradeEvent
 	protected Referential.Depositary 	depositary;
 	protected Referential.Trader 		trader;
 
+	@Override
+	public double getAmount(){ return amount; }
 
 	public TradeLoan(TradeGenerator instrument, String reference, Way way, Date date, Date tradeDate,
 			Counterpart counterpart, Book book, Date valueDate,
