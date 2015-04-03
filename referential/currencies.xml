@@ -1,0 +1,85 @@
+<currencies>
+	<currency>
+		<code>EUR</code>
+		<name>Euro</name>
+		<country>FR</country>
+	</currency>
+
+	<currency>
+		<code>EUR</code>
+		<name>Euro</name>
+		<country>ES</country>
+	</currency>
+
+	<currency>
+		<code>EUR</code>
+		<name>Euro</name>
+		<country>IT</country>
+	</currency>
+
+	<currency>
+		<code>EUR</code>
+		<name>Euro</name>
+		<country>DE</country>
+	</currency>
+
+	<currency>
+		<code>USD</code>
+		<name>Dollar</name>
+		<country>US</country>
+	</currency>
+
+	<currency>
+		<code>JPY</code>
+		<name>Yen</name>
+		<country>JP</country>
+	</currency>
+
+	<currency>
+		<code>RUB</code>
+		<name>Rouble</name>
+		<country>RU</country>
+	</currency>
+
+	<currency>
+		<code>CHF</code>
+		<name>Franc suisse</name>
+		<country>CH</country>
+	</currency>
+
+	<currency>
+		<code>CNY</code>
+		<name>Yuan</name>
+		<country>CN</country>
+	</currency>
+
+	<currency>
+		<code>ARS</code>
+		<name>Peso argentin</name>
+		<country>AG</country>
+	</currency>
+
+	<currency>
+		<code>HUF</code>
+		<name>Forint hongrois</name>
+		<country>HU</country>
+	</currency>
+
+	<currency>
+		<code>GBP</code>
+		<name>Livre sterling</name>
+		<country>UK</country>
+	</currency>
+	
+	<currency>
+		<code>CZK</code>
+		<name>Couronne tchcque</name>
+		<country>CK</country>
+	</currency>
+	
+	<currency>
+		<code>AUD</code>
+		<name>Dollar austrlien</name>
+		<country>AU</country>
+	</currency>
+</currencies>	

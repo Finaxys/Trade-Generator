@@ -86,3 +86,8 @@ base de calcul pas demandé
 get random enum pas correct à enlever 
 générer tout les champs -> mettre des champs vide si il y a plus de champs dans d'autre classes
 Eviter de modifier les choses en paramètre afin d'éviter les effets de bords
+
+-> mettre en place jenkins build automatisé
+reporting qualité de code -> sonar
+usine de dev Finaxys via jenkins
+prendre en main Atom lifl -> simulateur de marché plugger à notre générateur leur algorithm
