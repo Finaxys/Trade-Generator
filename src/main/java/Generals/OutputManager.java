@@ -81,7 +81,11 @@ public class OutputManager
 	{
 		if (output.getFormat() == Output.OutputFormat.XML)
 			for (TradeEvent trade : output.getTrades())
+			{
+				writer.write("<trades>" + System.lineSeparator());
 				writeXMLTrade(trade);
+				writer.write("</trades>" + System.lineSeparator());
+			}
 		else if (output.getFormat() == Output.OutputFormat.CSV)
 			manageCSV(output);
 	}

@@ -414,6 +414,9 @@ public class LoadXML
 
 			// Get filters
 			getFilters(ebook, bgenerators, bcurrencies, generators);
+		
+			if (bcurrencies.size() == 0 || bgenerators.size() == 0)
+				System.out.println("Book " + ebook.getAttribute("name") + " : filters invalid");
 
 			books.add(new Book(ebook.getAttribute("name"), bcurrencies,
 					bgenerators));

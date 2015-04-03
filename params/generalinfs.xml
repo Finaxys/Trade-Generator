@@ -7,19 +7,19 @@
     <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
-	  <format>CSV</format>
+	  <format>XML</format>
 	  <path>trades</path>
 	  <instrument>all</instrument>
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
 	<!-- <output> -->
-	<!--   <format>XML</format> -->
-	<!--   <path>trades</path> -->
-	<!--   <instrument>all</instrument> -->
-	<!--   <isStp>true</isStp> -->
-	<!--   <layer>FS</layer> -->
-	<!-- </output> -->
+	  <!--   <format>XML</format> -->
+	  <!--   <path>trades</path> -->
+	  <!--   <instrument>all</instrument> -->
+	  <!--   <isStp>true</isStp> -->
+	  <!--   <layer>FS</layer> -->
+	  <!-- </output> -->
       </workflow>
       <instruments>
 	<instrument name="equity">
@@ -68,10 +68,16 @@
 	  <books>
 	    <book name="bookdervius">
 	      <filters>
-		<filter type="instrument" value="equity,loandepo"></filter><filter type="currency" value="EU"></filter>
-	    </filters></book>
+		<filter type="instrument" value="equity,loandepo"/>
+		<filter type="currency" value="EU"/>
+	      </filters>
+	    </book>
 	    <book name="bookfundingus">
-	      <filters><filter type="instrument" value="loandepo"></filter><filter type="currency" value="EU"></filter></filters></book>
+	      <filters>
+		<filter type="instrument" value="loandepo"></filter>
+		<filter type="currency" value="EU"></filter>
+	      </filters>
+	    </book>
 	    <book name="DERIVFUNDEUR"/>
 	    <book name="DERIVOTHERS"/>
 	  </books>
