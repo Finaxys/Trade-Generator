@@ -57,17 +57,17 @@ public class LoadXMLTest extends TestCase
 		for (int indexBu = 0; indexBu < gen.bu.size(); indexBu++)
 		{
 			System.out.println("Business unit " + (indexBu + 1) + " : " + gen.bu.get(indexBu).getName().toString());
-			for (int indexInstru = 0; indexInstru < gen.bu.get(indexBu).getInstruments().size(); indexInstru++)
-				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).getInstruments().get(indexInstru).getName().toString());
+			for (int indexInstru = 0; indexInstru < gen.bu.get(indexBu).getGenerators().size(); indexInstru++)
+				System.out.println("Instrument " + (indexInstru + 1) + " : " + gen.bu.get(indexBu).getGenerators().get(indexInstru).getName().toString());
 			for (int indexPort = 0; indexPort < gen.bu.get(indexBu).getPortfolios().size(); indexPort++)
 			{
 				System.out.println("Portfolio " + (indexPort + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).getName().toString());
 				for (int indexBook = 0; indexBook < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().size(); indexBook++)
 				{
 					System.out.println("Book " + (indexBook + 1) + " : " + gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getName().toString());
-					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getInstruments().size(); indexIns++)
+					for (int indexIns = 0; indexIns < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getGenerators().size(); indexIns++)
 						System.out.println("Filtre InstruBook " + (indexIns + 1) + " : "
-								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getInstruments().get(indexIns).getName());
+								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getGenerators().get(indexIns).getName());
 					for (int indexCur = 0; indexCur < gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getCurrencies().size(); indexCur++)
 						System.out.println("Filtre CurrencyBook " + (indexCur + 1) + " : "
 								+ gen.bu.get(indexBu).getPortfolios().get(indexPort).getLb().get(indexBook).getCurrencies().get(indexCur).code);

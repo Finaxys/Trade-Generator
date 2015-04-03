@@ -11,7 +11,7 @@ public abstract class TradeGenerator
 	private String 	name;
 	private int		amount;
 
-	public abstract void init();
+	public abstract void init(int amount_day);
 	public abstract void generate(Book b, int amount, Date date);
 
 	static public Output getOutputFromTrade(TradeEvent trade)
@@ -20,97 +20,8 @@ public abstract class TradeGenerator
 			if (op.getInstruments().contains(trade.getInstrument()))
 				return (op);
 
-<<<<<<< HEAD
 		return (null);
 	}
-=======
-		int simulate_days = Integer.parseInt(args[0]);
-		int amount_per_book;
-		int j;
-		int dis;
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		for (j = 0; j <= simulate_days; j++)
-		{
-			for (Businessunit bu : gen.bu)
-			{
-				dis = bu.getMainInstrumentCount();
-
-				for (Portfolio port : bu.getPortfolios())
-				{
-
-					for (Book b : port.getLb())
-					{
-						if (b.getInstruments().size() > 0 && (b.getInstruments().contains(bu.getMainInstrument())))
-						{
-							amount_per_book = (int) (gen.budget * bu.getRatio() / (dis * 1000));
-							for (int i = 0; i < b.getInstruments().size(); i++)
-							{
-								Instrument t = b.getInstruments().get(i);
-
-								if (!(t.equals(bu.getMainInstrument())))
-								{
-									t.generate(b, t.getMontant(), calendar.getTime());
-								}
-								{
-									t.generate(b, amount_per_book, calendar.getTime());
-								}
-
-							}
-						}
-						else
-						{
-							if (j == 0)
-								System.out.println("book mal rangé: " + b.getName());
-						}
-					}
-
-				}
-			}
-
-			// List of instrument available
-			List<Instrument> instruments = new ArrayList<Instrument>();
-			for (Businessunit bu : gen.bu)
-			{	
-				// Init instruments available
-				instruments.addAll(bu.getInstruments());
-				
-				// Init Instrument Generator
-				for (Instrument ins : instruments)
-					ins.init();
-				
-				// While there is still an instrument with a volumetry > 0
-				while (instruments.size() > 0)
-				{
-					// Get random instrument & currency
-					
-					// Find appropriate book
-					
-					// We found one -> generate trade
-					
-					// Set trade attributes
-
-					// Instrument is full -> remove from list
-					
-					
-//					Instrument insrandom=getrandomins();
-//					Currency currandom=getrandomdevise();
-//					Book book= match(bu,insrandom,currandom);
-//
-//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
-				}
-			}
-
-
-			
-			
-			
-			
-			calendar.add(Calendar.DATE, 1);
-			OutputManager.getInstance().outputTrades();
-		}
->>>>>>> 1a2037b17e89cbad7222b7b0a2d8641f4517c40b
-
 	static int cnt = 0;
 
 	public void tradeGenerated(TradeEvent trade)

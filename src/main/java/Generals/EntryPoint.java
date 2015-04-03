@@ -81,13 +81,15 @@ public class EntryPoint
 			List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
 			for (Businessunit bu : gen.bu)
 			{	
-				// Init instruments available
+				// Init generators available
 				generators.addAll(bu.getGenerators());
 				
 				// Init Instrument Generator
+				for (TradeGenerator tgen : generators)
+					tgen.init(43);
 				
-				// While there is still an instrument with a volumetry > 0
-				while(instrumentgenerator!=null)
+				// While there is still a generator with a volumetry > 0
+				while (generators.size() > 0)
 				{
 					TradeGenerator insrandom=getrandomins();
 					Currency currandom=getrandomdevise();

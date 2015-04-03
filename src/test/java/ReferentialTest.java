@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import Generals.EntryPoint;
 import Generals.Referential;
 import Generals.Referential.Trader;
 import Generals.TradeGenerator;
@@ -26,7 +27,7 @@ public class ReferentialTest extends TestCase
 		String instrument = new String("equity");
 		String country = new String("CN");
 
-		TradeGenerator.main(new String[] {"10"});
+		EntryPoint.main(new String[] {"10"});
 		Trader trader = ref.getTrader(ref, country, instrument);
 		if (trader == null)
 			System.out.println("trader is null");
