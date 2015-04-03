@@ -58,8 +58,8 @@
 	    </book>
 	    <book name="EQUOTHERS">
 	      <filters>
-		<filter type="instrument" value="equity"/>
-		<filter type="currency" value="USD"/>
+		<filter type="instrument" value="all"/>
+		<filter type="currency" value="all"/>
 	      </filters>
 	    </book>
 	  </books>

@@ -26,7 +26,15 @@ public class LoanDepositGenerator extends TradeGenerator
 	private int 				durée;
 	private BaseCalcul 			basecalcul;
 	private String 				devise;
+	private List<Integer> 		Loanpertrade;
+	private int 				amountPerDay;
+	private List<Locality> 		listLocality;
+	private List<Way>			listWay;
+	private List<RateType> 		listRatetype;
+	private int 				roundedVolume;
+	private int 				index;
 	
+
 
 
 	public LoanDepositGenerator(int partloan, int owncountry,
@@ -44,14 +52,8 @@ public class LoanDepositGenerator extends TradeGenerator
 		this.tolerance_taux_var = tolerance_taux_var;
 		this.part_taux_variable = part_taux_variable;
 	}
-
-	@Override
-	public void generate(Book book, int amount, Date date)
-	{
-		Referential ref = Referential.getInstance();
-		Generals generals = Generals.getInstance();
-
-		int amountPerDay = amount;
+	public void init()
+	{		
 		double rand1, rand2;
 		double toleredVolumetry;
 		Random random = new Random();
@@ -65,12 +67,19 @@ public class LoanDepositGenerator extends TradeGenerator
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
 		int roundedVolume = (int) toleredVolumetry;	
-
-
-
+		Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
+		List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,
+				Locality.class);
+		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
+		List<RateType> t3 = tableaubin(roundedVolume, this.part_taux_variable,
+				RateType.class);
 	
-		List<Integer> Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
-
+	}
+	@Override
+	public void generate(Book book, int amount, Date date)
+	{	
+		Referential ref = Referential.getInstance();
+		Generals generals = Generals.getInstance();
 		// List<Way> t;
 
 		// declaration des tirages au sort sous contrainte
@@ -79,20 +88,14 @@ public class LoanDepositGenerator extends TradeGenerator
 		Referential.Trader tr1;
 		Referential.Currency cur1;
 		
-		List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,
-				Locality.class);
-		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
-		List<RateType> t3 = tableaubin(roundedVolume, this.part_taux_variable,
-				RateType.class);
 		
-		for (int i = 0; i < roundedVolume; i = i + 1)
-		{
+		
 
 			d1 = ref.getRandomElement(ref.depositaries);
 
 			c1 = ref.getRandomElement(ref.counterparts);
 			
-			if (t1.get(i).toString() == "NATIONAL")
+			if (listLocality.get(0).toString() == "NATIONAL")
 			{
 				cur1 = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
 			}
@@ -108,14 +111,17 @@ public class LoanDepositGenerator extends TradeGenerator
 			
 			tr1 = ref.getTrader(ref, cur1.country, "loandepo");
 			
-			TradeLoan tl = new TradeLoan(this, "eference", t2.get(i), date, date,
+			TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
 					c1, book, date,
 					date,(double ) 45, Indexation.EIBOR, "isni",
 					RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
 					BaseCalcul.methode1, null, amount,
 					cur1, d1, tr1);
 			tradeGenerated(tl);
+			listLocality.remove(0);
+			listWay.remove(0);
+			listRatetype.remove(0);
 		}
 	}
 
-}
+

@@ -319,6 +319,15 @@ public class LoadXML
 		{
 			Element efilter = (Element) nfilters.item(ifilter);
 
+			if (efilter.getAttribute("value").equalsIgnoreCase("all"))
+			{
+				if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
+					binstruments.addAll(instruments);
+				else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
+					bcurrencies.addAll(_ref.currencies);
+				continue;
+			}
+
 			List<String> vfilter = Arrays.asList(efilter.getAttribute("value")
 					.split("\\s*,\\s*"));
 
