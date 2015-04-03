@@ -34,7 +34,7 @@ public class TradeLoan extends TradeEvent
 			Counterpart counterpart, Book book, Date valueDate,
 			Date maturityDate, Double national, Indexation index, String iSIN,
 			RateType rate, Double rateValue, Double spread, Term term,
-			BaseCalcul basecalcul, Boolean is_stp, double amount,
+			BaseCalcul basecalcul, double amount,
 			Currency currency, Depositary depositary, Trader trader) {
 		super(reference, way, date, tradeDate, counterpart, book, instrument);
 		this.valueDate = valueDate;
