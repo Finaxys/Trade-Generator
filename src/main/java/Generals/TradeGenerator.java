@@ -85,15 +85,28 @@ public class TradeGenerator
 				instruments.addAll(bu.getInstruments());
 				
 				// Init Instrument Generator
+				for (Instrument ins : instruments)
+					ins.init();
 				
 				// While there is still an instrument with a volumetry > 0
-				while(instrumentgenerator!=null)
+				while (instruments.size() > 0)
 				{
-					Instrument insrandom=getrandomins();
-					Currency currandom=getrandomdevise();
-					Book book= match(bu,insrandom,currandom);
+					// Get random instrument & currency
+					
+					// Find appropriate book
+					
+					// We found one -> generate trade
+					
+					// Set trade attributes
 
-					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
+					// Instrument is full -> remove from list
+					
+					
+//					Instrument insrandom=getrandomins();
+//					Currency currandom=getrandomdevise();
+//					Book book= match(bu,insrandom,currandom);
+//
+//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
 				}
 			}
 
