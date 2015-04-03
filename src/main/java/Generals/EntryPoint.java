@@ -45,6 +45,9 @@ public class EntryPoint
 			{
 				dis = bu.getMainInstrumentCount();
 
+				for (TradeGenerator tgen : bu.getGenerators())
+					tgen.init((int) (gen.budget * bu.getRatio() / (dis * 1000)));
+
 				for (Portfolio port : bu.getPortfolios())
 				{
 
