@@ -109,7 +109,7 @@ public class OutputManager
 			writer.write(field + ",");
 		writer.write(System.lineSeparator());
 		
-		for (TradeGenerator ins : output.getInstruments())
+		for (TradeGenerator ins : output.getGenerators())
 		{
 			List<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
 
