@@ -13,25 +13,29 @@ public abstract class TradeGenerator
 
 	public abstract void init(int amount_day);
 	public abstract void generate(Book b, int amount, Date date);
-
-	static public Output getOutputFromTrade(TradeEvent trade)
+	
+	static public List<Output> getOutputsFromTrade(TradeEvent trade)
 	{
+		List<Output>	outputs = new ArrayList<Output>();
+
 		for (Output op : trade.getBook().getPortFolios().getBu().getOutputs())
 			if (op.getGenerators().contains(trade.getInstrument()))
-				return (op);
+				outputs.add(op);
 
-		return (null);
+		return (outputs);
 	}
 	static int cnt = 0;
 
 	public void tradeGenerated(TradeEvent trade)
 	{
-		Output output = getOutputFromTrade(trade);
 		Report.add(trade);
-		if (output.isStp())
-			OutputManager.getInstance().outputTrade(output, trade);
-		else
-			output.addTradeEvent(trade);
+
+		List<Output> outputs = getOutputsFromTrade(trade);
+		for (Output output : outputs)
+			if (output.isStp())
+				OutputManager.getInstance().outputTrade(output, trade);
+			else
+				output.addTradeEvent(trade);
 	}
 	
 
