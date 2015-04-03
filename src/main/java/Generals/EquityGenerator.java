@@ -41,19 +41,13 @@ public class EquityGenerator extends TradeGenerator
 		amountPerDay += rand1 * amountPerDay;
 
 		// calculation of number of trades to distribute per day
-		toleredVolumetry = (1 - rand2) * getVolumetry();
+		toleredVolumetry = (1 - rand2) * volumetry;
 		 this.roundedVolumetry = (int) toleredVolumetry;
 
-		float randToleranceQuantities;
 
-		double randomquantity;
-		List<Integer> Loanpertrade = Sparsemoney(roundedVolumetry, amountPerDay);
+ Loanpertrade = Sparsemoney(roundedVolumetry, amountPerDay);
 
-		int quantity;
-		float price;
 
-		List<Locality> t1;
-		List<Way> t2;
 		t1 = TradeGenerator.tableaubin(roundedVolumetry,
 				 this.getOwnCountry(),Locality.class);
 				 t2 = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(),Way.class);
@@ -87,7 +81,7 @@ public class EquityGenerator extends TradeGenerator
 		 c = ref.getRandomElement(ref.counterparts);
 		 cur = ref.getRandomElement(ref.currencies);
 		 tr = ref.getTrader(ref, cur.country, "equity");
-
+		 System.out.println(12);
 		 if (t1.get(0).toString() == "NATIONAL")
 		 {
 			 cur = ref.subList(ref.currencies, "country", generals.owncountry).get(0);

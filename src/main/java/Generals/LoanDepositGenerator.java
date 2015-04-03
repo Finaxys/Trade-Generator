@@ -68,10 +68,10 @@ public class LoanDepositGenerator extends TradeGenerator
 		toleredVolumetry = (1 - rand2) * volumetry;
 		int roundedVolume = (int) toleredVolumetry;	
 		Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
-		List<Locality> t1 = tableaubin(roundedVolume, this.owncountry,
+		listLocality = tableaubin(roundedVolume, this.owncountry,
 				Locality.class);
-		List<Way> t2 = tableaubin(roundedVolume, this.Partloan, Way.class);
-		List<RateType> t3 = tableaubin(roundedVolume, this.part_taux_variable,
+		listWay = tableaubin(roundedVolume, this.Partloan, Way.class);
+		 listRatetype = tableaubin(roundedVolume, this.part_taux_variable,
 				RateType.class);
 	
 	}
@@ -118,6 +118,7 @@ public class LoanDepositGenerator extends TradeGenerator
 					BaseCalcul.methode1, null, amount,
 					cur1, d1, tr1);
 			tradeGenerated(tl);
+			
 			listLocality.remove(0);
 			listWay.remove(0);
 			listRatetype.remove(0);
