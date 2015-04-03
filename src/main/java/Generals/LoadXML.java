@@ -311,7 +311,7 @@ public class LoadXML
 	}
 
 	private static void getFilters(Element ebook,
-			List<TradeGenerator> binstruments,
+			List<TradeGenerator> bgenerators,
 			List<Currency> bcurrencies, List<TradeGenerator> generators)
 	{
 		NodeList nfilters = ebook.getElementsByTagName("filter");
@@ -322,7 +322,7 @@ public class LoadXML
 			if (efilter.getAttribute("value").equalsIgnoreCase("all"))
 			{
 				if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
-					binstruments.addAll(instruments);
+					bgenerators.addAll(generators);
 				else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
 					bcurrencies.addAll(_ref.currencies);
 				continue;
@@ -336,7 +336,7 @@ public class LoadXML
 				for (String str : vfilter)
 					for (TradeGenerator gen : generators)
 						if (str.equals(gen.getName()))
-							binstruments.add(gen);
+							bgenerators.add(gen);
 			}
 			else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
 			{
@@ -399,7 +399,7 @@ public class LoadXML
 		}
 	}
 
-	private static void getBooks(Element eportfolio, List<Book> books, List<TradeGenerator> instruments)
+	private static void getBooks(Element eportfolio, List<Book> books, List<TradeGenerator> generators)
 	{
 		// Get books
 		NodeList nbooks = eportfolio.getElementsByTagName("book");
@@ -410,13 +410,13 @@ public class LoadXML
 				continue;
 
 			List<Currency> bcurrencies = new ArrayList<Currency>();
-			List<TradeGenerator> binstruments = new ArrayList<TradeGenerator>();
+			List<TradeGenerator> bgenerators = new ArrayList<TradeGenerator>();
 
 			// Get filters
-			getFilters(ebook, binstruments, bcurrencies, instruments);
+			getFilters(ebook, bgenerators, bcurrencies, generators);
 
 			books.add(new Book(ebook.getAttribute("name"), bcurrencies,
-					binstruments));
+					bgenerators));
 		}
 	}
 

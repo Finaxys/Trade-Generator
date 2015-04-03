@@ -50,12 +50,12 @@ public class EntryPoint
 
 					for (Book b : port.getLb())
 					{
-						if (b.getInstruments().size() > 0 && (b.getInstruments().contains(bu.getMainInstrument())))
+						if (b.getGenerators().size() > 0 && (b.getGenerators().contains(bu.getMainInstrument())))
 						{
 							amount_per_book = (int) (gen.budget * bu.getRatio() / (dis * 1000));
-							for (int i = 0; i < b.getInstruments().size(); i++)
+							for (int i = 0; i < b.getGenerators().size(); i++)
 							{
-								Instrument t = b.getInstruments().get(i);
+								TradeGenerator t = b.getGenerators().get(i);
 
 								if (!(t.equals(bu.getMainInstrument())))
 								{
@@ -78,22 +78,22 @@ public class EntryPoint
 			}
 
 			// List of instrument available
-			List<Instrument> instruments = new ArrayList<Instrument>();
+			List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
 			for (Businessunit bu : gen.bu)
 			{	
 				// Init instruments available
-				instruments.addAll(bu.getInstruments());
+				generators.addAll(bu.getGenerators());
 				
 				// Init Instrument Generator
 				
 				// While there is still an instrument with a volumetry > 0
 				while(instrumentgenerator!=null)
 				{
-					Instrument insrandom=getrandomins();
+					TradeGenerator insrandom=getrandomins();
 					Currency currandom=getrandomdevise();
 					Book book= match(bu,insrandom,currandom);
 
-					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
+					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
 				}
 			}
 
@@ -116,12 +116,12 @@ public class EntryPoint
 				System.out.println("Done");
 	}
 	
-	private static Date instrumentGenerator(Instrument insrandom) {
+	private static Date instrumentGenerator(TradeGenerator insrandom) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private static LinkedList<Instrument> Init(Businessunit bu) {
+	private static LinkedList<TradeGenerator> Init(Businessunit bu) {
 		// TODO Auto-generated method stub
 		return null;
 	}

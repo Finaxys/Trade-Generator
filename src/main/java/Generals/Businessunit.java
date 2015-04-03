@@ -6,7 +6,7 @@ public class Businessunit
 {
 	private String name;
 	private int ratio;
-	private List<TradeGenerator> instruments;
+	private List<TradeGenerator> generators;
 	private List<Portfolio> portfolios;
 	private List<Output> outputs;
 	private TradeGenerator mainInstrument;
@@ -31,14 +31,14 @@ public class Businessunit
 		this.ratio = ratio;
 	}
 
-	public List<TradeGenerator> getInstruments()
+	public List<TradeGenerator> getGenerators()
 	{
-		return instruments;
+		return generators;
 	}
 
-	public void setInstruments(List<TradeGenerator> instruments)
+	public void setGenerators(List<TradeGenerator> generators)
 	{
-		this.instruments = instruments;
+		this.generators = generators;
 	}
 
 	public List<Portfolio> getPortfolios()
@@ -71,12 +71,12 @@ public class Businessunit
 		this.mainInstrument = mainInstrument;
 	}
 
-	public TradeGenerator getInstrument(String ins_str)
+	public TradeGenerator getGenerator(String gen_str)
 	{
-		for (TradeGenerator ins : instruments)
+		for (TradeGenerator gen : generators)
 		{
-			if (ins.getName().equalsIgnoreCase(ins_str))
-				return (ins);
+			if (gen.getName().equalsIgnoreCase(gen_str))
+				return (gen);
 		}
 		return (null);
 	}
@@ -88,7 +88,7 @@ public class Businessunit
 		this.mainInstrument = main_instrument;
 		this.name = name;
 		this.ratio = ratio;
-		this.instruments = instruments;
+		this.generators = instruments;
 		this.portfolios = portfolios;
 		this.outputs = outputs;
 	}
@@ -99,7 +99,7 @@ public class Businessunit
 		
 		for (Portfolio port : portfolios)
 			for (Book book : port.getLb())
-				if (book.getInstruments().contains(mainInstrument))
+				if (book.getGenerators().contains(mainInstrument))
 					++cnt;
 
 		return (cnt);

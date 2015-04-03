@@ -8,14 +8,14 @@ public class Book
 {
 	private String name;
 	private List<Currency> currencies;
-	private List<TradeGenerator> instruments;
+	private List<TradeGenerator> generators;
 	private Portfolio portFolios;
 
-	public Book(String name, List<Currency> currencies, List<TradeGenerator> instruments)
+	public Book(String name, List<Currency> currencies, List<TradeGenerator> generators)
 	{
 		this.name = name;
 		this.currencies = currencies;
-		this.instruments = instruments;
+		this.generators = generators;
 	}
 
 	public String getName()
@@ -38,14 +38,14 @@ public class Book
 		this.currencies = currencies;
 	}
 
-	public List<TradeGenerator> getInstruments()
+	public List<TradeGenerator> getGenerators()
 	{
-		return instruments;
+		return generators;
 	}
 
-	public void setInstruments(List<TradeGenerator> instruments)
+	public void setGenerators(List<TradeGenerator> generators)
 	{
-		this.instruments = instruments;
+		this.generators = generators;
 	}
 
 	public Portfolio getPortFolios()
