@@ -64,7 +64,7 @@ public class TradeLoan extends TradeEvent
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "loandepo", null);
-		addNode(nodes, "amount", Double.toString(amount), null);
+		addNode(nodes, "amount", Double.toString(this.amount), null);
 		addNode(nodes, "rate", rate.name(), null);
 		addNode(nodes, "trader", trader.codeptf, null);
 		addNode(nodes, "currency", currency.name, null);

@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -61,8 +64,16 @@ public static void writeCSTrade(TradeEvent te, int nombre_op,double montant) thr
 	
 	String s=System.lineSeparator();
 	
+	String date = "";
+	SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+	
+	DecimalFormat df = new DecimalFormat () ;
 
-	writer.write(printDate(te.getDate()) +","+te.getBook().getPortFolios().getBu().getName()+","+te.getBook().getPortFolios().getName() +","+te.getBook().getName() +","+te.getInstrument().getName()+","+te.getWay() +","+nombre_op+","+montant +","+ s);
+	df.setMaximumFractionDigits ( 2 ) ; //arrondi à 2 chiffres apres la virgules 
+	df.setMinimumFractionDigits ( 2 ) ;
+
+		date = formater.format(te.getDate());
+	writer.write(date +","+te.getBook().getPortFolios().getBu().getName()+","+te.getBook().getPortFolios().getName() +","+te.getBook().getName() +","+te.getInstrument().getName()+","+te.getWay() +","+nombre_op+","+df.format(montant) +","+ s);
 //	writer.write(System.lineSeparator());
 //	writer.write(te.date.toString() +",");
 //	writer.write(System.lineSeparator());
@@ -93,7 +104,7 @@ public static void writeCSTrade(TradeEvent te, int nombre_op,double montant) thr
 	
 }
 public static String printDate(Date d){
-	return d.getDate()+"-"+d.getMonth()+"-"+d.getYear();
+	return MessageFormat.format("{0}-{1}-{2}", d.getDate(), d.getMonth(), d.getYear());
 }
 public static void report(ArrayList<TradeEvent> lists,int j){
 	

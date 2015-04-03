@@ -11,6 +11,9 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
+//		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
+//		for(int i:Loanpertrade)
+//			System.out.println(i);
 		// Stat
 		long startTime = System.currentTimeMillis();
 
@@ -55,7 +58,7 @@ public class Generator
 
 				// Init Instrument Generator
 				for (TradeGenerator tgen : generators)
-					tgen.init(43);
+					tgen.init(43000);
 
 				// While there is still a generator with a volumetry > 0
 				while (generators.size() > 0)
@@ -79,7 +82,7 @@ public class Generator
 						continue;
 
 					// Generate trade and set properties
-					trade = tgen.generate(book, 0, calendar.getTime());
+					trade = tgen.generate(book, calendar.getTime());
 					
 					// Manage output
 					TradeGenerator.tradeGenerated(trade);

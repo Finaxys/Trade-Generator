@@ -56,7 +56,7 @@ public class LoanDepositGenerator extends TradeGenerator
 				/ 100;
 		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
-		amountPerDay += rand1 * amountPerDay;
+		amountPerDay = (int) (amountPerDay + rand1 * amountPerDay);
 		
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
@@ -70,9 +70,9 @@ public class LoanDepositGenerator extends TradeGenerator
 	
 	}
 	@Override
-	public TradeEvent generate(Book book, int amount, Date date)
+	public TradeEvent generate(Book book, Date date)
 	{	
-		super.generate(book, amount, date);
+		super.generate(book, date);
 
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();

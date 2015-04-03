@@ -43,9 +43,9 @@ public class EquityGenerator extends TradeGenerator
 	}
 
 	@Override
-	public TradeEvent generate(Book book, int amount, Date date)
+	public TradeEvent generate(Book book, Date date)
 	{
-		super.generate(book, amount, date);
+		super.generate(book,  date);
 
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();

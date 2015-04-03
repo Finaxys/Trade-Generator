@@ -35,7 +35,7 @@ public abstract class TradeGenerator
 		trade_generated = 0;
 	}
 
-	public TradeEvent generate(Book b, int amount, Date date)
+	public TradeEvent generate(Book b, Date date)
 	{
 		++trade_generated;
 
@@ -103,7 +103,7 @@ public abstract class TradeGenerator
 
 		for (int i = 0; i < volumetry; i++)
 		{		
-			randint = random.nextInt(volumetryorder);
+			randint = random.nextInt(volumetryorder)+5;
 			somme=somme+randint;
 			T.add(randint);
 		}
