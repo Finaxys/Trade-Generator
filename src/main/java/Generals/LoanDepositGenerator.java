@@ -46,6 +46,8 @@ public class LoanDepositGenerator extends TradeGenerator
 
 	public void init(int amount)
 	{		
+		super.init(amount);
+
 		double rand1, rand2;
 		double toleredVolumetry;
 		Random random = new Random();

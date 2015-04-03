@@ -14,7 +14,15 @@ public abstract class TradeGenerator
 	protected int 		rounded_volumetry;
 	protected int		trade_generated = 0;
 
+	public void setVolumetry(int volumetry) {
+		this.volumetry = volumetry;
+	}
+
 	public int getVolumetry() {
+		return volumetry;
+	}
+
+	public int getRoundedVolumetry() {
 		return rounded_volumetry;
 	}
 
@@ -22,7 +30,11 @@ public abstract class TradeGenerator
 		return trade_generated;
 	}
 
-	public abstract void init(int amount_day);
+	public void init(int amount_day)
+	{
+		trade_generated = 0;
+	}
+
 	public TradeEvent generate(Book b, int amount, Date date)
 	{
 		++trade_generated;

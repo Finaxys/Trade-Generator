@@ -33,59 +33,6 @@ public class Generator
 			System.out.println("Problem handled. Continuing operation. Fix it next time.");
 		}
 
-//		int simulate_days = Integer.parseInt(args[0]);
-//		int amount_per_book;
-//		int j;
-//		int dis;
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.setTime(new Date());
-//		for (j = 0; j <= simulate_days; j++)
-//		{
-//			for (Businessunit bu : gen.bu)
-//			{
-//				dis = bu.getMainInstrumentCount();
-//
-//				for (TradeGenerator tgen : bu.getGenerators())
-//					tgen.init((int) (gen.budget * bu.getRatio() / (dis * 1000)));
-//
-//				for (Portfolio port : bu.getPortfolios())
-//				{
-//
-//					for (Book b : port.getLb())
-//					{
-//						if (b.getGenerators().size() > 0 && (b.getGenerators().contains(bu.getMainInstrument())))
-//						{
-//							amount_per_book = (int) (gen.budget * bu.getRatio() / (dis * 1000));
-//							for (int i = 0; i < b.getGenerators().size(); i++)
-//							{
-//								TradeGenerator t = b.getGenerators().get(i);
-//
-//								if (!(t.equals(bu.getMainInstrument())))
-//								{
-//									t.generate(b, t.getMontant(), calendar.getTime());
-//								}
-//								{
-//									t.generate(b, amount_per_book, calendar.getTime());
-//								}
-//
-//							}
-//						}
-//						else
-//						{
-//							if (j == 0)
-//								System.out.println("book mal rangé: " + b.getName());
-//						}
-//					}
-//
-//				}
-//			}
-//
-//			calendar.add(Calendar.DATE, 1);
-//			OutputManager.getInstance().outputTrades();
-//		}
-		
-		
-
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();
 		int						days = Integer.parseInt(args[0]);
@@ -129,7 +76,7 @@ public class Generator
 					TradeGenerator.tradeGenerated(trade);
 					
 					// Check if Generator volumetry full
-					if (tgen.getTradeGenerated() >= tgen.getVolumetry())
+					if (tgen.getTradeGenerated() >= tgen.getRoundedVolumetry())
 						generators.remove(tgen);
 				}
 			}
