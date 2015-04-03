@@ -80,37 +80,35 @@ public class Generator
 				}
 			}
 
-			// List of instrument available
-			List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
-			for (Businessunit bu : gen.bu)
-			{	
-				// Init generators available
-				generators.addAll(bu.getGenerators());
-				
-				// Init Instrument Generator
-				for (TradeGenerator tgen : generators)
-					tgen.init(43);
-				
-				// While there is still a generator with a volumetry > 0
-				while (generators.size() > 0)
-				{
-					
-					
-//					TradeGenerator insrandom=getrandomins();
-//					Currency currandom=getrandomdevise();
-//					Book book= match(bu,insrandom,currandom);
-//
-//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
-				}
-			}
-
-
-			
-			
-			
-			
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
+		}
+		
+		System.exit(0);
+		
+
+		// List of instrument available
+		List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
+		for (Businessunit bu : gen.bu)
+		{	
+			// Init generators available
+			generators.addAll(bu.getGenerators());
+
+			// Init Instrument Generator
+			for (TradeGenerator tgen : generators)
+				tgen.init(43);
+
+			// While there is still a generator with a volumetry > 0
+			while (generators.size() > 0)
+			{
+
+
+				//					TradeGenerator insrandom=getrandomins();
+				//					Currency currandom=getrandomdevise();
+				//					Book book= match(bu,insrandom,currandom);
+				//
+				//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGenerator(insrandom));
+			}
 		}
 
 		Report.ConcatSortOutput();

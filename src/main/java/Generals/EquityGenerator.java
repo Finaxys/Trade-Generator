@@ -81,7 +81,6 @@ public class EquityGenerator extends TradeGenerator
 		 c = ref.getRandomElement(ref.counterparts);
 		 cur = ref.getRandomElement(ref.currencies);
 		 tr = ref.getTrader(ref, cur.country, "equity");
-		 System.out.println(12);
 		 if (t1.get(0).toString() == "NATIONAL")
 		 {
 			 cur = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
