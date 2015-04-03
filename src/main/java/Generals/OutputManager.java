@@ -109,38 +109,24 @@ public class OutputManager
 			writer.write(field + ",");
 		writer.write(System.lineSeparator());
 		
-		for (TradeGenerator ins : output.getGenerators())
+		for (TradeEvent trade : output.getTrades())
 		{
-			List<TradeEvent> te_remaining = new ArrayList<TradeEvent>();
-
-			for (TradeEvent trade : output.getTrades())
-			{
-				// Only one instrument at a time to keep them together
-				if (trade.getInstrument() != ins)
+			List<TradeEvent.Node> nodes = trade.getNodes();
+			
+			// Check each field of header - if not present : empty ','
+			for (String field : header)
 				{
-					te_remaining.add(trade);
-					continue;
+				for (TradeEvent.Node node : nodes)
+					if (node.name.equals(field))
+					{
+						writer.write(node.value);
+						break;
+					}
+				
+				writer.write(",");
 				}
 
-				List<TradeEvent.Node> nodes = trade.getNodes();
-
-				// Check each field of header - if not present : empty ','
-				for (String field : header)
-				{
-					for (TradeEvent.Node node : nodes)
-						if (node.name.equals(field))
-						{
-							writer.write(node.value);
-							break;
-						}
-					
-					writer.write(",");
-				}
-
-				writer.write(System.lineSeparator());
-			}
-
-			output.setTrades(te_remaining);
+			writer.write(System.lineSeparator());
 		}
 	}
 
