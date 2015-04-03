@@ -1,5 +1,5 @@
 <traders>
-  <currency code="EUR" name="Euro" country="FR">
+  <currency code="EUR">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -44,7 +44,7 @@
     </instruments>
   </currency>
 
-  <currency code="EUR" name="Euro" country="ES">
+  <currency code="EUR">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -88,7 +88,7 @@
       </instrument>
     </instruments>
   </currency>
-  <currency code="EUR" name="Euro" country="IT">
+  <currency code="EUR">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -134,7 +134,7 @@
   </currency> 
 
 
-  <currency code="EUR" name="Euro" country="DE">
+  <currency code="EUR">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -180,7 +180,7 @@
   </currency> 
 
 
-  <currency code="USD" name="Dollar" country="US">
+  <currency code="USD">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -225,53 +225,7 @@
     </instruments>
   </currency>
 
-  <currency code="JPY" name="Yen" country="JP">
-    <instruments>
-      <instrument name="equity">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>    
-      <instrument name="derivative">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="mutual_funds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="bond">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="debt">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="swaps">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="cds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="forex">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="repo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="loandepo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-    </instruments>
-  </currency>
-
-
-  <currency code="RUB" name="Rouble" country="RU">
+  <currency code="JPY">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -317,232 +271,7 @@
   </currency>
 
 
-  <currency code="CHF" name="Franc suisse" country="FR">
-    <instruments>
-      <instrument name="equity">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>    
-      <instrument name="derivative">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="mutual_funds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="bond">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="debt">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="swaps">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="cds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="forex">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="repo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="loandepo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-    </instruments>
-  </currency>
-
-  <currency code="CNY" name="Yuan" country="CN">
-    <instruments>
-      <instrument name="equity">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>    
-      <instrument name="derivative">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="mutual_funds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="bond">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="debt">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="swaps">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="cds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="forex">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="repo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="loandepo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-    </instruments>
-  </currency>
-
-  <currency code="ARS" name="Peso argentin" country="AG">
-    <instruments>
-      <instrument name="equity">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>    
-      <instrument name="derivative">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="mutual_funds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="bond">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="debt">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="swaps">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="cds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="forex">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="repo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="loandepo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-    </instruments>
-  </currency>
-
-  <currency code="HUF" name="Forint hongrois" country="HU">
-    <instruments>
-      <instrument name="equity">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>    
-      <instrument name="derivative">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="mutual_funds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="bond">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="debt">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="swaps">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="cds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="forex">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="repo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="loandepo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-    </instruments>
-  </currency>
-
-  <currency code="GBP" name="Livre sterling" country="UK">
-    <instruments>
-      <instrument name="equity">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>    
-      <instrument name="derivative">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="mutual_funds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="bond">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="debt">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="swaps">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="cds">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="forex">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="repo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-      <instrument name="loandepo">
-	<trader name="Watt" codeptf="PFFRAC1"></trader>
-	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
-      </instrument>
-    </instruments>
-  </currency>
-
-  <currency code="CZK" name="Couronne tcheque" country="CK">
+  <currency code="RUB">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>
@@ -588,7 +317,278 @@
   </currency>
 
 
-  <currency code="AUD" name="Dollar australien" country="AU">
+  <currency code="CHF">
+    <instruments>
+      <instrument name="equity">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>    
+      <instrument name="derivative">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="mutual_funds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="bond">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="debt">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="swaps">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="cds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="forex">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="repo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="loandepo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+    </instruments>
+  </currency>
+
+  <currency code="CNY">
+    <instruments>
+      <instrument name="equity">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>    
+      <instrument name="derivative">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="mutual_funds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="bond">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="debt">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="swaps">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="cds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="forex">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="repo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="loandepo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+    </instruments>
+  </currency>
+
+  <currency code="ARS">
+    <instruments>
+      <instrument name="equity">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>    
+      <instrument name="derivative">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="mutual_funds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="bond">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="debt">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="swaps">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="cds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="forex">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="repo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="loandepo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+    </instruments>
+  </currency>
+
+  <currency code="HUF">
+    <instruments>
+      <instrument name="equity">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>    
+      <instrument name="derivative">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="mutual_funds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="bond">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="debt">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="swaps">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="cds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="forex">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="repo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="loandepo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+    </instruments>
+  </currency>
+
+  <currency code="GBP">
+    <instruments>
+      <instrument name="equity">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>    
+      <instrument name="derivative">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="mutual_funds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="bond">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="debt">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="swaps">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="cds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="forex">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="repo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="loandepo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+    </instruments>
+  </currency>
+
+  <currency code="CZK">
+    <instruments>
+      <instrument name="equity">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>    
+      <instrument name="derivative">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="mutual_funds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="bond">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="debt">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="swaps">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="cds">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="forex">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="repo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+      <instrument name="loandepo">
+	<trader name="Watt" codeptf="PFFRAC1"></trader>
+	<trader name="Bord-Michel" codeptf="PFFRAC2"></trader>
+      </instrument>
+    </instruments>
+  </currency>
+
+
+  <currency code="AUD">
     <instruments>
       <instrument name="equity">
 	<trader name="Watt" codeptf="PFFRAC1"></trader>

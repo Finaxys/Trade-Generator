@@ -83,17 +83,16 @@ public class LoadXMLTest extends TestCase
 		testInit();
 		System.out.println("\nCheck if values of the trader file are recovered.");
 		System.out.println("Size currencies = " + ref.currencies.size());
-		for (int indexCur = 0; indexCur < ref.currencies.size(); indexCur++)
+		for (int indexCur = 0; indexCur < ref.currencyTraders.size(); indexCur++)
 		{
-			System.out.println("Currency " + (indexCur + 1) + " : " + ref.currencies.get(indexCur).code + " " + ref.currencies.get(indexCur).name + " "
-					+ ref.currencies.get(indexCur).country);
-			System.out.println("Size instru = " + ref.currencies.get(indexCur).Instruments.size());
-			for (int indexIns = 0; indexIns < ref.currencies.get(indexCur).Instruments.size(); indexIns++)
+			System.out.println("Currency " + (indexCur + 1) + " : " + ref.currencyTraders.get(indexCur).code);
+			System.out.println("Size instru = " + ref.currencyTraders.get(indexCur).Instruments.size());
+			for (int indexIns = 0; indexIns < ref.currencyTraders.get(indexCur).Instruments.size(); indexIns++)
 			{
-				System.out.println("Instrument " + (indexIns + 1) + " " + ref.currencies.get(indexCur).Instruments.get(indexIns).name);
-				for (int indexTra = 0; indexTra < ref.currencies.get(indexCur).Instruments.get(indexIns).Traders.size(); indexTra++)
-					System.out.println("Trader " + (indexTra + 1) + " " + ref.currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).name
-							+ " " + ref.currencies.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).codeptf);
+				System.out.println("Instrument " + (indexIns + 1) + " " + ref.currencyTraders.get(indexCur).Instruments.get(indexIns).name);
+				for (int indexTra = 0; indexTra < ref.currencyTraders.get(indexCur).Instruments.get(indexIns).Traders.size(); indexTra++)
+					System.out.println("Trader " + (indexTra + 1) + " " + ref.currencyTraders.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).name
+							+ " " + ref.currencyTraders.get(indexCur).Instruments.get(indexIns).Traders.get(indexTra).codeptf);
 			}
 		}
 	}

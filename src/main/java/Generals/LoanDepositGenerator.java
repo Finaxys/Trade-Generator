@@ -102,7 +102,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		//			Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
 
 
-		tr1 = ref.getTrader(ref, cur1.country, "loandepo");
+		tr1 = ref.getTrader(ref, cur1.code, "loandepo");
 
 //		TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date, date,
 //				c1, book, date,

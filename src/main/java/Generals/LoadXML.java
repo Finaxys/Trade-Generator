@@ -138,6 +138,23 @@ public class LoadXML
 				ref.portfolios.add(portfolio);
 			}
 		});
+		
+		loadReferential("currencies.xml", "currency", new CbReferential()
+		{
+			public void init(Referential ref)
+			{
+				ref.currencies = new ArrayList<Referential.Currency>();
+			}
+
+			public void execute(Referential ref, Element eElement) throws CustomParsingException
+			{
+				Referential.Currency currency = ref.new Currency();
+				currency.name = getContent(eElement, "name");
+				currency.country = getContent(eElement, "country");
+				currency.code = getContent(eElement, "code");
+				ref.currencies.add(currency);
+			}
+		});
 
 		try
 		{
@@ -263,13 +280,13 @@ public class LoadXML
 		Document doc = dBuilder.parse(fXmlFile);
 		doc.getDocumentElement().normalize();
 
-		List<Referential.Currency> currencies = new ArrayList<Referential.Currency>();
+		List<Referential.CurrencyTrader> currencyTraders = new ArrayList<Referential.CurrencyTrader>();
 		
 		// Get currencies
 		NodeList ncurrencies = doc.getElementsByTagName("currency");
 		for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++)
 		{
-			List<Referential.Instrument> instruments = new ArrayList<Referential.Instrument>();
+			List<Referential.InstrumentTrader> instruments = new ArrayList<Referential.InstrumentTrader>();
 
 			Element ecurrency = (Element) ncurrencies.item(icurrencies);
 			if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
@@ -298,16 +315,16 @@ public class LoadXML
 					traders.add(_ref.new Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
 				}
 
-				Referential.Instrument instrument = _ref.new Instrument(einstrument.getAttribute("name"));
+				Referential.InstrumentTrader instrument = _ref.new InstrumentTrader(einstrument.getAttribute("name"));
 				instrument.Traders = traders;
 				instruments.add(instrument);
 			}
 
-			Referential.Currency currency = _ref.new Currency(ecurrency.getAttribute("code"), ecurrency.getAttribute("name"), ecurrency.getAttribute("country"));
-			currency.Instruments = instruments;
-			currencies.add(currency);
+			Referential.CurrencyTrader currencyTrader = _ref.new CurrencyTrader(ecurrency.getAttribute("code"));
+			currencyTrader.Instruments = instruments;
+			currencyTraders.add(currencyTrader);
 		}
-		_ref.currencies = currencies;
+		_ref.currencyTraders = currencyTraders;
 	}
 
 	private static void getFilters(Element ebook,

@@ -65,7 +65,7 @@ public class EquityGenerator extends TradeGenerator
 		depositary = ref.getRandomElement(ref.depositaries);
 		counterpart = ref.getRandomElement(ref.counterparts);
 		currency = ref.getRandomElement(ref.currencies);
-		trader = ref.getTrader(ref, currency.country, "equity");
+		trader = ref.getTrader(ref, currency.code, "equity");
 		if (localities.get(0).toString() == "NATIONAL")
 		{
 			currency = ref.subList(ref.currencies, "country", generals.owncountry).get(0);

@@ -50,6 +50,8 @@ public class TradeLoan extends TradeEvent
 		this.amount = amount;
 		this.currency = currency;
 		this.depositary = depositary;
+		if (trader == null)
+			System.out.println("redefzpkopkppkok");
 		this.trader = trader;
 	}
 
