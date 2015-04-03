@@ -30,7 +30,9 @@ public class TradeEquity extends TradeEvent
 		this.depositary = depositary;
 		this.trader=trader;
 	}
-	public abstract double getAmount(){return price};
+
+	public abstract double getAmount(){ return price };
+
 	@Override
 	public List<Node> getNodes()
 	{

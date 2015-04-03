@@ -78,22 +78,35 @@ public class EntryPoint
 			}
 
 			// List of instrument available
-			List<Instrument> instruments = new ArrayList<Instrument>();
+			List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
 			for (Businessunit bu : gen.bu)
 			{	
 				// Init instruments available
-				instruments.addAll(bu.getInstruments());
+				generators.addAll(bu.getInstruments());
 				
 				// Init Instrument Generator
+				for (TradeGenerator tgen : generators)
+					tgen.init(43);
 				
-				// While there is still an instrument with a volumetry > 0
-				while(instrumentgenerator!=null)
+				// While there is still a generator with a volumetry > 0
+				while (generators.size() > 0)
 				{
-					Instrument insrandom=getrandomins();
-					Currency currandom=getrandomdevise();
-					Book book= match(bu,insrandom,currandom);
+					// Get random instrument & currency
+					
+					// Find appropriate book
+					
+					// We found one -> generate trade
+					
+					// Set trade attributes
 
-					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
+					// Instrument is full -> remove from list
+					
+					
+//					Instrument insrandom=getrandomins();
+//					Currency currandom=getrandomdevise();
+//					Book book= match(bu,insrandom,currandom);
+//
+//					insrandom.generate(book, bu.getMainInstrument().getMontant(), instrumentGeneratorinsrandom));
 				}
 			}
 
