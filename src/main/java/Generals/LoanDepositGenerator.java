@@ -11,10 +11,6 @@ import Generals.Referential.Trader;
 
 public class LoanDepositGenerator extends TradeGenerator
 {
-
-	// type de taux (fixe/variable), base de calcul, valeur du taux, devise,
-	// durée
-
 	private int 				Partloan;
 	private int 				owncountry;
 	private int 				volumetry_tolerance;
@@ -30,11 +26,7 @@ public class LoanDepositGenerator extends TradeGenerator
 	private List<Locality> 		listLocality;
 	private List<Way>			listWay;
 	private List<RateType> 		listRatetype;
-	private int 				roundedVolume;
 	private int 				index;
-	
-
-
 
 	public LoanDepositGenerator(int partloan, int owncountry,
 			int volumetry, int volumetry_tolerance,
@@ -51,6 +43,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		this.tolerance_taux_var = tolerance_taux_var;
 		this.part_taux_variable = part_taux_variable;
 	}
+
 	public void init(int amount)
 	{		
 		double rand1, rand2;
@@ -65,12 +58,12 @@ public class LoanDepositGenerator extends TradeGenerator
 		
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
-		int roundedVolume = (int) toleredVolumetry;	
-		Loanpertrade = Sparsemoney(roundedVolume, amountPerDay);
-		listLocality = tableaubin(roundedVolume, this.owncountry,
+		rounded_volumetry = (int) toleredVolumetry;	
+		Loanpertrade = Sparsemoney(rounded_volumetry, amountPerDay);
+		listLocality = tableaubin(rounded_volumetry, this.owncountry,
 				Locality.class);
-		listWay = tableaubin(roundedVolume, this.Partloan, Way.class);
-		 listRatetype = tableaubin(roundedVolume, this.part_taux_variable,
+		listWay = tableaubin(rounded_volumetry, this.Partloan, Way.class);
+		 listRatetype = tableaubin(rounded_volumetry, this.part_taux_variable,
 				RateType.class);
 	
 	}

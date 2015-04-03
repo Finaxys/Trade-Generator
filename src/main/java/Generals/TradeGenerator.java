@@ -11,10 +11,11 @@ public abstract class TradeGenerator
 	protected String 	name;
 	protected int		amount;
 	protected int 		volumetry;
+	protected int 		rounded_volumetry;
 	protected int		trade_generated = 0;
 
 	public int getVolumetry() {
-		return volumetry;
+		return rounded_volumetry;
 	}
 
 	public int getTradeGenerated() {

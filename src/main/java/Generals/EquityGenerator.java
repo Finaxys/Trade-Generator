@@ -17,7 +17,6 @@ public class EquityGenerator extends TradeGenerator
 	private int 		ownCountry;
 	private double 		volumetryTolerance;
 	private double 		repartitionTolerance;
-	private int  roundedVolumetry;
 	private List<Integer> Loanpertrade ;
 	private List<Locality> t1;
 	private List<Way> t2;
@@ -39,16 +38,13 @@ public class EquityGenerator extends TradeGenerator
 
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
-		 this.roundedVolumetry = (int) toleredVolumetry;
+		 rounded_volumetry = (int) toleredVolumetry;
 
-
- Loanpertrade = Sparsemoney(roundedVolumetry, amountPerDay);
-
-
-		t1 = TradeGenerator.tableaubin(roundedVolumetry,
-				 this.getOwnCountry(),Locality.class);
-				 t2 = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(),Way.class);
-				
+		 Loanpertrade = Sparsemoney(rounded_volumetry, amountPerDay);
+		 
+		t1 = TradeGenerator.tableaubin(rounded_volumetry,
+				this.getOwnCountry(),Locality.class);
+				 t2 = TradeGenerator.tableaubin(rounded_volumetry, this.getPartSell(),Way.class);
 	}
 
 	@Override
@@ -69,9 +65,9 @@ public class EquityGenerator extends TradeGenerator
 		
 		 List<Referential.Product> Listequity=ref.subList(ref.products,
 		 "type", "EQUITY");
-		 t1 = TradeGenerator.tableaubin(this.roundedVolumetry,
+		 t1 = TradeGenerator.tableaubin(rounded_volumetry,
 		 this.getOwnCountry(),Locality.class);
-		 t2 = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(),Way.class);
+		 t2 = TradeGenerator.tableaubin(rounded_volumetry, this.getPartSell(),Way.class);
 
 
 		 // tirage au sort sous contrainte
