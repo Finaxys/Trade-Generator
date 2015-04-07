@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -67,13 +68,16 @@ public static void writeCSTrade(TradeEvent te, int nombre_op,double montant) thr
 	String date = "";
 	SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 	
-	DecimalFormat df = new DecimalFormat () ;
+	DecimalFormat df = new DecimalFormat() ;
 
-	df.setMaximumFractionDigits ( 2 ) ; //arrondi à 2 chiffres apres la virgules 
-	df.setMinimumFractionDigits ( 2 ) ;
+	df.setRoundingMode(RoundingMode.HALF_UP);
+	df.applyPattern("###.##");
+	df.setMaximumFractionDigits( 2 ) ; //arrondi à 2 chiffres apres la virgules 
+	String montantstr = df.format(montant);
+	montantstr = montantstr.replaceAll(",", ".");
 
 		date = formater.format(te.getDate());
-	writer.write(date +","+te.getBook().getPortFolios().getBu().getName()+","+te.getBook().getPortFolios().getName() +","+te.getBook().getName() +","+te.getInstrument().getName()+","+te.getWay() +","+nombre_op+","+df.format(montant) +","+ s);
+	writer.write(date +","+te.getBook().getPortFolios().getBu().getName()+","+te.getBook().getPortFolios().getName() +","+te.getBook().getName() +","+te.getInstrument().getName()+","+te.getWay() +","+nombre_op+","+montantstr +","+ s);
 //	writer.write(System.lineSeparator());
 //	writer.write(te.date.toString() +",");
 //	writer.write(System.lineSeparator());
