@@ -14,11 +14,10 @@ public class Generator
 	public static void main(String[] args)
 	{
 		// Test Spring
-//		ApplicationContext context = new ClassPathXmlApplicationContext(
-//				"Spring-Module.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
  
-//		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
-//		obj.printHello();
+		Greeter obj = (Greeter) context.getBean("helloBean");
+		obj.sayHello();
 		
 		LocalTime currentTime = new LocalTime();
 		System.out.println("The current local time is: " + currentTime);
