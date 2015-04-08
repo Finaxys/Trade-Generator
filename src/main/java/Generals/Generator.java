@@ -1,5 +1,7 @@
 package Generals;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,7 +9,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.joda.time.LocalTime;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,14 +16,18 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
+//		try {
+//			 Class.forName("Greeter");
+//			 System.out.println("FOUND");
+//			} catch( ClassNotFoundException e ) {
+//			 System.out.println("NOT FOUND");
+//			}
+
 		// Test Spring
-		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
- 
-		Greeter obj = (Greeter) context.getBean("helloBean");
-		obj.sayHello();
-		
-		LocalTime currentTime = new LocalTime();
-		System.out.println("The current local time is: " + currentTime);
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:spring.xml");
+//		IGreeter obj = (IGreeter) context.getBean("helloWorld");
+//		obj.sayHello();
+
 
 //		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
 //		for(int i:Loanpertrade)
