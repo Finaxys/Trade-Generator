@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.joda.time.LocalTime;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Generator
 {
