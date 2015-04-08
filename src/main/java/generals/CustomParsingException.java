@@ -1,4 +1,4 @@
-package Generals;
+package generals;
 
 public class CustomParsingException extends Exception {
 	/**
@@ -16,6 +16,6 @@ public class CustomParsingException extends Exception {
 
 	public boolean aborting()
 	{
-		return (abort);
+		return abort;
 	}
 }

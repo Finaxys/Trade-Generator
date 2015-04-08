@@ -1,7 +1,7 @@
-import Generals.CustomParsingException;
-import Generals.Generals;
-import Generals.LoadXML;
-import Generals.Referential;
+import generals.CustomParsingException;
+import generals.Generals;
+import generals.LoadXML;
+import domain.Referential;
 import junit.framework.TestCase;
 
 public class LoadXMLTest extends TestCase

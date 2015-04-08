@@ -1,4 +1,6 @@
-package Generals;
+package domain;
+
+import generals.Output;
 
 import java.util.List;
 
@@ -76,16 +78,16 @@ public class Businessunit
 		for (TradeGenerator gen : generators)
 		{
 			if (gen.getName().equalsIgnoreCase(gen_str))
-				return (gen);
+				return gen;
 		}
-		return (null);
+		return null;
 	}
 
-	public Businessunit(String name, int ratio, TradeGenerator main_instrument, List<Output> outputs,
+	public Businessunit(String name, int ratio, TradeGenerator mainInstrument, List<Output> outputs,
 			List<TradeGenerator> instruments, List<Portfolio> portfolios)
 	{
 		super();
-		this.mainInstrument = main_instrument;
+		this.mainInstrument = mainInstrument;
 		this.name = name;
 		this.ratio = ratio;
 		this.generators = instruments;
@@ -102,6 +104,6 @@ public class Businessunit
 				if (book.getGenerators().contains(mainInstrument))
 					++cnt;
 
-		return (cnt);
+		return cnt;
 	}
 }

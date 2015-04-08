@@ -1,8 +1,9 @@
+import generals.Generator;
+
 import java.util.ArrayList;
 
-import Generals.Generator;
-import Generals.Referential;
-import Generals.Referential.Trader;
+import domain.Referential;
+import domain.Referential.Trader;
 import junit.framework.TestCase;
 
 public class ReferentialTest extends TestCase

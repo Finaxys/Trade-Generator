@@ -1,4 +1,4 @@
-package Generals;
+package domain;
 
 import java.util.Random;
 
@@ -9,7 +9,6 @@ public enum BaseCalcul
 	public static BaseCalcul getRandom()
 	{
 		Random random = new Random();
-		return BaseCalcul.values()[random
-				.nextInt(BaseCalcul.values().length - 1)];
+		return BaseCalcul.values()[random.nextInt(BaseCalcul.values().length - 1)];
 	}
 }

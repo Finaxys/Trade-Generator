@@ -1,7 +1,10 @@
-package Generals;
+package generals;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import domain.TradeEvent;
+import domain.TradeGenerator;
 
 public class Output
 {

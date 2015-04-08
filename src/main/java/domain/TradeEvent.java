@@ -1,13 +1,13 @@
-package Generals;
+package domain;
 
 import java.util.Date;
 import java.util.List;
 
-import Generals.Referential.Counterpart;
-import Generals.Referential.Currency;
-import Generals.Referential.Depositary;
-import Generals.Referential.Portfolio;
-import Generals.Referential.Trader;
+import domain.Referential.Counterpart;
+import domain.Referential.Currency;
+import domain.Referential.Depositary;
+import domain.Referential.Portfolio;
+import domain.Referential.Trader;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
@@ -21,7 +21,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	protected Referential.Counterpart 	counterpart;
 	protected Book 						book;
 	protected Referential.Portfolio 	portfolio;
-	protected TradeGenerator 				instrument;
+	protected TradeGenerator 			instrument;
 	protected List<Node> 				nodes;
 	
 	public TradeEvent(String reference, Way way, Date date,
@@ -34,7 +34,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 		this.tradeDate = tradeDate;
 		this.instrument = instrument;
 		this.counterpart = counterpart;
-		this.book=book;
+		this.book = book;
 	}
 
 
@@ -63,8 +63,6 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	{
 		 if (!(this.getDate().equals(trade.getDate())))
 	         return (int) (this.getDate().getTime()-trade.getDate().getTime());
-//	     if (!this.book.pt.bu.name.equalsIgnoreCase(trade.book.pt.bu.name))
-//	    	 return 1;
 	     if (!this.getBook().getPortFolios().getName().equalsIgnoreCase(trade.getBook().getPortFolios().getName()))
 	    	 return this.getBook().getPortFolios().getName().compareTo(trade.getBook().getPortFolios().getName());
 
@@ -72,8 +70,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	    	 return this.getBook().getName().compareTo(trade.getBook().getName());
 	     if (!this.instrument.getName().equalsIgnoreCase(trade.getInstrument().getName()))
 	    	 return this.instrument.getName().compareTo(trade.getInstrument().getName());
-	     return (this.getWay().name().compareTo(trade.getWay().name()));
-//	    	return 0; 
+	     return this.getWay().name().compareTo(trade.getWay().name()); 
 	     }
 
 	public Book getBook() {

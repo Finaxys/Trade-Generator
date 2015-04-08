@@ -1,4 +1,4 @@
-package Generals;
+package domain;
 
 public enum Locality
 {

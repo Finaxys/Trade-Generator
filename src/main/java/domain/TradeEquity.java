@@ -1,4 +1,4 @@
-package Generals;
+package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Generals.Referential.Counterpart;
-import Generals.Referential.Currency;
-import Generals.Referential.Depositary;
-import Generals.Referential.Portfolio;
-import Generals.Referential.Product;
-import Generals.Referential.Trader;
+import domain.Referential.Counterpart;
+import domain.Referential.Currency;
+import domain.Referential.Depositary;
+import domain.Referential.Portfolio;
+import domain.Referential.Product;
+import domain.Referential.Trader;
+import domain.TradeEvent.Node;
 
 public class TradeEquity extends TradeEvent
 {	
@@ -54,6 +55,6 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "depositary", depositary.toString(), null);
 		addNode(nodes, "trader", trader.name, null);
 		
-		return (nodes);
+		return nodes;
 	}
 }

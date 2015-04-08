@@ -1,4 +1,7 @@
-package Generals;
+package domain;
+
+import generals.Output;
+import generals.OutputManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,8 +14,8 @@ public abstract class TradeGenerator
 	protected String 	name;
 	protected int		amount;
 	protected int 		volumetry;
-	protected int 		rounded_volumetry;
-	protected int		trade_generated = 0;
+	protected int 		roundedVolumetry;
+	protected int		tradeGenerated = 0;
 
 	public void setVolumetry(int volumetry) {
 		this.volumetry = volumetry;
@@ -23,21 +26,21 @@ public abstract class TradeGenerator
 	}
 
 	public int getRoundedVolumetry() {
-		return rounded_volumetry;
+		return roundedVolumetry;
 	}
 
 	public int getTradeGenerated() {
-		return trade_generated;
+		return tradeGenerated;
 	}
 
 	public void init(int amount_day)
 	{
-		trade_generated = 0;
+		tradeGenerated = 0;
 	}
 
 	public TradeEvent generate(Book b, Date date)
 	{
-		++trade_generated;
+		++tradeGenerated;
 
 		return null;
 	}
@@ -50,7 +53,7 @@ public abstract class TradeGenerator
 			if (op.getGenerators().contains(trade.getInstrument()))
 				outputs.add(op);
 
-		return (outputs);
+		return outputs;
 	}
 	static int cnt = 0;
 
@@ -84,7 +87,7 @@ public abstract class TradeGenerator
 
 		Collections.shuffle(TrueArray);
 
-		return (TrueArray);
+		return TrueArray;
 	}
 	public static <T extends Enum<T>> T randEnum(Class<T> e){
 	Random rand= new Random();
@@ -117,9 +120,9 @@ public abstract class TradeGenerator
 	public boolean equals(Object ins)
 	{
 		if (!(ins instanceof TradeGenerator))
-			return (false);
+			return false;
 
-		return (((TradeGenerator) ins).getName().equalsIgnoreCase(this.getName()));
+		return ((TradeGenerator) ins).getName().equalsIgnoreCase(this.getName());
 	}
 
 	public int getMontant() {

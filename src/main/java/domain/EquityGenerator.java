@@ -1,8 +1,17 @@
-package Generals;
+package domain;
+
+import generals.Generals;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import domain.Referential.Counterpart;
+import domain.Referential.Currency;
+import domain.Referential.Depositary;
+import domain.Referential.Portfolio;
+import domain.Referential.Product;
+import domain.Referential.Trader;
 
 public class EquityGenerator extends TradeGenerator
 {
@@ -33,13 +42,13 @@ public class EquityGenerator extends TradeGenerator
 
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rdmVolumetryTolerance) * volumetry;
-		rounded_volumetry = (int) toleredVolumetry;
+		roundedVolumetry = (int) toleredVolumetry;
 
-		Loanpertrade = Sparsemoney(rounded_volumetry, amountPerDay);
+		Loanpertrade = Sparsemoney(roundedVolumetry, amountPerDay);
 		 
-		localities = TradeGenerator.tableaubin(rounded_volumetry,
+		localities = TradeGenerator.tableaubin(roundedVolumetry,
 				this.getOwnCountry(),Locality.class);
-		ways = TradeGenerator.tableaubin(rounded_volumetry, this.getPartSell(),Way.class);
+		ways = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(),Way.class);
 	}
 
 	@Override

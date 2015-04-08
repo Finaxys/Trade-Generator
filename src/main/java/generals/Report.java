@@ -1,4 +1,4 @@
-package Generals;
+package generals;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+
+import domain.Referential;
+import domain.TradeEvent;
 public class Report {
 
 

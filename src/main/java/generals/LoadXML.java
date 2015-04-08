@@ -1,4 +1,4 @@
-package Generals;
+package generals;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +12,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import Generals.Referential.Currency;
+
+import domain.Book;
+import domain.Businessunit;
+import domain.EquityGenerator;
+import domain.LoanDepositGenerator;
+import domain.Portfolio;
+import domain.Referential;
+import domain.TradeGenerator;
+import domain.Referential.Currency;
 
 public class LoadXML
 {
@@ -27,7 +35,7 @@ public class LoadXML
 	
 	public static String getPathGeneralInfs()
 	{
-		return (pathGeneralInfs);
+		return pathGeneralInfs;
 	}
 	
 	public static void setPathGeneralInfs(String pathGeneralsInfs)
@@ -47,7 +55,7 @@ public class LoadXML
 		{
 			throw new CustomParsingException("Name tag invalid: " + name, true);
 		}
-		return (content);
+		return content;
 	}
 
 	static public String getOptContent(Element elem, String name, String opt)
@@ -60,7 +68,7 @@ public class LoadXML
 		{
 			return (opt);
 		}
-		return (content);
+		return content;
 	}
 
 

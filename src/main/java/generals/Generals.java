@@ -1,6 +1,8 @@
-package Generals;
+package generals;
 
 import java.util.List;
+
+import domain.Businessunit;
 
 public class Generals
 {

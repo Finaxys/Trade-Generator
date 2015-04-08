@@ -1,18 +1,21 @@
-package Generals;
+package domain;
+
+import generals.Generals;
+import generals.Indexation;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import Generals.Referential.Counterpart;
-import Generals.Referential.Currency;
-import Generals.Referential.Depositary;
-import Generals.Referential.Trader;
+import domain.Referential.Counterpart;
+import domain.Referential.Currency;
+import domain.Referential.Depositary;
+import domain.Referential.Trader;
 
 public class LoanDepositGenerator extends TradeGenerator
 {
 	private int 				PartSell;
-	private int 				owncountry;
+	private int 				ownCountry;
 	private int 				volumetry_tolerance;
 	private int 				repartition_tolerance;
 	private float 				valeur_taux;
@@ -21,7 +24,7 @@ public class LoanDepositGenerator extends TradeGenerator
 	private int 				durée;
 	private BaseCalcul 			basecalcul;
 	private String 				devise;
-	private List<Integer> 		Loanpertrade;
+	private List<Integer> 		loanPerTrade;
 	private int 				amountPerDay;
 	private List<Locality> 		listLocality;
 	private List<Way>			listWay;
@@ -35,7 +38,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		super();
 		this.devise = "EUR";
 		this.PartSell = partloan;
-		this.owncountry = owncountry;
+		this.ownCountry = owncountry;
 		this.volumetry = volumetry;
 		this.volumetry_tolerance = volumetry_tolerance;
 		this.repartition_tolerance = repartition_tolerance;
@@ -60,12 +63,12 @@ public class LoanDepositGenerator extends TradeGenerator
 		
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
-		rounded_volumetry = (int) toleredVolumetry;	
-		Loanpertrade = Sparsemoney(rounded_volumetry, amountPerDay);
-		listLocality = tableaubin(rounded_volumetry, this.owncountry,
+		roundedVolumetry = (int) toleredVolumetry;	
+		loanPerTrade = Sparsemoney(roundedVolumetry, amountPerDay);
+		listLocality = tableaubin(roundedVolumetry, this.ownCountry,
 				Locality.class);
-		listWay = tableaubin(rounded_volumetry, this.PartSell, Way.class);
-		 listRatetype = tableaubin(rounded_volumetry, this.part_taux_variable,
+		listWay = tableaubin(roundedVolumetry, this.PartSell, Way.class);
+		 listRatetype = tableaubin(roundedVolumetry, this.part_taux_variable,
 				RateType.class);
 	
 	}
@@ -114,15 +117,15 @@ public class LoanDepositGenerator extends TradeGenerator
 				c1, book, date,
 				date,(double) 0,TradeGenerator.randEnum(Indexation.class), "isin?",
 				TradeGenerator.randEnum(RateType.class),(double) this.valeur_taux,(double) this.valeur_taux/2, TradeGenerator.randEnum(Term.class),
-				TradeGenerator.randEnum(BaseCalcul.class), Loanpertrade.get(0),
+				TradeGenerator.randEnum(BaseCalcul.class), loanPerTrade.get(0),
 				cur1, d1, tr1);
 
 		listLocality.remove(0);
 		listWay.remove(0);
 		listRatetype.remove(0);
-		Loanpertrade.remove(0);
+		loanPerTrade.remove(0);
 
-		return (tl);
+		return tl;
 	}
 }
 

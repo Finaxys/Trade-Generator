@@ -1,4 +1,4 @@
-package Generals;
+package generals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,9 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import domain.Businessunit;
+import domain.TradeEvent;
 
 public class OutputManager
 {
@@ -25,7 +28,7 @@ public class OutputManager
 
 	static public OutputManager getInstance()
 	{
-		return (instance);
+		return instance;
 	}
 	
 	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
@@ -35,7 +38,7 @@ public class OutputManager
 		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
 					"." + output.getFormat().toString().toLowerCase();
 
-		return (new PrintWriter(path, OUTPUT_ENCODING));
+		return new PrintWriter(path, OUTPUT_ENCODING);
 	}
 	
 	private PrintWriter getWriter(Output output) throws FileNotFoundException, UnsupportedEncodingException
@@ -48,7 +51,7 @@ public class OutputManager
 
 		String path = OUTPUT_PATH + "batch" + output.getId() + "-" + date + "." + output.getFormat().toString().toLowerCase();
 		
-		return (new PrintWriter(path, OUTPUT_ENCODING));
+		return new PrintWriter(path, OUTPUT_ENCODING);
 	}
 
 	public void outputTrades()

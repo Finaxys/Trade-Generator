@@ -1,8 +1,8 @@
-package Generals;
+package domain;
 
 import java.util.List;
 
-import Generals.Referential.Currency;
+import domain.Referential.Currency;
 
 public class Book
 {

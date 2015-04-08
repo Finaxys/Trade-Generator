@@ -1,4 +1,4 @@
-package Generals;
+package domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class Referential
 
 		}
 
-		return (subT);
+		return subT;
 	}
 
 	public <T> List<T> exList(List<T> list, String field, String filter)
@@ -68,7 +68,7 @@ public class Referential
 			}
 
 		}
-		return (subT);
+		return subT;
 	}
 
 	public Trader getTrader(Referential ref, String code, String nameIns)
@@ -79,7 +79,7 @@ public class Referential
 					if (ins.name.equals(nameIns))
 						return getRandomElement(ins.Traders);
 
-		return (null);
+		return null;
 	}
 
 	public class Counterpart

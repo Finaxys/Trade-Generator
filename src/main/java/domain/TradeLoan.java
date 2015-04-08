@@ -1,14 +1,17 @@
-package Generals;
+package domain;
+
+import generals.Indexation;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Generals.Referential.Counterpart;
-import Generals.Referential.Currency;
-import Generals.Referential.Depositary;
-import Generals.Referential.Portfolio;
-import Generals.Referential.Trader;
+import domain.Referential.Counterpart;
+import domain.Referential.Currency;
+import domain.Referential.Depositary;
+import domain.Referential.Portfolio;
+import domain.Referential.Trader;
+import domain.TradeEvent.Node;
 
 public class TradeLoan extends TradeEvent
 {
@@ -83,6 +86,6 @@ public class TradeLoan extends TradeEvent
 		addNode(nodes, "spread", spread.toString(), null);
 		addNode(nodes, "national", national.toString(), null);
 		
-		return (nodes);
+		return nodes;
 	}
 }

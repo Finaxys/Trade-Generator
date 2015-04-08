@@ -1,4 +1,4 @@
-package Generals;
+package generals;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +11,13 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import domain.Book;
+import domain.Businessunit;
+import domain.Portfolio;
+import domain.Referential;
+import domain.TradeEvent;
+import domain.TradeGenerator;
 
 public class Generator
 {
