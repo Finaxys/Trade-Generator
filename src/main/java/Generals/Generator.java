@@ -11,6 +11,13 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
+		// Test Spring
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"Spring-Module.xml");
+ 
+		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
+		obj.printHello();
+
 //		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
 //		for(int i:Loanpertrade)
 //			System.out.println(i);
@@ -97,10 +104,11 @@ public class Generator
 			calendar.add(Calendar.DATE, 1);
 			OutputManager.getInstance().outputTrades();
 		}
-System.out.println(Report.liste.size());
-		Report.ConcatSortOutput();
-				Report.report(Report.liste, days);
-				System.out.println("Report done");
+
+//		System.out.println(Report.liste.size());
+//		Report.ConcatSortOutput();
+//		Report.report(Report.liste, days);
+//		System.out.println("Report done");
 
 		// Estimation Stats
 		long estimatedTime = System.currentTimeMillis() - startTime;

@@ -1,39 +1,39 @@
 <generalSettings>
   <name>Finaxys Bank</name>
   <side>SellSide</side>
-  <budget>10000</budget>
+  <budget>1000000</budget>
   <ownCountry>FR</ownCountry>
   <bussinessUnits>
     <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
-	  <format>CSV</format>
+	  <format>XML</format>
 	  <path>trades</path>
 	  <instrument>all</instrument>
 	  <isStp>false</isStp>
 	  <layer>FS</layer>
 	</output>
-	<output>
-	    <format>XML</format>
-	    <path>trades</path>
-	    <instrument>all</instrument>
-	    <isStp>false</isStp>
-	    <layer>FS</layer>
-	  </output>
+	<!-- <output> -->
+	<!--     <format>XML</format> -->
+	<!--     <path>trades</path> -->
+	<!--     <instrument>all</instrument> -->
+	<!--     <isStp>false</isStp> -->
+	<!--     <layer>FS</layer> -->
+	<!--   </output> -->
       </workflow>
       <instruments>
 	<instrument name="equity">
 	  <budgetTolerance>2</budgetTolerance> 
 	  <partSell>20</partSell> 
 	  <ownCountry>20</ownCountry> 
-	  <volumetry>100</volumetry> 
+	  <volumetry>200</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	</instrument>
 	<instrument name="loandepo">
 	  <montant>1000</montant>
 	  <partSell>50</partSell> 
 	  <ownCountry>40</ownCountry> 
-	  <volumetry>40</volumetry> 
+	  <volumetry>20</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
 	  <budgetTolerance>2</budgetTolerance> 
 	  <rateValue>20</rateValue> 

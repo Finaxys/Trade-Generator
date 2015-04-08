@@ -56,7 +56,7 @@ public abstract class TradeGenerator
 
 	static public void tradeGenerated(TradeEvent trade)
 	{
-		Report.add(trade);
+		//Report.add(trade);
 		
 		List<Output> outputs = getOutputsFromTrade(trade);
 		for (Output output : outputs)
