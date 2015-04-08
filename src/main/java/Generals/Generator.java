@@ -7,16 +7,21 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.joda.time.LocalTime;
+
 public class Generator
 {
 	public static void main(String[] args)
 	{
 		// Test Spring
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"Spring-Module.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext(
+//				"Spring-Module.xml");
  
-		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
-		obj.printHello();
+//		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
+//		obj.printHello();
+		
+		LocalTime currentTime = new LocalTime();
+		System.out.println("The current local time is: " + currentTime);
 
 //		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
 //		for(int i:Loanpertrade)
