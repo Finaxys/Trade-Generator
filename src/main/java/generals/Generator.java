@@ -23,17 +23,17 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
-		try {
-			 Class.forName("Greeter");
-			 System.out.println("FOUND");
-			} catch( ClassNotFoundException e ) {
-			 System.out.println("NOT FOUND");
-			}
-
-		// Test Spring
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:spring.xml");
-		IGreeter obj = (IGreeter) context.getBean("helloWorld");
-		obj.sayHello();
+//		try {
+//			Class.forName("Greeter");
+//			System.out.println("FOUND");
+//		} catch( ClassNotFoundException e ) {
+//			System.out.println("NOT FOUND");
+//		}
+//
+//		// Test Spring
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:spring.xml");
+//		IGreeter obj = (IGreeter) context.getBean("helloWorld");
+//		obj.sayHello();
 
 
 //		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
