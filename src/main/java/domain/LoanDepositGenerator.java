@@ -8,30 +8,26 @@ import java.util.Random;
 
 public class LoanDepositGenerator extends TradeGenerator
 {
-	private int 				partSell;
-	private int 				ownCountry;
-	private int 				volumetryTolerance;
-	private int 				repartitionTolerance;
-	private float 				valueRate;
-	private int 				partVariableRate;
-	private List<Integer> 		loanPerTrade;
-	private int 				amountPerDay;
-	private List<Locality> 		listLocality;
-	private List<Way>			listWay;
-	private List<RateType> 		listRatetype;
 
-	public LoanDepositGenerator(int partSell, int ownCountry,
-			int volumetry, int volumetryTolerance,
-			int repartitionTolerance, int valueRate,
-			int tolerance_taux_var, int partVariableRate){
-		super();
-		this.partSell = partSell;
-		this.ownCountry = ownCountry;
-		this.volumetry = volumetry;
-		this.volumetryTolerance = volumetryTolerance;
-		this.repartitionTolerance = repartitionTolerance;
-		this.valueRate = valueRate;
-		this.partVariableRate = partVariableRate;
+	public int 				partSell;
+	public int 				ownCountry;
+	public int 				repartitionTolerance;
+	public float 				rateValue;
+	public int 				rateValueTolerance;
+	public int 				partRateVariable;
+	//public int 				durée;
+	public BaseCalcul 			basecalcul;
+	public String 				devise;
+	public List<Integer> 		loanPerTrade;
+	public int 				amountPerDay;
+	public List<Locality> 		listLocality;
+	public List<Way>			listWay;
+	public List<RateType> 		listRatetype;
+	public int 				index;
+
+	public LoanDepositGenerator()
+	{
+
 	}
 
 	public boolean equals(Object obj)
@@ -61,7 +57,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		listLocality = tableaubin(roundedVolumetry, this.ownCountry,
 				Locality.class);
 		listWay = tableaubin(roundedVolumetry, this.partSell, Way.class);
-		 listRatetype = tableaubin(roundedVolumetry, this.partVariableRate,
+		 listRatetype = tableaubin(roundedVolumetry, this.partRateVariable,
 				RateType.class);
 	
 	}
@@ -109,7 +105,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0), date, date,
 				c1, book, date,
 				date,(double) 0,TradeGenerator.randEnum(Indexation.class), "isin?",
-				TradeGenerator.randEnum(RateType.class),(double) this.valueRate,(double) this.valueRate/2, TradeGenerator.randEnum(Term.class),
+				TradeGenerator.randEnum(RateType.class),(double) this.rateValue,(double) this.rateValue/2, TradeGenerator.randEnum(Term.class),
 				TradeGenerator.randEnum(BaseCalcul.class), loanPerTrade.get(0),
 				cur1, d1, tr1);
 

@@ -1,6 +1,7 @@
 <generalSettings>
   <name>Finaxys Bank</name>
   <side>SellSide</side>
+  <numberOfDay>10</numberOfDay>
   <budget>1000000</budget>
   <ownCountry>FR</ownCountry>
   <bussinessUnits>
@@ -28,9 +29,10 @@
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>200</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
+	  <implementation>customequitygenerator</implementation> <!-- Spring Bean --> 
 	</instrument>
 	<instrument name="loandepo">
-	  <montant>1000</montant>
+	  <budget>1000</budget>
 	  <partSell>50</partSell> 
 	  <ownCountry>40</ownCountry> 
 	  <volumetry>20</volumetry> 

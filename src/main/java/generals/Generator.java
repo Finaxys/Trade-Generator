@@ -23,18 +23,6 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
-//		try {
-//			 Class.forName("Greeter");
-//			 System.out.println("FOUND");
-//			} catch( ClassNotFoundException e ) {
-//			 System.out.println("NOT FOUND");
-//			}
-
-		// Test Spring
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:spring.xml");
-//		IGreeter obj = (IGreeter) context.getBean("helloWorld");
-//		obj.sayHello();
-
 
 //		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
 //		for(int i:Loanpertrade)
@@ -69,7 +57,7 @@ public class Generator
 
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();
-		int						days = Integer.parseInt(args[0]);
+		int						days = gen.number_of_day;
 		Calendar				calendar = Calendar.getInstance();
 		Book					book;
 		TradeEvent				trade;

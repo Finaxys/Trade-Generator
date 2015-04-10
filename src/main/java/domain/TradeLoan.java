@@ -61,8 +61,7 @@ public class TradeLoan extends TradeEvent
 	@Override
 	public List<Node> getNodes()
 	{
-		// TODO Auto-generated method stub
-		nodes = new ArrayList<Node>();
+		nodes = super.getNodes();
 
 		addNode(nodes, "businessUnit", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);

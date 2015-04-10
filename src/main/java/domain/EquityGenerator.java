@@ -124,11 +124,6 @@ public class EquityGenerator extends TradeGenerator
 		return budgetTolerance;
 	}
 
-	public void setBudgetTolerance(double budgetTolerance)
-	{
-		this.budgetTolerance = budgetTolerance;
-	}
-
 	public double getVolumetryTolerance()
 	{
 		return volumetryTolerance;
@@ -174,5 +169,6 @@ public class EquityGenerator extends TradeGenerator
 		}
 		return false;
 	}
+
 
 }
