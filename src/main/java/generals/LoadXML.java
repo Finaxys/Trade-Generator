@@ -260,13 +260,12 @@ public class LoadXML
 				if (main_ins == null)
 					throw new CustomParsingException("Business unit missing main instrument", true);
 
-				businessunits.add(new Businessunit(ebusinessunit
-						.getAttribute("name"), Integer.parseInt(ebusinessunit
+				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit
 						.getAttribute("ratio")), main_ins, outputs, generators,
 						portfolios));
 			}
 
-			Generals.getInstance().init(getContent(esetting, "name"),
+			Generals.getInstance().init(Integer.parseInt(getContent(esetting, "numberOfDay")), getContent(esetting, "name"),
 					Integer.parseInt(getContent(esetting, "budget")),
 					getContent(esetting, "ownCountry"), businessunits);
 		}

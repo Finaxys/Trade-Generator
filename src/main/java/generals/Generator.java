@@ -29,8 +29,8 @@ public class Generator
 //			} catch( ClassNotFoundException e ) {
 //			 System.out.println("NOT FOUND");
 //			}
-
-		// Test Spring
+//
+//		// Test Spring
 //		ApplicationContext context = new ClassPathXmlApplicationContext("file:spring.xml");
 //		IGreeter obj = (IGreeter) context.getBean("helloWorld");
 //		obj.sayHello();
@@ -69,7 +69,7 @@ public class Generator
 
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();
-		int						days = Integer.parseInt(args[0]);
+		int						days = gen.number_of_day;
 		Calendar				calendar = Calendar.getInstance();
 		Book					book;
 		TradeEvent				trade;
