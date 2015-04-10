@@ -29,10 +29,10 @@
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>200</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <implementation>equity</implementation> <!-- Spring Bean --> 
+	  <implementation>customequitygenerator</implementation> <!-- Spring Bean --> 
 	</instrument>
 	<instrument name="loandepo">
-	  <montant>1000</montant>
+	  <budget>1000</budget>
 	  <partSell>50</partSell> 
 	  <ownCountry>40</ownCountry> 
 	  <volumetry>20</volumetry> 
@@ -41,6 +41,7 @@
 	  <rateValue>20</rateValue> 
 	  <rateValueTolerance>2</rateValueTolerance> 
 	  <partRateVariable>2</partRateVariable> 
+	  <implementation>customloandepogenerator</implementation> <!-- Spring Bean --> 
 	</instrument>
       </instruments>
       <portfolios>

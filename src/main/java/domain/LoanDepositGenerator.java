@@ -14,37 +14,25 @@ import domain.Referential.Trader;
 
 public class LoanDepositGenerator extends TradeGenerator
 {
-	private int 				PartSell;
-	private int 				ownCountry;
-	private int 				volumetry_tolerance;
-	private int 				repartition_tolerance;
-	private float 				valeur_taux;
-	private int 				tolerance_taux_var;
-	private int 				part_taux_variable;
-	private int 				durée;
-	private BaseCalcul 			basecalcul;
-	private String 				devise;
-	private List<Integer> 		loanPerTrade;
-	private int 				amountPerDay;
-	private List<Locality> 		listLocality;
-	private List<Way>			listWay;
-	private List<RateType> 		listRatetype;
-	private int 				index;
+	public int 				PartSell;
+	public int 				ownCountry;
+	public int 				repartition_tolerance;
+	public float 				valeur_taux;
+	public int 				tolerance_taux_var;
+	public int 				part_taux_variable;
+	public int 				durée;
+	public BaseCalcul 			basecalcul;
+	public String 				devise;
+	public List<Integer> 		loanPerTrade;
+	public int 				amountPerDay;
+	public List<Locality> 		listLocality;
+	public List<Way>			listWay;
+	public List<RateType> 		listRatetype;
+	public int 				index;
 
-	public LoanDepositGenerator(int partloan, int owncountry,
-			int volumetry, int volumetry_tolerance,
-			int repartition_tolerance, int valeur_taux,
-			int tolerance_taux_var, int part_taux_variable){
-		super();
-		this.devise = "EUR";
-		this.PartSell = partloan;
-		this.ownCountry = owncountry;
-		this.volumetry = volumetry;
-		this.volumetry_tolerance = volumetry_tolerance;
-		this.repartition_tolerance = repartition_tolerance;
-		this.valeur_taux = valeur_taux;
-		this.tolerance_taux_var = tolerance_taux_var;
-		this.part_taux_variable = part_taux_variable;
+	public LoanDepositGenerator()
+	{
+		
 	}
 
 	public void init(int amount)
@@ -57,7 +45,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		amountPerDay=amount;
 		rand1 = this.repartition_tolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
-		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble() - 0.5)
+		rand2 = this.volumetryTolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
 		amountPerDay = (int) (amountPerDay + rand1 * amountPerDay);
 		

@@ -1,6 +1,8 @@
 package generals;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,8 +10,12 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -24,6 +30,8 @@ import domain.Referential.Currency;
 
 public class LoadXML
 {
+	private static ApplicationContext context = null;
+
 	interface CbReferential
 	{
 		public void init(Referential ref);
@@ -76,6 +84,13 @@ public class LoadXML
 	static public void init(Referential ref) throws CustomParsingException
 	{
 		_ref = ref;
+		try
+		{
+			context = new ClassPathXmlApplicationContext("file:spring.xml");
+		} catch (Exception e)
+		{
+			System.out.println("Couldn't init spring modules. Using default generators.");
+		}
 
 		// Load Static Informations
 		loadReferential("counterparts.xml", "counterpart", new CbReferential()
@@ -252,11 +267,13 @@ public class LoadXML
 				// Get Main Instrument
 				TradeGenerator	main_ins = null;
 				for (TradeGenerator gen : generators)
+				{
 					if (gen.getName().equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
 					{
 						main_ins = gen;
 						break;
 					}
+				}
 				if (main_ins == null)
 					throw new CustomParsingException("Business unit missing main instrument", true);
 
@@ -440,7 +457,7 @@ public class LoadXML
 			getFilters(ebook, bgenerators, bcurrencies, generators);
 		
 			if (bcurrencies.size() == 0 || bgenerators.size() == 0)
-				System.out.println("Book " + ebook.getAttribute("name") + " : filters invalid");
+				System.out.println("Book " + ebook.getAttribute("name") + " : invalid filters");
 
 			books.add(new Book(ebook.getAttribute("name"), bcurrencies,
 					bgenerators));
@@ -458,28 +475,61 @@ public class LoadXML
 			if (((Node) eins).getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
-			// Manage all instrument (Only equity for now)
-			if (eins.getAttribute("name").equalsIgnoreCase("equity"))
+			String name = eins.getAttribute("name");
+			if (!name.equalsIgnoreCase("equity") && !name.equalsIgnoreCase("loandepo"))
+				continue; 
+
+			// Get custom or default generator
+			String implementation = getOptContent(eins, "implementation", "");
+			TradeGenerator generator = null;
+			if (implementation != null && !implementation.isEmpty())
+				generator = (TradeGenerator) context.getBean(implementation);
+			else
 			{
-				EquityGenerator equityGenerator = new EquityGenerator();
-				equityGenerator.setName("equity");
-				equityGenerator.setOwnCountry(Integer.parseInt(getContent(eins, "ownCountry")));
-				equityGenerator.setPartSell(Integer.parseInt(getContent(eins, "partSell")));
-				equityGenerator.setBudgetTolerance(Integer.parseInt(getContent(eins, "budgetTolerance")));
-				equityGenerator.setVolumetry(Integer.parseInt(getContent(eins, "volumetry")));
-				equityGenerator.setVolumetryTolerance(Integer.parseInt(getContent(eins, "volumetryTolerance")));
-				equityGenerator.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
-				instruments.add(equityGenerator);
+				if (eins.getAttribute("name").equalsIgnoreCase("equity"))
+					generator = new EquityGenerator();
+				else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
+					generator = new LoanDepositGenerator();
+				else
+					continue ;
 			}
-			else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
+			
+			// Set all fields by name
+			generator.name = name;
+			NodeList nfields = eins.getChildNodes();
+			for (int ifield = 0; ifield < nfields.getLength(); ifield++)
 			{
-				LoanDepositGenerator loandepositGenerator = new LoanDepositGenerator(Integer.parseInt(getContent(eins, "partSell")), Integer.parseInt(getContent(eins, "ownCountry")), Integer.parseInt(getContent(eins, "volumetry")), 
-						Integer.parseInt(getContent(eins, "volumetryTolerance")), Integer.parseInt(getContent(eins, "budgetTolerance")),  Integer.parseInt(getContent(eins, "rateValue")), 
-						Integer.parseInt(getContent(eins, "rateValueTolerance")), Integer.parseInt(getContent(eins, "partRateVariable")));
-				loandepositGenerator.setName("loandepo");
-				loandepositGenerator.setMontant(Integer.parseInt(getOptContent(eins, "montant", "-1")));
-				instruments.add(loandepositGenerator);
+				Node nfield = nfields.item(ifield);
+				try {
+					Field field = generator.getClass().getField(nfield.getNodeName());
+					try {
+						if (field.getType() == Integer.TYPE)
+							field.set(generator, Integer.parseInt(nfield.getFirstChild().getNodeValue()));
+						else if (field.getType().toString().equals(String.class.toString()))
+							field.set(generator, nfield.getFirstChild().getNodeValue());
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (DOMException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
 			}
+
+			instruments.add(generator);
 		}
 	}
 

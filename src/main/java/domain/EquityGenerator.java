@@ -15,14 +15,12 @@ import domain.Referential.Trader;
 
 public class EquityGenerator extends TradeGenerator
 {
-	private int 			partSell;
-	private int 			ownCountry;
-	private double 			volumetryTolerance;
-	private double 			budgetTolerance;
-	private List<Integer> 	Loanpertrade ;
-	private List<Locality> 	localities;
-	private List<Way> 		ways;
-	private int 			amountPerDay;
+	public int 			partSell;
+	public int 			ownCountry;
+	public List<Integer> 	Loanpertrade ;
+	public List<Locality> 	localities;
+	public List<Way> 		ways;
+	public int 			amountPerDay;
 	
 	@Override
 	public void init(int amount)
@@ -131,18 +129,8 @@ public class EquityGenerator extends TradeGenerator
 		return budgetTolerance;
 	}
 
-	public void setBudgetTolerance(double budgetTolerance)
-	{
-		this.budgetTolerance = budgetTolerance;
-	}
-
 	public double getVolumetryTolerance()
 	{
 		return volumetryTolerance;
-	}
-
-	public void setVolumetryTolerance(double volumetryTolerance)
-	{
-		this.volumetryTolerance = volumetryTolerance;
 	}
 }
