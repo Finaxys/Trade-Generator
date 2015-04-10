@@ -18,7 +18,6 @@ public abstract class TradeGenerator
 	public int		tradeGenerated = 0;
 	public int		volumetryTolerance;
 	public int 		budgetTolerance;
-	public String	implementation;
 
 	public void setVolumetry(int volumetry) {
 		this.volumetry = volumetry;

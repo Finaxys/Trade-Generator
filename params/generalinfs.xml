@@ -41,7 +41,6 @@
 	  <rateValue>20</rateValue> 
 	  <rateValueTolerance>2</rateValueTolerance> 
 	  <partRateVariable>2</partRateVariable> 
-	  <implementation>customloandepogenerator</implementation> <!-- Spring Bean --> 
 	</instrument>
       </instruments>
       <portfolios>

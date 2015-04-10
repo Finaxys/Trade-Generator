@@ -503,6 +503,7 @@ public class LoadXML
 				try {
 					Field field = generator.getClass().getField(nfield.getNodeName());
 					try {
+						System.out.println(name + " >> " + nfield.getNodeName());
 						if (field.getType() == Integer.TYPE)
 							field.set(generator, Integer.parseInt(nfield.getFirstChild().getNodeValue()));
 						else if (field.getType().toString().equals(String.class.toString()))
