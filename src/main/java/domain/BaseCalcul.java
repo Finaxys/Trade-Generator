@@ -4,8 +4,8 @@ import java.util.Random;
 
 public enum BaseCalcul
 {
-	methode1, methode2, methode3;
-
+	METHOD1, METHOD2, METHOD3;
+	
 	public static BaseCalcul getRandom()
 	{
 		Random random = new Random();

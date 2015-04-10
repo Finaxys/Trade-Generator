@@ -124,6 +124,12 @@ public abstract class TradeGenerator
 
 		return ((TradeGenerator) ins).getName().equalsIgnoreCase(this.getName());
 	}
+	
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
 
 	public int getMontant() {
 		return amount;

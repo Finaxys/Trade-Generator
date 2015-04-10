@@ -33,21 +33,19 @@ public class Referential
 	public <T> List<T> subList(List<T> list, String field, String filter)
 	{
 		List<T> subT = new ArrayList<T>();
-		for (T te : list)
+		try
 		{
-			try
+			for (T te : list)
 			{
 				if (te.getClass().getField(field).get(te).equals(filter))
 					subT.add((T) te);
 			}
-			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 		}
-
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 		return subT;
 	}
 
@@ -63,8 +61,8 @@ public class Referential
 			}
 			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return null;
 			}
 
 		}
@@ -105,23 +103,25 @@ public class Referential
 			this.name = name;
 			this.country = country;
 		}
-		
-		public  Currency getCurrencybycountry(String country)
+
+		public Currency getCurrencybycountry(String country)
 		{
-			for (int i = 0; i < currencies.size(); i++ )
+			for (int i = 0; i < currencies.size(); i++)
 				if (currencies.get(i).country.equals(country))
 					return currencies.get(i);
 			return null;
 		}
 	}
-	
+
 	public class CurrencyTrader
 	{
 		public String code;
 		public List<InstrumentTrader> Instruments;
-		
-		public CurrencyTrader(){}
-		
+
+		public CurrencyTrader()
+		{
+		}
+
 		public CurrencyTrader(String code)
 		{
 			this.code = code;
@@ -163,7 +163,7 @@ public class Referential
 	{
 		public String name;
 		public String codeptf;
-		
+
 		public Trader(String name, String codeptf)
 		{
 			this.name = name;

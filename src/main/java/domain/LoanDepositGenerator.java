@@ -2,51 +2,44 @@ package domain;
 
 import generals.Generals;
 import generals.Indexation;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import domain.Referential.Counterpart;
-import domain.Referential.Currency;
-import domain.Referential.Depositary;
-import domain.Referential.Trader;
-
 public class LoanDepositGenerator extends TradeGenerator
 {
-	private int 				PartSell;
+	private int 				partSell;
 	private int 				ownCountry;
-	private int 				volumetry_tolerance;
-	private int 				repartition_tolerance;
-	private float 				valeur_taux;
-	private int 				tolerance_taux_var;
-	private int 				part_taux_variable;
-	private int 				durée;
-	private BaseCalcul 			basecalcul;
-	private String 				devise;
+	private int 				volumetryTolerance;
+	private int 				repartitionTolerance;
+	private float 				valueRate;
+	private int 				partVariableRate;
 	private List<Integer> 		loanPerTrade;
 	private int 				amountPerDay;
 	private List<Locality> 		listLocality;
 	private List<Way>			listWay;
 	private List<RateType> 		listRatetype;
-	private int 				index;
 
-	public LoanDepositGenerator(int partloan, int owncountry,
-			int volumetry, int volumetry_tolerance,
-			int repartition_tolerance, int valeur_taux,
-			int tolerance_taux_var, int part_taux_variable){
+	public LoanDepositGenerator(int partSell, int ownCountry,
+			int volumetry, int volumetryTolerance,
+			int repartitionTolerance, int valueRate,
+			int tolerance_taux_var, int partVariableRate){
 		super();
-		this.devise = "EUR";
-		this.PartSell = partloan;
-		this.ownCountry = owncountry;
+		this.partSell = partSell;
+		this.ownCountry = ownCountry;
 		this.volumetry = volumetry;
-		this.volumetry_tolerance = volumetry_tolerance;
-		this.repartition_tolerance = repartition_tolerance;
-		this.valeur_taux = valeur_taux;
-		this.tolerance_taux_var = tolerance_taux_var;
-		this.part_taux_variable = part_taux_variable;
+		this.volumetryTolerance = volumetryTolerance;
+		this.repartitionTolerance = repartitionTolerance;
+		this.valueRate = valueRate;
+		this.partVariableRate = partVariableRate;
 	}
 
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
+	
+	@Override
 	public void init(int amount)
 	{		
 		super.init(amount);
@@ -55,9 +48,9 @@ public class LoanDepositGenerator extends TradeGenerator
 		double toleredVolumetry;
 		Random random = new Random();
 		amountPerDay=amount;
-		rand1 = this.repartition_tolerance * 2 * (random.nextDouble() - 0.5)
+		rand1 = this.repartitionTolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
-		rand2 = this.volumetry_tolerance * 2 * (random.nextDouble() - 0.5)
+		rand2 = this.volumetryTolerance * 2 * (random.nextDouble() - 0.5)
 				/ 100;
 		amountPerDay = (int) (amountPerDay + rand1 * amountPerDay);
 		
@@ -67,8 +60,8 @@ public class LoanDepositGenerator extends TradeGenerator
 		loanPerTrade = Sparsemoney(roundedVolumetry, amountPerDay);
 		listLocality = tableaubin(roundedVolumetry, this.ownCountry,
 				Locality.class);
-		listWay = tableaubin(roundedVolumetry, this.PartSell, Way.class);
-		 listRatetype = tableaubin(roundedVolumetry, this.part_taux_variable,
+		listWay = tableaubin(roundedVolumetry, this.partSell, Way.class);
+		 listRatetype = tableaubin(roundedVolumetry, this.partVariableRate,
 				RateType.class);
 	
 	}
@@ -116,7 +109,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0), date, date,
 				c1, book, date,
 				date,(double) 0,TradeGenerator.randEnum(Indexation.class), "isin?",
-				TradeGenerator.randEnum(RateType.class),(double) this.valeur_taux,(double) this.valeur_taux/2, TradeGenerator.randEnum(Term.class),
+				TradeGenerator.randEnum(RateType.class),(double) this.valueRate,(double) this.valueRate/2, TradeGenerator.randEnum(Term.class),
 				TradeGenerator.randEnum(BaseCalcul.class), loanPerTrade.get(0),
 				cur1, d1, tr1);
 

@@ -6,24 +6,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import domain.Referential.Counterpart;
-import domain.Referential.Currency;
-import domain.Referential.Depositary;
-import domain.Referential.Portfolio;
-import domain.Referential.Product;
-import domain.Referential.Trader;
-
 public class EquityGenerator extends TradeGenerator
 {
-	private int 			partSell;
-	private int 			ownCountry;
-	private double 			volumetryTolerance;
-	private double 			budgetTolerance;
-	private List<Integer> 	Loanpertrade ;
-	private List<Locality> 	localities;
-	private List<Way> 		ways;
-	private int 			amountPerDay;
-	
+	private int partSell;
+	private int ownCountry;
+	private double volumetryTolerance;
+	private double budgetTolerance;
+	private List<Integer> Loanpertrade;
+	private List<Locality> localities;
+	private List<Way> ways;
+	private int amountPerDay;
+
 	@Override
 	public void init(int amount)
 	{
@@ -45,16 +38,15 @@ public class EquityGenerator extends TradeGenerator
 		roundedVolumetry = (int) toleredVolumetry;
 
 		Loanpertrade = Sparsemoney(roundedVolumetry, amountPerDay);
-		 
-		localities = TradeGenerator.tableaubin(roundedVolumetry,
-				this.getOwnCountry(),Locality.class);
-		ways = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(),Way.class);
+
+		localities = TradeGenerator.tableaubin(roundedVolumetry, this.getOwnCountry(), Locality.class);
+		ways = TradeGenerator.tableaubin(roundedVolumetry, this.getPartSell(), Way.class);
 	}
 
 	@Override
 	public TradeEvent generate(Book book, Date date)
 	{
-		super.generate(book,  date);
+		super.generate(book, date);
 
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();
@@ -65,8 +57,9 @@ public class EquityGenerator extends TradeGenerator
 		Referential.Trader trader;
 		Referential.Product product;
 		Referential.Currency currency = null;
-		Referential.Portfolio portfolio;
+		//Referential.Portfolio portfolio = null;
 
+		
 		List<Referential.Product> Listequity = ref.subList(ref.products, "type", "EQUITY");
 
 		// tirage au sort sous contrainte
@@ -83,7 +76,7 @@ public class EquityGenerator extends TradeGenerator
 			currency = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
 		}
 		product = ref.getRandomElement(Listequity);
-		portfolio = ref.getRandomElement(ref.portfolios);
+		//portfolio = ref.getRandomElement(ref.portfolios);
 
 		float randToleranceQuantities;
 
@@ -102,7 +95,7 @@ public class EquityGenerator extends TradeGenerator
 		localities.remove(0);
 		ways.remove(0);
 		Loanpertrade.remove(0);
-		
+
 		return (tradeEquity);
 	}
 
@@ -145,4 +138,41 @@ public class EquityGenerator extends TradeGenerator
 	{
 		this.volumetryTolerance = volumetryTolerance;
 	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == this)
+			return true;
+		if (obj instanceof EquityGenerator)
+		{
+			EquityGenerator other = (EquityGenerator) obj;
+			if (this.partSell != other.partSell)
+				return false;
+			if (this.ownCountry != other.ownCountry)
+				return false;
+			if (this.volumetryTolerance != other.volumetryTolerance)
+				return false;
+			if (this.budgetTolerance != other.budgetTolerance)
+				return false;
+			if (this.amountPerDay != other.amountPerDay)
+				return false;
+
+			if (this.Loanpertrade != other.Loanpertrade)
+				if (this.Loanpertrade == null || !this.Loanpertrade.equals(other.Loanpertrade))
+					return false;
+
+			if (this.localities != other.localities)
+				if (this.localities == null || !this.localities.equals(other.localities))
+					return false;
+
+			if (this.ways != other.ways)
+				if (this.ways == null || !this.ways.equals(other.ways))
+					return false;
+
+			return true;
+		}
+		return false;
+	}
+
 }

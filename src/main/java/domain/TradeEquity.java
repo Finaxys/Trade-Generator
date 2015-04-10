@@ -49,7 +49,7 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "type", "equity", null);
 		addNode(nodes, "product", product.libelle, null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
-		addNode(nodes, "price", new BigDecimal(price).setScale(2, RoundingMode.HALF_UP).toString(), null);
+		addNode(nodes, "price", BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP).toString(), null);
 		addNode(nodes, "counterpart", counterpart.code, null);
 		addNode(nodes, "product", product.name, null);
 		addNode(nodes, "depositary", depositary.toString(), null);
