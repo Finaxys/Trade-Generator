@@ -40,7 +40,7 @@ public class TradeEquity extends TradeEvent
 	@Override
 	public List<Node> getNodes()
 	{
-		nodes = new ArrayList<Node>();
+		nodes = super.getNodes();
 
 		addNode(nodes, "businessUnit", book.getPortFolios().getBu().getName(), null);
 		addNode(nodes, "portfolio", book.getPortFolios().getName(), null);

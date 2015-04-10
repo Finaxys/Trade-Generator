@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +48,11 @@ public abstract class TradeEvent implements Comparable<TradeEvent>
 	
 	public abstract double getAmount();
 	
-	public abstract List<Node> getNodes();
+	public List<Node> getNodes()
+	{
+		nodes = new ArrayList<Node>();
+		return (nodes);
+	}
 
 	public void addNode(List<Node> root, String name, String value,
 			List<Node> nodes)
