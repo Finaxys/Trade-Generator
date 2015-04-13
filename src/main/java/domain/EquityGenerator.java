@@ -11,7 +11,7 @@ public class EquityGenerator extends TradeGenerator
 	public int partSell;
 	public int ownCountry;
 	public double budgetTolerance;
-	private List<Integer> Loanpertrade;
+	private List<Integer> loanPerTrade;
 	private List<Locality> localities;
 	private List<Way> ways;
 	private int amountPerDay;
@@ -38,7 +38,7 @@ public class EquityGenerator extends TradeGenerator
 		toleredVolumetry = (1 - rdmVolumetryTolerance) * volumetry;
 		roundedVolumetry = (int) toleredVolumetry;
 
-		Loanpertrade = Sparsemoney(roundedVolumetry, amountPerDay);
+		loanPerTrade = Sparsemoney(roundedVolumetry, amountPerDay);
 
 		localities = TradeGenerator.tableaubin(roundedVolumetry,
 				this.getOwnCountry(), Locality.class);
@@ -60,7 +60,7 @@ public class EquityGenerator extends TradeGenerator
 		Referential.Product product;
 		Referential.Currency currency = null;
 
-		List<Referential.Product> Listequity = ref.subList(ref.getProducts(),
+		List<Referential.Product> equities = ref.subList(ref.getProducts(),
 				"type", "EQUITY");
 
 		// tirage au sort sous contrainte
@@ -74,7 +74,7 @@ public class EquityGenerator extends TradeGenerator
 		else
 			currency = ref.getRandomElement(ref.subList(ref.getCurrencies(),
 					"country", generals.owncountry));
-		product = ref.getRandomElement(Listequity);
+		product = ref.getRandomElement(equities);
 
 		float randToleranceQuantities;
 
@@ -87,13 +87,13 @@ public class EquityGenerator extends TradeGenerator
 		float price = product.getPrice();
 
 		price = (float) (price * (1 + randomquantity / 100));
-		int quantity = (int) (randToleranceQuantities * Loanpertrade.get(0) / price);
+		int quantity = (int) (randToleranceQuantities * loanPerTrade.get(0) / price);
 		TradeEquity tradeEquity = new TradeEquity(this, "reference",
 				ways.get(0), date, date, counterpart, book, price, quantity,
 				product, depositary, trader);
 		localities.remove(0);
 		ways.remove(0);
-		Loanpertrade.remove(0);
+		loanPerTrade.remove(0);
 
 		return tradeEquity;
 	}

@@ -32,7 +32,10 @@ public class TradeEquity extends TradeEvent
 	}
 
 	@Override
-	public double getAmount(){ return price; }
+	public double getAmount() 
+	{ 
+		return price; 
+	}
 
 	@Override
 	public List<Node> getNodes()

@@ -19,6 +19,8 @@ public abstract class TradeGenerator
 	public int		volumetryTolerance;
 	public int 		budgetTolerance;
 
+	static int cnt = 0;
+
 	public void setVolumetry(int volumetry) {
 		this.volumetry = volumetry;
 	}
@@ -65,12 +67,9 @@ public abstract class TradeGenerator
 
 		return outputs;
 	}
-	static int cnt = 0;
 
 	static public void tradeGenerated(TradeEvent trade)
 	{
-		//Report.add(trade);
-		
 		List<Output> outputs = getOutputsFromTrade(trade);
 		for (Output output : outputs)
 			if (output.isStp())
@@ -83,31 +82,32 @@ public abstract class TradeGenerator
 	public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio,
 			Class<T> e)
 	{
-		List<T> TrueArray = new ArrayList<T>();
+		List<T> trueArray = new ArrayList<T>();
 		int j, i;
 		int national = (ratio * (size - 1)) / 100;
 		T tp1 = e.getEnumConstants()[0];
 		T tp2 = e.getEnumConstants()[1];
 
 		for (i = 0; i < size; i++)
-		TrueArray.add(tp1);
+		trueArray.add(tp1);
 
 		for (j = 0; j < national; j++)
-			TrueArray.set(j, tp2);
+			trueArray.set(j, tp2);
 
-		Collections.shuffle(TrueArray);
+		Collections.shuffle(trueArray);
 
-		return TrueArray;
+		return trueArray;
 	}
-	public static <T extends Enum<T>> T randEnum(Class<T> e){
-	Random rand= new Random();
+	public static <T extends Enum<T>> T randEnum(Class<T> e)
+	{
+		Random rand= new Random();
 		return e.getEnumConstants()[rand.nextInt(e.getEnumConstants().length - 1)];
 	}
 
 	public static List<Integer> Sparsemoney(int volumetry, int montant)
 
 	{
-		List<Integer> T = new ArrayList<Integer>();
+		List<Integer> ints = new ArrayList<Integer>();
 		
 		Random random = new Random();
 		int somme = 0;
@@ -118,12 +118,12 @@ public abstract class TradeGenerator
 		{		
 			randint = random.nextInt(volumetryorder)+5;
 			somme=somme+randint;
-			T.add(randint);
+			ints.add(randint);
 		}
 		for (int i = 0; i < volumetry; i++)
-			T.set(i, T.get(i) * montant / somme);
+			ints.set(i, ints.get(i) * montant / somme);
 		
-		return T;
+		return ints;
 	}
 
 	@Override

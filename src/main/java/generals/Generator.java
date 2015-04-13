@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import domain.Book;
 import domain.Businessunit;
 import domain.Portfolio;
@@ -14,6 +17,8 @@ import domain.TradeGenerator;
 
 public class Generator
 {
+	private static final Logger LOGGER = Logger.getLogger(Generator.class.getName());
+
 	public static void main(String[] args)
 	{
 		Referential ref = Referential.getInstance();
@@ -25,6 +30,8 @@ public class Generator
 		}
 		catch (CustomParsingException e)
 		{
+			LOGGER.log(Level.WARNING, "Custom exception caught", e);
+
 			System.out.println("Problem while parsing informations :");
 			System.out.println(e.getMessage());
 			if (e.aborting())
@@ -36,12 +43,6 @@ public class Generator
 		}
 
 		long startTime = System.currentTimeMillis();
-
-//		for (Businessunit bu : gen.bu)
-//			for (Portfolio portfolio : bu.getPortfolios())
-//				for (Book sbook : portfolio.getLb())
-//					for (Referential.Currency cur : sbook.getCurrencies())
-//						System.out.println(sbook.getName() +" >> " + cur.code);
 
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();

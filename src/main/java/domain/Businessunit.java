@@ -13,6 +13,18 @@ public class Businessunit
 	private List<Output> outputs;
 	private TradeGenerator mainInstrument;
 
+	public Businessunit(String name, int ratio, TradeGenerator mainInstrument, List<Output> outputs,
+			List<TradeGenerator> instruments, List<Portfolio> portfolios)
+	{
+		super();
+		this.mainInstrument = mainInstrument;
+		this.name = name;
+		this.ratio = ratio;
+		this.generators = instruments;
+		this.portfolios = portfolios;
+		this.outputs = outputs;
+	}
+
 	public String getName()
 	{
 		return name;
@@ -73,26 +85,14 @@ public class Businessunit
 		this.mainInstrument = mainInstrument;
 	}
 
-	public TradeGenerator getGenerator(String gen_str)
+	public TradeGenerator getGenerator(String genStr)
 	{
 		for (TradeGenerator gen : generators)
 		{
-			if (gen.getName().equalsIgnoreCase(gen_str))
+			if (gen.getName().equalsIgnoreCase(genStr))
 				return gen;
 		}
 		return null;
-	}
-
-	public Businessunit(String name, int ratio, TradeGenerator mainInstrument, List<Output> outputs,
-			List<TradeGenerator> instruments, List<Portfolio> portfolios)
-	{
-		super();
-		this.mainInstrument = mainInstrument;
-		this.name = name;
-		this.ratio = ratio;
-		this.generators = instruments;
-		this.portfolios = portfolios;
-		this.outputs = outputs;
 	}
 	
 	public int getMainInstrumentCount()

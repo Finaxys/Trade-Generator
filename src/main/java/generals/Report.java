@@ -22,6 +22,7 @@ public class Report {
 	final static private String		OUTPUT_PATH = "report.csv";
 	final static private String		OUTPUT_ENCODING = "UTF-8";
 	static private PrintWriter	writer;
+
 	private Report()
 	{	
 		super();	

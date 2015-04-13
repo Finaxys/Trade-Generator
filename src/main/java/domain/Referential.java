@@ -4,9 +4,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Referential
 {
+	private static final Logger LOGGER = Logger.getLogger(Referential.class.getName());
+
 	private List<Counterpart> counterparts = null;
 	private List<Product> products = null;
 	private List<Currency> currencies = null;
@@ -45,9 +49,9 @@ public class Referential
 					subT.add((T) te);
 			}
 		}
-		catch (Exception e)
+		catch (NoSuchFieldException | IllegalAccessException e)
 		{
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Field unknown", e);
 		}
 
 		return subT;
@@ -69,11 +73,27 @@ public class Referential
 		private String code;
 		private String name;
 
-		public void setCode(String code) { this.code = code; }
-		public void setName(String name) { this.name = name; }
+		public void setCode(String code) 
+		{
+			this.code = code; 
+		}
 
-		public String getCode() { return code; }
-		public String getName() { return name; }
+		public void setName(String name) 
+		{
+			this.name = name; 
+		}
+
+
+		public String getCode() 
+		{
+			return code; 
+		}
+
+		public String getName() 
+		{
+			return name; 
+		}
+
 	}
 
 	public class Currency
@@ -82,16 +102,6 @@ public class Referential
 		private String name;
 		private String country;
 		private float change;
-		
-		public void setCode(String code) { this.code = code; }
-		public void setName(String name) { this.name = name; }
-		public void setCountry(String country) { this.country = country; }
-		public void setChange(Float change) { this.change = change; }
-		
-		public String getCode() { return code; }
-		public String getName() { return name; }
-		public String getCountry() { return country; }
-		public float getChange() { return change; }
 
 		public Currency()
 		{
@@ -102,6 +112,47 @@ public class Referential
 			this.code = code;
 			this.name = name;
 			this.country = country;
+		}
+		
+		public void setCode(String code) 
+		{
+			this.code = code; 
+		}
+
+		public void setName(String name) 
+		{
+			this.name = name; 
+		}
+
+		public void setCountry(String country) 
+		{
+			this.country = country; 
+		}
+
+		public void setChange(Float change) 
+		{
+			this.change = change; 
+		}
+
+		
+		public String getCode() 
+		{
+			return code; 
+		}
+
+		public String getName() 
+		{
+			return name; 
+		}
+
+		public String getCountry() 
+		{
+			return country; 
+		}
+
+		public float getChange() 
+		{
+			return change; 
 		}
 
 		public Currency getCurrencybycountry(String country)
@@ -118,12 +169,6 @@ public class Referential
 		private String code;
 		private List<InstrumentTrader> instruments;
 
-		public void setCode(String code) { this.code = code; }
-		public void setInstruments(List<InstrumentTrader> instruments) { this.instruments = instruments; }
-
-		public String getCode() { return code; }
-		public List<InstrumentTrader> getInstruments() { return instruments; }
-
 		public CurrencyTrader()
 		{
 		}
@@ -132,6 +177,28 @@ public class Referential
 		{
 			this.code = code;
 		}
+
+		public void setCode(String code) 
+		{
+			this.code = code; 
+		}
+
+		public void setInstruments(List<InstrumentTrader> instruments) 
+		{
+			this.instruments = instruments; 
+		}
+
+
+		public String getCode() 
+		{
+			return code; 
+		}
+
+		public List<InstrumentTrader> getInstruments() 
+		{
+			return instruments; 
+		}
+
 	}
 
 	public class Product
@@ -143,19 +210,67 @@ public class Referential
 		private String country;
 		private float price;
 
-		public void setType(String type) { this.type = type; }
-		public void setName(String name) { this.name = name; }
-		public void setCountry(String country) { this.country = country; }
-		public void setIsin(String isin) { this.isin = isin; }
-		public void setLibelle(String name) { this.name = name; }
-		public void setPrice(float price) { this.price = price; }
+		public void setType(String type) 
+		{
+			this.type = type; 
+		}
 
-		public String getType() { return type; }
-		public String getName() { return name; }
-		public String getCountry() { return country; }
-		public String getLibelle() { return libelle; }
-		public String getIsin() { return isin; }
-		public float getPrice() { return price; }
+		public void setName(String name) 
+		{
+			this.name = name; 
+		}
+
+		public void setCountry(String country) 
+		{
+			this.country = country; 
+		}
+
+		public void setIsin(String isin) 
+		{
+			this.isin = isin; 
+		}
+
+		public void setLibelle(String name) 
+		{
+			this.name = name; 
+		}
+
+		public void setPrice(float price) 
+		{
+			this.price = price; 
+		}
+
+
+		public String getType() 
+		{
+			return type; 
+		}
+
+		public String getName() 
+		{
+			return name; 
+		}
+
+		public String getCountry() 
+		{
+			return country; 
+		}
+
+		public String getLibelle() 
+		{
+			return libelle; 
+		}
+
+		public String getIsin() 
+		{
+			return isin; 
+		}
+
+		public float getPrice() 
+		{
+			return price; 
+		}
+
 	}
 
 	public class Depositary
@@ -163,23 +278,33 @@ public class Referential
 		private String code;
 		private String libelle;
 
-		public void setCode(String code) { this.code = code; }
-		public void setLibelle(String libelle) { this.libelle = libelle; }
+		public void setCode(String code) 
+		{
+			this.code = code; 
+		}
 
-		public String getCode() { return code; }
-		public String getLibelle() { return libelle; }
+		public void setLibelle(String libelle) 
+		{
+			this.libelle = libelle; 
+		}
+
+
+		public String getCode() 
+		{
+			return code; 
+		}
+
+		public String getLibelle() 
+		{
+			return libelle; 
+		}
+
 	}
 
 	public class InstrumentTrader
 	{
 		private String name;
 		private List<Trader> traders;
-
-		public String getName() { return name; }
-		public List<Trader> getTraders() { return traders; }
-
-		public void setName(String name) { this.name = name; }
-		public void setTraders(List<Trader> traders) { this.traders = traders; }
 
 		public InstrumentTrader()
 		{
@@ -189,6 +314,27 @@ public class Referential
 		{
 			this.name = name;
 		}
+
+		public String getName() 
+		{
+			return name; 
+		}
+
+		public List<Trader> getTraders() 
+		{
+			return traders; 
+		}
+
+
+		public void setName(String name) 
+		{
+			this.name = name; 
+		}
+
+		public void setTraders(List<Trader> traders) 
+		{
+			this.traders = traders; 
+		}
 	}
 
 	public class Trader
@@ -196,16 +342,31 @@ public class Referential
 		private String name;
 		private String codeptf;
 
-		public String getCode() { return codeptf; }
-		public String getName() { return name; }
-
-		public void setCode(String code) { this.codeptf = code; }
-		public void setName(String name) { this.name = name; }
-
 		public Trader(String name, String codeptf)
 		{
 			this.name = name;
 			this.codeptf = codeptf;
+		}
+
+		public String getCode() 
+		{
+			return codeptf; 
+		}
+
+		public String getName() 
+		{
+			return name; 
+		}
+
+
+		public void setCode(String code) 
+		{
+			this.codeptf = code; 
+		}
+
+		public void setName(String name) 
+		{
+			this.name = name; 
 		}
 	}
 
@@ -215,13 +376,37 @@ public class Referential
 		private String country;
 		private String codeptf;
 
-		public void setCode(String code) { this.codeptf = code; }
-		public void setType(String type) { this.type = type; }
-		public void setCountry(String country) { this.country = country; }
+		public void setCode(String code) 
+		{
+			this.codeptf = code; 
+		}
 
-		public String getCode() { return codeptf; }
-		public String getType() { return type; }
-		public String getCountry() { return country; }
+		public void setType(String type) 
+		{
+			this.type = type; 
+		}
+
+		public void setCountry(String country) 
+		{
+			this.country = country; 
+		}
+
+
+		public String getCode() 
+		{
+			return codeptf; 
+		}
+
+		public String getType() 
+		{
+			return type; 
+		}
+
+		public String getCountry() 
+		{
+			return country; 
+		}
+
 	}
 
 	public List<Counterpart> getCounterparts() {

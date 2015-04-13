@@ -14,6 +14,7 @@ public enum Term
 			"12M");
 
 	private static final Map<String, Term> BY_CODE_MAP = new LinkedHashMap<>();
+	private String shortCode;
 
 	static
 	{
@@ -23,9 +24,13 @@ public enum Term
 		}
 	}
 
+	private Term(String shortCode)
+	{
+		this.shortCode = shortCode;
+	}
+
 	public static Term getRandom()
 	{
-		// TODO Auto-generated method stub
 		Random random = new Random();
 		return Term.values()[random.nextInt(Term.values().length - 1)];
 	}
@@ -46,13 +51,6 @@ public enum Term
 	public static Term forCode(String code)
 	{
 		return BY_CODE_MAP.get(code);
-	}
-
-	private String shortCode;
-
-	private Term(String shortCode)
-	{
-		this.shortCode = shortCode;
 	}
 
 	public String getShortCode()

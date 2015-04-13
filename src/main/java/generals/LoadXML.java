@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,6 +31,7 @@ import domain.Referential.Currency;
 public class LoadXML
 {
 	private static ApplicationContext context = null;
+	private static final Logger LOGGER = Logger.getLogger(LoadXML.class.getName());
 
 	interface CbReferential
 	{
@@ -72,12 +75,12 @@ public class LoadXML
 			content = elem.getElementsByTagName(name).item(0).getTextContent();
 		} catch (Exception e)
 		{
+			LOGGER.log(Level.FINE, "No XML Element TAG Found", e);
 			return (opt);
 		}
+
 		return content;
 	}
-
-
 	
 	static public void init(Referential ref) throws CustomParsingException
 	{
@@ -87,6 +90,7 @@ public class LoadXML
 			context = new ClassPathXmlApplicationContext("file:spring.xml");
 		} catch (Exception e)
 		{
+			LOGGER.log(Level.WARNING, "Couldn't init spring modules", e);
 			System.out.println("Couldn't init spring modules. Using default generators.");
 		}
 
@@ -182,7 +186,6 @@ public class LoadXML
 			loadTraders();
 		} catch (Exception e)
 		{
-			e.printStackTrace();
 			throw new CustomParsingException("Traders :" + e.getMessage(), true);
 		}
 		setPathGeneralInfs("params/generalinfs.xml");
@@ -501,31 +504,18 @@ public class LoadXML
 				try {
 					Field field = generator.getClass().getField(nfield.getNodeName());
 					try {
+						// TODO - TO REMOVE
 						System.out.println(name + " >> " + nfield.getNodeName());
 						if (field.getType() == Integer.TYPE)
 							field.set(generator, Integer.parseInt(nfield.getFirstChild().getNodeValue()));
 						else if (field.getType().toString().equals(String.class.toString()))
 							field.set(generator, nfield.getFirstChild().getNodeValue());
-					} catch (NumberFormatException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (DOMException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} catch (IllegalAccessException | IllegalArgumentException | DOMException e) {
+						LOGGER.log(Level.FINE, "Could not set Field from XML", e);
 					}
-				} catch (NoSuchFieldException e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
-				}
+				} catch (NoSuchFieldException | SecurityException e) {
+					LOGGER.log(Level.FINE, "Field not found from XML settings", e);
+				} 
 			}
 
 			instruments.add(generator);
