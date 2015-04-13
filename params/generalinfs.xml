@@ -32,7 +32,7 @@
 	  <implementation>customequitygenerator</implementation> <!-- Spring Bean --> 
 	</instrument>
 	<instrument name="loandepo">
-	  <budget>1000</budget>
+	  <amount>1000</amount>
 	  <partSell>50</partSell> 
 	  <ownCountry>40</ownCountry> 
 	  <volumetry>20</volumetry> 

@@ -2,17 +2,14 @@ package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import domain.Referential.Counterpart;
-import domain.Referential.Currency;
 import domain.Referential.Depositary;
-import domain.Referential.Portfolio;
 import domain.Referential.Product;
 import domain.Referential.Trader;
-import domain.TradeEvent.Node;
+
 
 public class TradeEquity extends TradeEvent
 {	

@@ -1,17 +1,11 @@
 package generals;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import domain.Book;
 import domain.Businessunit;
 import domain.Portfolio;
@@ -43,7 +37,7 @@ public class Generator
 			if (e.aborting())
 			{
 				System.out.println("Aborting program");
-				System.exit(-1);
+				return;
 			}
 			System.out.println("Problem handled. Continuing operation. Fix it next time.");
 		}
@@ -123,7 +117,7 @@ public class Generator
 		System.out.println("OVER");
 	}
 
-	private static Date instrumentGenerator(TradeGenerator insrandom) {
+	/*private static Date instrumentGenerator(TradeGenerator insrandom) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -131,7 +125,7 @@ public class Generator
 	private static LinkedList<TradeGenerator> Init(Businessunit bu) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
 	{
