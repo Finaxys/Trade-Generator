@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import domain.Book;
 import domain.Businessunit;
@@ -17,12 +16,6 @@ public class Generator
 {
 	public static void main(String[] args)
 	{
-
-//		ArrayList<Integer> Loanpertrade = (ArrayList<Integer>) TradeGenerator.Sparsemoney(10, 10000);
-//		for(int i:Loanpertrade)
-//			System.out.println(i);
-		// Stat
-
 		Referential ref = Referential.getInstance();
 		Generals gen = Generals.getInstance();
 
@@ -73,7 +66,7 @@ public class Generator
 				{
 					// Generate random generator & currency
 					TradeGenerator tgen = ref.getRandomElement(generators);
-					Referential.Currency cur = ref.getRandomElement(ref.currencies);
+					Referential.Currency cur = ref.getRandomElement(ref.getCurrencies());
 					book = null;
 					
 					// Get matching book

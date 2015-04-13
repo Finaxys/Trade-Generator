@@ -27,6 +27,14 @@ public abstract class TradeGenerator
 		return volumetry;
 	}
 
+	public void setVolumetryTolerance(int vt) {
+		this.volumetryTolerance = vt;
+	}
+
+	public int getVolumetryTolerance() {
+		return volumetryTolerance;
+	}
+
 	public int getRoundedVolumetry() {
 		return roundedVolumetry;
 	}

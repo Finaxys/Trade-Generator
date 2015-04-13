@@ -20,11 +20,6 @@ public class LoanDepositGenerator extends TradeGenerator
 	private List<Way> listWay;
 	private List<RateType> listRatetype;
 
-	// public int index;
-	// public int durée;
-	// private BaseCalcul basecalcul;
-	// private String devise;
-
 	public LoanDepositGenerator(){}
 
 	@Override
@@ -69,7 +64,6 @@ public class LoanDepositGenerator extends TradeGenerator
 
 		Referential ref = Referential.getInstance();
 		Generals generals = Generals.getInstance();
-		// List<Way> t;
 
 		// declaration des tirages au sort sous contrainte
 		Referential.Depositary d1;
@@ -77,33 +71,17 @@ public class LoanDepositGenerator extends TradeGenerator
 		Referential.Trader tr1;
 		Referential.Currency cur1;
 
-		d1 = ref.getRandomElement(ref.depositaries);
+		d1 = ref.getRandomElement(ref.getDepositaries());
 
-		c1 = ref.getRandomElement(ref.counterparts);
+		c1 = ref.getRandomElement(ref.getCounterparts());
 
 		if (listLocality.get(0).toString() == "NATIONAL")
-		{
-			cur1 = ref.subList(ref.currencies, "country", generals.owncountry).get(0);
-		}
+			cur1 = ref.subList(ref.getCurrencies(), "country", generals.owncountry).get(0);
+		else
+			cur1 = ref.getRandomElement(ref.subList(ref.getCurrencies(), "country", generals.owncountry));
 
-		{
-			cur1 = ref.getRandomElement(ref.exList(ref.currencies, "country", generals.owncountry));
-		}
+		tr1 = ref.getTrader(ref, cur1.getCode(), "loandepo");
 
-		// float
-		// change=1/Referential.getInstance().getdevise(generals.owncountry).change*cur1.change;
-		// int trade=(int) ((int) Loanpertrade.get(i)*change);
-		// Tradeloan tl = new Tradeloan(this, book, date,Loanpertrade.get(i),
-
-		tr1 = ref.getTrader(ref, cur1.code, "loandepo");
-
-		// TradeLoan tl = new TradeLoan(this, "eference", listWay.get(0), date,
-		// date,
-		// c1, book, date,
-		// date,(double ) 45, Indexation.EIBOR, "isni",
-		// RateType.ADJUSTABLE,(double )45, (double )45, Term.ONE_WEEK,
-		// BaseCalcul.methode1, null, amount,
-		// cur1, d1, tr1);
 		TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0), date, date, c1, book, date, date, (double) 0,
 				TradeGenerator.randEnum(Indexation.class), "isin?", TradeGenerator.randEnum(RateType.class), (double) this.rateValue,
 				(double) this.rateValue / 2, TradeGenerator.randEnum(Term.class), TradeGenerator.randEnum(BaseCalcul.class), loanPerTrade.get(0), cur1, d1, tr1);

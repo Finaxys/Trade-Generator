@@ -5,10 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import domain.Referential.Counterpart;
-import domain.Referential.Currency;
-import domain.Referential.Depositary;
-import domain.Referential.Portfolio;
-import domain.Referential.Trader;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {

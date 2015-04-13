@@ -44,13 +44,13 @@ public class TradeEquity extends TradeEvent
 		addNode(nodes, "book", book.getName(), null);
 		addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
 		addNode(nodes, "type", "equity", null);
-		addNode(nodes, "product", product.libelle, null);
+		addNode(nodes, "product", product.getLibelle(), null);
 		addNode(nodes, "quantity", Integer.toString(quantity), null);
 		addNode(nodes, "price", BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP).toString(), null);
-		addNode(nodes, "counterpart", counterpart.code, null);
-		addNode(nodes, "product", product.name, null);
+		addNode(nodes, "counterpart", counterpart.getCode(), null);
+		addNode(nodes, "product", product.getName(), null);
 		addNode(nodes, "depositary", depositary.toString(), null);
-		addNode(nodes, "trader", trader.name, null);
+		addNode(nodes, "trader", trader.getName(), null);
 		
 		return nodes;
 	}

@@ -2,16 +2,13 @@ package domain;
 
 import generals.Indexation;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import domain.Referential.Counterpart;
 import domain.Referential.Currency;
 import domain.Referential.Depositary;
-import domain.Referential.Portfolio;
 import domain.Referential.Trader;
-import domain.TradeEvent.Node;
 
 public class TradeLoan extends TradeEvent
 {
@@ -70,16 +67,16 @@ public class TradeLoan extends TradeEvent
 		addNode(nodes, "type", "loandepo", null);
 		addNode(nodes, "amount", Double.toString(this.amount), null);
 		addNode(nodes, "rate", rate.name(), null);
-		addNode(nodes, "trader", trader.codeptf, null);
-		addNode(nodes, "currency", currency.name, null);
+		addNode(nodes, "trader", trader.getCode(), null);
+		addNode(nodes, "currency", currency.getName(), null);
 		addNode(nodes, "rateValue", Double.toString(rateValue), null);
 		addNode(nodes, "term", term.name(), null);
 		addNode(nodes, "basecalcul", basecalcul.name(), null);
 		addNode(nodes, "spread", Double.toString(spread), null);
 		addNode(nodes, "valueDate", valueDate.toString(), null);
 		addNode(nodes, "maturityDate", maturityDate.toString(), null);
-		addNode(nodes, "Depositary", depositary.code, null);
-		addNode(nodes, "trader", trader.name, null);
+		addNode(nodes, "Depositary", depositary.getCode(), null);
+		addNode(nodes, "trader", trader.getName(), null);
 		addNode(nodes, "ISin", ISIN, null);
 		addNode(nodes, "indexation", index.name(), null);
 		addNode(nodes, "spread", spread.toString(), null);

@@ -1,7 +1,6 @@
 package generals;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +14,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -97,15 +95,15 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.counterparts = new ArrayList<Referential.Counterpart>();
+				ref.setCounterparts(new ArrayList<Referential.Counterpart>());
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Counterpart counterpart = ref.new Counterpart();
-				counterpart.code = getContent(eElement, "code");
-				counterpart.name = getContent(eElement, "name");
-				ref.counterparts.add(counterpart);
+				counterpart.setCode(getContent(eElement, "code"));
+				counterpart.setName(getContent(eElement, "name"));
+				ref.getCounterparts().add(counterpart);
 			}
 		});
 
@@ -113,19 +111,19 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.products = new ArrayList<Referential.Product>();
+				ref.setProducts(new ArrayList<Referential.Product>());
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Product product = ref.new Product();
-				product.name = getContent(eElement, "type");
-				product.type = getContent(eElement, "type");
-				product.isin = getContent(eElement, "isin");
-				product.libelle = getContent(eElement, "libelle");
-				product.country = getContent(eElement, "country");
-				product.price = Float.parseFloat(getContent(eElement, "price"));
-				ref.products.add(product);
+				product.setName(getContent(eElement, "type"));
+				product.setType(getContent(eElement, "type"));
+				product.setIsin(getContent(eElement, "isin"));
+				product.setLibelle(getContent(eElement, "libelle"));
+				product.setCountry(getContent(eElement, "country"));
+				product.setPrice(Float.parseFloat(getContent(eElement, "price")));
+				ref.getProducts().add(product);
 			}
 		});
 
@@ -133,15 +131,15 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.depositaries = new ArrayList<Referential.Depositary>();
+				ref.setDepositaries(new ArrayList<Referential.Depositary>());
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Depositary depositary = ref.new Depositary();
-				depositary.code = getContent(eElement, "code");
-				depositary.libelle = getContent(eElement, "libelle");
-				ref.depositaries.add(depositary);
+				depositary.setCode(getContent(eElement, "code"));
+				depositary.setLibelle(getContent(eElement, "libelle"));
+				ref.getDepositaries().add(depositary);
 			}
 		});
 
@@ -149,16 +147,16 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.portfolios = new ArrayList<Referential.Portfolio>();
+				ref.setPortfolios(new ArrayList<Referential.Portfolio>());
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Portfolio portfolio = ref.new Portfolio();
-				portfolio.codeptf = getContent(eElement, "codeptf");
-				portfolio.country = getContent(eElement, "country");
-				portfolio.type = getContent(eElement, "type");
-				ref.portfolios.add(portfolio);
+				portfolio.setCode(getContent(eElement, "codeptf"));
+				portfolio.setCountry(getContent(eElement, "country"));
+				portfolio.setType(getContent(eElement, "type"));
+				ref.getPortfolios().add(portfolio);
 			}
 		});
 		
@@ -166,16 +164,16 @@ public class LoadXML
 		{
 			public void init(Referential ref)
 			{
-				ref.currencies = new ArrayList<Referential.Currency>();
+				ref.setCurrencies(new ArrayList<Referential.Currency>());
 			}
 
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Currency currency = ref.new Currency();
-				currency.name = getContent(eElement, "name");
-				currency.country = getContent(eElement, "country");
-				currency.code = getContent(eElement, "code");
-				ref.currencies.add(currency);
+				currency.setName(getContent(eElement, "name"));
+				currency.setCountry(getContent(eElement, "country"));
+				currency.setCode(getContent(eElement, "code"));
+				ref.getCurrencies().add(currency);
 			}
 		});
 
@@ -340,15 +338,15 @@ public class LoadXML
 				}
 
 				Referential.InstrumentTrader instrument = _ref.new InstrumentTrader(einstrument.getAttribute("name"));
-				instrument.Traders = traders;
+				instrument.setTraders(traders);
 				instruments.add(instrument);
 			}
 
 			Referential.CurrencyTrader currencyTrader = _ref.new CurrencyTrader(ecurrency.getAttribute("code"));
-			currencyTrader.Instruments = instruments;
+			currencyTrader.setInstruments(instruments);
 			currencyTraders.add(currencyTrader);
 		}
-		_ref.currencyTraders = currencyTraders;
+		_ref.setCurrencyTraders(currencyTraders);
 	}
 
 	private static void getFilters(Element ebook,
@@ -365,7 +363,7 @@ public class LoadXML
 				if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
 					bgenerators.addAll(generators);
 				else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
-					bcurrencies.addAll(_ref.currencies);
+					bcurrencies.addAll(_ref.getCurrencies());
 				continue;
 			}
 
@@ -382,8 +380,8 @@ public class LoadXML
 			else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
 			{
 				for (String str : vfilter)
-					for (Currency cur : _ref.currencies)
-						if (str.equals(cur.code))
+					for (Currency cur : _ref.getCurrencies())
+						if (str.equals(cur.getCode()))
 							bcurrencies.add(cur);
 			}
 		}

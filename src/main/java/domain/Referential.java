@@ -1,17 +1,18 @@
 package domain;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Referential
 {
-	public List<Counterpart> counterparts;
-	public List<Product> products;
-	public List<Currency> currencies;
-	public List<CurrencyTrader> currencyTraders;
-	public List<Depositary> depositaries;
-	public List<Portfolio> portfolios;
+	private List<Counterpart> counterparts = null;
+	private List<Product> products = null;
+	private List<Currency> currencies = null;
+	private List<CurrencyTrader> currencyTraders = null;
+	private List<Depositary> depositaries = null;
+	private List<Portfolio> portfolios = null;
 
 	private Referential()
 	{
@@ -27,45 +28,28 @@ public class Referential
 	public <T> T getRandomElement(List<T> list)
 	{
 		Random randomGenerator = new Random();
-		return (list.get(randomGenerator.nextInt(list.size())));
+		return list.get(randomGenerator.nextInt(list.size()));
 	}
 
-	public <T> List<T> subList(List<T> list, String field, String filter)
+	public <T> List<T> subList(List<T> list, String fieldname, String filter)
 	{
 		List<T> subT = new ArrayList<T>();
 		try
 		{
 			for (T te : list)
 			{
-				if (te.getClass().getField(field).get(te).equals(filter))
+				Field field = te.getClass().getDeclaredField(fieldname);
+				field.setAccessible(true);
+
+				if (field.get(te).equals(filter))
 					subT.add((T) te);
 			}
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			return null;
 		}
-		return subT;
-	}
 
-	public <T> List<T> exList(List<T> list, String field, String filter)
-	{
-		List<T> subT = new ArrayList<T>();
-		for (T te : list)
-		{
-			try
-			{
-				if (!te.getClass().getField(field).get(te).equals(filter))
-					subT.add((T) te);
-			}
-			catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e)
-			{
-				e.printStackTrace();
-				return null;
-			}
-
-		}
 		return subT;
 	}
 
@@ -73,25 +57,41 @@ public class Referential
 	{
 		for (Referential.CurrencyTrader cur : ref.currencyTraders)
 			if (cur.code.equals(code))
-				for (Referential.InstrumentTrader ins : cur.Instruments)
+				for (Referential.InstrumentTrader ins : cur.getInstruments())
 					if (ins.name.equals(nameIns))
-						return getRandomElement(ins.Traders);
+						return getRandomElement(ins.getTraders());
 
 		return null;
 	}
 
 	public class Counterpart
 	{
-		public String code;
-		public String name;
+		private String code;
+		private String name;
+
+		public void setCode(String code) { this.code = code; }
+		public void setName(String name) { this.name = name; }
+
+		public String getCode() { return code; }
+		public String getName() { return name; }
 	}
 
 	public class Currency
 	{
-		public String code;
-		public String name;
-		public String country;
-		public float change;
+		private String code;
+		private String name;
+		private String country;
+		private float change;
+		
+		public void setCode(String code) { this.code = code; }
+		public void setName(String name) { this.name = name; }
+		public void setCountry(String country) { this.country = country; }
+		public void setChange(Float change) { this.change = change; }
+		
+		public String getCode() { return code; }
+		public String getName() { return name; }
+		public String getCountry() { return country; }
+		public float getChange() { return change; }
 
 		public Currency()
 		{
@@ -115,8 +115,14 @@ public class Referential
 
 	public class CurrencyTrader
 	{
-		public String code;
-		public List<InstrumentTrader> Instruments;
+		private String code;
+		private List<InstrumentTrader> instruments;
+
+		public void setCode(String code) { this.code = code; }
+		public void setInstruments(List<InstrumentTrader> instruments) { this.instruments = instruments; }
+
+		public String getCode() { return code; }
+		public List<InstrumentTrader> getInstruments() { return instruments; }
 
 		public CurrencyTrader()
 		{
@@ -130,24 +136,50 @@ public class Referential
 
 	public class Product
 	{
-		public String name;
-		public String type;
-		public String isin;
-		public String libelle;
-		public String country;
-		public float price;
+		private String name;
+		private String type;
+		private String isin;
+		private String libelle;
+		private String country;
+		private float price;
+
+		public void setType(String type) { this.type = type; }
+		public void setName(String name) { this.name = name; }
+		public void setCountry(String country) { this.country = country; }
+		public void setIsin(String isin) { this.isin = isin; }
+		public void setLibelle(String name) { this.name = name; }
+		public void setPrice(float price) { this.price = price; }
+
+		public String getType() { return type; }
+		public String getName() { return name; }
+		public String getCountry() { return country; }
+		public String getLibelle() { return libelle; }
+		public String getIsin() { return isin; }
+		public float getPrice() { return price; }
 	}
 
 	public class Depositary
 	{
-		public String code;
-		public String libelle;
+		private String code;
+		private String libelle;
+
+		public void setCode(String code) { this.code = code; }
+		public void setLibelle(String libelle) { this.libelle = libelle; }
+
+		public String getCode() { return code; }
+		public String getLibelle() { return libelle; }
 	}
 
 	public class InstrumentTrader
 	{
-		public String name;
-		public List<Trader> Traders;
+		private String name;
+		private List<Trader> traders;
+
+		public String getName() { return name; }
+		public List<Trader> getTraders() { return traders; }
+
+		public void setName(String name) { this.name = name; }
+		public void setTraders(List<Trader> traders) { this.traders = traders; }
 
 		public InstrumentTrader()
 		{
@@ -161,8 +193,14 @@ public class Referential
 
 	public class Trader
 	{
-		public String name;
-		public String codeptf;
+		private String name;
+		private String codeptf;
+
+		public String getCode() { return codeptf; }
+		public String getName() { return name; }
+
+		public void setCode(String code) { this.codeptf = code; }
+		public void setName(String name) { this.name = name; }
 
 		public Trader(String name, String codeptf)
 		{
@@ -173,8 +211,64 @@ public class Referential
 
 	public class Portfolio
 	{
-		public String type;
-		public String country;
-		public String codeptf;
+		private String type;
+		private String country;
+		private String codeptf;
+
+		public void setCode(String code) { this.codeptf = code; }
+		public void setType(String type) { this.type = type; }
+		public void setCountry(String country) { this.country = country; }
+
+		public String getCode() { return codeptf; }
+		public String getType() { return type; }
+		public String getCountry() { return country; }
+	}
+
+	public List<Counterpart> getCounterparts() {
+		return counterparts;
+	}
+
+	public void setCounterparts(List<Counterpart> counterparts) {
+		this.counterparts = counterparts;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<Currency> getCurrencies() {
+		return currencies;
+	}
+
+	public void setCurrencies(List<Currency> currencies) {
+		this.currencies = currencies;
+	}
+
+	public List<CurrencyTrader> getCurrencyTraders() {
+		return currencyTraders;
+	}
+
+	public void setCurrencyTraders(List<CurrencyTrader> currencyTraders) {
+		this.currencyTraders = currencyTraders;
+	}
+
+	public List<Depositary> getDepositaries() {
+		return depositaries;
+	}
+
+	public void setDepositaries(List<Depositary> depositaries) {
+		this.depositaries = depositaries;
+	}
+
+	public List<Portfolio> getPortfolios() {
+		return portfolios;
+	}
+
+	public void setPortfolios(List<Portfolio> portfolios) {
+		this.portfolios = portfolios;
 	}
 }
