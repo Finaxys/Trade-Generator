@@ -28,7 +28,6 @@ public class Generator
 //		for(int i:Loanpertrade)
 //			System.out.println(i);
 		// Stat
-		long startTime = System.currentTimeMillis();
 
 		Referential ref = Referential.getInstance();
 		Generals gen = Generals.getInstance();
@@ -48,6 +47,8 @@ public class Generator
 			}
 			System.out.println("Problem handled. Continuing operation. Fix it next time.");
 		}
+
+		long startTime = System.currentTimeMillis();
 
 //		for (Businessunit bu : gen.bu)
 //			for (Portfolio portfolio : bu.getPortfolios())
