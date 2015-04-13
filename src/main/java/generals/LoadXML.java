@@ -1,6 +1,7 @@
 package generals;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,6 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import domain.Book;
 import domain.Businessunit;
@@ -32,6 +35,7 @@ public class LoadXML
 {
 	private static ApplicationContext context = null;
 	private static final Logger LOGGER = Logger.getLogger(LoadXML.class.getName());
+	private static Referential ref;
 
 	interface CbReferential
 	{
@@ -52,9 +56,8 @@ public class LoadXML
 		pathGeneralInfs = pathGeneralsInfs;
 	}
 
-	private static Referential _ref;
 
-	static public String getContent(Element elem, String name) throws CustomParsingException
+	public static String getContent(Element elem, String name) throws CustomParsingException
 	{
 		String content;
 		try
@@ -62,12 +65,12 @@ public class LoadXML
 			content = elem.getElementsByTagName(name).item(0).getTextContent();
 		} catch (Exception e)
 		{
-			throw new CustomParsingException("Name tag invalid: " + name, true);
+			throw new CustomParsingException("Name tag invalid: " + name, true, e);
 		}
 		return content;
 	}
 
-	static public String getOptContent(Element elem, String name, String opt)
+	public static String getOptContent(Element elem, String name, String opt)
 	{
 		String content;
 		try
@@ -76,15 +79,16 @@ public class LoadXML
 		} catch (Exception e)
 		{
 			LOGGER.log(Level.FINE, "No XML Element TAG Found", e);
-			return (opt);
+			return opt;
 		}
 
 		return content;
 	}
 	
-	static public void init(Referential ref) throws CustomParsingException
+	public static void init() throws CustomParsingException
 	{
-		_ref = ref;
+		ref = Referential.getInstance();
+
 		try
 		{
 			context = new ClassPathXmlApplicationContext("file:spring.xml");
@@ -97,11 +101,13 @@ public class LoadXML
 		// Load Static Informations
 		loadReferential("counterparts.xml", "counterpart", new CbReferential()
 		{
+			@Override
 			public void init(Referential ref)
 			{
 				ref.setCounterparts(new ArrayList<Referential.Counterpart>());
 			}
 
+			@Override
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Counterpart counterpart = ref.new Counterpart();
@@ -113,11 +119,13 @@ public class LoadXML
 
 		loadReferential("products.xml", "product", new CbReferential()
 		{
+			@Override
 			public void init(Referential ref)
 			{
 				ref.setProducts(new ArrayList<Referential.Product>());
 			}
 
+			@Override
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Product product = ref.new Product();
@@ -133,11 +141,13 @@ public class LoadXML
 
 		loadReferential("depositaries.xml", "depositary", new CbReferential()
 		{
+			@Override
 			public void init(Referential ref)
 			{
 				ref.setDepositaries(new ArrayList<Referential.Depositary>());
 			}
 
+			@Override
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Depositary depositary = ref.new Depositary();
@@ -149,11 +159,13 @@ public class LoadXML
 
 		loadReferential("portfolios.xml", "portfolio", new CbReferential()
 		{
+			@Override
 			public void init(Referential ref)
 			{
 				ref.setPortfolios(new ArrayList<Referential.Portfolio>());
 			}
 
+			@Override
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Portfolio portfolio = ref.new Portfolio();
@@ -166,11 +178,13 @@ public class LoadXML
 		
 		loadReferential("currencies.xml", "currency", new CbReferential()
 		{
+			@Override
 			public void init(Referential ref)
 			{
 				ref.setCurrencies(new ArrayList<Referential.Currency>());
 			}
 
+			@Override
 			public void execute(Referential ref, Element eElement) throws CustomParsingException
 			{
 				Referential.Currency currency = ref.new Currency();
@@ -181,18 +195,16 @@ public class LoadXML
 			}
 		});
 
-		try
-		{
-			loadTraders();
-		} catch (Exception e)
-		{
-			throw new CustomParsingException("Traders :" + e.getMessage(), true);
+		try {
+		    loadTraders();
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+		    throw new CustomParsingException("Traders :" + e.getMessage(), true, e);
 		}
 		setPathGeneralInfs("params/generalinfs.xml");
 		loadGeneralSettings();
 	}
 
-	static public void loadReferential(String filename, String elem,
+	public static void loadReferential(String filename, String elem,
 			CbReferential cb) throws CustomParsingException
 	{
 		try
@@ -205,7 +217,7 @@ public class LoadXML
 
 			doc.getDocumentElement().normalize();
 
-			cb.init(_ref);
+			cb.init(ref);
 
 			NodeList nList = doc.getElementsByTagName(elem);
 
@@ -217,17 +229,17 @@ public class LoadXML
 				{
 					Element eElement = (Element) nNode;
 
-					cb.execute(_ref, eElement);
+					cb.execute(ref, eElement);
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			throw new CustomParsingException("Referential : " + e.getMessage(), true);
+			throw new CustomParsingException("Referential : " + e.getMessage(), true, e);
 		}
 	}
 
-	static public void loadGeneralSettings() throws CustomParsingException
+	public static void loadGeneralSettings() throws CustomParsingException
 	{
 		try
 		{
@@ -253,7 +265,7 @@ public class LoadXML
 
 				Element ebusinessunit = (Element) nbusinessunits.item(ibu);
 
-				if (((Node) ebusinessunit).getNodeType() != Node.ELEMENT_NODE)
+				if (ebusinessunit.getNodeType() != Node.ELEMENT_NODE)
 					continue;
 
 				// Get instruments
@@ -263,23 +275,23 @@ public class LoadXML
 				getPortfolios(ebusinessunit, portfolios, generators);
 
 				// Get outputs
-				getOutputs(ebusinessunit, esetting, outputs, generators);
+				getOutputs(ebusinessunit, outputs, generators);
 				
 				// Get Main Instrument
-				TradeGenerator	main_ins = null;
+				TradeGenerator	mainIns = null;
 				for (TradeGenerator gen : generators)
 				{
 					if (gen.getName().equalsIgnoreCase(ebusinessunit.getAttribute("instrument")))
 					{
-						main_ins = gen;
+						mainIns = gen;
 						break;
 					}
 				}
-				if (main_ins == null)
-					throw new CustomParsingException("Business unit missing main instrument", true);
+				if (mainIns == null)
+					throw new CustomParsingException("Business unit missing main instrument", true, null);
 
 				businessunits.add(new Businessunit(ebusinessunit.getAttribute("name"), Integer.parseInt(ebusinessunit
-						.getAttribute("ratio")), main_ins, outputs, generators,
+						.getAttribute("ratio")), mainIns, outputs, generators,
 						portfolios));
 			}
 
@@ -289,14 +301,14 @@ public class LoadXML
 		}
 		catch (Exception e)
 		{
-			throw new CustomParsingException("Settings : " + e.getMessage(), true);
+			throw new CustomParsingException("Settings : " + e.getMessage(), true, e);
 		}
 
 		// Add cross references
 		crossReferences();
 	}
 
-	static public void loadTraders() throws Exception
+	public static void loadTraders() throws ParserConfigurationException, SAXException, IOException 
 	{
 		File fXmlFile = new File("referential/traders.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory
@@ -314,7 +326,7 @@ public class LoadXML
 			List<Referential.InstrumentTrader> instruments = new ArrayList<Referential.InstrumentTrader>();
 
 			Element ecurrency = (Element) ncurrencies.item(icurrencies);
-			if (((Node) ecurrency).getNodeType() != Node.ELEMENT_NODE)
+			if (ecurrency.getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
 			// Get instruments
@@ -325,7 +337,7 @@ public class LoadXML
 				List<Referential.Trader> traders = new ArrayList<Referential.Trader>();
 
 				Element einstrument = (Element) ninstruments.item(iinstru);
-				if (((Node) einstrument).getNodeType() != Node.ELEMENT_NODE)
+				if (einstrument.getNodeType() != Node.ELEMENT_NODE)
 					continue;
 
 				// Get traders
@@ -334,22 +346,22 @@ public class LoadXML
 				for (int itrader = 0; itrader < ntraders.getLength(); itrader++)
 				{
 					Element etrader = (Element) ntraders.item(itrader);
-					if (((Node) etrader).getNodeType() != Node.ELEMENT_NODE)
+					if (etrader.getNodeType() != Node.ELEMENT_NODE)
 						continue;
 
-					traders.add(_ref.new Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
+					traders.add(ref.new Trader(etrader.getAttribute("name"), etrader.getAttribute("codeptf")));
 				}
 
-				Referential.InstrumentTrader instrument = _ref.new InstrumentTrader(einstrument.getAttribute("name"));
+				Referential.InstrumentTrader instrument = ref.new InstrumentTrader(einstrument.getAttribute("name"));
 				instrument.setTraders(traders);
 				instruments.add(instrument);
 			}
 
-			Referential.CurrencyTrader currencyTrader = _ref.new CurrencyTrader(ecurrency.getAttribute("code"));
+			Referential.CurrencyTrader currencyTrader = ref.new CurrencyTrader(ecurrency.getAttribute("code"));
 			currencyTrader.setInstruments(instruments);
 			currencyTraders.add(currencyTrader);
 		}
-		_ref.setCurrencyTraders(currencyTraders);
+		ref.setCurrencyTraders(currencyTraders);
 	}
 
 	private static void getFilters(Element ebook,
@@ -361,48 +373,48 @@ public class LoadXML
 		{
 			Element efilter = (Element) nfilters.item(ifilter);
 
-			if (efilter.getAttribute("value").equalsIgnoreCase("all"))
+			if ("all".equalsIgnoreCase(efilter.getAttribute("value")))
 			{
-				if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
+				if ("instrument".equalsIgnoreCase(efilter.getAttribute("type")))
 					bgenerators.addAll(generators);
-				else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
-					bcurrencies.addAll(_ref.getCurrencies());
+				else if ("currency".equalsIgnoreCase(efilter.getAttribute("type")))
+					bcurrencies.addAll(ref.getCurrencies());
 				continue;
 			}
 
 			List<String> vfilter = Arrays.asList(efilter.getAttribute("value")
 					.split("\\s*,\\s*"));
 
-			if (efilter.getAttribute("type").equalsIgnoreCase("instrument"))
+			if ("instrument".equalsIgnoreCase(efilter.getAttribute("type")))
 			{
 				for (String str : vfilter)
 					for (TradeGenerator gen : generators)
 						if (str.equals(gen.getName()))
 							bgenerators.add(gen);
 			}
-			else if (efilter.getAttribute("type").equalsIgnoreCase("currency"))
+			else if ("currency".equalsIgnoreCase(efilter.getAttribute("type")))
 			{
 				for (String str : vfilter)
-					for (Currency cur : _ref.getCurrencies())
+					for (Currency cur : ref.getCurrencies())
 						if (str.equals(cur.getCode()))
 							bcurrencies.add(cur);
 			}
 		}
 	}
 
-	private static void getOutputs(Element ebusinessunit, Element esetting,
+	private static void getOutputs(Element ebusinessunit,
 			List<Output> outputs, List<TradeGenerator> generators) throws CustomParsingException
 	{
 		NodeList noutputs = ebusinessunit.getElementsByTagName("output");
 		for (int ipf = 0; ipf < noutputs.getLength(); ipf++)
 		{
 			Element eoutput = (Element) noutputs.item(ipf);
-			if (((Node) eoutput).getNodeType() != Node.ELEMENT_NODE)
+			if (eoutput.getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
 			String sinst = getContent(eoutput, "instrument");
 			List<TradeGenerator> opins = new ArrayList<TradeGenerator>();
-			if (sinst.equalsIgnoreCase("all"))
+			if ("all".equalsIgnoreCase(sinst))
 				opins.addAll(generators);
 			else
 			{
@@ -431,7 +443,7 @@ public class LoadXML
 		for (int ipf = 0; ipf < nportfolios.getLength(); ipf++)
 		{
 			Element eportfolio = (Element) nportfolios.item(ipf);
-			if (((Node) eportfolio).getNodeType() != Node.ELEMENT_NODE)
+			if (eportfolio.getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
 			List<Book> books = new ArrayList<Book>();
@@ -448,7 +460,7 @@ public class LoadXML
 		for (int ibook = 0; ibook < nbooks.getLength(); ibook++)
 		{
 			Element ebook = (Element) nbooks.item(ibook);
-			if (((Node) ebook).getNodeType() != Node.ELEMENT_NODE)
+			if (ebook.getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
 			List<Currency> bcurrencies = new ArrayList<Currency>();
@@ -457,7 +469,7 @@ public class LoadXML
 			// Get filters
 			getFilters(ebook, bgenerators, bcurrencies, generators);
 		
-			if (bcurrencies.size() == 0 || bgenerators.size() == 0)
+			if (bcurrencies.isEmpty() || bgenerators.isEmpty())
 				System.out.println("Book " + ebook.getAttribute("name") + " : invalid filters");
 
 			books.add(new Book(ebook.getAttribute("name"), bcurrencies,
@@ -473,11 +485,11 @@ public class LoadXML
 		for (int iins = 0; iins < ninstruments.getLength(); iins++)
 		{
 			Element eins = (Element) ninstruments.item(iins);
-			if (((Node) eins).getNodeType() != Node.ELEMENT_NODE)
+			if (eins.getNodeType() != Node.ELEMENT_NODE)
 				continue;
 
 			String name = eins.getAttribute("name");
-			if (!name.equalsIgnoreCase("equity") && !name.equalsIgnoreCase("loandepo"))
+			if (!"equity".equalsIgnoreCase(name) && !"loandepo".equalsIgnoreCase(name))
 				continue; 
 
 			// Get custom or default generator
@@ -487,9 +499,9 @@ public class LoadXML
 				generator = (TradeGenerator) context.getBean(implementation);
 			else
 			{
-				if (eins.getAttribute("name").equalsIgnoreCase("equity"))
+				if ("equity".equalsIgnoreCase(eins.getAttribute("name")))
 					generator = new EquityGenerator();
-				else if (eins.getAttribute("name").equalsIgnoreCase("loandepo"))
+				else if ("loandepo".equalsIgnoreCase(eins.getAttribute("name")))
 					generator = new LoanDepositGenerator();
 				else
 					continue ;
@@ -524,7 +536,7 @@ public class LoadXML
 
 	private static void crossReferences()
 	{
-		for (Businessunit bu : Generals.getInstance().bu)
+		for (Businessunit bu : Generals.getInstance().getBusinessunits())
 		{
 			// Set Ref BU/PORT for Books
 			for (Portfolio pt : bu.getPortfolios())

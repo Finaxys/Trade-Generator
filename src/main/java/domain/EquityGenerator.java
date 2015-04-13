@@ -38,7 +38,7 @@ public class EquityGenerator extends TradeGenerator
 		toleredVolumetry = (1 - rdmVolumetryTolerance) * volumetry;
 		roundedVolumetry = (int) toleredVolumetry;
 
-		loanPerTrade = Sparsemoney(roundedVolumetry, amountPerDay);
+		loanPerTrade = sparseMoney(roundedVolumetry, amountPerDay);
 
 		localities = TradeGenerator.tableaubin(roundedVolumetry,
 				this.getOwnCountry(), Locality.class);
@@ -70,10 +70,10 @@ public class EquityGenerator extends TradeGenerator
 		trader = ref.getTrader(ref, currency.getCode(), "equity");
 		if (localities.get(0).toString() == "NATIONAL")
 			currency = ref.subList(ref.getCurrencies(), "country",
-					generals.owncountry).get(0);
+					generals.getOwnCountry()).get(0);
 		else
 			currency = ref.getRandomElement(ref.subList(ref.getCurrencies(),
-					"country", generals.owncountry));
+					"country", generals.getOwnCountry()));
 		product = ref.getRandomElement(equities);
 
 		float randToleranceQuantities;

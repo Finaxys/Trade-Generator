@@ -6,11 +6,11 @@ import domain.Businessunit;
 
 public class Generals
 {
-	public int		number_of_day;
-	public String	bank_name;
-	public int		budget;
-	public String	owncountry;
-	public List<Businessunit> bu;
+    private int		numberOfDay;
+	private String	bankName;
+	private int		budget;
+	private String	ownCountry;
+	private List<Businessunit> businessunits;
 
 	private Generals()
 	{
@@ -27,10 +27,31 @@ public class Generals
 	public void init(int nbday, String bankname, int budget,
 			String owncountry, List<Businessunit> bu)
 	{
-		this.number_of_day = nbday;
-		this.bank_name = bankname;
+		this.numberOfDay = nbday;
+		this.bankName = bankname;
 		this.budget = budget;
-		this.owncountry = owncountry;
-		this.bu = bu;
+		this.ownCountry = owncountry;
+		this.businessunits = bu;
 	}
+
+	public int getNumberOfDay() {
+        return numberOfDay;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public int getBudget() {
+        return budget;
+    }
+
+    public String getOwnCountry() {
+        return ownCountry;
+    }
+
+    public List<Businessunit> getBusinessunits() {
+        return businessunits;
+    }
+
 }

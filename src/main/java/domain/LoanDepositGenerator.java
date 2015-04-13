@@ -50,7 +50,7 @@ public class LoanDepositGenerator extends TradeGenerator
 		// calculation of number of trades to distribute per day
 		toleredVolumetry = (1 - rand2) * volumetry;
 		roundedVolumetry = (int) toleredVolumetry;
-		loanPerTrade = Sparsemoney(roundedVolumetry, amountPerDay);
+		loanPerTrade = sparseMoney(roundedVolumetry, amountPerDay);
 		listLocality = tableaubin(roundedVolumetry, this.ownCountry, Locality.class);
 		listWay = tableaubin(roundedVolumetry, this.partSell, Way.class);
 		listRatetype = tableaubin(roundedVolumetry, this.partRateVariable, RateType.class);
@@ -76,9 +76,9 @@ public class LoanDepositGenerator extends TradeGenerator
 		c1 = ref.getRandomElement(ref.getCounterparts());
 
 		if (listLocality.get(0).toString() == "NATIONAL")
-			cur1 = ref.subList(ref.getCurrencies(), "country", generals.owncountry).get(0);
+			cur1 = ref.subList(ref.getCurrencies(), "country", generals.getOwnCountry()).get(0);
 		else
-			cur1 = ref.getRandomElement(ref.subList(ref.getCurrencies(), "country", generals.owncountry));
+			cur1 = ref.getRandomElement(ref.subList(ref.getCurrencies(), "country", generals.getOwnCountry()));
 
 		tr1 = ref.getTrader(ref, cur1.getCode(), "loandepo");
 

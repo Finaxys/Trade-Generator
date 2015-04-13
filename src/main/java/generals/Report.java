@@ -11,17 +11,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import domain.Referential;
 import domain.TradeEvent;
 
 public class Report {
 	Referential ref;
-	public static ArrayList<TradeEvent> liste;
+	public static List<TradeEvent> liste;
 
-	final static private String		OUTPUT_PATH = "report.csv";
-	final static private String		OUTPUT_ENCODING = "UTF-8";
-	static private PrintWriter	writer;
+	private final static String		OUTPUT_PATH = "report.csv";
+	private final static String		OUTPUT_ENCODING = "UTF-8";
+	private static PrintWriter	writer;
+	private static Report INSTANCE = new Report();
 
 	private Report()
 	{	
@@ -33,16 +35,12 @@ public class Report {
 			writer.write("Date" +"," +"BussinessUnit"+","+"Portfolio" +"," +"Book" +","+"Instrument" +","+"Sens" +","+"Nombre de transactions"+","+"Montant engage" +" EU"+","+System.lineSeparator());
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-
-	private static Report INSTANCE = new Report();
 
 	public static Report getInstance()
 	{	
@@ -78,34 +76,6 @@ public class Report {
 
 		date = formater.format(te.getDate());
 		writer.write(date +","+te.getBook().getPortFolios().getBu().getName()+","+te.getBook().getPortFolios().getName() +","+te.getBook().getName() +","+te.getInstrument().getName()+","+te.getWay() +","+nombre_op+","+montantstr +","+ s);
-		//	writer.write(System.lineSeparator());
-		//	writer.write(te.date.toString() +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write("Portfolio" +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write(te.book.pt.name +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write("book" +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write(te.book.name +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write("Instrument" +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write(te.instrument.name +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write("Sens" +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write(te.way +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write("Nombre de transactions" +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write(nombre_op +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write("Montant engagé" +",");
-		//	writer.write(System.lineSeparator());
-		//	writer.write(montant +",");
-
-
 	}
 	public static String printDate(Date d){
 		return MessageFormat.format("{0}-{1}-{2}", d.getDate(), d.getMonth(), d.getYear());
@@ -118,13 +88,9 @@ public class Report {
 			check.getParentFile().mkdirs();
 
 		try {
-			//			ff.createNewFile();
-			//		
-			//		final FileWriter ffw=new FileWriter(ff);
-
 			TradeEvent te;
 			te=lists.get(0);
-			int nombre_transaction=1;
+			int nombreTransaction=1;
 			double MS=0;
 			double ME=0;
 			int NE=0;
@@ -137,21 +103,39 @@ public class Report {
 				if (i==lists.size()-1)
 				{
 					montant=montant+lists.get(i).getAmount();
-					nombre_transaction++;
-					writeCSTrade(te,nombre_transaction,montant);
+					nombreTransaction++;
+					writeCSTrade(te,nombreTransaction,montant);
 
-					if (!lists.get(i).getWay().name().equalsIgnoreCase("sell")) {MS=MS+montant;NS=NS+nombre_transaction;}else{ME=ME+montant;NE=NE+nombre_transaction;}
+					if (!lists.get(i).getWay().name().equalsIgnoreCase("sell"))
+					{
+					    MS=MS+montant;
+					    NS=NS+nombreTransaction;
+					}
+					else
+					{
+					        ME=ME+montant;
+					        NE=NE+nombreTransaction;
+					}
 				}
 				{
 					if (lists.get(i).compareTo(te)==0)
 					{	
 						montant=montant+lists.get(i).getAmount();
-						nombre_transaction++;
+						nombreTransaction++;
 					}else
-					{	writeCSTrade(te,nombre_transaction,montant);
+					{	writeCSTrade(te, nombreTransaction, montant);
 
-					if (!lists.get(i).getWay().name().equalsIgnoreCase("sell")) {MS=MS+montant;NS=NS+nombre_transaction;}else{ME=ME+montant;NE=NE+nombre_transaction;}
-					nombre_transaction=1;
+					if (!lists.get(i).getWay().name().equalsIgnoreCase("sell"))
+					{
+					    MS=MS+montant;
+					    NS=NS+nombreTransaction;
+					}
+					else
+					{
+					    ME=ME+montant;
+					    NE=NE+nombreTransaction;
+					}
+					nombreTransaction=1;
 					montant=lists.get(i).getAmount();
 
 					}
@@ -163,10 +147,8 @@ public class Report {
 
 			NS=NS+NE;
 
-
 			writer.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

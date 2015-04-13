@@ -8,7 +8,6 @@ import domain.Referential.Counterpart;
 
 public abstract class TradeEvent implements Comparable<TradeEvent>
 {
-
 	private static long 				counter = 0;
 	protected long 						id;
 	private Way 						way;

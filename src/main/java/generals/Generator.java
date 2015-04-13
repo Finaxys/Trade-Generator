@@ -18,6 +18,11 @@ import domain.TradeGenerator;
 public class Generator
 {
 	private static final Logger LOGGER = Logger.getLogger(Generator.class.getName());
+	
+	private Generator()
+	{
+	    
+	}
 
 	public static void main(String[] args)
 	{
@@ -26,7 +31,7 @@ public class Generator
 
 		try
 		{
-			LoadXML.init(ref);
+			LoadXML.init();
 		}
 		catch (CustomParsingException e)
 		{
@@ -46,14 +51,14 @@ public class Generator
 
 		// List of instrument available
 		List<TradeGenerator>	generators = new ArrayList<TradeGenerator>();
-		int						days = gen.number_of_day;
+		int						days = gen.getNumberOfDay();
 		Calendar				calendar = Calendar.getInstance();
 		Book					book;
 		TradeEvent				trade;
 		calendar.setTime(new Date());
 		for (int day = 0; day < days; ++day)
 		{
-			for (Businessunit bu : gen.bu)
+			for (Businessunit bu : gen.getBusinessunits())
 			{	
 				// Init generators available
 				generators.addAll(bu.getGenerators());
@@ -63,7 +68,7 @@ public class Generator
 					tgen.init(43000);
 
 				// While there is still a generator with a volumetry > 0
-				while (generators.size() > 0)
+				while (!generators.isEmpty())
 				{
 					// Generate random generator & currency
 					TradeGenerator tgen = ref.getRandomElement(generators);
@@ -109,30 +114,5 @@ public class Generator
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
 		System.out.println("OVER");
-	}
-
-	/*private static Date instrumentGenerator(TradeGenerator insrandom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static LinkedList<TradeGenerator> Init(Businessunit bu) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
-	static void writeXMLNode(PrintWriter writer, TradeEvent.Node node)
-	{
-		// Check if there is nodes inside node -> recursion
-		if (node.nodes != null)
-		{
-			writer.write("<" + node.name + ">" + System.lineSeparator());
-			for (TradeEvent.Node n : node.nodes)
-				writeXMLNode(writer, n);
-			writer.write("</" + node.name + ">" + System.lineSeparator());
-		}
-		// Only simple node -> print it
-		else
-			writer.write("<" + node.name + ">" + node.value + "</" + node.name + ">" + System.lineSeparator());
 	}
 }

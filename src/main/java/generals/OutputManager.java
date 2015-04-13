@@ -7,16 +7,20 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import domain.Businessunit;
 import domain.TradeEvent;
 
 public class OutputManager
 {
-	static private OutputManager	instance = new OutputManager();
-	static private PrintWriter		writer;
-	final static private String		OUTPUT_PATH = "trades/";
-	final static private String		OUTPUT_ENCODING = "UTF-8";
+	private static final Logger LOGGER = Logger.getLogger(OutputManager.class.getName());
+
+	private static OutputManager	instance = new OutputManager();
+	private static PrintWriter		writer;
+	private final static String		OUTPUT_PATH = "trades/";
+	private final static String		OUTPUT_ENCODING = "UTF-8";
 
 	private OutputManager()
 	{
@@ -26,7 +30,7 @@ public class OutputManager
 			check.getParentFile().mkdirs();
 	}
 
-	static public OutputManager getInstance()
+	public static OutputManager getInstance()
 	{
 		return instance;
 	}
@@ -46,7 +50,7 @@ public class OutputManager
 		String date = "";
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
-		if (output.getTrades().size() > 0)
+		if (!output.getTrades().isEmpty())
 			date = formater.format(output.getTrades().get(0).getDate());
 
 		String path = OUTPUT_PATH + "batch" + output.getId() + "-" + date + "." + output.getFormat().toString().toLowerCase();
@@ -58,7 +62,7 @@ public class OutputManager
 	{
 		try
 		{
-			for (Businessunit bu : Generals.getInstance().bu)
+			for (Businessunit bu : Generals.getInstance().getBusinessunits())
 				for (Output output : bu.getOutputs())
 				{
 					writer = getWriter(output);
@@ -70,13 +74,13 @@ public class OutputManager
 					output.getTrades().clear();
 				}
 		}
-		catch (FileNotFoundException e1)
+		catch (FileNotFoundException e)
 		{
-			e1.printStackTrace();
+		    LOGGER.log(Level.SEVERE, "Could not open file", e);
 		}
-		catch (UnsupportedEncodingException e1)
+		catch (UnsupportedEncodingException e)
 		{
-			e1.printStackTrace();
+		    LOGGER.log(Level.SEVERE, "Wrong encoding", e);
 		}
 	}
 
@@ -95,15 +99,15 @@ public class OutputManager
 
 	private void manageCSV(Output output)
 	{
-		List<Class<? extends TradeEvent>>	trade_class = new ArrayList<Class<? extends TradeEvent>>();
+		List<Class<? extends TradeEvent>>	tradeClass = new ArrayList<Class<? extends TradeEvent>>();
 		List<String>						header = new ArrayList<String>();
 
 		// Get header
 		for (TradeEvent trade : output.getTrades())
 		{
-			if (!trade_class.contains(trade.getClass()))
+			if (!tradeClass.contains(trade.getClass()))
 			{
-				trade_class.add(trade.getClass());
+				tradeClass.add(trade.getClass());
 
 				for (TradeEvent.Node node : trade.getNodes())
 					if (!header.contains(node.name))
@@ -165,13 +169,13 @@ public class OutputManager
 			writeTrade(output, trade);
 			writer.close();
 		}
-		catch (FileNotFoundException e1)
+		catch (FileNotFoundException e)
 		{
-			e1.printStackTrace();
+		    LOGGER.log(Level.SEVERE, "Could not open file", e);
 		}
-		catch (UnsupportedEncodingException e1)
+		catch (UnsupportedEncodingException e)
 		{
-			e1.printStackTrace();
+		    LOGGER.log(Level.SEVERE, "Wrong encoding", e);
 		}
 	}
 

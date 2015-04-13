@@ -17,11 +17,6 @@ public class Output
 	private int						id;
 	static 	int						counter = 0;
 
-	public void addTradeEvent(TradeEvent tn)
-	{   
-		te.add(tn);
-	}
-
 	Output(String format, String path, List<TradeGenerator> gen, Boolean stp, String lay)
 	{
 		this.te = new ArrayList<TradeEvent>();
@@ -31,6 +26,11 @@ public class Output
 		this.generators = gen;
 		this.isStp = stp;
 		this.layer = Layer.valueOf(lay);
+	}
+
+	public void addTradeEvent(TradeEvent tn)
+	{   
+		te.add(tn);
 	}
 
 	public OutputFormat getFormat() {

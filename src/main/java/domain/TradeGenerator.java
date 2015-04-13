@@ -45,7 +45,7 @@ public abstract class TradeGenerator
 		return tradeGenerated;
 	}
 
-	public void init(int amount_day)
+	public void init(int amountDay)
 	{
 		tradeGenerated = 0;
 	}
@@ -57,7 +57,7 @@ public abstract class TradeGenerator
 		return null;
 	}
 	
-	static public List<Output> getOutputsFromTrade(TradeEvent trade)
+	public static List<Output> getOutputsFromTrade(TradeEvent trade)
 	{
 		List<Output>	outputs = new ArrayList<Output>();
 
@@ -68,7 +68,7 @@ public abstract class TradeGenerator
 		return outputs;
 	}
 
-	static public void tradeGenerated(TradeEvent trade)
+	public static void tradeGenerated(TradeEvent trade)
 	{
 		List<Output> outputs = getOutputsFromTrade(trade);
 		for (Output output : outputs)
@@ -104,7 +104,7 @@ public abstract class TradeGenerator
 		return e.getEnumConstants()[rand.nextInt(e.getEnumConstants().length - 1)];
 	}
 
-	public static List<Integer> Sparsemoney(int volumetry, int montant)
+	public static List<Integer> sparseMoney(int volumetry, int montant)
 
 	{
 		List<Integer> ints = new ArrayList<Integer>();
