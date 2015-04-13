@@ -1,6 +1,5 @@
 package domain;
 
-public enum Way
-{
-	BUY, SELL;
+public enum Way {
+    BUY, SELL;
 }

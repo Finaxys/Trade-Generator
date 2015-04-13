@@ -4,37 +4,33 @@ import java.util.List;
 
 import domain.Businessunit;
 
-public class Generals
-{
-    private int		numberOfDay;
-	private String	bankName;
-	private int		budget;
-	private String	ownCountry;
-	private List<Businessunit> businessunits;
+public class Generals {
+    private static Generals INSTANCE = new Generals();
 
-	private Generals()
-	{
-		super();
-	}
+    private int numberOfDay;
+    private String bankName;
+    private int budget;
+    private String ownCountry;
+    private List<Businessunit> businessunits;
 
-	private static Generals INSTANCE = new Generals();
+    private Generals() {
+        super();
+    }
 
-	public static Generals getInstance()
-	{
-		return INSTANCE;
-	}
+    public static Generals getInstance() {
+        return INSTANCE;
+    }
 
-	public void init(int nbday, String bankname, int budget,
-			String owncountry, List<Businessunit> bu)
-	{
-		this.numberOfDay = nbday;
-		this.bankName = bankname;
-		this.budget = budget;
-		this.ownCountry = owncountry;
-		this.businessunits = bu;
-	}
+    public void init(int nbday, String bankname, int budget, String owncountry,
+            List<Businessunit> bu) {
+        this.numberOfDay = nbday;
+        this.bankName = bankname;
+        this.budget = budget;
+        this.ownCountry = owncountry;
+        this.businessunits = bu;
+    }
 
-	public int getNumberOfDay() {
+    public int getNumberOfDay() {
         return numberOfDay;
     }
 

@@ -1,6 +1,5 @@
 package domain;
 
-public enum Locality
-{
-	NATIONAL, INTERNATIONAL;
+public enum Locality {
+    NATIONAL, INTERNATIONAL;
 }

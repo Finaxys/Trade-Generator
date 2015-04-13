@@ -9,152 +9,144 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public abstract class TradeGenerator
-{
-	public String 	name;
-	public int		amount;
-	public int 		volumetry;
-	public int 		roundedVolumetry;
-	public int		tradeGenerated = 0;
-	public int		volumetryTolerance;
-	public int 		budgetTolerance;
+public abstract class TradeGenerator {
+    public String name;
+    public int amount;
+    public int volumetry;
+    public int roundedVolumetry;
+    public int tradeGenerated = 0;
+    public int volumetryTolerance;
+    public int budgetTolerance;
 
-	static int cnt = 0;
+    static int cnt = 0;
 
-	public void setVolumetry(int volumetry) {
-		this.volumetry = volumetry;
-	}
+    public void setVolumetry(int volumetry) {
+        this.volumetry = volumetry;
+    }
 
-	public int getVolumetry() {
-		return volumetry;
-	}
+    public int getVolumetry() {
+        return volumetry;
+    }
 
-	public void setVolumetryTolerance(int vt) {
-		this.volumetryTolerance = vt;
-	}
+    public void setVolumetryTolerance(int vt) {
+        this.volumetryTolerance = vt;
+    }
 
-	public int getVolumetryTolerance() {
-		return volumetryTolerance;
-	}
+    public int getVolumetryTolerance() {
+        return volumetryTolerance;
+    }
 
-	public int getRoundedVolumetry() {
-		return roundedVolumetry;
-	}
+    public int getRoundedVolumetry() {
+        return roundedVolumetry;
+    }
 
-	public int getTradeGenerated() {
-		return tradeGenerated;
-	}
+    public int getTradeGenerated() {
+        return tradeGenerated;
+    }
 
-	public void init(int amountDay)
-	{
-		tradeGenerated = 0;
-	}
+    public void init(int amountDay) {
+        tradeGenerated = 0;
+    }
 
-	public TradeEvent generate(Book b, Date date)
-	{
-		++tradeGenerated;
+    public TradeEvent generate(Book b, Date date) {
+        ++tradeGenerated;
 
-		return null;
-	}
-	
-	public static List<Output> getOutputsFromTrade(TradeEvent trade)
-	{
-		List<Output>	outputs = new ArrayList<Output>();
+        return null;
+    }
 
-		for (Output op : trade.getBook().getPortFolios().getBu().getOutputs())
-			if (op.getGenerators().contains(trade.getInstrument()))
-				outputs.add(op);
+    public static List<Output> getOutputsFromTrade(TradeEvent trade) {
+        List<Output> outputs = new ArrayList<Output>();
 
-		return outputs;
-	}
+        for (Output op : trade.getBook().getPortFolios().getBu().getOutputs())
+            if (op.getGenerators().contains(trade.getInstrument()))
+                outputs.add(op);
 
-	public static void tradeGenerated(TradeEvent trade)
-	{
-		List<Output> outputs = getOutputsFromTrade(trade);
-		for (Output output : outputs)
-			if (output.isStp())
-				OutputManager.getInstance().outputTrade(output, trade);
-			else
-				output.addTradeEvent(trade);
-	}
-	
+        return outputs;
+    }
 
-	public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio,
-			Class<T> e)
-	{
-		List<T> trueArray = new ArrayList<T>();
-		int j, i;
-		int national = (ratio * (size - 1)) / 100;
-		T tp1 = e.getEnumConstants()[0];
-		T tp2 = e.getEnumConstants()[1];
+    public static void tradeGenerated(TradeEvent trade) {
+        List<Output> outputs = getOutputsFromTrade(trade);
+        for (Output output : outputs)
+            if (output.isStp())
+                OutputManager.getInstance().outputTrade(output, trade);
+            else
+                output.addTradeEvent(trade);
+    }
 
-		for (i = 0; i < size; i++)
-		trueArray.add(tp1);
+    public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio,
+            Class<T> e) {
+        List<T> trueArray = new ArrayList<T>();
+        int j, i;
+        int national = (ratio * (size - 1)) / 100;
+        T tp1 = e.getEnumConstants()[0];
+        T tp2 = e.getEnumConstants()[1];
 
-		for (j = 0; j < national; j++)
-			trueArray.set(j, tp2);
+        for (i = 0; i < size; i++)
+            trueArray.add(tp1);
 
-		Collections.shuffle(trueArray);
+        for (j = 0; j < national; j++)
+            trueArray.set(j, tp2);
 
-		return trueArray;
-	}
-	public static <T extends Enum<T>> T randEnum(Class<T> e)
-	{
-		Random rand= new Random();
-		return e.getEnumConstants()[rand.nextInt(e.getEnumConstants().length - 1)];
-	}
+        Collections.shuffle(trueArray);
 
-	public static List<Integer> sparseMoney(int volumetry, int montant)
+        return trueArray;
+    }
 
-	{
-		List<Integer> ints = new ArrayList<Integer>();
-		
-		Random random = new Random();
-		int somme = 0;
-		int volumetryorder = Math.max((int) 0.1 * volumetry,3);
-		int randint=0;
+    public static <T extends Enum<T>> T randEnum(Class<T> e) {
+        Random rand = new Random();
+        return e.getEnumConstants()[rand
+                .nextInt(e.getEnumConstants().length - 1)];
+    }
 
-		for (int i = 0; i < volumetry; i++)
-		{		
-			randint = random.nextInt(volumetryorder)+5;
-			somme=somme+randint;
-			ints.add(randint);
-		}
-		for (int i = 0; i < volumetry; i++)
-			ints.set(i, ints.get(i) * montant / somme);
-		
-		return ints;
-	}
+    public static List<Integer> sparseMoney(int volumetry, int montant)
 
-	@Override
-	public boolean equals(Object ins)
-	{
-		if (!(ins instanceof TradeGenerator))
-			return false;
+    {
+        List<Integer> ints = new ArrayList<Integer>();
 
-		return ((TradeGenerator) ins).getName().equalsIgnoreCase(this.getName());
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+        Random random = new Random();
+        int somme = 0;
+        int volumetryorder = Math.max((int) 0.1 * volumetry, 3);
+        int randint = 0;
 
-	public int getMontant() {
-		return amount;
-	}
+        for (int i = 0; i < volumetry; i++) {
+            randint = random.nextInt(volumetryorder) + 5;
+            somme = somme + randint;
+            ints.add(randint);
+        }
+        for (int i = 0; i < volumetry; i++)
+            ints.set(i, ints.get(i) * montant / somme);
 
-	public void setMontant(int montant) {
-		this.amount = montant;
-	}
+        return ints;
+    }
 
-	public String getName() {
-		return name;
-	}
+    @Override
+    public boolean equals(Object ins) {
+        if (!(ins instanceof TradeGenerator))
+            return false;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        return ((TradeGenerator) ins).getName()
+                .equalsIgnoreCase(this.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    public int getMontant() {
+        return amount;
+    }
+
+    public void setMontant(int montant) {
+        this.amount = montant;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

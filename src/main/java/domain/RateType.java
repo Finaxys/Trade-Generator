@@ -1,6 +1,5 @@
 package domain;
 
-public enum RateType
-{
-	FIXED, ADJUSTABLE;
+public enum RateType {
+    FIXED, ADJUSTABLE;
 }

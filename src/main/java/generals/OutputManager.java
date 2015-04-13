@@ -13,193 +13,167 @@ import java.util.logging.Logger;
 import domain.Businessunit;
 import domain.TradeEvent;
 
-public class OutputManager
-{
-	private static final Logger LOGGER = Logger.getLogger(OutputManager.class.getName());
+public class OutputManager {
+    private static final Logger LOGGER = Logger.getLogger(OutputManager.class
+            .getName());
 
-	private static OutputManager	instance = new OutputManager();
-	private static PrintWriter		writer;
-	private final static String		OUTPUT_PATH = "trades/";
-	private final static String		OUTPUT_ENCODING = "UTF-8";
+    private static OutputManager instance = new OutputManager();
+    private static PrintWriter writer;
+    private final static String OUTPUT_PATH = "trades/";
+    private final static String OUTPUT_ENCODING = "UTF-8";
 
-	private OutputManager()
-	{
-		File check = new File(OUTPUT_PATH + "test");
+    private OutputManager() {
+        File check = new File(OUTPUT_PATH + "test");
 
-		if (!check.exists())
-			check.getParentFile().mkdirs();
-	}
+        if (!check.exists())
+            check.getParentFile().mkdirs();
+    }
 
-	public static OutputManager getInstance()
-	{
-		return instance;
-	}
-	
-	private PrintWriter getWriter(Output output, TradeEvent trade) throws FileNotFoundException, UnsupportedEncodingException
-	{
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    public static OutputManager getInstance() {
+        return instance;
+    }
 
-		String path = OUTPUT_PATH + "stp" + trade.getId() + "-" + formater.format(trade.getDate()) +
-					"." + output.getFormat().toString().toLowerCase();
+    private PrintWriter getWriter(Output output, TradeEvent trade)
+            throws FileNotFoundException, UnsupportedEncodingException {
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
-		return new PrintWriter(path, OUTPUT_ENCODING);
-	}
-	
-	private PrintWriter getWriter(Output output) throws FileNotFoundException, UnsupportedEncodingException
-	{
-		String date = "";
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        String path = OUTPUT_PATH + "stp" + trade.getId() + "-"
+                + formater.format(trade.getDate()) + "."
+                + output.getFormat().toString().toLowerCase();
 
-		if (!output.getTrades().isEmpty())
-			date = formater.format(output.getTrades().get(0).getDate());
+        return new PrintWriter(path, OUTPUT_ENCODING);
+    }
 
-		String path = OUTPUT_PATH + "batch" + output.getId() + "-" + date + "." + output.getFormat().toString().toLowerCase();
-		
-		return new PrintWriter(path, OUTPUT_ENCODING);
-	}
+    private PrintWriter getWriter(Output output) throws FileNotFoundException,
+            UnsupportedEncodingException {
+        String date = "";
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
-	public void outputTrades()
-	{
-		try
-		{
-			for (Businessunit bu : Generals.getInstance().getBusinessunits())
-				for (Output output : bu.getOutputs())
-				{
-					writer = getWriter(output);
+        if (!output.getTrades().isEmpty())
+            date = formater.format(output.getTrades().get(0).getDate());
 
-					outputByFormat(output);
+        String path = OUTPUT_PATH + "batch" + output.getId() + "-" + date + "."
+                + output.getFormat().toString().toLowerCase();
 
-					writer.close();
+        return new PrintWriter(path, OUTPUT_ENCODING);
+    }
 
-					output.getTrades().clear();
-				}
-		}
-		catch (FileNotFoundException e)
-		{
-		    LOGGER.log(Level.SEVERE, "Could not open file", e);
-		}
-		catch (UnsupportedEncodingException e)
-		{
-		    LOGGER.log(Level.SEVERE, "Wrong encoding", e);
-		}
-	}
+    public void outputTrades() {
+        try {
+            for (Businessunit bu : Generals.getInstance().getBusinessunits())
+                for (Output output : bu.getOutputs()) {
+                    writer = getWriter(output);
 
-	private void outputByFormat(Output output)
-	{
-		if (output.getFormat() == Output.OutputFormat.XML)
-			for (TradeEvent trade : output.getTrades())
-			{
-				writer.write("<trades>" + System.lineSeparator());
-				writeXMLTrade(trade);
-				writer.write("</trades>" + System.lineSeparator());
-			}
-		else if (output.getFormat() == Output.OutputFormat.CSV)
-			manageCSV(output);
-	}
+                    outputByFormat(output);
 
-	private void manageCSV(Output output)
-	{
-		List<Class<? extends TradeEvent>>	tradeClass = new ArrayList<Class<? extends TradeEvent>>();
-		List<String>						header = new ArrayList<String>();
+                    writer.close();
 
-		// Get header
-		for (TradeEvent trade : output.getTrades())
-		{
-			if (!tradeClass.contains(trade.getClass()))
-			{
-				tradeClass.add(trade.getClass());
+                    output.getTrades().clear();
+                }
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Could not open file", e);
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.log(Level.SEVERE, "Wrong encoding", e);
+        }
+    }
 
-				for (TradeEvent.Node node : trade.getNodes())
-					if (!header.contains(node.name))
-						header.add(node.name);
-			}
-		}
-		
-		// Header
-		for (String field : header)
-			writer.write(field + ",");
-		writer.write(System.lineSeparator());
-		
-		for (TradeEvent trade : output.getTrades())
-		{
-			List<TradeEvent.Node> nodes = trade.getNodes();
-			
-			// Check each field of header - if not present : empty ','
-			for (String field : header)
-				{
-				for (TradeEvent.Node node : nodes)
-					if (node.name.equals(field))
-					{
-						writer.write(node.value);
-						break;
-					}
-				
-				writer.write(",");
-				}
+    private void outputByFormat(Output output) {
+        if (output.getFormat() == Output.OutputFormat.XML)
+            for (TradeEvent trade : output.getTrades()) {
+                writer.write("<trades>" + System.lineSeparator());
+                writeXMLTrade(trade);
+                writer.write("</trades>" + System.lineSeparator());
+            }
+        else if (output.getFormat() == Output.OutputFormat.CSV)
+            manageCSV(output);
+    }
 
-			writer.write(System.lineSeparator());
-		}
-	}
+    private void manageCSV(Output output) {
+        List<Class<? extends TradeEvent>> tradeClass = new ArrayList<Class<? extends TradeEvent>>();
+        List<String> header = new ArrayList<String>();
 
-	private void writeXMLTrade(TradeEvent trade)
-	{
-		writer.write("<trade>" + System.lineSeparator());
-		for (TradeEvent.Node node : trade.getNodes())
-			writeXMLNode(node);
-		writer.write("</trade>" + System.lineSeparator());
-	}
+        // Get header
+        for (TradeEvent trade : output.getTrades()) {
+            if (!tradeClass.contains(trade.getClass())) {
+                tradeClass.add(trade.getClass());
 
-	private void writeCSVTrade(TradeEvent trade)
-	{
-		List<TradeEvent.Node> nodes = trade.getNodes();
+                for (TradeEvent.Node node : trade.getNodes())
+                    if (!header.contains(node.name))
+                        header.add(node.name);
+            }
+        }
 
-		for (TradeEvent.Node node : nodes)
-			writer.write(node.name + ",");
-		writer.write(System.lineSeparator());
-		for (TradeEvent.Node node : nodes)
-			writer.write(node.value + ",");
-		writer.write(System.lineSeparator());
-	}
+        // Header
+        for (String field : header)
+            writer.write(field + ",");
+        writer.write(System.lineSeparator());
 
-	public void outputTrade(Output output, TradeEvent trade)
-	{
-		try
-		{
-			writer = getWriter(output, trade);
-			writeTrade(output, trade);
-			writer.close();
-		}
-		catch (FileNotFoundException e)
-		{
-		    LOGGER.log(Level.SEVERE, "Could not open file", e);
-		}
-		catch (UnsupportedEncodingException e)
-		{
-		    LOGGER.log(Level.SEVERE, "Wrong encoding", e);
-		}
-	}
+        for (TradeEvent trade : output.getTrades()) {
+            List<TradeEvent.Node> nodes = trade.getNodes();
 
-	private void writeTrade(Output output, TradeEvent trade)
-	{
-		if (output.getFormat().equals(Output.OutputFormat.XML))
-			writeXMLTrade(trade);
-		else if (output.getFormat().equals(Output.OutputFormat.CSV))
-			writeCSVTrade(trade);
-	}
+            // Check each field of header - if not present : empty ','
+            for (String field : header) {
+                for (TradeEvent.Node node : nodes)
+                    if (node.name.equals(field)) {
+                        writer.write(node.value);
+                        break;
+                    }
 
-	private void writeXMLNode(TradeEvent.Node node)
-	{
-		// Check if there is nodes inside node -> recursion
-		if (node.nodes != null)
-		{
-			writer.write("<" + node.name + ">" + System.lineSeparator());
-			for (TradeEvent.Node n : node.nodes)
-				writeXMLNode(n);
-			writer.write("</" + node.name + ">" + System.lineSeparator());
-		}
-		// Only simple node -> print it
-		else
-			writer.write("<" + node.name + ">" + node.value + "</" + node.name
-					+ ">" + System.lineSeparator());
-	}
+                writer.write(",");
+            }
+
+            writer.write(System.lineSeparator());
+        }
+    }
+
+    private void writeXMLTrade(TradeEvent trade) {
+        writer.write("<trade>" + System.lineSeparator());
+        for (TradeEvent.Node node : trade.getNodes())
+            writeXMLNode(node);
+        writer.write("</trade>" + System.lineSeparator());
+    }
+
+    private void writeCSVTrade(TradeEvent trade) {
+        List<TradeEvent.Node> nodes = trade.getNodes();
+
+        for (TradeEvent.Node node : nodes)
+            writer.write(node.name + ",");
+        writer.write(System.lineSeparator());
+        for (TradeEvent.Node node : nodes)
+            writer.write(node.value + ",");
+        writer.write(System.lineSeparator());
+    }
+
+    public void outputTrade(Output output, TradeEvent trade) {
+        try {
+            writer = getWriter(output, trade);
+            writeTrade(output, trade);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Could not open file", e);
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.log(Level.SEVERE, "Wrong encoding", e);
+        }
+    }
+
+    private void writeTrade(Output output, TradeEvent trade) {
+        if (output.getFormat().equals(Output.OutputFormat.XML))
+            writeXMLTrade(trade);
+        else if (output.getFormat().equals(Output.OutputFormat.CSV))
+            writeCSVTrade(trade);
+    }
+
+    private void writeXMLNode(TradeEvent.Node node) {
+        // Check if there is nodes inside node -> recursion
+        if (node.nodes != null) {
+            writer.write("<" + node.name + ">" + System.lineSeparator());
+            for (TradeEvent.Node n : node.nodes)
+                writeXMLNode(n);
+            writer.write("</" + node.name + ">" + System.lineSeparator());
+        }
+        // Only simple node -> print it
+        else
+            writer.write("<" + node.name + ">" + node.value + "</" + node.name
+                    + ">" + System.lineSeparator());
+    }
 }
