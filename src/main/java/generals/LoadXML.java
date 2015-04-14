@@ -84,9 +84,9 @@ public class LoadXML {
         try {
             context = new ClassPathXmlApplicationContext("file:spring.xml");
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "Couldn't init spring modules", e);
-            System.out
-                    .println("Couldn't init spring modules. Using default generators.");
+            LOGGER.log(Level.WARNING,
+                    "Couldn't init spring modules. Using default parameters.",
+                    e);
         }
 
         // Load Static Informations
@@ -435,7 +435,7 @@ public class LoadXML {
             getFilters(ebook, bgenerators, bcurrencies, generators);
 
             if (bcurrencies.isEmpty() || bgenerators.isEmpty())
-                System.out.println("Book " + ebook.getAttribute("name")
+                LOGGER.log(Level.WARNING, "Book " + ebook.getAttribute("name")
                         + " : invalid filters");
 
             books.add(new Book(ebook.getAttribute("name"), bcurrencies,

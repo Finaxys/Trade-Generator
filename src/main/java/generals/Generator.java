@@ -29,16 +29,12 @@ public class Generator {
         try {
             LoadXML.init();
         } catch (CustomParsingException e) {
-            LOGGER.log(Level.WARNING, "Custom exception caught", e);
+            LOGGER.log(Level.WARNING, "Custom exception caught - Problem while parsing informations", e);
 
-            System.out.println("Problem while parsing informations :");
-            System.out.println(e.getMessage());
             if (e.aborting()) {
-                System.out.println("Aborting program");
                 return;
             }
-            System.out
-                    .println("Problem handled. Continuing operation. Fix it next time.");
+            LOGGER.log(Level.INFO, "Managing Exception : continuing", e);
         }
 
         long startTime = System.currentTimeMillis();
@@ -103,7 +99,6 @@ public class Generator {
 
         // Estimation Stats
         long estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println((float) estimatedTime * 100000 / 1000 / 60 / 60);
-        System.out.println("OVER");
+        LOGGER.log(Level.INFO, "Estimated 1B Trades/hour: " + (float) estimatedTime * 100000 / 1000 / 60 / 60);
     }
 }

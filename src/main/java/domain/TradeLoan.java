@@ -26,13 +26,13 @@ public class TradeLoan extends TradeEvent {
     private Referential.Depositary depositary;
     private Referential.Trader trader;
 
-    public TradeLoan(TradeGenerator instrument, String reference, Way way,
+    public TradeLoan(TradeGenerator instrument, Way way,
             Date date, Counterpart counterpart, Book book,
             Date valueDate, Date maturityDate, Double national,
             Indexation index, String isin, RateType rate, Double rateValue,
             Double spread, Term term, BaseCalcul basecalcul, double amount,
             Currency currency, Depositary depositary, Trader trader) {
-        super(reference, way, date, counterpart, book, instrument);
+        super(way, date, counterpart, book, instrument);
         this.valueDate = valueDate;
         this.maturityDate = maturityDate;
         this.national = national;

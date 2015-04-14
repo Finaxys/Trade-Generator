@@ -17,7 +17,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
     protected TradeGenerator instrument;
     protected List<Node> nodes;
 
-    public TradeEvent(String reference, Way way, Date date,
+    public TradeEvent(Way way, Date date,
             Counterpart counterpart, Book book, TradeGenerator instrument) {
         super();
         this.id = counter++;
@@ -115,6 +115,10 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
     }
 
     public class Node {
+        private String name;
+        private String value; // If empty take list of nodes
+        private List<Node> nodes;
+
         public String getName() {
             return name;
         }
@@ -133,9 +137,6 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
         public void setNodes(List<Node> nodes) {
             this.nodes = nodes;
         }
-        private String name;
-        private String value; // If empty take list of nodes
-        private List<Node> nodes;
     }
 
     public static long getCounter() {

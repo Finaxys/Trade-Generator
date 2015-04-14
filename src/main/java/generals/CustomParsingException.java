@@ -1,11 +1,7 @@
 package generals;
 
 public class CustomParsingException extends Exception {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 1L;
-
     private final boolean abort;
 
     public CustomParsingException(String message, boolean abort) {

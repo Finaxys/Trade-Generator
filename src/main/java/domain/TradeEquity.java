@@ -14,9 +14,9 @@ public class TradeEquity extends TradeEvent {
     private Referential.Depositary depositary;
     private Referential.Trader trader;
 
-    public TradeEquity(TradeGenerator instrument, String reference, Way way,
+    public TradeEquity(TradeGenerator instrument, Way way,
             Date date, Counterpart counterpart, Book book) {
-        super(reference, way, date, counterpart, book, instrument);
+        super(way, date, counterpart, book, instrument);
     }
 
     @Override
