@@ -83,7 +83,7 @@ public class LoanDepositGenerator extends TradeGenerator {
 
         tr1 = ref.getTrader(ref, cur1.getCode(), "loandepo");
 
-        TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0), date,
+        TradeLoan tl = new TradeLoan(this, "reference", listWay.get(0),
                 date, c1, book, date, date, (double) 0,
                 TradeGenerator.randEnum(Indexation.class), "isin?",
                 TradeGenerator.randEnum(RateType.class),

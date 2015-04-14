@@ -6,27 +6,17 @@ import java.util.Date;
 import java.util.List;
 
 import domain.Referential.Counterpart;
-import domain.Referential.Depositary;
-import domain.Referential.Product;
-import domain.Referential.Trader;
 
 public class TradeEquity extends TradeEvent {
     private double price;
     private int quantity;
     private Referential.Product product;
-    protected Referential.Depositary depositary;
-    protected Referential.Trader trader;
+    private Referential.Depositary depositary;
+    private Referential.Trader trader;
 
     public TradeEquity(TradeGenerator instrument, String reference, Way way,
-            Date date, Date tradeDate, Counterpart counterpart, Book book,
-            double price, int quantity, Product product, Depositary depositary,
-            Trader trader) {
-        super(reference, way, date, tradeDate, counterpart, book, instrument);
-        this.price = price;
-        this.quantity = quantity;
-        this.product = product;
-        this.depositary = depositary;
-        this.trader = trader;
+            Date date, Counterpart counterpart, Book book) {
+        super(reference, way, date, counterpart, book, instrument);
     }
 
     @Override
@@ -56,4 +46,45 @@ public class TradeEquity extends TradeEvent {
 
         return nodes;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Referential.Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Referential.Product product) {
+        this.product = product;
+    }
+
+    public Referential.Depositary getDepositary() {
+        return depositary;
+    }
+
+    public void setDepositary(Referential.Depositary depositary) {
+        this.depositary = depositary;
+    }
+
+    public Referential.Trader getTrader() {
+        return trader;
+    }
+
+    public void setTrader(Referential.Trader trader) {
+        this.trader = trader;
+    }
+
 }

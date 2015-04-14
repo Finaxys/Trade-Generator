@@ -7,17 +7,17 @@ import java.util.List;
 import domain.Referential.Counterpart;
 
 public abstract class TradeEvent implements Comparable<TradeEvent> {
-    private static long counter = 0;
+    protected static long counter = 0;
     protected long id;
-    private Way way;
-    private Date date;
+    protected Way way;
+    protected Date date;
     protected Referential.Counterpart counterpart;
     protected Book book;
     protected Referential.Portfolio portfolio;
     protected TradeGenerator instrument;
     protected List<Node> nodes;
 
-    public TradeEvent(String reference, Way way, Date date, Date tradeDate,
+    public TradeEvent(String reference, Way way, Date date,
             Counterpart counterpart, Book book, TradeGenerator instrument) {
         super();
         this.id = counter++;
@@ -26,12 +26,6 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
         this.instrument = instrument;
         this.counterpart = counterpart;
         this.book = book;
-    }
-
-    public class Node {
-        public String name;
-        public String value; // If empty take list of nodes
-        public List<Node> nodes;
     }
 
     public abstract double getAmount();
@@ -119,4 +113,57 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
     public void setId(long id) {
         this.id = id;
     }
+
+    public class Node {
+        public String getName() {
+            return name;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+        public String getValue() {
+            return value;
+        }
+        public void setValue(String value) {
+            this.value = value;
+        }
+        public List<Node> getNodes() {
+            return nodes;
+        }
+        public void setNodes(List<Node> nodes) {
+            this.nodes = nodes;
+        }
+        private String name;
+        private String value; // If empty take list of nodes
+        private List<Node> nodes;
+    }
+
+    public static long getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(long counter) {
+        TradeEvent.counter = counter;
+    }
+
+    public Referential.Counterpart getCounterpart() {
+        return counterpart;
+    }
+
+    public void setCounterpart(Referential.Counterpart counterpart) {
+        this.counterpart = counterpart;
+    }
+
+    public Referential.Portfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(Referential.Portfolio portfolio) {
+        this.portfolio = portfolio;
+    }
+
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
+    }
+
 }

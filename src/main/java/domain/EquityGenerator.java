@@ -87,8 +87,13 @@ public class EquityGenerator extends TradeGenerator {
         price = (float) (price * (1 + randomquantity / 100));
         int quantity = (int) (randToleranceQuantities * loanPerTrade.get(0) / price);
         TradeEquity tradeEquity = new TradeEquity(this, "reference",
-                ways.get(0), date, date, counterpart, book, price, quantity,
-                product, depositary, trader);
+                ways.get(0), date, counterpart, book);
+        tradeEquity.setProduct(product);
+        tradeEquity.setBook(book);
+        tradeEquity.setDepositary(depositary);
+        tradeEquity.setTrader(trader);
+        tradeEquity.setPrice(price);
+        tradeEquity.setQuantity(quantity);
         localities.remove(0);
         ways.remove(0);
         loanPerTrade.remove(0);

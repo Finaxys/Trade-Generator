@@ -98,8 +98,8 @@ public class OutputManager {
                 tradeClass.add(trade.getClass());
 
                 for (TradeEvent.Node node : trade.getNodes())
-                    if (!header.contains(node.name))
-                        header.add(node.name);
+                    if (!header.contains(node.getName()))
+                        header.add(node.getName());
             }
         }
 
@@ -114,8 +114,8 @@ public class OutputManager {
             // Check each field of header - if not present : empty ','
             for (String field : header) {
                 for (TradeEvent.Node node : nodes)
-                    if (node.name.equals(field)) {
-                        writer.write(node.value);
+                    if (node.getName().equals(field)) {
+                        writer.write(node.getValue());
                         break;
                     }
 
@@ -137,10 +137,10 @@ public class OutputManager {
         List<TradeEvent.Node> nodes = trade.getNodes();
 
         for (TradeEvent.Node node : nodes)
-            writer.write(node.name + ",");
+            writer.write(node.getName() + ",");
         writer.write(System.lineSeparator());
         for (TradeEvent.Node node : nodes)
-            writer.write(node.value + ",");
+            writer.write(node.getValue() + ",");
         writer.write(System.lineSeparator());
     }
 
@@ -165,15 +165,15 @@ public class OutputManager {
 
     private void writeXMLNode(TradeEvent.Node node) {
         // Check if there is nodes inside node -> recursion
-        if (node.nodes != null) {
-            writer.write("<" + node.name + ">" + System.lineSeparator());
-            for (TradeEvent.Node n : node.nodes)
+        if (node.getNodes() != null) {
+            writer.write("<" + node.getName() + ">" + System.lineSeparator());
+            for (TradeEvent.Node n : node.getNodes())
                 writeXMLNode(n);
-            writer.write("</" + node.name + ">" + System.lineSeparator());
+            writer.write("</" + node.getName() + ">" + System.lineSeparator());
         }
         // Only simple node -> print it
         else
-            writer.write("<" + node.name + ">" + node.value + "</" + node.name
+            writer.write("<" + node.getName() + ">" + node.getValue() + "</" + node.getName()
                     + ">" + System.lineSeparator());
     }
 }
