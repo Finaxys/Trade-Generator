@@ -10,15 +10,24 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class TradeGenerator {
-    public String name;
-    public int amount;
-    public int volumetry;
-    public int roundedVolumetry;
-    public int tradeGenerated = 0;
-    public int volumetryTolerance;
-    public int budgetTolerance;
+    protected String name;
+    protected int amount;
+    protected int volumetry;
+    protected int roundedVolumetry;
+    protected int tradeGenerated = 0;
+    protected int volumetryTolerance;
+    protected int budgetTolerance;
 
     static int cnt = 0;
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
 
     public void setVolumetry(int volumetry) {
         this.volumetry = volumetry;

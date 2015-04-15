@@ -3,6 +3,8 @@ package generals;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +38,10 @@ public class LoadXML {
     private static final Logger LOGGER = Logger.getLogger(LoadXML.class
             .getName());
     private static Referential ref;
+
+    private static final String COUNTRY = "country";
+    private static final String INSTRUMENT = "instrument";
+    private static final String CURRENCY = "currency";
 
     interface CbReferential {
         public void init(Referential ref);
@@ -120,7 +126,7 @@ public class LoadXML {
                 product.setType(getContent(eElement, "type"));
                 product.setIsin(getContent(eElement, "isin"));
                 product.setLibelle(getContent(eElement, "libelle"));
-                product.setCountry(getContent(eElement, "country"));
+                product.setCountry(getContent(eElement, COUNTRY));
                 product.setPrice(Float
                         .parseFloat(getContent(eElement, "price")));
                 ref.getProducts().add(product);
@@ -154,13 +160,13 @@ public class LoadXML {
                     throws CustomParsingException {
                 Referential.Portfolio portfolio = ref.new Portfolio();
                 portfolio.setCode(getContent(eElement, "codeptf"));
-                portfolio.setCountry(getContent(eElement, "country"));
+                portfolio.setCountry(getContent(eElement, COUNTRY));
                 portfolio.setType(getContent(eElement, "type"));
                 ref.getPortfolios().add(portfolio);
             }
         });
 
-        loadReferential("currencies.xml", "currency", new CbReferential() {
+        loadReferential("currencies.xml", CURRENCY, new CbReferential() {
             @Override
             public void init(Referential ref) {
                 ref.setCurrencies(new ArrayList<Referential.Currency>());
@@ -171,7 +177,7 @@ public class LoadXML {
                     throws CustomParsingException {
                 Referential.Currency currency = ref.new Currency();
                 currency.setName(getContent(eElement, "name"));
-                currency.setCountry(getContent(eElement, "country"));
+                currency.setCountry(getContent(eElement, COUNTRY));
                 currency.setCode(getContent(eElement, "code"));
                 ref.getCurrencies().add(currency);
             }
@@ -179,7 +185,7 @@ public class LoadXML {
 
         try {
             loadTraders();
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (Exception e) {
             throw new CustomParsingException("Traders :" + e.getMessage(),
                     true, e);
         }
@@ -256,7 +262,7 @@ public class LoadXML {
                 TradeGenerator mainIns = null;
                 for (TradeGenerator gen : generators) {
                     if (gen.getName().equalsIgnoreCase(
-                            ebusinessunit.getAttribute("instrument"))) {
+                            ebusinessunit.getAttribute(INSTRUMENT))) {
                         mainIns = gen;
                         break;
                     }
@@ -285,8 +291,8 @@ public class LoadXML {
         crossReferences();
     }
 
-    public static void loadTraders() throws ParserConfigurationException,
-            SAXException, IOException {
+    public static void loadTraders() throws Exception
+    {
         File fXmlFile = new File("referential/traders.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -296,7 +302,7 @@ public class LoadXML {
         List<Referential.CurrencyTrader> currencyTraders = new ArrayList<Referential.CurrencyTrader>();
 
         // Get currencies
-        NodeList ncurrencies = doc.getElementsByTagName("currency");
+        NodeList ncurrencies = doc.getElementsByTagName(CURRENCY);
         for (int icurrencies = 0; icurrencies < ncurrencies.getLength(); icurrencies++) {
             List<Referential.InstrumentTrader> instruments = new ArrayList<Referential.InstrumentTrader>();
 
@@ -305,8 +311,7 @@ public class LoadXML {
                 continue;
 
             // Get instruments
-            NodeList ninstruments = ecurrency
-                    .getElementsByTagName("instrument");
+            NodeList ninstruments = ecurrency.getElementsByTagName(INSTRUMENT);
             for (int iinstru = 0; iinstru < ninstruments.getLength(); iinstru++) {
                 List<Referential.Trader> traders = new ArrayList<Referential.Trader>();
 
@@ -347,9 +352,9 @@ public class LoadXML {
             Element efilter = (Element) nfilters.item(ifilter);
 
             if ("all".equalsIgnoreCase(efilter.getAttribute("value"))) {
-                if ("instrument".equalsIgnoreCase(efilter.getAttribute("type")))
+                if (INSTRUMENT.equalsIgnoreCase(efilter.getAttribute("type")))
                     bgenerators.addAll(generators);
-                else if ("currency".equalsIgnoreCase(efilter
+                else if (CURRENCY.equalsIgnoreCase(efilter
                         .getAttribute("type")))
                     bcurrencies.addAll(ref.getCurrencies());
                 continue;
@@ -358,13 +363,13 @@ public class LoadXML {
             List<String> vfilter = Arrays.asList(efilter.getAttribute("value")
                     .split("\\s*,\\s*"));
 
-            if ("instrument".equalsIgnoreCase(efilter.getAttribute("type"))) {
+            if (INSTRUMENT.equalsIgnoreCase(efilter.getAttribute("type"))) {
                 for (String str : vfilter)
                     for (TradeGenerator gen : generators)
                         if (str.equals(gen.getName()))
                             bgenerators.add(gen);
-            } else if ("currency"
-                    .equalsIgnoreCase(efilter.getAttribute("type"))) {
+            } else if (CURRENCY.equalsIgnoreCase(efilter.getAttribute("type")))
+            {
                 for (String str : vfilter)
                     for (Currency cur : ref.getCurrencies())
                         if (str.equals(cur.getCode()))
@@ -470,33 +475,38 @@ public class LoadXML {
                 else
                     continue;
             }
-
-            // Set all fields by name
-            generator.name = name;
+            
+            // Set all fields by name setter
+            generator.setName(name);
             NodeList nfields = eins.getChildNodes();
             for (int ifield = 0; ifield < nfields.getLength(); ifield++) {
                 Node nfield = nfields.item(ifield);
                 try {
-                    Field field = generator.getClass().getField(
-                            nfield.getNodeName());
+                    String methodName = "set" + Character.toString(nfield.getNodeName().charAt(0)).toUpperCase()+nfield.getNodeName().substring(1);
+                    Method method = generator.getClass().getMethod(methodName, int.class);
+
                     try {
-                        // TODO - TO REMOVE
-                        System.out
-                                .println(name + " >> " + nfield.getNodeName());
-                        if (field.getType() == Integer.TYPE)
-                            field.set(generator, Integer.parseInt(nfield
-                                    .getFirstChild().getNodeValue()));
-                        else if (field.getType().toString()
-                                .equals(String.class.toString()))
-                            field.set(generator, nfield.getFirstChild()
-                                    .getNodeValue());
-                    } catch (IllegalAccessException | IllegalArgumentException
+                        method.invoke(generator, Integer.parseInt(nfield.getFirstChild().getNodeValue()));
+                    } catch (InvocationTargetException | IllegalAccessException | IllegalArgumentException
                             | DOMException e) {
-                        LOGGER.log(Level.FINE, "Could not set Field from XML",
+                        LOGGER.log(Level.FINE, "Could not call Method from XML",
                                 e);
                     }
-                } catch (NoSuchFieldException | SecurityException e) {
-                    LOGGER.log(Level.FINE, "Field not found from XML settings",
+                    System.out.println(name + " >> " + nfield.getNodeName());
+
+                    // Set field by name attribute
+//                    Field field = generator.getClass().getField(
+//                            nfield.getNodeName());
+//                        if (field.getType() == Integer.TYPE)
+//                            field.set(generator, Integer.parseInt(nfield
+//                                    .getFirstChild().getNodeValue()));
+//                        else if (field.getType().toString()
+//                                .equals(String.class.toString()))
+//                            field.set(generator, nfield.getFirstChild()
+//                                    .getNodeValue());
+
+                } catch (NoSuchMethodException | SecurityException e) {
+                    LOGGER.log(Level.FINE, "Method not found from XML settings",
                             e);
                 }
             }

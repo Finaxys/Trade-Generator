@@ -188,8 +188,8 @@ public class Referential {
             this.isin = isin;
         }
 
-        public void setLibelle(String name) {
-            this.name = name;
+        public void setLibelle(String libelle) {
+            this.libelle = libelle;
         }
 
         public void setPrice(float price) {

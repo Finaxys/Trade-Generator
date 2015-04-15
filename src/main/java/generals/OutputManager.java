@@ -19,8 +19,8 @@ public class OutputManager {
 
     private static OutputManager instance = new OutputManager();
     private static PrintWriter writer;
-    private final static String OUTPUT_PATH = "trades/";
-    private final static String OUTPUT_ENCODING = "UTF-8";
+    private static final String OUTPUT_PATH = "trades/";
+    private static final String OUTPUT_ENCODING = "UTF-8";
 
     private OutputManager() {
         File check = new File(OUTPUT_PATH + "test");
@@ -63,6 +63,9 @@ public class OutputManager {
             for (Businessunit bu : Generals.getInstance().getBusinessunits())
                 for (Output output : bu.getOutputs()) {
                     writer = getWriter(output);
+                    
+                    if (writer == null)
+                    System.out.println("WUT");
 
                     outputByFormat(output);
 
@@ -115,7 +118,7 @@ public class OutputManager {
             for (String field : header) {
                 for (TradeEvent.Node node : nodes)
                     if (node.getName().equals(field)) {
-                        writer.write(node.getValue());
+                        writer.write("" + node.getValue());
                         break;
                     }
 

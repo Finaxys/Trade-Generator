@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Random;
 
 public class LoanDepositGenerator extends TradeGenerator {
-    public int partSell;
-    public int ownCountry;
-    public int repartitionTolerance;
-    public float rateValue;
-    public int rateValueTolerance;
-    public int partRateVariable;
+    private int partSell;
+    private int ownCountry;
+    private int repartitionTolerance;
+    private float rateValue;
+    private int rateValueTolerance;
+    private int partRateVariable;
     private int amountPerDay;
     private List<Integer> loanPerTrade;
     private List<Locality> listLocality;
@@ -98,5 +98,53 @@ public class LoanDepositGenerator extends TradeGenerator {
         loanPerTrade.remove(0);
 
         return tl;
+    }
+
+    public int getPartSell() {
+        return partSell;
+    }
+
+    public void setPartSell(int partSell) {
+        this.partSell = partSell;
+    }
+
+    public int getOwnCountry() {
+        return ownCountry;
+    }
+
+    public void setOwnCountry(int ownCountry) {
+        this.ownCountry = ownCountry;
+    }
+
+    public int getRepartitionTolerance() {
+        return repartitionTolerance;
+    }
+
+    public void setRepartitionTolerance(int repartitionTolerance) {
+        this.repartitionTolerance = repartitionTolerance;
+    }
+
+    public float getRateValue() {
+        return rateValue;
+    }
+
+    public void setRateValue(float rateValue) {
+        this.rateValue = rateValue;
+    }
+
+    public int getRateValueTolerance() {
+        return rateValueTolerance;
+    }
+
+    public void setRateValueTolerance(int rateValueTolerance) {
+        this.rateValueTolerance = rateValueTolerance;
+    }
+
+    public int getPartRateVariable() {
+        return partRateVariable;
+    }
+
+    public void setPartRateVariable(int partRateVariable) {
+        this.partRateVariable = partRateVariable;
     }
 }

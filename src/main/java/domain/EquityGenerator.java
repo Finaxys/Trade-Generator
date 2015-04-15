@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Random;
 
 public class EquityGenerator extends TradeGenerator {
-    public int partSell;
-    public int ownCountry;
-    public double budgetTolerance;
+    private int partSell;
+    private int ownCountry;
+    private int budgetTolerance;
     private List<Integer> loanPerTrade;
     private List<Locality> localities;
     private List<Way> ways;
     private int amountPerDay;
-
+    
     @Override
     public void init(int amount) {
         super.init(amount);
@@ -86,7 +86,8 @@ public class EquityGenerator extends TradeGenerator {
 
         price = (float) (price * (1 + randomquantity / 100));
         int quantity = (int) (randToleranceQuantities * loanPerTrade.get(0) / price);
-        TradeEquity tradeEquity = new TradeEquity(this, ways.get(0), date, counterpart, book);
+        TradeEquity tradeEquity = new TradeEquity(this, ways.get(0), date,
+                counterpart, book);
         tradeEquity.setProduct(product);
         tradeEquity.setBook(book);
         tradeEquity.setDepositary(depositary);
@@ -118,6 +119,10 @@ public class EquityGenerator extends TradeGenerator {
 
     public double getBudgetTolerance() {
         return budgetTolerance;
+    }
+
+    public void setBudgetTolerance(int btol) {
+        this.budgetTolerance = btol;
     }
 
     @Override

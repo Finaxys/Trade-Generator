@@ -12,23 +12,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import domain.Referential;
 import domain.TradeEvent;
 
 public class Report {
     Referential ref;
-    public static List<TradeEvent> liste;
+    private List<TradeEvent> liste = null;
+    private static final Logger LOGGER = Logger.getLogger(Report.class
+            .getName());
 
-    private final static String OUTPUT_PATH = "report.csv";
-    private final static String OUTPUT_ENCODING = "UTF-8";
-    private static PrintWriter writer;
+    private static final String OUTPUT_PATH = "report.csv";
+    private static final String OUTPUT_ENCODING = "UTF-8";
+    private PrintWriter writer;
     private static Report INSTANCE = new Report();
 
     private Report() {
         super();
 
-        Report.liste = new ArrayList<TradeEvent>();
+        liste = new ArrayList<TradeEvent>();
         try {
             writer = new PrintWriter(OUTPUT_PATH, OUTPUT_ENCODING);
             writer.write("Date" + "," + "BussinessUnit" + "," + "Portfolio"
@@ -37,29 +41,29 @@ public class Report {
                     + "," + System.lineSeparator());
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Could not open Report file", e);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Encoding Report file failed", e);
         }
 
     }
-
+    
     public static Report getInstance() {
         return INSTANCE;
     }
 
-    public static void add(TradeEvent te) {
+    public void add(TradeEvent te) {
 
-        Report.liste.add(te);
+        liste.add(te);
     }
 
-    public static void concatSortOutput() {
+    public void concatSortOutput() {
 
-        Collections.sort(Report.liste);
+        Collections.sort(liste);
     }
 
-    public static void writeCsTrade(TradeEvent te, int nombre_op, double montant)
-            throws FileNotFoundException, UnsupportedEncodingException {
+    public void writeCsTrade(TradeEvent te, int nombreOp, double montant)
+            throws Exception {
 
         String s = System.lineSeparator();
 
@@ -80,16 +84,17 @@ public class Report {
                 + te.getBook().getPortFolios().getBu().getName() + ","
                 + te.getBook().getPortFolios().getName() + ","
                 + te.getBook().getName() + "," + te.getInstrument().getName()
-                + "," + te.getWay() + "," + nombre_op + "," + montantstr + ","
+                + "," + te.getWay() + "," + nombreOp + "," + montantstr + ","
                 + s);
     }
 
-    public static String printDate(Date d) {
+    public String printDate(Date d) 
+    {
         return MessageFormat.format("{0}-{1}-{2}", d.getDate(), d.getMonth(),
                 d.getYear());
     }
 
-    public static void report(ArrayList<TradeEvent> lists, int j) {
+    public void report(List<TradeEvent> lists) {
 
         File check = new File(OUTPUT_PATH);
 
@@ -113,7 +118,8 @@ public class Report {
                     nombreTransaction++;
                     writeCsTrade(te, nombreTransaction, montant);
 
-                    if (!lists.get(i).getWay().name().equalsIgnoreCase("sell")) {
+                    if (!"sell".equalsIgnoreCase(lists.get(i).getWay().name()))
+                    {
                         ms = ms + montant;
                         ns = ns + nombreTransaction;
                     } else {
@@ -121,6 +127,7 @@ public class Report {
                         ne = ne + nombreTransaction;
                     }
                 }
+                else
                 {
                     if (lists.get(i).compareTo(te) == 0) {
                         montant = montant + lists.get(i).getAmount();
@@ -128,8 +135,8 @@ public class Report {
                     } else {
                         writeCsTrade(te, nombreTransaction, montant);
 
-                        if (!lists.get(i).getWay().name()
-                                .equalsIgnoreCase("sell")) {
+                        if (!"sell".equalsIgnoreCase(lists.get(i).getWay().name()))
+                        {
                             ms = ms + montant;
                             ns = ns + nombreTransaction;
                         } else {
@@ -150,7 +157,7 @@ public class Report {
 
             writer.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Could not create Report", e);
         }
     }
 }
