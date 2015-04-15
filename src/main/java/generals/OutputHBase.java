@@ -2,9 +2,9 @@ package generals;
 
 import DAO.HBaseDAO;
 import HBaseTools.HBaseMiniConnection;
-import HBaseTools.IHBaseConnection;
+//import HBaseTools.IHBaseConnection;
 import Model.Data;
-import Model.HRow;
+//import Model.HRow;
 import domain.TradeEvent;
 
 import org.apache.hadoop.conf.Configuration;
@@ -19,21 +19,21 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- * Created by cramo on 15/04/15.
- */
-/*
-public class OutputHBase extends Output{
+public class OutputHBase extends Output
+{
+    private static final Logger LOGGER = Logger.getLogger(OutputHBase.class
+            .getName());
 
     private static HBaseDAO dao;
 
 
     private static void connection() throws IOException
     {
-        IHBaseConnection hbaseconnection=new HBaseMiniConnection("/tmp/configuration.xml") ;
-        HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
-        dao.connect();
+//        IHBaseConnection hbaseconnection=new HBaseMiniConnection("/tmp/configuration.xml") ;
+//        HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
+//        dao.connect();
     }
     public static void createTable() throws IOException
     {
@@ -43,10 +43,11 @@ public class OutputHBase extends Output{
         dao.disconnect();
     }
 
-    /public static void putData(TradeEvent tradeEvent) throws IOException
+    public static void putData(TradeEvent tradeEvent) throws IOException
     {
-        connection();
-        Data[] data =new Data[]{new Data("cf1", Integer.toString(tradeEvent.getId(), )
+//        connection();
+//        Data[] data =new Data[]{new Data("cf1", Integer.toString(tradeEvent.getId(), )
+    }
 
     public void outputTrade(TradeEvent trade)
     {
@@ -55,16 +56,15 @@ public class OutputHBase extends Output{
 
         //put
 
-        for (TradeEvent.Node node : nodes)
-            try {
-                putData();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        writer.write(node.getName() + ",");
-        writer.write(System.lineSeparator());
+//        for (TradeEvent.Node node : nodes)
+//            try {
+//                putData();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        writer.write(node.getName() + ",");
+//        writer.write(System.lineSeparator());
 
-        writer.close();
     }
 
     public void outputTrades()
@@ -122,5 +122,5 @@ public class OutputHBase extends Output{
         writer.close();
         tradeEvents.clear();
     }
-}*/
+}
 

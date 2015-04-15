@@ -8,7 +8,7 @@
     <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
-	  <format>CSV</format>
+	  <format>HBase</format>
 	  <path>trades</path>
 	  <instrument>all</instrument>
 	  <isStp>false</isStp>
