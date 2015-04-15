@@ -115,7 +115,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
 
     public class Node {
         private String name;
-        private String value; // If empty take list of nodes
+        private Object value; // If empty take list of nodes
         private List<Node> nodes;
 
         public String getName() {
@@ -124,10 +124,10 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
         public void setName(String name) {
             this.name = name;
         }
-        public String getValue() {
+        public Object getValue() {
             return value;
         }
-        public void setValue(String value) {
+        public void setValue(Object value) {
             this.value = value;
         }
         public List<Node> getNodes() {

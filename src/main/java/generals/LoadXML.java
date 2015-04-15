@@ -1,8 +1,6 @@
 package generals;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.spec.ECField;
@@ -14,7 +12,6 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,12 +20,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import domain.Book;
 import domain.Businessunit;
-import domain.EquityGenerator;
-import domain.LoanDepositGenerator;
 import domain.Portfolio;
 import domain.Referential;
 import domain.TradeGenerator;
@@ -378,7 +372,7 @@ public class LoadXML {
             if (eoutput.getNodeType() != Node.ELEMENT_NODE)
                 continue;
 
-            String sinst = getContent(eoutput, "instrument");
+            String sinst = getContent(eoutput, INSTRUMENT);
             List<TradeGenerator> opgens = new ArrayList<TradeGenerator>();
             if ("all".equalsIgnoreCase(sinst))
                 opgens.addAll(generators);

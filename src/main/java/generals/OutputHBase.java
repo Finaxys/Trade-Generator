@@ -2,8 +2,9 @@ package generals;
 
 import DAO.HBaseDAO;
 import HBaseTools.HBaseMiniConnection;
-import HBaseTools.IHBaseConnection;
+//import HBaseTools.IHBaseConnection;
 import Model.Data;
+//import Model.HRow;
 import Model.HRow;
 import domain.TradeEvent;
 
@@ -19,21 +20,23 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- * Created by cramo on 15/04/15.
- */
 
-public class OutputHBase extends Output{
+public class OutputHBase extends Output
+{
+    private static final Logger LOGGER = Logger.getLogger(OutputHBase.class
+            .getName());
+
 
     private static HBaseDAO dao;
 
 
     private static void connection() throws IOException
     {
-        IHBaseConnection hbaseconnection=new HBaseMiniConnection("/tmp/configuration.xml") ;
-        HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
-        dao.connect();
+//        IHBaseConnection hbaseconnection=new HBaseMiniConnection("/tmp/configuration.xml") ;
+//        HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
+//        dao.connect();
     }
     public static void createTable() throws IOException
     {
@@ -42,14 +45,16 @@ public class OutputHBase extends Output{
         dao.createTable("Trades", ColumnFamilies);
         dao.disconnect();
     }
+
     //mettre tout les qualifiers dans un seul put
     public static void putData(TradeEvent tradeEvent) throws IOException {
         connection();
         List<Data> data = new ArrayList<Data>();
         for (TradeEvent.Node node : tradeEvent.getNodes())
-            data.add(new Data("cf1", node.getName(), node.getValue()));
+            data.add(new Data("cf1", node.getName(), (String)node.getValue()));
         HRow row = new HRow("Trades", Long.toString(tradeEvent.getId()), (Data[]) data.toArray());
         dao.disconnect();
+
     }
 
     public void outputTrade(TradeEvent trade)
@@ -58,6 +63,7 @@ public class OutputHBase extends Output{
         List<TradeEvent.Node> nodes = trade.getNodes();
 
         //put
+
 /*
             for (TradeEvent.Node node : nodes)
                 try {
@@ -70,6 +76,7 @@ public class OutputHBase extends Output{
 
         writer.close();
         */
+
     }
 
     public void outputTrades()
