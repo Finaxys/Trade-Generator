@@ -7,14 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import domain.TradeEvent;
 import domain.TradeGenerator;
 
 public abstract class Output {
-    protected static final Logger LOGGER = Logger.getLogger(Output.class
-            .getName());
     protected static PrintWriter writer;
 
     protected Format format;

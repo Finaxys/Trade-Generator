@@ -5,11 +5,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import domain.TradeEvent;
 
 public class OutputCSV extends Output {
+    private static final Logger LOGGER = Logger.getLogger(OutputCSV.class
+            .getName());
 
+    @Override
     public void outputTrade(TradeEvent trade)
     {
         try
@@ -35,6 +39,7 @@ public class OutputCSV extends Output {
         writer.close();
     }
 
+    @Override
     public void outputTrades()
     {
         if (tradeEvents.isEmpty())

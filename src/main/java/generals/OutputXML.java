@@ -3,10 +3,13 @@ package generals;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import domain.TradeEvent;
 
 public class OutputXML extends Output {
+    private static final Logger LOGGER = Logger.getLogger(OutputXML.class
+            .getName());
 
     public OutputXML()
     {
@@ -20,6 +23,7 @@ public class OutputXML extends Output {
         writer.write("</trade>" + System.lineSeparator());
     }
 
+    @Override
     public void outputTrade(TradeEvent trade)
     {
         try
@@ -38,6 +42,7 @@ public class OutputXML extends Output {
         writer.close();
     }
 
+    @Override
     public void outputTrades()
     {
         if (tradeEvents.isEmpty())
