@@ -27,8 +27,8 @@ public class ReferentialTest extends TestCase {
         if (trader == null)
             System.out.println("trader is null");
         else {
-            System.out.println("name trader : " + trader.name);
-            System.out.println("codeptf trader : " + trader.codeptf);
+            System.out.println("name trader : " + trader.getName());
+            System.out.println("codeptf trader : " + trader.getCode());
         }
 
     }
