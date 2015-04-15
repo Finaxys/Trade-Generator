@@ -35,7 +35,7 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
         return nodes;
     }
 
-    public void addNode(List<Node> root, String name, String value,
+    public void addNode(List<Node> root, String name, Object value,
             List<Node> nodes) {
         Node node = new Node();
         node.name = name;

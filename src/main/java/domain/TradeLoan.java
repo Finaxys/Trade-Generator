@@ -64,22 +64,22 @@ public class TradeLoan extends TradeEvent {
         addNode(nodes, "book", book.getName(), null);
         addNode(nodes, "way", getWay().equals(Way.BUY) ? "BUY" : "SELL", null);
         addNode(nodes, "type", "loandepo", null);
-        addNode(nodes, "amount", Double.toString(this.amount), null);
+        addNode(nodes, "amount", this.amount, null);
         addNode(nodes, "rate", rate.name(), null);
         addNode(nodes, "trader", trader.getCode(), null);
         addNode(nodes, "currency", currency.getName(), null);
-        addNode(nodes, "rateValue", Double.toString(rateValue), null);
+        addNode(nodes, "rateValue", rateValue, null);
         addNode(nodes, "term", term.name(), null);
         addNode(nodes, "basecalcul", basecalcul.name(), null);
-        addNode(nodes, "spread", Double.toString(spread), null);
-        addNode(nodes, "valueDate", valueDate.toString(), null);
-        addNode(nodes, "maturityDate", maturityDate.toString(), null);
+        addNode(nodes, "spread", spread, null);
+        addNode(nodes, "valueDate", valueDate, null);
+        addNode(nodes, "maturityDate", maturityDate, null);
         addNode(nodes, "Depositary", depositary.getCode(), null);
         addNode(nodes, "trader", trader.getName(), null);
         addNode(nodes, "ISIN", isin, null);
         addNode(nodes, "indexation", index.name(), null);
-        addNode(nodes, "spread", spread.toString(), null);
-        addNode(nodes, "national", national.toString(), null);
+        addNode(nodes, "spread", spread, null);
+        addNode(nodes, "national", national, null);
 
         return nodes;
     }
