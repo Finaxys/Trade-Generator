@@ -76,7 +76,7 @@ public abstract class Output {
     }
 
     public enum Format {
-        CSV, JSON, XML
+        CSV, JSON, XML, HBASE
     }
 
     public enum Layer {

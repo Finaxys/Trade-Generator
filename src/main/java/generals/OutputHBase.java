@@ -23,7 +23,7 @@ import java.util.logging.Level;
 /**
  * Created by cramo on 15/04/15.
  */
-/*
+
 public class OutputHBase extends Output{
 
     private static HBaseDAO dao;
@@ -42,29 +42,34 @@ public class OutputHBase extends Output{
         dao.createTable("Trades", ColumnFamilies);
         dao.disconnect();
     }
-
-    /public static void putData(TradeEvent tradeEvent) throws IOException
-    {
+    //mettre tout les qualifiers dans un seul put
+    public static void putData(TradeEvent tradeEvent) throws IOException {
         connection();
-        Data[] data =new Data[]{new Data("cf1", Integer.toString(tradeEvent.getId(), )
+        List<Data> data = new ArrayList<Data>();
+        for (TradeEvent.Node node : tradeEvent.getNodes())
+            data.add(new Data("cf1", node.getName(), node.getValue()));
+        HRow row = new HRow("Trades", Long.toString(tradeEvent.getId()), (Data[]) data.toArray());
+        dao.disconnect();
+    }
 
     public void outputTrade(TradeEvent trade)
-    {
+        {
 
         List<TradeEvent.Node> nodes = trade.getNodes();
 
         //put
-
-        for (TradeEvent.Node node : nodes)
-            try {
-                putData();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        writer.write(node.getName() + ",");
-        writer.write(System.lineSeparator());
+/*
+            for (TradeEvent.Node node : nodes)
+                try {
+               .     putData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            writer.write(node.getName() + ",");
+            writer.write(System.lineSeparator());
 
         writer.close();
+        */
     }
 
     public void outputTrades()
@@ -122,5 +127,5 @@ public class OutputHBase extends Output{
         writer.close();
         tradeEvents.clear();
     }
-}*/
+}
 

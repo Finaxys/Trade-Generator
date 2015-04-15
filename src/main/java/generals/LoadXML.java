@@ -405,7 +405,7 @@ public class LoadXML {
             if (output == null)
                 throw new CustomParsingException("Could not create output bean", true);
 
-            output.setFormat(Output.Format.valueOf(getContent(eoutput, "format")));
+            output.setFormat(Output.Format.valueOf(getContent(eoutput, "format").toUpperCase()));
             output.setPath(getContent(eoutput, "path"));
             output.setIsStp(Boolean.parseBoolean(getContent(eoutput, "isStp")));
             output.setLayer(Output.Layer.valueOf(getContent(eoutput, "layer")));

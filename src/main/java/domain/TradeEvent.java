@@ -54,7 +54,6 @@ public abstract class TradeEvent implements Comparable<TradeEvent> {
         return super.hashCode();
     }
 
-    @Override
     public int compareTo(TradeEvent trade) {
         if (!(this.getDate().equals(trade.getDate())))
             return (int) (this.getDate().getTime() - trade.getDate().getTime());

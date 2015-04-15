@@ -41,7 +41,7 @@ public class Referential {
                 if (field.get(te).equals(filter))
                     subT.add((T) te);
             }
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Field unknown", e);
         }
 

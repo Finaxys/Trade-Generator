@@ -12,7 +12,7 @@ public enum Term {
             "1M"), TWO_MONTHS("2M"), THREE_MONTHS("3M"), SIX_MONTHS("6M"), TWELVE_MONTHS(
             "12M");
 
-    private static final Map<String, Term> BY_CODE_MAP = new LinkedHashMap<>();
+    private static final Map<String, Term> BY_CODE_MAP = new LinkedHashMap<String, Term>();
     private String shortCode;
 
     static {
