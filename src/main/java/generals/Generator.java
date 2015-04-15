@@ -99,6 +99,6 @@ public class Generator {
 
         // Estimation Stats
         long estimatedTime = System.currentTimeMillis() - startTime;
-        LOGGER.log(Level.INFO, "Estimated 1B Trades/hour: " + (float) estimatedTime * 100000 / 1000 / 60 / 60);
+        LOGGER.log(Level.INFO, "Estimated hours for 1B Trades: " + (float) estimatedTime * 100000 / 1000 / 60 / 60);
     }
 }

@@ -5,6 +5,6 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 <bean id="customequitygenerator" class="domain.EquityGenerator"/>
 <bean id="customloandepogenerator" class="domain.LoanDepositGenerator"/>
-<bean id="outputxml" class="domain.OutputXML"/>
-<bean id="outputcsv" class="domain.OutputCSV"/>
+<bean id="outputxml" class="generals.OutputXML"/>
+<bean id="outputcsv" class="generals.OutputCSV"/>
 </beans>

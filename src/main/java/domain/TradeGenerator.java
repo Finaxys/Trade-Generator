@@ -75,11 +75,9 @@ public abstract class TradeGenerator {
 
     public static void tradeGenerated(TradeEvent trade) {
         List<Output> outputs = getOutputsFromTrade(trade);
+
         for (Output output : outputs)
-            if (output.isStp())
-                OutputManager.getInstance().outputTrade(output, trade);
-            else
-                output.addTradeEvent(trade);
+            output.addTradeEvent(trade);
     }
 
     public static <T extends Enum<T>> List<T> tableaubin(int size, int ratio,
