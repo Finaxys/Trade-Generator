@@ -2,18 +2,14 @@ package generals;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 
 import domain.TradeEvent;
-import domain.TradeGenerator;
 
 public class OutputXML extends Output {
 
-    OutputXML(String format, String path, List<TradeGenerator> gen,
-            Boolean stp, String lay) {
-        super(format, path, gen, stp, lay);
+    public OutputXML()
+    {
     }
     
     public void writeTrade(TradeEvent trade)

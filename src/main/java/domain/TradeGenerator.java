@@ -1,7 +1,6 @@
 package domain;
 
 import generals.Output;
-import generals.OutputManager;
 
 import java.util.ArrayList;
 import java.util.Collections;

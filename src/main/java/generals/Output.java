@@ -17,7 +17,7 @@ public abstract class Output {
             .getName());
     protected static PrintWriter writer;
 
-    protected OutputFormat format;
+    protected Format format;
     protected String path;
     protected List<TradeGenerator> generators;
     protected Boolean isStp;
@@ -28,15 +28,10 @@ public abstract class Output {
 
     protected static int counter = 0;
 
-    Output(String format, String path, List<TradeGenerator> gen, Boolean stp,
-            String lay) {
+    public Output() 
+    {
         this.tradeEvents = new ArrayList<TradeEvent>();
         this.id = counter++;
-        this.format = OutputFormat.valueOf(format.toUpperCase());
-        this.path = path;
-        this.generators = gen;
-        this.isStp = stp;
-        this.layer = Layer.valueOf(lay);
     }
 
     protected PrintWriter getWriter(TradeEvent trade)
@@ -68,35 +63,43 @@ public abstract class Output {
 
     public abstract void outputTrades();
 
-    public OutputFormat getFormat() {
-        return format;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
     public List<TradeGenerator> getGenerators() {
         return generators;
     }
 
-    public Boolean isStp() {
-        return isStp;
-    }
-
-    public Layer getLayer() {
-        return layer;
+    public void setGenerators(List<TradeGenerator> gen) {
+        this.generators = gen;
     }
 
     public int getId() {
         return id;
     }
 
-    public enum OutputFormat {
+    public enum Format {
         CSV, JSON, XML
     }
 
     public enum Layer {
         FS, MQ, HBASE
+    }
+
+    public Boolean getIsStp() {
+        return isStp;
+    }
+
+    public void setIsStp(Boolean isStp) {
+        this.isStp = isStp;
+    }
+
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setLayer(Layer layer) {
+        this.layer = layer;
     }
 }

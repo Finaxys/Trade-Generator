@@ -379,7 +379,8 @@ public class LoadXML {
     }
 
     private static void getOutputs(Element ebusinessunit, List<Output> outputs,
-            List<TradeGenerator> generators) throws CustomParsingException {
+            List<TradeGenerator> generators) throws CustomParsingException 
+    {
         NodeList noutputs = ebusinessunit.getElementsByTagName("output");
         for (int ipf = 0; ipf < noutputs.getLength(); ipf++) {
             Element eoutput = (Element) noutputs.item(ipf);
@@ -387,9 +388,9 @@ public class LoadXML {
                 continue;
 
             String sinst = getContent(eoutput, "instrument");
-            List<TradeGenerator> opins = new ArrayList<TradeGenerator>();
+            List<TradeGenerator> opgens = new ArrayList<TradeGenerator>();
             if ("all".equalsIgnoreCase(sinst))
-                opins.addAll(generators);
+                opgens.addAll(generators);
             else {
                 List<String> sins = new ArrayList<String>(Arrays.asList(sinst
                         .split("\\s*,\\s*")));
@@ -398,13 +399,28 @@ public class LoadXML {
                 for (String str : sins)
                     for (TradeGenerator gen : generators)
                         if (str.equals(gen.getName())) {
-                            opins.add(gen);
+                            opgens.add(gen);
                             break;
                         }
             }
-            outputs.add(new Output(getContent(eoutput, "format"), getContent(
-                    eoutput, "path"), opins, Boolean.parseBoolean(getContent(
-                    eoutput, "isStp")), getContent(eoutput, "layer")));
+
+            String implementation = "output" + getContent(eoutput, "format").toLowerCase();
+            Output output = null;
+            if (implementation == null || implementation.isEmpty())
+                throw new CustomParsingException("Invalid output", true);
+            
+            output = (Output) context.getBean(implementation);
+
+            if (output == null)
+                throw new CustomParsingException("Could not create output bean", true);
+
+            output.setFormat(Output.Format.valueOf(getContent(eoutput, "format")));
+            output.setPath(getContent(eoutput, "path"));
+            output.setIsStp(Boolean.parseBoolean(getContent(eoutput, "isStp")));
+            output.setLayer(Output.Layer.valueOf(getContent(eoutput, "layer")));
+            output.setGenerators(opgens);
+            
+            outputs.add(output);
         }
     }
 
@@ -465,16 +481,9 @@ public class LoadXML {
             // Get custom or default generator
             String implementation = getOptContent(eins, "implementation", "");
             TradeGenerator generator = null;
-            if (implementation != null && !implementation.isEmpty())
-                generator = (TradeGenerator) context.getBean(implementation);
-            else {
-                if ("equity".equalsIgnoreCase(eins.getAttribute("name")))
-                    generator = new EquityGenerator();
-                else if ("loandepo".equalsIgnoreCase(eins.getAttribute("name")))
-                    generator = new LoanDepositGenerator();
-                else
-                    continue;
-            }
+            if (implementation == null || implementation.isEmpty())
+                implementation = name + "generator";
+            generator = (TradeGenerator) context.getBean(implementation);
             
             // Set all fields by name setter
             generator.setName(name);

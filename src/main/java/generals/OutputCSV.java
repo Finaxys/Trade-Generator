@@ -7,14 +7,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 import domain.TradeEvent;
-import domain.TradeGenerator;
 
 public class OutputCSV extends Output {
-
-    OutputCSV(String format, String path, List<TradeGenerator> gen,
-            Boolean stp, String lay) {
-        super(format, path, gen, stp, lay);
-    }
 
     public void outputTrade(TradeEvent trade)
     {

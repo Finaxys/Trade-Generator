@@ -19,7 +19,7 @@
 	<!--     <path>trades</path> -->
 	<!--     <instrument>all</instrument> -->
 	<!--     <isStp>false</isStp> -->
-	<!--     <layer>FS</layer> -->
+	<!--     <layer>HBASE</layer> -->
 	<!--   </output> -->
       </workflow>
       <instruments>
@@ -29,7 +29,7 @@
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>200</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <implementation>customequitygenerator</implementation> <!-- Spring Bean --> 
+	  <implementation>equitygenerator</implementation> <!-- Spring Bean --> 
 	</instrument>
 	<instrument name="loandepo">
 	  <amount>1000</amount>
@@ -74,14 +74,14 @@
 		<filter type="currency" value="EU"/>
 	      </filters>
 	    </book>
-	    <book name="bookfundingus">
-	      <filters>
-		<filter type="instrument" value="loandepo"></filter>
-		<filter type="currency" value="EU"></filter>
-	      </filters>
-	    </book>
-	    <book name="DERIVFUNDEUR"/>
-	    <book name="DERIVOTHERS"/>
+	    <!-- <book name="bookfundingus"> -->
+	    <!--   <filters> -->
+		<!-- <filter type="instrument" value="loandepo"></filter> -->
+		<!-- <filter type="currency" value="EU"></filter> -->
+	    <!--   </filters> -->
+	    <!-- </book> -->
+	    <!-- <book name="DERIVFUNDEUR"/> -->
+	    <!-- <book name="DERIVOTHERS"/> -->
 	  </books>
 	</portfolio>
       </portfolios>
