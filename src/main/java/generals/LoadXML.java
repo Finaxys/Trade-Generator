@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,12 +98,10 @@ public class LoadXML {
 
         // Load Static Informations
         loadReferential("counterparts.xml", "counterpart", new CbReferential() {
-            @Override
             public void init(Referential ref) {
                 ref.setCounterparts(new ArrayList<Referential.Counterpart>());
             }
 
-            @Override
             public void execute(Referential ref, Element eElement)
                     throws CustomParsingException {
                 Referential.Counterpart counterpart = ref.new Counterpart();
@@ -113,12 +112,10 @@ public class LoadXML {
         });
 
         loadReferential("products.xml", "product", new CbReferential() {
-            @Override
             public void init(Referential ref) {
                 ref.setProducts(new ArrayList<Referential.Product>());
             }
 
-            @Override
             public void execute(Referential ref, Element eElement)
                     throws CustomParsingException {
                 Referential.Product product = ref.new Product();
@@ -134,12 +131,10 @@ public class LoadXML {
         });
 
         loadReferential("depositaries.xml", "depositary", new CbReferential() {
-            @Override
             public void init(Referential ref) {
                 ref.setDepositaries(new ArrayList<Referential.Depositary>());
             }
 
-            @Override
             public void execute(Referential ref, Element eElement)
                     throws CustomParsingException {
                 Referential.Depositary depositary = ref.new Depositary();
@@ -150,12 +145,10 @@ public class LoadXML {
         });
 
         loadReferential("portfolios.xml", "portfolio", new CbReferential() {
-            @Override
             public void init(Referential ref) {
                 ref.setPortfolios(new ArrayList<Referential.Portfolio>());
             }
 
-            @Override
             public void execute(Referential ref, Element eElement)
                     throws CustomParsingException {
                 Referential.Portfolio portfolio = ref.new Portfolio();
@@ -167,12 +160,10 @@ public class LoadXML {
         });
 
         loadReferential("currencies.xml", CURRENCY, new CbReferential() {
-            @Override
             public void init(Referential ref) {
                 ref.setCurrencies(new ArrayList<Referential.Currency>());
             }
 
-            @Override
             public void execute(Referential ref, Element eElement)
                     throws CustomParsingException {
                 Referential.Currency currency = ref.new Currency();
@@ -496,8 +487,7 @@ public class LoadXML {
 
                     try {
                         method.invoke(generator, Integer.parseInt(nfield.getFirstChild().getNodeValue()));
-                    } catch (InvocationTargetException | IllegalAccessException | IllegalArgumentException
-                            | DOMException e) {
+                    } catch (Exception e) {
                         LOGGER.log(Level.FINE, "Could not call Method from XML",
                                 e);
                     }
@@ -514,7 +504,7 @@ public class LoadXML {
 //                            field.set(generator, nfield.getFirstChild()
 //                                    .getNodeValue());
 
-                } catch (NoSuchMethodException | SecurityException e) {
+                } catch (Exception e) {
                     LOGGER.log(Level.FINE, "Method not found from XML settings",
                             e);
                 }
