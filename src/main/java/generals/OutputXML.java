@@ -13,6 +13,8 @@ public class OutputXML extends Output {
 
     public OutputXML()
     {
+        super();
+        extension = "xml";
     }
     
     public void writeTrade(TradeEvent trade)

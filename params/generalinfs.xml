@@ -8,11 +8,10 @@
     <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
-	  <format>CSV</format>
+	  <implementation>csv</implementation> <!-- Spring Bean Output implementation -->
 	  <path>trades</path>
 	  <instrument>all</instrument>
 	  <isStp>false</isStp>
-	  <layer>FS</layer>
 	</output>
 	<!-- <output> -->
 	<!--     <format>XML</format> -->
@@ -29,7 +28,7 @@
 	  <ownCountry>20</ownCountry> 
 	  <volumetry>200</volumetry> 
 	  <volumetryTolerance>2</volumetryTolerance> 
-	  <implementation>equitygenerator</implementation> <!-- Spring Bean --> 
+	  <implementation>equityrandom</implementation> <!-- Spring Bean Generator implementation --> 
 	</instrument>
 	<instrument name="loandepo">
 	  <amount>1000</amount>

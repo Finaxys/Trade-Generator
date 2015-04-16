@@ -389,7 +389,7 @@ public class LoadXML {
                         }
             }
 
-            String implementation = "output" + getContent(eoutput, "format").toLowerCase();
+            String implementation = getContent(eoutput, "implementation");
             Output output = null;
             if (implementation == null || implementation.isEmpty())
                 throw new CustomParsingException("Invalid output", true);
@@ -399,10 +399,8 @@ public class LoadXML {
             if (output == null)
                 throw new CustomParsingException("Could not create output bean", true);
 
-            output.setFormat(Output.Format.valueOf(getContent(eoutput, "format").toUpperCase()));
             output.setPath(getContent(eoutput, "path"));
             output.setIsStp(Boolean.parseBoolean(getContent(eoutput, "isStp")));
-            output.setLayer(Output.Layer.valueOf(getContent(eoutput, "layer")));
             output.setGenerators(opgens);
             
             outputs.add(output);
@@ -467,7 +465,7 @@ public class LoadXML {
             String implementation = getOptContent(eins, "implementation", "");
             TradeGenerator generator = null;
             if (implementation == null || implementation.isEmpty())
-                implementation = name + "generator";
+                implementation = name + "random";
             generator = (TradeGenerator) context.getBean(implementation);
             
             // Set all fields by name setter

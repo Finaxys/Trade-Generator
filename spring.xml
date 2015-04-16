@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<bean id="equitygenerator" class="domain.EquityGenerator" scope="prototype"/>
-<bean id="loandepogenerator" class="domain.LoanDepositGenerator" scope="prototype"/>
-<bean id="outputxml" class="generals.OutputXML" scope="prototype"/>
-<bean id="outputcsv" class="generals.OutputCSV" scope="prototype"/>
-<bean id="outputhbase" class="generals.OutputHBase" scope="prototype"/>
+<bean id="equityrandom" class="domain.EquityGenerator" scope="prototype"/>
+<bean id="loandeporandom" class="domain.LoanDepositGenerator" scope="prototype"/>
+<bean id="xml" class="generals.OutputXML" scope="prototype"/>
+<bean id="csv" class="generals.OutputCSV" scope="prototype"/>
+<bean id="hbase" class="generals.OutputHBase" scope="prototype"/>
 </beans>

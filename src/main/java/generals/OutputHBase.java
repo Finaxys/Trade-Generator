@@ -1,19 +1,12 @@
 package generals;
 
 import DAO.HBaseDAO;
-import HBaseTools.HBaseMiniConnection;
 //import HBaseTools.IHBaseConnection;
 import Model.Data;
 //import Model.HRow;
 import Model.HRow;
 import domain.TradeEvent;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.*;
-import org.apache.hadoop.hbase.client.*;
-import org.apache.hadoop.hbase.util.Bytes;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -28,9 +21,7 @@ public class OutputHBase extends Output
     private static final Logger LOGGER = Logger.getLogger(OutputHBase.class
             .getName());
 
-
     private static HBaseDAO dao;
-
 
     private static void connection() throws IOException
     {

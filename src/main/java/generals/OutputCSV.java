@@ -12,6 +12,11 @@ import domain.TradeEvent;
 public class OutputCSV extends Output {
     private static final Logger LOGGER = Logger.getLogger(OutputCSV.class
             .getName());
+    
+    public OutputCSV() {
+        super();
+        extension = "csv";
+    }
 
     @Override
     public void outputTrade(TradeEvent trade)
