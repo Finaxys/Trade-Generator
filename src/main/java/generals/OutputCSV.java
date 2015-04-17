@@ -10,12 +10,16 @@ import java.util.logging.Logger;
 import domain.TradeEvent;
 
 public class OutputCSV extends Output {
+    private boolean normalize = false;
     private static final Logger LOGGER = Logger.getLogger(OutputCSV.class
             .getName());
     
-    public OutputCSV() {
+    public OutputCSV(boolean normalize) {
         super();
         extension = "csv";
+        this.normalize = normalize;
+        
+        System.out.println("NORMALIZE : " + normalize);
     }
 
     @Override
@@ -60,11 +64,20 @@ public class OutputCSV extends Output {
             LOGGER.log(Level.SEVERE, "Wrong encoding", e);
             return ;
         }
+        
+        if (normalize)
+            writeNormalizedOutputs();
+        else
+            writeOutputs();
 
+        writer.close();
+        tradeEvents.clear();
+    }
+
+    private void writeNormalizedOutputs() {
         List<Class<? extends TradeEvent>> tradeClass = new ArrayList<Class<? extends TradeEvent>>();
         List<String> header = new ArrayList<String>();
 
-        // Get header
         for (TradeEvent trade : tradeEvents) {
             if (!tradeClass.contains(trade.getClass())) {
                 tradeClass.add(trade.getClass());
@@ -74,7 +87,7 @@ public class OutputCSV extends Output {
                         header.add(node.getName());
             }
         }
-
+        
         // Header
         for (String field : header)
             writer.write(field + ",");
@@ -82,7 +95,7 @@ public class OutputCSV extends Output {
 
         for (TradeEvent trade : tradeEvents) {
             List<TradeEvent.Node> nodes = trade.getNodes();
-
+            
             // Check each field of header - if not present : empty ','
             for (String field : header) {
                 for (TradeEvent.Node node : nodes)
@@ -90,15 +103,22 @@ public class OutputCSV extends Output {
                         writer.write("" + node.getValue());
                         break;
                     }
-
                 writer.write(",");
             }
 
             writer.write(System.lineSeparator());
         }
+    }
 
-        writer.close();
-        tradeEvents.clear();
+    private void writeOutputs() {
+        for (TradeEvent trade : tradeEvents) {
+            List<TradeEvent.Node> nodes = trade.getNodes();
+
+            for (TradeEvent.Node node : nodes)
+                writer.write("" + node.getValue() + ",");
+
+            writer.write(System.lineSeparator());
+        }
     }
         
 }

@@ -6,6 +6,8 @@
 <bean id="equityrandom" class="domain.EquityGenerator" scope="prototype"/>
 <bean id="loandeporandom" class="domain.LoanDepositGenerator" scope="prototype"/>
 <bean id="xml" class="generals.OutputXML" scope="prototype"/>
-<bean id="csv" class="generals.OutputCSV" scope="prototype"/>
+<bean id="csv" class="generals.OutputCSV" scope="prototype">
+  <constructor-arg type="boolean" value="true"/> <!-- Normalized -->
+</bean>
 <bean id="hbase" class="generals.OutputHBase" scope="prototype"/>
 </beans>
