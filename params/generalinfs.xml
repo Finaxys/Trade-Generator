@@ -8,7 +8,7 @@
     <businessUnit name="ged" ratio="100" instrument="equity">
       <workflow>
 	<output>
-	  <implementation>csv</implementation> <!-- Spring Bean Output implementation -->
+	  <implementation>hbase</implementation> <!-- Spring Bean Output implementation -->
 	  <path>trades</path>
 	  <instrument>all</instrument>
 	  <isStp>false</isStp>

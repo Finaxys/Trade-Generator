@@ -2,6 +2,8 @@ package generals;
 
 import DAO.HBaseDAO;
 //import HBaseTools.IHBaseConnection;
+import HBaseTools.HBaseMiniConnection;
+import HBaseTools.IHBaseConnection;
 import Model.Data;
 //import Model.HRow;
 import Model.HRow;
@@ -21,108 +23,55 @@ public class OutputHBase extends Output
     private static final Logger LOGGER = Logger.getLogger(OutputHBase.class
             .getName());
 
-    private static HBaseDAO dao;
+    private static IHBaseConnection hbaseconnection = new HBaseMiniConnection("/tmp/configuration.xml") ;
+    private static HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
 
     private static void connection() throws IOException
     {
-//        IHBaseConnection hbaseconnection=new HBaseMiniConnection("/tmp/configuration.xml") ;
-//        HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
-//        dao.connect();
+        dao.connect();
     }
+
     public static void createTable() throws IOException
     {
         connection();
+
         String[] ColumnFamilies=new String[] {"cf1"};
         dao.createTable("Trades", ColumnFamilies);
+
         dao.disconnect();
     }
 
     //mettre tout les qualifiers dans un seul put
     public static void putData(TradeEvent tradeEvent) throws IOException {
         connection();
+
         List<Data> data = new ArrayList<Data>();
         for (TradeEvent.Node node : tradeEvent.getNodes())
             data.add(new Data("cf1", node.getName(), (String)node.getValue()));
         HRow row = new HRow("Trades", Long.toString(tradeEvent.getId()), (Data[]) data.toArray());
-        dao.disconnect();
+        dao.putRow(row);
 
+        dao.disconnect();
     }
 
     public void outputTrade(TradeEvent trade)
-        {
-
+    {
         List<TradeEvent.Node> nodes = trade.getNodes();
 
-        //put
-
-/*
-            for (TradeEvent.Node node : nodes)
-                try {
-               .     putData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            writer.write(node.getName() + ",");
-            writer.write(System.lineSeparator());
-
-        writer.close();
-        */
-
+        try {
+            putData(trade);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void outputTrades()
-    {
+    public void outputTrades() {
         if (tradeEvents.isEmpty())
             return;
 
-        try
-        {
-            writer = getWriter(tradeEvents.get(0).getDate());
-        } catch (FileNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "Could not open file", e);
-            return ;
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.log(Level.SEVERE, "Wrong encoding", e);
-            return ;
-        }
+        for (TradeEvent trade : tradeEvents)
+            outputTrade(trade);
 
-        List<Class<? extends TradeEvent>> tradeClass = new ArrayList<Class<? extends TradeEvent>>();
-        List<String> header = new ArrayList<String>();
-
-        // Get header
-        for (TradeEvent trade : tradeEvents) {
-            if (!tradeClass.contains(trade.getClass())) {
-                tradeClass.add(trade.getClass());
-
-                for (TradeEvent.Node node : trade.getNodes())
-                    if (!header.contains(node.getName()))
-                        header.add(node.getName());
-            }
-        }
-
-        // Header
-        for (String field : header)
-            writer.write(field + ",");
-        writer.write(System.lineSeparator());
-
-        for (TradeEvent trade : tradeEvents) {
-            List<TradeEvent.Node> nodes = trade.getNodes();
-
-            // Check each field of header - if not present : empty ','
-            for (String field : header) {
-                for (TradeEvent.Node node : nodes)
-                    if (node.getName().equals(field)) {
-                        writer.write("" + node.getValue());
-                        break;
-                    }
-
-                writer.write(",");
-            }
-
-            writer.write(System.lineSeparator());
-        }
-
-        writer.close();
         tradeEvents.clear();
     }
 }
