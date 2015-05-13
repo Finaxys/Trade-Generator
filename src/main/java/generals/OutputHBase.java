@@ -1,18 +1,14 @@
 package generals;
 
-import DAO.HBaseDAO;
-//import HBaseTools.IHBaseConnection;
-import HBaseTools.HBaseMiniConnection;
-import HBaseTools.IHBaseConnection;
-import Model.Data;
-//import Model.HRow;
-import Model.HRow;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.*;
+import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.util.Bytes;
 import domain.TradeEvent;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,40 +19,78 @@ public class OutputHBase extends Output
     private static final Logger LOGGER = Logger.getLogger(OutputHBase.class
             .getName());
 
-    private static IHBaseConnection hbaseconnection = new HBaseMiniConnection("/tmp/configuration.xml") ;
-    private static HBaseDAO dao = new HBaseDAO(hbaseconnection)  ;
+    private static boolean init = false;
+    private static boolean closed = false;
+    private static Configuration conf;
+    private static HConnection connection;
+    private static HBaseAdmin admin;
+    private static HTableDescriptor tableDescriptor;
+    private static HTable table;
 
-    private static void connection() throws IOException
+    OutputHBase()
     {
-        dao.connect();
+        if (init)
+            return;
+
+        init = true;
+        conf = HBaseConfiguration.create();
+        try {
+            conf.addResource(new FileInputStream("/tmp/configuration"));
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Could not get hbase configuration files", e);
+            return ;
+        }
+
+        conf.reloadConfiguration();
+
+        try {
+            connection = HConnectionManager.createConnection(conf);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Could not create Connection", e);
+        }
+
+        HBaseAdmin admin = null;
+        try {
+            admin = new HBaseAdmin(connection);
+        } catch (MasterNotRunningException e) {
+            LOGGER.log(Level.SEVERE, "Master server not running", e);
+        } catch (ZooKeeperConnectionException e) {
+            LOGGER.log(Level.SEVERE, "Could not connect to ZooKeeper", e);
+        }
+
+        tableDescriptor = new HTableDescriptor(TableName.valueOf("trades"));
+        try {
+            tableDescriptor.addFamily(new HColumnDescriptor("cf"));
+            admin.createTable(tableDescriptor);
+        } catch (IOException e) {
+            LOGGER.log(Level.FINEST, "Table already created");
+        }
+
+        try {
+            LOGGER.log(Level.INFO, "Getting table information");
+            table = new HTable(conf, "trades");
+//            AutoFlushing
+            table.setAutoFlushTo(true);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Could not get table " + "trades", e);
+        }
     }
 
-    public static void createTable() throws IOException
-    {
-        connection();
+    public void putData(TradeEvent tradeEvent) throws IOException {
+        Put p = new Put(Bytes.toBytes(tradeEvent.getId()));
+        List<TradeEvent.Node> nodes = tradeEvent.getNodes();
+        for (TradeEvent.Node node : nodes) {
+            if (node.getValue().getClass().getSimpleName().equals("String"))
+                p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((String) node.getValue()));
+            else
+                p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((Integer) node.getValue()));
 
-        String[] ColumnFamilies=new String[] {"cf1"};
-        dao.createTable("Trades", ColumnFamilies);
-
-        dao.disconnect();
-    }
-
-    //mettre tout les qualifiers dans un seul put
-    public static void putData(TradeEvent tradeEvent) throws IOException {
-        connection();
-
-        List<Data> data = new ArrayList<Data>();
-        for (TradeEvent.Node node : tradeEvent.getNodes())
-            data.add(new Data("cf1", node.getName(), (String)node.getValue()));
-        HRow row = new HRow("Trades", Long.toString(tradeEvent.getId()), (Data[]) data.toArray());
-        dao.putRow(row);
-
-        dao.disconnect();
+        }
+        table.put(p);
     }
 
     public void outputTrade(TradeEvent trade)
     {
-        List<TradeEvent.Node> nodes = trade.getNodes();
 
         try {
             putData(trade);
@@ -73,6 +107,20 @@ public class OutputHBase extends Output
             outputTrade(trade);
 
         tradeEvents.clear();
+    }
+
+    public void close()
+    {
+        if (!closed)
+            return;
+
+        closed = true;
+        try {
+            table.close();
+            connection.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

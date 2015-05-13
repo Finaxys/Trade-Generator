@@ -92,6 +92,8 @@ public class Generator {
             OutputManager.getInstance().outputTrades();
         }
 
+        OutputManager.getInstance().close();
+
         // System.out.println(Report.liste.size());
         // Report.ConcatSortOutput();
         // Report.report(Report.liste, days);

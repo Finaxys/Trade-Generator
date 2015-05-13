@@ -81,4 +81,6 @@ public abstract class Output {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public void close() {}
 }

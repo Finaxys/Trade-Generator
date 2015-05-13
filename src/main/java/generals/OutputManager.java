@@ -26,4 +26,11 @@ public class OutputManager {
             for (Output output : bu.getOutputs())
                 output.outputTrades();
     }
+
+    public void close()
+    {
+        for (Businessunit bu : Generals.getInstance().getBusinessunits())
+            for (Output output : bu.getOutputs())
+                output.close();
+    }
 }
