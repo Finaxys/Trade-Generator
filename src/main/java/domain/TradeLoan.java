@@ -72,13 +72,11 @@ public class TradeLoan extends TradeEvent {
         addNode(nodes, "term", term.name(), null);
         addNode(nodes, "basecalcul", basecalcul.name(), null);
         addNode(nodes, "spread", spread, null);
-        addNode(nodes, "valueDate", valueDate, null);
-        addNode(nodes, "maturityDate", maturityDate, null);
+        addNode(nodes, "valueDate", valueDate.getTime(), null);
+        addNode(nodes, "maturityDate", maturityDate.getTime(), null);
         addNode(nodes, "Depositary", depositary.getCode(), null);
-        addNode(nodes, "trader", trader.getName(), null);
         addNode(nodes, "ISIN", isin, null);
         addNode(nodes, "indexation", index.name(), null);
-        addNode(nodes, "spread", spread, null);
         addNode(nodes, "national", national, null);
 
         return nodes;

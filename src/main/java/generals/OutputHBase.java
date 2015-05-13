@@ -9,6 +9,7 @@ import domain.TradeEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class OutputHBase extends Output
         init = true;
         conf = HBaseConfiguration.create();
         try {
-            conf.addResource(new FileInputStream("/tmp/configuration"));
+            conf.addResource(new FileInputStream("/tmp/configuration.xml"));
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Could not get hbase configuration files", e);
             return ;
@@ -82,6 +83,14 @@ public class OutputHBase extends Output
         for (TradeEvent.Node node : nodes) {
             if (node.getValue().getClass().getSimpleName().equals("String"))
                 p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((String) node.getValue()));
+            else if (node.getValue().getClass().getSimpleName().equals("Float"))
+                p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((Float) node.getValue()));
+            else if (node.getValue().getClass().getSimpleName().equals("Double"))
+                p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((Double) node.getValue()));
+            else if (node.getValue().getClass().getSimpleName().equals("Character"))
+                p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((Character) node.getValue()));
+            else if (node.getValue().getClass().getSimpleName().equals("Long"))
+                p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((Long) node.getValue()));
             else
                 p.add(Bytes.toBytes("cf"), Bytes.toBytes(node.getName()), Bytes.toBytes((Integer) node.getValue()));
 

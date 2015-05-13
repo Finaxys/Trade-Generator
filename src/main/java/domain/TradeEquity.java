@@ -37,7 +37,7 @@ public class TradeEquity extends TradeEvent {
         addNode(nodes, "product", product.getLibelle(), null);
         addNode(nodes, "quantity", quantity, null);
         addNode(nodes, "price",
-                BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP)
+                BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP).floatValue()
                         , null);
         addNode(nodes, "counterpart", counterpart.getCode(), null);
         addNode(nodes, "product", product.getName(), null);
