@@ -164,7 +164,13 @@ public class OutputHBase extends Output
         if (!closed)
             return;
 
-        table.flushCommits();
+        try {
+            table.flushCommits();
+        } catch (InterruptedIOException e) {
+            e.printStackTrace();
+        } catch (RetriesExhaustedWithDetailsException e) {
+            e.printStackTrace();
+        }
 
         closed = true;
         try {
