@@ -164,6 +164,8 @@ public class OutputHBase extends Output
         if (!closed)
             return;
 
+        table.flushCommits();
+
         closed = true;
         try {
             table.close();
