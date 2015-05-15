@@ -1,0 +1,8 @@
+hbase.table=trades
+hbase.cf=cf
+hbase.conf.minicluster=/tmp/configuration.xml
+hbase.conf.core=core-site.xml
+hbase.conf.site=hbase-site.xml
+hbase.conf.hdfs=hdfs-site.xml
+hbase.autoflush=false
+hbase.stackputs=1000

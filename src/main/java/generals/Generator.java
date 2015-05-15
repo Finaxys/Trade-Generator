@@ -1,9 +1,7 @@
 package generals;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.io.FileInputStream;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,8 +21,14 @@ public class Generator {
     }
 
     public static void main(String[] args) {
-        Referential ref = Referential.getInstance();
-        Generals gen = Generals.getInstance();
+        // Loading properties
+        try {
+            getConfiguration();
+        }
+        catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Could not load properties", e);
+            return;
+        }
 
         try {
             LoadXML.init();
@@ -38,6 +42,23 @@ public class Generator {
         }
 
         long startTime = System.currentTimeMillis();
+
+        launchSimulation();
+
+        // System.out.println(Report.liste.size());
+        // Report.ConcatSortOutput();
+        // Report.report(Report.liste, days);
+        // System.out.println("Report done");
+
+        // Estimation Stats
+        long estimatedTime = System.currentTimeMillis() - startTime;
+        LOGGER.log(Level.INFO, "Estimated hours for 1B Trades: " + (float) estimatedTime * 100000 / 1000 / 60 / 60);
+    }
+
+    private static void launchSimulation()
+    {
+        Referential ref = Referential.getInstance();
+        Generals gen = Generals.getInstance();
 
         // List of instrument available
         List<TradeGenerator> generators = new ArrayList<TradeGenerator>();
@@ -92,15 +113,14 @@ public class Generator {
             OutputManager.getInstance().outputTrades();
         }
 
+        // Clean Outputs (HBase...)
         OutputManager.getInstance().close();
+    }
 
-        // System.out.println(Report.liste.size());
-        // Report.ConcatSortOutput();
-        // Report.report(Report.liste, days);
-        // System.out.println("Report done");
-
-        // Estimation Stats
-        long estimatedTime = System.currentTimeMillis() - startTime;
-        LOGGER.log(Level.INFO, "Estimated hours for 1B Trades: " + (float) estimatedTime * 100000 / 1000 / 60 / 60);
+    private static void getConfiguration() throws Exception {
+        FileInputStream propFile = new FileInputStream("properties.txt");
+        Properties p = new Properties(System.getProperties());
+        p.load(propFile);
+        System.setProperties(p);
     }
 }

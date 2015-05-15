@@ -6,10 +6,9 @@ import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 import domain.TradeEvent;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +27,11 @@ public class OutputHBase extends Output
     private static HTableDescriptor tableDescriptor;
     private static HTable table;
 
+    private static long stackedPuts = 0;
+    private static long flushedPuts = 0;
+    private static boolean autoflush;
+    private static long stackPuts;
+
     OutputHBase()
     {
         if (init)
@@ -35,11 +39,30 @@ public class OutputHBase extends Output
 
         init = true;
         conf = HBaseConfiguration.create();
+
+        String tableName = System.getProperty("hbase.table", "trades");
+        String cfName = System.getProperty("hbase.cf", "cf");
+
+        autoflush = Boolean.parseBoolean(System.getProperty("hbase.autoflush", "false"));
+        stackPuts = Integer.parseInt(System.getProperty("hbase.stackputs", "1000"));
+
+        Configuration conf = HBaseConfiguration.create() ;
         try {
-            conf.addResource(new FileInputStream("/tmp/configuration.xml"));
-        } catch (FileNotFoundException e) {
+            String minicluster = System.getProperty("hbase.conf.minicluster", "");
+            if (!minicluster.isEmpty())
+                conf.addResource(new FileInputStream(minicluster));
+            else
+            {
+                conf.addResource(new File(System.getProperty("hbase.conf.core", "core-site.xml")).getAbsoluteFile().toURI().toURL());
+                conf.addResource(new File(System.getProperty("hbase.conf.hbase", "hbase-site.xml")).getAbsoluteFile().toURI().toURL());
+                conf.addResource(new File(System.getProperty("hbase.conf.hdfs", "hdfs-site.xml")).getAbsoluteFile().toURI().toURL());
+            }
+        } catch (MalformedURLException e) {
             LOGGER.log(Level.SEVERE, "Could not get hbase configuration files", e);
-            return ;
+            return;
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Could not get minicluster configuration files", e);
+            return;
         }
 
         conf.reloadConfiguration();
@@ -59,9 +82,9 @@ public class OutputHBase extends Output
             LOGGER.log(Level.SEVERE, "Could not connect to ZooKeeper", e);
         }
 
-        tableDescriptor = new HTableDescriptor(TableName.valueOf("trades"));
+        tableDescriptor = new HTableDescriptor(TableName.valueOf(tableName));
         try {
-            tableDescriptor.addFamily(new HColumnDescriptor("cf"));
+            tableDescriptor.addFamily(new HColumnDescriptor(cfName));
             admin.createTable(tableDescriptor);
         } catch (IOException e) {
             LOGGER.log(Level.FINEST, "Table already created");
@@ -71,7 +94,7 @@ public class OutputHBase extends Output
             LOGGER.log(Level.INFO, "Getting table information");
             table = new HTable(conf, "trades");
 //            AutoFlushing
-            table.setAutoFlushTo(true);
+            table.setAutoFlushTo(autoflush);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Could not get table " + "trades", e);
         }
@@ -103,9 +126,27 @@ public class OutputHBase extends Output
 
         try {
             putData(trade);
+            ++stackedPuts;
+
+            // Flushing every X
+            if (!autoflush && stackedPuts > stackPuts)
+                flushPuts();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void flushPuts(){
+        try {
+            table.flushCommits();
+        } catch (InterruptedIOException e) {
+            LOGGER.log(Level.SEVERE, "Could not flush table", e);
+        } catch (RetriesExhaustedWithDetailsException e) {
+            LOGGER.log(Level.SEVERE, "Could not flush table ", e);
+        }
+
+        flushedPuts += stackedPuts;
+        stackedPuts = 0;
     }
 
     public void outputTrades() {
